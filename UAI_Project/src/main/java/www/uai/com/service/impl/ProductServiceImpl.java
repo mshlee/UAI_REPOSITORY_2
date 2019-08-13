@@ -1,7 +1,9 @@
 package www.uai.com.service.impl;
 
 import java.util.ArrayList;
+
 import org.springframework.ui.Model;
+
 import www.uai.com.mapper.ProductSQLMapper;
 import www.uai.com.service.ProductService;
 import www.uai.com.vo.PageVO;
@@ -24,7 +26,7 @@ public class ProductServiceImpl implements ProductService{
 		
 		ArrayList<ProductDataVO> dataList = new ArrayList<ProductDataVO>();
 		
-		PageVO pageData = new PageVO(0,0,0);
+		PageVO pageData = new PageVO(0,0,0,0,0);
 		
 		// 페이징 처리 구현
 		

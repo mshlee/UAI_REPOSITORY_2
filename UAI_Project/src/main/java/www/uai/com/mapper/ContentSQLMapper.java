@@ -13,23 +13,26 @@ public interface ContentSQLMapper {
 	@Select("SELECT B_IDX.NEXTVAL FROM Dual")
 	public String getKey();
 	
-	@Select("SELECT * FROM BOARD_CONTENT WHERE B_TYPE=#{b_type} ORDER BY b_idx DESC ")
+	@Select("SELECT bd2.* FROM (SELECT bd.*, ROWNUM AS rnum FROM (SELECT * FROM BOARD_CONTENTS WHERE b_type=#{b_type} ORDER BY C_IDX DESC) bd) bd2 WHERE rnum BETWEEN #{startPost} AND #{endPost}")
 	public ArrayList<ContentDataVO> selectAll();
 	
 	@Select("SELECT * FROM BOARD_CONTENT WHERE B_TITLE LIKE '%'||#{searchWord}||'%' AND b_type=#{b_type} ORDER BY b_idx DESC")
 	public ArrayList<ContentDataVO> selectBytitle(String searchWord,String b_type);
 	
 	@Select("SELECT * FROM BOARD_CONTENT WHERE B_CONTENT LIKE '%'||#{searchWord}||'%' AND b_type=#{b_type} ORDER BY b_idx DESC")
-	public ArrayList<ContentDataVO> selectByContent(String searchWord);
+	public ArrayList<ContentDataVO> selectByContent(String searchWord, String b_type);
 	
 	@Select("SELECT * FROM BOARD_CONTENT, MEMBERS WHERE BOARD_CONTENT.M_IDX = MEMBERS.M_IDX AND MEMBERS.M_NICK LIKE '%'||#{searchWord}||'%' ORDER BY m_idx DESC")
-	public ArrayList<ContentDataVO> selectByNick(String searchWord);
+	public ArrayList<ContentDataVO> selectByNick(String searchWord, String b_type);
 	
-	@Select("SELECT * FROM BOARD_CONTENT WHERE b_id=#{b_id}")
+	@Select("SELECT * FROM BOARD_CONTENT WHERE b_idx=#{b_idx}")
 	public ContentDataVO selectByIdx(String b_idx);
 	
-	@Insert("INSERT INTO BOARD_CONTENT(b_id, b_type, b_title, b_content, b_postdate, b_count, b_isHidden, b_pw, b_qCategory, b_isPost, m_idx, p_idx, ad_idx) VALUES (#{b_id},#{b_type},#{b_title},#{b_content},SYSDATE, 0, #{b_isHidden},#{b_pw},#{b_qCategory}, #{b_isPost}, #{m_idx}, #{p_idx}, #{ad_idx})")
+	@Insert("INSERT INTO BOARD_CONTENT(b_type, b_title, b_content, b_postdate, b_count, b_isHidden, b_pw, b_qCategory, b_isPost, m_idx, p_idx, ad_idx) VALUES (#{b_id},#{b_type},#{b_title},#{b_content},SYSDATE, 0, #{b_isHidden},#{b_pw},#{b_qCategory}, #{b_isPost}, #{m_idx}, #{p_idx}, #{ad_idx})")
 	public void insert(ContentDataVO vo);
+	
+	@Insert("INSERT INTO BOARD_CONTENT(b_id, b_content, b_postdate, b_isPost, m_idx)VALUE (#{b_id},#{b_content},#{b_postdate},#{b_isPost},#{m_idx}))")
+	public void insertReply(ContentDataVO vo);
 	
 	@Delete("DELETE FROM BOARD_CONTENTS WHERE b_idx = #{b_idx}")
 	public void deleteByIdx(String b_idx);
@@ -39,4 +42,7 @@ public interface ContentSQLMapper {
 	
 	@Update("UPDATE BOARD_CONTENTS SET b_count = b_count+1 WHERE b_id=#{b_id}")
 	public void increaseCount(String b_idx);
+	
+	@Select("SELECT COUNT(*) FROM BOARD_CONTENTS")
+	public int getListCount();
 }
