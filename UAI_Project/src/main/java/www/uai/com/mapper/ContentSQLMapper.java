@@ -25,18 +25,18 @@ public interface ContentSQLMapper {
 	@Select("SELECT * FROM BOARD_CONTENT, MEMBERS WHERE BOARD_CONTENT.M_IDX = MEMBERS.M_IDX AND MEMBERS.M_NICK LIKE '%'||#{searchWord}||'%' ORDER BY m_idx DESC")
 	public ArrayList<ContentDataVO> selectByNick(String searchWord);
 	
-	@Select("SELECT * FROM BOARD_CONTENT WHERE m_idx=#{m_idx}")
-	public ContentDataVO selectByIdx(String c_idx);
+	@Select("SELECT * FROM BOARD_CONTENT WHERE b_id=#{b_id}")
+	public ContentDataVO selectByIdx(String b_idx);
 	
-	@Insert("INSERT INTO BOARD_CONTENT VALUES (#{b_idx}, #{m_idx}, #{c_title}, #{c_content}, 0, SYSDATE)")
+	@Insert("INSERT INTO BOARD_CONTENT(b_id, b_type, b_title, b_content, b_postdate, b_count, b_isHidden, b_pw, b_qCategory, b_isPost, m_idx, p_idx, ad_idx) VALUES (#{b_id},#{b_type},#{b_title},#{b_content},SYSDATE, 0, #{b_isHidden},#{b_pw},#{b_qCategory}, #{b_isPost}, #{m_idx}, #{p_idx}, #{ad_idx})")
 	public void insert(ContentDataVO vo);
 	
 	@Delete("DELETE FROM BOARD_CONTENTS WHERE b_idx = #{b_idx}")
-	public void deleteByIdx(String c_idx);
+	public void deleteByIdx(String b_idx);
 	
-	@Update("UPDATE BOARD_CONTENTS SET c_title=#{c_title}, c_content=#{c_content} WHERE c_idx=#{c_idx}")
+	@Update("UPDATE BOARD_CONTENTS SET c_title=#{b_title}, c_content=#{b_content} WHERE b_idx=#{b_idx}")
 	public void updateByIdx(ContentDataVO vo);
 	
-	@Update("UPDATE BOARD_CONTENTS SET c_count = c_count+1 WHERE c_idx=#{c_idx}")
-	public void increaseCount(String c_idx);
+	@Update("UPDATE BOARD_CONTENTS SET b_count = b_count+1 WHERE b_id=#{b_id}")
+	public void increaseCount(String b_idx);
 }
