@@ -5,16 +5,15 @@ import java.util.ArrayList;
 public class BoardDataVO {
 	
 	   private AdminDataVO adminDataVO;
-	   private BoardDataVO boardDataVO;
+	   private ContentDataVO contentDataVO;
 	   private MemberDataVO memberDataVO;
 	   private OrderDataVO orderDataVO;
 	   private ArrayList<UploadFileVO> fileList;
-	   
-	public BoardDataVO(AdminDataVO adminDataVO, BoardDataVO boardDataVO, MemberDataVO memberDataVO,
+	public BoardDataVO(AdminDataVO adminDataVO, ContentDataVO contentDataVO, MemberDataVO memberDataVO,
 			OrderDataVO orderDataVO, ArrayList<UploadFileVO> fileList) {
 		super();
 		this.adminDataVO = adminDataVO;
-		this.boardDataVO = boardDataVO;
+		this.contentDataVO = contentDataVO;
 		this.memberDataVO = memberDataVO;
 		this.orderDataVO = orderDataVO;
 		this.fileList = fileList;
@@ -25,11 +24,11 @@ public class BoardDataVO {
 	public void setAdminDataVO(AdminDataVO adminDataVO) {
 		this.adminDataVO = adminDataVO;
 	}
-	public BoardDataVO getBoardDataVO() {
-		return boardDataVO;
+	public ContentDataVO getContentDataVO() {
+		return contentDataVO;
 	}
-	public void setBoardDataVO(BoardDataVO boardDataVO) {
-		this.boardDataVO = boardDataVO;
+	public void setContentDataVO(ContentDataVO contentDataVO) {
+		this.contentDataVO = contentDataVO;
 	}
 	public MemberDataVO getMemberDataVO() {
 		return memberDataVO;
@@ -49,5 +48,5 @@ public class BoardDataVO {
 	public void setFileList(ArrayList<UploadFileVO> fileList) {
 		this.fileList = fileList;
 	}
-
+	   
 }
