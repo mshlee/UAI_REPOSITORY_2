@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import www.uai.com.service.ProductService;
+import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.BoardDataVO;
 import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.SessionDataVO;
@@ -47,14 +48,14 @@ public class SellerContentController {
 	}
 	
 	
-	//관리 기능별 페이지... (페이지를 돌려막기할까 1:1로 쓸까??)
+	//관리 기능별 페이지...
 	@RequestMapping ("/seller/manageProduct.do")
-	public String productManagePage(Model model){
-		
+	public String productManagePage(Model model, AdvancedSearchDataVO searchDataVO){
+
 		//상품 리스트 불러오기
 		ArrayList<ProductDataVO> productDataList = new ArrayList<ProductDataVO>();
-		productDataList=productService.getAllProductContent();
-		
+		productDataList=productService.getAllProductContent(searchDataVO);
+			
 		model.addAttribute("productDataList", productDataList);
 		
 		return "sellerProductManagePage";
@@ -90,6 +91,17 @@ public class SellerContentController {
 		
 		return "sellerManagePage";		
 	}
+	
+	
+	
+	//lhe: 상품 등록 페이지 맵핑
+	@RequestMapping("/seller/newProduct.do")
+	public String newProductPage(){
+		
+		return "sellerNewProductPage";
+	}
+	
+	
 	
 	
 }
