@@ -75,7 +75,7 @@
 		</div>
 		<br> <img src="" type="button">
 		<div id="header">
-			<a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="">주문 관리</a> | <a href="">회원 관리</a> | 
+			<a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="">주문 관리</a> | <a href="./manageMember.do">회원 관리</a> | 
 			<a href="">리뷰 관리</a> | <a href="">QnA 관리</a> | <a href="">지급 관리</a>
 		</div>
 		<div id="left_box">
@@ -130,7 +130,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="" method="post">
+		<form action="./deleteProductData.do" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>

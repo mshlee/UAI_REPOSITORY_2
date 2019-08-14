@@ -68,7 +68,7 @@
     <div id="wrapper">
         <div id="upper_bar"><a href="">쇼핑몰메인</a><a href="">로그아웃</a></div><br>
         <img src="" type="button">
-        <div id="header"><a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="">주문 관리</a> | <a href="">회원관리</a> |  
+        <div id="header"><a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="">주문 관리</a> | <a href="./manageMember.do">회원관리</a> |  
             <a href="">리뷰 관리</a> | <a href="">QnA 관리</a> | <a href="">지급 관리</a>
         </div>
         <div id="left_box">
