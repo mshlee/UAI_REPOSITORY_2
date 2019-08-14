@@ -162,10 +162,10 @@
 							
 								<!-- lhe: 성별코드를 키워드로 치환 -->
 							<c:choose>
-							<c:when test="${userDataList.memberVO.m_gender == 'M'}">
+							<c:when test="${userDataList.m_gender == 'M'}">
 							<th scope="row">남</th>
 							</c:when>
-							<c:when test="${userDataList.memberVO.m_gender == 'F'}">
+							<c:when test="${userDataList.m_gender == 'F'}">
 							<th scope="row">여</th>
 							</c:when>
 							</c:choose>

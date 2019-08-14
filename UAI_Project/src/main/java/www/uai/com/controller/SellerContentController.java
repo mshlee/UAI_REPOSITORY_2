@@ -22,6 +22,8 @@ public class SellerContentController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
 	private UserService userService;
 	
 	
@@ -83,7 +85,7 @@ public class SellerContentController {
 			
 		model.addAttribute("userDataList", userDataList);
 		
-		return "sellerManagePage";
+		return "sellerMemberManagePage";
 	}
 
 	@RequestMapping ("/seller/manageReview.do")
