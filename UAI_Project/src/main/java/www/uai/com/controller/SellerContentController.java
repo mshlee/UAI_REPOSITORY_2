@@ -1,16 +1,23 @@
 package www.uai.com.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import www.uai.com.service.SellerContentService;
 import www.uai.com.vo.BoardDataVO;
-import www.uai.com.vo.MemberDataVO;
+import www.uai.com.vo.SellerContentVO;
 import www.uai.com.vo.SessionDataVO;
 
 //판매자 관리 페이지용 컨트롤러
 
 @Controller
 public class SellerContentController {
+	
+	@Autowired
+	private SellerContentService sellerService;
 	
 	//관리자 계정 관리에 대한 페이지들...
 	@RequestMapping("/seller/manageAdmin.do")
@@ -42,6 +49,7 @@ public class SellerContentController {
 	//관리 기능별 페이지... (페이지를 돌려막기할까 1:1로 쓸까??)
 	@RequestMapping ("/seller/manageProduct.do")
 	public String productManagePage(BoardDataVO boardVO){
+		ArrayList<SellerContentVO> productList = sellerService.
 		
 		
 		return "sellerManagePage";
