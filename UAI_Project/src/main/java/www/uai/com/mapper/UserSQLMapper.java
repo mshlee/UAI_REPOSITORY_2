@@ -1,5 +1,7 @@
 package www.uai.com.mapper;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -18,7 +20,10 @@ public interface UserSQLMapper {
 	@Select("SELECT * FROM BOARD_MEMBERS WHERE M_IDX = #{m_idx}")
 	public MemberDataVO selectByIdx(String idx);
 
-
+	//lhe-판매자 모든 회원목록 불러오기
+	@Select("SELECT * FROM MEMBERS ORDER BY M_IDX")
+	public ArrayList<MemberDataVO> getAllUserList(); 
+	
 	//회원정보 수정...
 	@Update("UPDATE BOARD_MEMBERS SET m_nick = #{m_nick} WHERE m_idx = #{m_idx}")
 	public void update(MemberDataVO vo);

@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import www.uai.com.service.ProductService;
+import www.uai.com.service.UserService;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.BoardDataVO;
-import www.uai.com.vo.ProductDataVO;
+import www.uai.com.vo.MemberDataVO;
+import www.uai.com.vo.ProductVO;
 import www.uai.com.vo.SessionDataVO;
 
 //판매자 관리 페이지용 컨트롤러
@@ -20,6 +22,8 @@ public class SellerContentController {
 	
 	@Autowired
 	private ProductService productService;
+	private UserService userService;
+	
 	
 	//관리자 계정 관리에 대한 페이지들...
 	@RequestMapping("/seller/manageAdmin.do")
@@ -53,23 +57,31 @@ public class SellerContentController {
 	public String productManagePage(Model model, AdvancedSearchDataVO searchDataVO){
 
 		//상품 리스트 불러오기
-		ArrayList<ProductDataVO> productDataList = new ArrayList<ProductDataVO>();
-		productDataList=productService.getAllProductContent(searchDataVO);
+		ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
+		productList=productService.getAllProductList(searchDataVO);
 			
-		model.addAttribute("productDataList", productDataList);
+		model.addAttribute("productList", productList);
 		
 		return "sellerProductManagePage";
 	}
 	
 	
 	@RequestMapping ("/seller/manageOrder.do")
-	public String orderManage(BoardDataVO boardVO){
+	public String orderManage(Model model, AdvancedSearchDataVO searchDataVO){
 		
-		return "sellerManagePage";
+		
+		return "sellerMemberManagePage";
 	}
 	
 	@RequestMapping ("/seller/manageMember.do")
-	public String memberManage(BoardDataVO boardVO){
+	public String memberManage(Model model){
+		
+
+		//회원 리스트 불러오기
+		ArrayList<MemberDataVO> userDataList = new ArrayList<MemberDataVO>();
+		userDataList=userService.getAllUserList();
+			
+		model.addAttribute("userDataList", userDataList);
 		
 		return "sellerManagePage";
 	}

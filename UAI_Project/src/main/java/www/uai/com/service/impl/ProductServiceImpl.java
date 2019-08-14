@@ -89,7 +89,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	// lhe-상품전체리스트 출력용
-	public ArrayList<ProductDataVO> getAllProductContent(AdvancedSearchDataVO searchDataVO) {
+	public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO) {
 		// TODO Auto-generated method stub
 		/* 변수 확인용
 		System.out.println(searchDataVO.getP_type());
@@ -119,32 +119,25 @@ public class ProductServiceImpl implements ProductService {
 		}
 		
 		// lhe-상세검색기능 추가 (다중 조건 정렬 이용)
-		ArrayList<ProductDataVO> dataList = new ArrayList<ProductDataVO>();
+		ArrayList<ProductVO> dataList = new ArrayList<ProductVO>();
 		
 		if (isEmpty==true) {
 
-			ArrayList<ProductVO> productList = productSQLMapper.getAllProduct();
+			dataList = productSQLMapper.getAllProduct();
 
-			for (ProductVO product : productList) {
-
-				ProductContentVO content = productSQLMapper.selectByPIdx(product.getP_idx());
-				ProductDataVO data = new ProductDataVO(product, content);
-
-				dataList.add(data);
-			}
 
 		} else if (isEmpty==false) {
 			
 			//empty string 예외처리
-			if(p_type.isEmpty()) {
+			if(p_type.length()==0) {
 				p_type=null;
-			}if(startDate.isEmpty()) {
+			}if(startDate.length()==0) {
 				startDate=null;
-			}if(minPrice.isEmpty()) {
+			}if(minPrice.length()==0) {
 				minPrice=null;
-			}if(keyword.isEmpty()) {
+			}if(keyword.length()==0) {
 				keyword=null;
-			}if(value.isEmpty()) {
+			}if(value.length()==0) {
 				value=null;
 			}
 			
@@ -161,24 +154,20 @@ public class ProductServiceImpl implements ProductService {
 				query += "P_ORIGINALPRICE BETWEEN " + minPrice + " AND " + maxPrice;
 				query += andPhrase;
 			}if (keyword != null && value != null) {
-				query += keyword.toUpperCase() + " LIKE %" + "'"+value +"'"+ "%";
+				query += keyword.toUpperCase() + " LIKE "+ "'%'" + "'"+value +"'"+ "'%'" ;
 				query += andPhrase;
 			}
-			query = query.substring(0, query.length() - 5);
+			
+			
+			query = query.substring(0, query.length() - 4);
 			System.out.println(query);
 			
-			ArrayList<ProductVO> productList = productSQLMapper.getProductListBySearchWord(query);
-			for (ProductVO product : productList) {
-				ProductContentVO content = productSQLMapper.selectByPIdx(product.getP_idx());
-				ProductDataVO data = new ProductDataVO(product, content);
-				
-				dataList.add(data);
-			}
+			dataList = productSQLMapper.getProductListBySearchWord(query);
+			
 
-		}
 		
-		return dataList;
+	
+			}
+			return dataList;
+		}
 	}
-	
-	
-}

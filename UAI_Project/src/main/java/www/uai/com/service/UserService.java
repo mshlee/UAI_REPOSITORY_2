@@ -1,5 +1,8 @@
 package www.uai.com.service;
 
+import java.util.ArrayList;
+
+import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.SessionDataVO;
 
@@ -9,4 +12,6 @@ public interface UserService {
 	public SessionDataVO loginProcess(MemberDataVO vo);
 	
 	public boolean isExistID(MemberDataVO requestParam);
+	
+	public ArrayList<MemberDataVO> getAllUserList();
 }

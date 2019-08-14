@@ -119,7 +119,8 @@
               		<option></option>
                     <option value="p_name">강의명</option>
                     <option value="p_idx">강의번호</option>
-                    <option value="pc_teacher">강의번호</option>
+                    <option value="p_teacher">강사명</option>
+                    <option value="p_location">장소</option>
                 </select><input type="text" name="value"></th>
             </tr>
             <tr class="table-primary">
@@ -158,54 +159,49 @@
 				
 
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
-						<c:forEach var="productDataList" items="${productDataList }">
+						<c:forEach var="productList" items="${productList }">
 						<tr>
-							<th scope="row"><input type="checkbox" name="p_idx" value="${productDataList.productVO.p_idx }"></th>
-							<th scope="row">${productDataList.productVO.p_idx }</th>
+							<th scope="row"><input type="checkbox" name="p_idx" value="${productList.p_idx }"></th>
+							<th scope="row">${productList.p_idx }</th>
 							
 							
 							<!-- lhe: 상품 타입 번호를 키워드로 치환 -->
 							<c:choose>
-							<c:when test="${productDataList.productVO.p_type == '0'}">
+							<c:when test="${productList.p_type == '0'}">
 							<th scope="row">언어</th>
 							</c:when>
-							<c:when test="${productDataList.productVO.p_type == '1'}">
+							<c:when test="${productList.p_type == '1'}">
 							<th scope="row">IT/컴퓨터</th>
 							</c:when>
-							<c:when test="${productDataList.productVO.p_type == '2'}">
+							<c:when test="${productList.p_type == '2'}">
 							<th scope="row">미술</th>
 							</c:when>
-							<c:when test="${productDataList.productVO.p_type == '3'}">
+							<c:when test="${productList.p_type == '3'}">
 							<th scope="row">음악</th>
 							</c:when>
-							<c:when test="${productDataList.productVO.p_type == '4'}">
+							<c:when test="${productList.p_type == '4'}">
 							<th scope="row">스포츠</th>
 							</c:when>
-							<c:when test="${productDataList.productVO.p_type == '5'}">
+							<c:when test="${productList.p_type == '5'}">
 							<th scope="row">기타</th>
 							</c:when>
 							</c:choose>
 							
 							
-							<th scope="row">${productDataList.productVO.p_name }</th>
-							<th scope="row">${productDataList.productVO.p_discountRate }</th>
-							<th scope="row">${productDataList.productVO.p_originalPrice }</th>
-							
-							<!-- lhe: 어케하는겨대체 -->
-							<c:set var="oriPrice" scope="request" value="${productDataList.productVO.p_originalPrice }*=${productDataList.productVO.p_discountRate }">
-							</c:set>
-							<th scope="row">${oriPrice }</th>
-							
-							<th scope="row">${productDataList.productVO.p_commissionRate }</th>
-							<th scope="row">${productDataList.productContentVO.pc_teacher }</th>
-							<th scope="row">${productDataList.productContentVO.pc_location }</th>
+							<th scope="row">${productList.p_name }</th>
+							<th scope="row">${productList.p_discountRate }</th>
+							<th scope="row">${productList.p_originalPrice }</th>	
+							<th scope="row">${productList.p_nowPrice }</th>
+							<th scope="row">${productList.p_commissionRate }</th>
+							<th scope="row">${productList.p_teacher }</th>
+							<th scope="row">${productList.p_location }</th>
 							<th scope="row">0</th>
-							<th scope="row">${productDataList.productContentVO.pc_maxStudent }</th>
-							<th scope="row">${productDataList.productContentVO.pc_startDate }</th>
-							<th scope="row">${productDataList.productContentVO.pc_lastDate }</th>
-							<th scope="row">${productDataList.productContentVO.pc_lectureTime }</th>
-							<th scope="row">${productDataList.productContentVO.pc_lectureDay }</th>
-							<th scope="row">${productDataList.productVO.p_postDate }</th>
+							<th scope="row">${productList.p_maxStudent }</th>
+							<th scope="row">${productList.p_startDate }</th>
+							<th scope="row">${productList.p_lastDate }</th>
+							<th scope="row">${productList.p_lectureTime }</th>
+							<th scope="row">${productList.p_lectureDay }</th>
+							<th scope="row">${productList.p_postDate }</th>
 						</tr>
 						</c:forEach>
 						

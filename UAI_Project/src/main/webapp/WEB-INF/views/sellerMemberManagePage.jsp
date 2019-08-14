@@ -152,15 +152,15 @@
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="userDataList" items="${userDataList }">
 						<tr>
-							<th scope="row"><input type="checkbox" name="m_idx" value="${userDataList.memberVO.m_idx }"></th>
-							<th scope="row">${userDataList.memberVO.m_idx }</th>
-							<th scope="row">${productDataList.memberVO.m_id }</th>
-							<th scope="row">${productDataList.memberVO.m_name }</th>
-							<th scope="row">${productDataList.memberVO.m_nick }</th>
-							<th scope="row">${productDataList.memberVO.m_phone }</th>
-							<th scope="row">${productDataList.memberVO.m_address }</th>
+							<th scope="row"><input type="checkbox" name="m_idx" value="${userDataList.m_idx }"></th>
+							<th scope="row">${userDataList.m_idx }</th>
+							<th scope="row">${userDataList.m_id }</th>
+							<th scope="row">${userDataList.m_name }</th>
+							<th scope="row">${userDataList.m_nick }</th>
+							<th scope="row">${userDataList.m_phone }</th>
+							<th scope="row">${userDataList.m_address }</th>
 							
-								<!-- lhe: 상품 타입 번호를 키워드로 치환 -->
+								<!-- lhe: 성별코드를 키워드로 치환 -->
 							<c:choose>
 							<c:when test="${userDataList.memberVO.m_gender == 'M'}">
 							<th scope="row">남</th>
@@ -170,15 +170,15 @@
 							</c:when>
 							</c:choose>
 							
-						
-							<th scope="row">${productDataList.memberVO.m_joindate }</th>
-							<th scope="row">${productDataList.memberVO.m_interest1 }</th>
-							<th scope="row">${productDataList.memberVO.m_interest2 }</th>
-							<th scope="row">${productDataList.memberVO.m_interest3 }</th>
-							<th scope="row">${productDataList.memberVO.m_education }</th>
-							<th scope="row">${productDataList.memberVO.m_major }</th>
-							<th scope="row">${productDataList.memberVO.m_job }</th>
-							<th scope="row">${productDataList.memberVO.m_maritalstatus }</th>
+							<th scope="row">${userDataList.m_birth }</th>
+							<th scope="row">${userDataList.m_joindate }</th>
+							<th scope="row">${userDataList.m_interest1 }</th>
+							<th scope="row">${userDataList.m_interest2 }</th>
+							<th scope="row">${userDataList.m_interest3 }</th>
+							<th scope="row">${userDataList.m_education }</th>
+							<th scope="row">${userDataList.m_major }</th>
+							<th scope="row">${userDataList.m_job }</th>
+							<th scope="row">${userDataList.m_maritalstatus }</th>
 							
 						</tr>
 						</c:forEach>
