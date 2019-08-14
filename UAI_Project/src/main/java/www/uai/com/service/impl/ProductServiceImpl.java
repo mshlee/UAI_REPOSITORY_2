@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
 import www.uai.com.mapper.ProductSQLMapper;
 import www.uai.com.service.ProductService;
+import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.PageVO;
 import www.uai.com.vo.PostnumVO;
 import www.uai.com.vo.ProductContentVO;
@@ -86,26 +88,97 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-	@Override
-	
-	//lhe-상품전체리스트 출력용
-	public ArrayList<ProductDataVO> getAllProductContent() {
+	// lhe-상품전체리스트 출력용
+	public ArrayList<ProductDataVO> getAllProductContent(AdvancedSearchDataVO searchDataVO) {
 		// TODO Auto-generated method stub
+		/* 변수 확인용
+		System.out.println(searchDataVO.getP_type());
+		System.out.println(searchDataVO.getStartDate());
+		System.out.println(searchDataVO.getEndDate());
+		System.out.println(searchDataVO.getMinPrice());
+		System.out.println(searchDataVO.getMaxPrice());
+		System.out.println(searchDataVO.getKeyword());
+		System.out.println(searchDataVO.getValue());
+		System.out.println("---------------------");
+			 */
 		
-		ArrayList<ProductDataVO> dataList = new ArrayList<ProductDataVO>();
-		ArrayList<ProductVO> productList = productSQLMapper.getAllProduct();
+		String p_type = searchDataVO.getP_type();
+		String startDate = searchDataVO.getStartDate();
+		String endDate = searchDataVO.getEndDate();
+		String minPrice = searchDataVO.getMinPrice();
+		String maxPrice = searchDataVO.getMaxPrice();
+		String keyword = searchDataVO.getKeyword();
+		String value = searchDataVO.getValue();
+	
 		
+		//vo 객체 null값 여부 확인
+		boolean isEmpty=false;
 		
-		for(ProductVO product: productList){
-			
-			ProductContentVO content = productSQLMapper.selectByPIdx(product.getP_idx());
-			ProductDataVO data = new ProductDataVO(product, content);
-			
-			dataList.add(data);
+		if(p_type==null && startDate == null && minPrice == null && keyword == null) {
+			isEmpty=true;
 		}
+		
+		// lhe-상세검색기능 추가 (다중 조건 정렬 이용)
+		ArrayList<ProductDataVO> dataList = new ArrayList<ProductDataVO>();
+		
+		if (isEmpty==true) {
 
+			ArrayList<ProductVO> productList = productSQLMapper.getAllProduct();
 
+			for (ProductVO product : productList) {
+
+				ProductContentVO content = productSQLMapper.selectByPIdx(product.getP_idx());
+				ProductDataVO data = new ProductDataVO(product, content);
+
+				dataList.add(data);
+			}
+
+		} else if (isEmpty==false) {
+			
+			//empty string 예외처리
+			if(p_type.isEmpty()) {
+				p_type=null;
+			}if(startDate.isEmpty()) {
+				startDate=null;
+			}if(minPrice.isEmpty()) {
+				minPrice=null;
+			}if(keyword.isEmpty()) {
+				keyword=null;
+			}if(value.isEmpty()) {
+				value=null;
+			}
+			
+			String query = "";
+			String andPhrase = " AND ";
+
+			if (p_type != null) {
+				query += "P_TYPE=" + p_type;
+				query += andPhrase;
+			}if (startDate != null && endDate != null) {
+				query += "P_POSTDATE BETWEEN " + "'"+startDate +"'"+ " AND " + "'"+endDate+"'";
+				query += andPhrase;
+			}if (minPrice != null && maxPrice != null) {
+				query += "P_ORIGINALPRICE BETWEEN " + minPrice + " AND " + maxPrice;
+				query += andPhrase;
+			}if (keyword != null && value != null) {
+				query += keyword.toUpperCase() + " LIKE %" + "'"+value +"'"+ "%";
+				query += andPhrase;
+			}
+			query = query.substring(0, query.length() - 5);
+			System.out.println(query);
+			
+			ArrayList<ProductVO> productList = productSQLMapper.getProductListBySearchWord(query);
+			for (ProductVO product : productList) {
+				ProductContentVO content = productSQLMapper.selectByPIdx(product.getP_idx());
+				ProductDataVO data = new ProductDataVO(product, content);
+				
+				dataList.add(data);
+			}
+
+		}
+		
 		return dataList;
 	}
-
+	
+	
 }

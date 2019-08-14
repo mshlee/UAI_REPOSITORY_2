@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UAI-판매자 메인</title>
+<title>UAI-강의 관리</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -71,30 +71,32 @@
 <body>
 	<div id="wrapper">
 		<div id="upper_bar">
-			<a href="">쇼핑몰메인</a><a href="">로그아웃</a>
+			<a href="">쇼핑몰 메인</a><a href="">로그아웃</a>
 		</div>
 		<br> <img src="" type="button">
 		<div id="header">
-			<a href="">메인</a> <a href="">상품관리</a> <a href="">주문관리</a> <a href="">회원관리</a>
-			<a href="">리뷰관리</a> <a href="">QnA관리</a> <a href="">지급관리</a>
+			<a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="">주문 관리</a> | <a href="">회원 관리</a> | 
+			<a href="">리뷰 관리</a> | <a href="">QnA 관리</a> | <a href="">지급 관리</a>
 		</div>
 		<div id="left_box">
 			<div id="admin_menu">
-
-				환영합니다.<br>
+				환영합니다.<br>(닉네임아이디들어가야함)<br>
 				<button onclick="">로그아웃</button>
 				<br>
-				<button onclick="">관리자계정설정</button>
+				<a href=""><button>관리자계정설정</button></a>
 
 			</div>
-
+			<br>
+			<a href="./newProduct.do">강의 등록</a>
+	
 		</div>
 		<div id="search_box">
-            <form action="" method="post">
+            <form action="./manageProduct.do" method="get">
             <table>
             <tr class="table-primary">
                 <th>카테고리</th>
                 <th><select name="p_type">
+                	<option></option>
                     <option value="0">언어</option>
                     <option value="1">IT/컴퓨터</option>
                     <option value="2">미술</option>
@@ -105,7 +107,7 @@
             </tr>
             <tr class="table-secondary">
                 <th>등록기간</th>
-                    <th><input type="date">~<input type="date"></th></tr>
+                    <th><input type="date" name="startDate">~<input type="date" name="endDate"></th></tr>
             
             <tr class="table-primary">
                 <th>수강료</th>
@@ -114,6 +116,7 @@
             <tr class="table-secondary">
                 <th>키워드</th>
                 <th><select name="keyword">
+              		<option></option>
                     <option value="p_name">강의명</option>
                     <option value="p_idx">강의번호</option>
                     <option value="pc_teacher">강의번호</option>
@@ -121,7 +124,7 @@
             </tr>
             <tr class="table-primary">
                 <th>
-                <button type="submit" id="btn-primary" style="float: right">검색</button></th>
+                <button type="submit" style="float: right">검색</button></th>
             </tr>
             </table>
                 </form>
@@ -154,16 +157,45 @@
 				<tbody>
 				
 
-						<!--forEach문으로 반복해서 리스트 가져오기-->
+						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="productDataList" items="${productDataList }">
 						<tr>
 							<th scope="row"><input type="checkbox" name="p_idx" value="${productDataList.productVO.p_idx }"></th>
 							<th scope="row">${productDataList.productVO.p_idx }</th>
-							<th scope="row">${productDataList.productVO.p_type }</th>
+							
+							
+							<!-- lhe: 상품 타입 번호를 키워드로 치환 -->
+							<c:choose>
+							<c:when test="${productDataList.productVO.p_type == '0'}">
+							<th scope="row">언어</th>
+							</c:when>
+							<c:when test="${productDataList.productVO.p_type == '1'}">
+							<th scope="row">IT/컴퓨터</th>
+							</c:when>
+							<c:when test="${productDataList.productVO.p_type == '2'}">
+							<th scope="row">미술</th>
+							</c:when>
+							<c:when test="${productDataList.productVO.p_type == '3'}">
+							<th scope="row">음악</th>
+							</c:when>
+							<c:when test="${productDataList.productVO.p_type == '4'}">
+							<th scope="row">스포츠</th>
+							</c:when>
+							<c:when test="${productDataList.productVO.p_type == '5'}">
+							<th scope="row">기타</th>
+							</c:when>
+							</c:choose>
+							
+							
 							<th scope="row">${productDataList.productVO.p_name }</th>
 							<th scope="row">${productDataList.productVO.p_discountRate }</th>
 							<th scope="row">${productDataList.productVO.p_originalPrice }</th>
-							<th scope="row">${productDataList.productVO.p_originalPrice }*${productDataList.productVO.p_discountRate }</th>
+							
+							<!-- lhe: 어케하는겨대체 -->
+							<c:set var="oriPrice" scope="request" value="${productDataList.productVO.p_originalPrice }*=${productDataList.productVO.p_discountRate }">
+							</c:set>
+							<th scope="row">${oriPrice }</th>
+							
 							<th scope="row">${productDataList.productVO.p_commissionRate }</th>
 							<th scope="row">${productDataList.productContentVO.pc_teacher }</th>
 							<th scope="row">${productDataList.productContentVO.pc_location }</th>

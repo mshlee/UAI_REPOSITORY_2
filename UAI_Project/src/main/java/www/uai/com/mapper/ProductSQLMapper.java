@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Select;
 
+import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.PostnumVO;
 import www.uai.com.vo.ProductContentVO;
 import www.uai.com.vo.ProductDataVO;
@@ -32,6 +33,10 @@ public interface ProductSQLMapper {
 	//lhe-상품번호 기준 상품내용출력용
 	@Select ("SELECT * FROM product_content WHERE P_IDX=#{p_idx}")
 	public ProductContentVO selectByPIdx(String p_idx);
+	
+	//lhe-검색키워드 기준 상품내용 출력용
+	@Select ("SELECT * FROM PRODUCT WHERE ${value}")
+	public ArrayList<ProductVO> getProductListBySearchWord(String query);
 	
 
 }
