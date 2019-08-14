@@ -1,10 +1,12 @@
 package www.uai.com.mapper;
 
 import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Select;
 
 import www.uai.com.vo.PostnumVO;
 import www.uai.com.vo.ProductContentVO;
+import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductVO;
 
 
@@ -18,5 +20,18 @@ public interface ProductSQLMapper {
 	
 	@Select("SELECT * FROM PRODUCT_CONTENT WHERE P_IDX = #{idx}")
 	public ProductContentVO selectByIdx(String idx);
+	
+	//lhe-상품전체리스트출력용
+	@Select ("SELECT * FROM PRODUCT ORDER BY P_IDX")
+	public ArrayList<ProductVO> getAllProduct();
+	
+	//lhe-상품전체리스트출력용
+	@Select ("SELECT * FROM product_content ORDER BY P_IDX")
+	public ArrayList<ProductContentVO> getAllProductContent();
+	
+	//lhe-상품번호 기준 상품내용출력용
+	@Select ("SELECT * FROM product_content WHERE P_IDX=#{p_idx}")
+	public ProductContentVO selectByPIdx(String p_idx);
+	
 
 }

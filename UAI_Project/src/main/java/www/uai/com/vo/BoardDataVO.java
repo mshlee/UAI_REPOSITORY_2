@@ -45,32 +45,4 @@ public class BoardDataVO {
 	public MemberDataVO getMemberDataVO() {
 		return memberDataVO;
 	}
-
-
-	public void setMemberDataVO(MemberDataVO memberDataVO) {
-		this.memberDataVO = memberDataVO;
-	}
-
-
-	public OrderDataVO getOrderDataVO() {
-		return orderDataVO;
-	}
-
-
-	public void setOrderDataVO(OrderDataVO orderDataVO) {
-		this.orderDataVO = orderDataVO;
-	}
-
-
-	public ArrayList<UploadFileVO> getFileList() {
-		return fileList;
-	}
-
-
-	public void setFileList(ArrayList<UploadFileVO> fileList) {
-		this.fileList = fileList;
-	}
-      
- 
-
 }

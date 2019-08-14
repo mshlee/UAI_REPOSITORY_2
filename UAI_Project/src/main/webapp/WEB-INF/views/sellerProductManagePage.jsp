@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,6 +127,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
+		<form action="" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -136,7 +138,6 @@
 						<th scope="col">할인율</th>
 						<th scope="col">원 가격</th>
 						<th scope="col">판매 가격</th>
-						<th scope="col">할인율</th>
 						<th scope="col">수수료</th>
 						<th scope="col">강사명</th>
 						<th scope="col">지역</th>
@@ -151,32 +152,37 @@
 				</thead>
 
 				<tbody>
-					<form action="" method="post">
+				
 
 						<!--forEach문으로 반복해서 리스트 가져오기-->
+						<c:forEach var="productDataList" items="${productDataList }">
 						<tr>
-							<th scope="row"><input type="checkbox" name="b_idx"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
-							<th scope="row"></th>
+							<th scope="row"><input type="checkbox" name="p_idx" value="${productDataList.productVO.p_idx }"></th>
+							<th scope="row">${productDataList.productVO.p_idx }</th>
+							<th scope="row">${productDataList.productVO.p_type }</th>
+							<th scope="row">${productDataList.productVO.p_name }</th>
+							<th scope="row">${productDataList.productVO.p_discountRate }</th>
+							<th scope="row">${productDataList.productVO.p_originalPrice }</th>
+							<th scope="row">${productDataList.productVO.p_originalPrice }*${productDataList.productVO.p_discountRate }</th>
+							<th scope="row">${productDataList.productVO.p_commissionRate }</th>
+							<th scope="row">${productDataList.productContentVO.pc_teacher }</th>
+							<th scope="row">${productDataList.productContentVO.pc_location }</th>
+							<th scope="row">0</th>
+							<th scope="row">${productDataList.productContentVO.pc_maxStudent }</th>
+							<th scope="row">${productDataList.productContentVO.pc_startDate }</th>
+							<th scope="row">${productDataList.productContentVO.pc_lastDate }</th>
+							<th scope="row">${productDataList.productContentVO.pc_lectureTime }</th>
+							<th scope="row">${productDataList.productContentVO.pc_lectureDay }</th>
+							<th scope="row">${productDataList.productVO.p_postDate }</th>
 						</tr>
-					</form>
+						</c:forEach>
+						
+					
 				</tbody>
 			</table>
+			
+			<button id="btn-primary" style="float: right">삭제</button>
+			</form>
 		</div>
 
 	</div>
