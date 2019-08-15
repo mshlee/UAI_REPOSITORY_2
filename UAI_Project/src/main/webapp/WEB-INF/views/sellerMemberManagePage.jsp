@@ -75,7 +75,7 @@
 		</div>
 		<br> <img src="" type="button">
 		<div id="header">
-			<a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="">주문 관리</a> | <a href="./manageMember.do">회원 관리</a> | 
+			<a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="./manageOrder.do">주문 관리</a> | <a href="./manageMember.do">회원 관리</a> | 
 			<a href="">리뷰 관리</a> | <a href="">QnA 관리</a> | <a href="">지급 관리</a>
 		</div>
 		<div id="left_box">
@@ -99,8 +99,9 @@
                
             <tr class="table-secondary">
                 <th>성별</th>
-                    <th><input type="radio" name="m_gender" value="M">남</th>
-                    <th><input type="radio" name="m_gender" value="F">여</th></tr>
+                    <th><input type="radio" name="m_gender" value="M">남  
+                    <input type="radio" name="m_gender" value="F">여</th>
+                    </tr>
             
             <tr class="table-primary">
                 <th>키워드</th>
@@ -122,7 +123,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./deleteMemberData.do" method="post">
+		<form action="./deleteMembersByIdx.do" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>

@@ -131,7 +131,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./deleteProductData.do" method="post">
+		<form action="./deleteProductByIdx.do" method="post"ss>
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -152,6 +152,7 @@
 						<th scope="col">강의시간</th>
 						<th scope="col">강의일자</th>
 						<th scope="col">등록일</th>
+						<th scope="col">수정</th>
 					</tr>
 				</thead>
 
@@ -202,6 +203,7 @@
 							<th scope="row">${productList.p_lectureTime }</th>
 							<th scope="row">${productList.p_lectureDay }</th>
 							<th scope="row">${productList.p_postDate }</th>
+							<th scope="row"><a href="./updateProductByIdx?p_idx=${productList.p_idx }"><button>수정</button></a></th>
 						</tr>
 						</c:forEach>
 						
@@ -209,7 +211,7 @@
 				</tbody>
 			</table>
 			
-			<button id="btn-primary" style="float: right">삭제</button>
+			<button type="submit" style="float: right">삭제</button>
 			</form>
 		</div>
 
