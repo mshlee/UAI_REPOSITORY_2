@@ -75,8 +75,8 @@
 		</div>
 		<br> <img src="" type="button">
 		<div id="header">
-			<a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="">주문 관리</a> | <a href="./manageMember.do">회원 관리</a> | 
-			<a href="">리뷰 관리</a> | <a href="">QnA 관리</a> | <a href="">지급 관리</a>
+			<a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="./manageOrder.do">주문 관리</a> | <a href="./manageMember.do">회원 관리</a> | 
+			<a href="./manageReview.do">리뷰 관리</a> | <a href="./manageQnA.do">QnA 관리</a> | <a href="./managePaycheck.do">지급 관리</a>
 		</div>
 		<div id="left_box">
 			<div id="admin_menu">

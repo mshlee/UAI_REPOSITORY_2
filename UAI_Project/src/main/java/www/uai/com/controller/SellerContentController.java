@@ -12,8 +12,12 @@ import www.uai.com.service.SellerContentService;
 import www.uai.com.service.UserService;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.BoardDataVO;
+import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
+import www.uai.com.vo.PaycheckDataVO;
 import www.uai.com.vo.ProductVO;
+import www.uai.com.vo.PurchaseDataVO;
+import www.uai.com.vo.SellerContentVO;
 import www.uai.com.vo.SessionDataVO;
 
 //판매자 관리 페이지용 컨트롤러
@@ -72,6 +76,7 @@ public class SellerContentController {
 		return "sellerProductManagePage";
 	}
 	
+	//lhe-판매자 상품 관리 페이지 복수 상품 삭제 명령
 	@RequestMapping("/seller/deleteProductByIdx.do")
 	public String deleteProductByIdxAction (ArrayList<ProductVO> productVO) {
 		
@@ -82,11 +87,28 @@ public class SellerContentController {
 	}
 	
 	
+	
+	//lhe-판매자 주문 관리 페이지 관련 맵핑
 	@RequestMapping ("/seller/manageOrder.do")
 	public String orderManage(Model model, AdvancedSearchDataVO searchDataVO){
 		
+		//lhe-주문 리스트 불러오기
+		ArrayList<SellerContentVO> orderDataList = new ArrayList<SellerContentVO>();
+		orderDataList=sellerContentService.getAllOrderList();
 		
-		return "sellerMemberManagePage";
+		model.addAttribute("orderDataList", orderDataList);
+		
+		return "sellerOrderManagePage";
+	}
+	
+	//lhe-판매자 주문 관리 페이지 복수 주문 결제상태 변경
+	@RequestMapping("/seller/updateOrderByIdx.do")
+	public String updateOrderByIdxAction(ArrayList<PurchaseDataVO> purchaseVO) {
+		
+		//선택한 주문 결제 상태 변경
+		sellerContentService.updateOrderByIdx(purchaseVO);
+		
+		return "redirect:sellerOrderManagePage";
 	}
 	
 	
@@ -105,6 +127,7 @@ public class SellerContentController {
 		
 	}
 	
+	//lhe-판매자 회원 관리 페이지 복수 회원 탈퇴
 	@RequestMapping("/seller/deleteMemberByIdx.do")
 		public String deleteMemberByIdxAction (ArrayList<MemberDataVO> memberVO) {
 		
@@ -114,22 +137,73 @@ public class SellerContentController {
 			return "redirect:sellerMemberManagePage";
 		}
 	
+	//lhe-판매자 리뷰 관리 페이지 관련 맵핑
 	@RequestMapping ("/seller/manageReview.do")
-	public String reviewManage(BoardDataVO boardVO){
+	public String reviewManage(Model model){
 		
-		return "sellerManagePage";
+		//리뷰 리스트 불러오기
+		ArrayList<SellerContentVO> reviewDataList = new ArrayList<SellerContentVO>();
+		reviewDataList = sellerContentService.getAllReviewList();
+		
+		model.addAttribute("reviewDataList", reviewDataList);
+		
+		
+		return "sellerReviewManagePage";
 	}
 	
+	//lhe-판매자 리뷰 관리 페이지 복수 리뷰 삭제
+	@RequestMapping("/seller/deleteReviewByIdx.do")
+	public String deleteReviewByIdxAction (ArrayList<ContentDataVO> requestVO) {
+		
+		//선택한 리뷰 리스트 지우기
+		
+		return "redirect:sellerReviewManagePage";
+				
+	}
+	
+	//lhe-판매자 QnA 관리 페이지 관련 맵핑
 	@RequestMapping("/seller/manageQnA.do")
-	public String qnaManagePage(BoardDataVO boardVO) {
+	public String qnaManagePage(Model model) {
 		
-		return "sellerManagePage";		
+		ArrayList<SellerContentVO> qnaDataList = new ArrayList<SellerContentVO>();
+		qnaDataList = sellerContentService.getAllQnAList();
+		
+		model.addAttribute("qnaDataList", qnaDataList);
+		
+		return "sellerQnAManagePage";		
 	}
 	
-	@RequestMapping("/seller/managePaycheck.do")
-	public String paycheckManagePage(BoardDataVO boardVO) {
+	
+	//lhe-판매자 QnA 관리 페이지 복수 항목 삭제
+	@RequestMapping("/seller/deleteQnAByIdx.do")
+	public String deleteQnAByIdxAction(ArrayList<ContentDataVO> requestVO) {
 		
-		return "sellerManagePage";		
+		//선택한 질문글 지우기
+		sellerContentService.deleteQnAByIdx(requestVO);
+		
+		return "redirect:sellerQnAManagePage";
+	}
+	
+	
+	//lhe-판매자 
+	@RequestMapping("/seller/managePaycheck.do")
+	public String paycheckManagePage(Model model) {
+		
+		ArrayList<SellerContentVO> paycheckDataList = new ArrayList<SellerContentVO>();
+		paycheckDataList = sellerContentService.getAllPaycheckList();
+		
+		return "sellerPaycheckManagePage";		
+	}
+	
+	//lhe-판매자 지급 관리 페이지 복수 항목 변경
+	@RequestMapping("/seller/deleteQnAByIdx.do")
+	public String updatePaycheckByIdxAction(ArrayList<PaycheckDataVO> requestVO) {
+		
+		//선택한 지급항목 변경하기
+		
+		
+		
+		return "redirect:sellerQnAManagePage";
 	}
 	
 	
