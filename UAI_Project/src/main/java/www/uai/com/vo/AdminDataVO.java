@@ -6,9 +6,15 @@ public class AdminDataVO {
 	private String ad_id;
 	private String ad_pw;
 	private String ad_nick;
+	
+	
+
+	public AdminDataVO() {
+	
+	}
 
 	public AdminDataVO(String ad_idx, String ad_id, String ad_pw, String ad_nick) {
-		super();
+		
 		this.ad_idx = ad_idx;
 		this.ad_id = ad_id;
 		this.ad_pw = ad_pw;

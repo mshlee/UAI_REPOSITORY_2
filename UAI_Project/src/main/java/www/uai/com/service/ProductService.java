@@ -11,6 +11,5 @@ import www.uai.com.vo.ProductNPageDataVO;
 public interface ProductService {
 
 	public ProductNPageDataVO getProductList(Model model, int nowPage);
-	public ArrayList<ProductDataVO> getAllProductContent(AdvancedSearchDataVO searchDataVO);
-	
+
 }

@@ -1,11 +1,12 @@
 package www.uai.com.vo;
 
 public class SellerContentVO {
-	private ProductVO productVO;
-	private OrderDataVO orderVO;
-	private MemberDataVO memberVO;
-	private ProductContentVO productContentVO;
-	private ProductDataVO productDataVO;
+	private ProductVO productDataVO;
+	private OrderDataVO orderDataVO;
+	private MemberDataVO memberDataVO;
+	private PurchaseDataVO purchaseDataVO;
+	private ContentDataVO contentDataVO;
+	private PaycheckDataVO paycheckDataVO;
 	
 	
 	
@@ -14,90 +15,95 @@ public class SellerContentVO {
 
 
 
-
-
-	public SellerContentVO(ProductVO productVO, OrderDataVO orderVO, MemberDataVO memberVO,
-			ProductContentVO productContentVO, ProductDataVO productDataVO) {
+	public SellerContentVO(ProductVO productDataVO, OrderDataVO orderDataVO, MemberDataVO memberDataVO,
+			PurchaseDataVO purchaseDataVO, ContentDataVO contentDataVO, PaycheckDataVO paycheckDataVO) {
 		super();
-		this.productVO = productVO;
-		this.orderVO = orderVO;
-		this.memberVO = memberVO;
-		this.productContentVO = productContentVO;
 		this.productDataVO = productDataVO;
+		this.orderDataVO = orderDataVO;
+		this.memberDataVO = memberDataVO;
+		this.purchaseDataVO = purchaseDataVO;
+		this.contentDataVO = contentDataVO;
+		this.paycheckDataVO = paycheckDataVO;
 	}
 
 
 
-
-
-	public ProductDataVO getProductDataVO() {
+	public ProductVO getProductDataVO() {
 		return productDataVO;
 	}
 
 
 
-
-
-	public void setProductDataVO(ProductDataVO productDataVO) {
+	public void setProductDataVO(ProductVO productDataVO) {
 		this.productDataVO = productDataVO;
 	}
 
 
 
-
-
-	public ProductVO getProductVO() {
-		return productVO;
+	public OrderDataVO getOrderDataVO() {
+		return orderDataVO;
 	}
 
 
 
-	public void setProductVO(ProductVO productVO) {
-		this.productVO = productVO;
+	public void setOrderDataVO(OrderDataVO orderDataVO) {
+		this.orderDataVO = orderDataVO;
 	}
 
 
 
-	public OrderDataVO getOrderVO() {
-		return orderVO;
+	public MemberDataVO getMemberDataVO() {
+		return memberDataVO;
 	}
 
 
 
-	public void setOrderVO(OrderDataVO orderVO) {
-		this.orderVO = orderVO;
+	public void setMemberDataVO(MemberDataVO memberDataVO) {
+		this.memberDataVO = memberDataVO;
 	}
 
 
 
-	public MemberDataVO getMemberVO() {
-		return memberVO;
+	public PurchaseDataVO getPurchaseDataVO() {
+		return purchaseDataVO;
 	}
 
 
 
-	public void setMemberVO(MemberDataVO memberVO) {
-		this.memberVO = memberVO;
+	public void setPurchaseDataVO(PurchaseDataVO purchaseDataVO) {
+		this.purchaseDataVO = purchaseDataVO;
 	}
 
 
 
-	public ProductContentVO getProductContentVO() {
-		return productContentVO;
+	public ContentDataVO getContentDataVO() {
+		return contentDataVO;
 	}
 
 
 
-	public void setProductContentVO(ProductContentVO productContentVO) {
-		this.productContentVO = productContentVO;
+	public void setContentDataVO(ContentDataVO contentDataVO) {
+		this.contentDataVO = contentDataVO;
 	}
+
+
+
+	public PaycheckDataVO getPaycheckDataVO() {
+		return paycheckDataVO;
+	}
+
+
+
+	public void setPaycheckDataVO(PaycheckDataVO paycheckDataVO) {
+		this.paycheckDataVO = paycheckDataVO;
+	}
+
+
+
 	
 	
 	
-	
-	
-	
-	
+
 	
 	
 
