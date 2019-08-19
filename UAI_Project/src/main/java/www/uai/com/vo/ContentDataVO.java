@@ -3,7 +3,7 @@ package www.uai.com.vo;
 public class ContentDataVO {
 	
 	   private String b_idx;
-	   private String b_id;
+	   private String b_referidx;
 	   private String b_type;
 	   private String b_title;
 	   private String b_content;
@@ -16,12 +16,13 @@ public class ContentDataVO {
 	   private String m_idx;
 	   private String p_idx;
 	   private String ad_idx;
-	public ContentDataVO(String b_idx, String b_id, String b_type, String b_title, String b_content, String b_postdate,
+	   
+	public ContentDataVO(String b_idx, String b_referidx, String b_type, String b_title, String b_content, String b_postdate,
 			String b_count, String b_isHidden, String b_pw, String b_qCategory, String b_isPost, String m_idx,
 			String p_idx, String ad_idx) {
 		super();
 		this.b_idx = b_idx;
-		this.b_id = b_id;
+		this.b_referidx = b_referidx;
 		this.b_type = b_type;
 		this.b_title = b_title;
 		this.b_content = b_content;
@@ -38,14 +39,14 @@ public class ContentDataVO {
 	public String getB_idx() {
 		return b_idx;
 	}
-	public void setB_idx(String b_idx) {
-		this.b_idx = b_idx;
+	public void setB_idx(String b_referidx) {
+		this.b_referidx = b_referidx;
 	}
-	public String getB_id() {
-		return b_id;
+	public String getB_referidx() {
+		return b_referidx;
 	}
-	public void setB_id(String b_id) {
-		this.b_id = b_id;
+	public void setB_referidx(String b_referidx) {
+		this.b_referidx = b_referidx;
 	}
 	public String getB_type() {
 		return b_type;

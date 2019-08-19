@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UAI-회원 관리</title>
+<title>UAI-리뷰 관리</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -91,31 +91,32 @@
 	
 		</div>
 		<div id="search_box">
-            <form action="./manageMember.do" method="get">
+            <form action="./manageReview.do" method="get">
             <table>
             <tr class="table-primary">
-            <th>가입일</th>
+            <th>작성일</th>
                 <th><input type="date" name="startDate">~<input type="date" name="endDate"></th></tr>
                
             <tr class="table-secondary">
-                <th>성별</th>
-                    <th><input type="radio" name="m_gender" value="M">남  
-                    <input type="radio" name="m_gender" value="F">여</th>
+            <th>별점</th>
+               <th><input type="text" name="minRate">~<input type="text" name="maxRate"></th>
                     </tr>
             
             <tr class="table-primary">
                 <th>키워드</th>
                 <th><select name="keyword">
               		<option></option>
+              		<option value="b_referidx">글번호</option>
+              		<option value="b_title">글제목</option>
+              		<option value="p_idx">강의번호</option>
+              		<option value="p_name">강의명</option>
                     <option value="m_idx">회원번호</option>
                     <option value="m_name">이름</option>
                     <option value="m_id">아이디</option>
                     <option value="m_nick">닉네임</option>
-                    <option value="m_address">주소</option>
-                    <option value="m_phone">전화번호</option>
                 </select><input type="text" name="value"></th>
             </tr>
-            <tr class="table-primary">
+            <tr class="table-secondary">
                 <th>
                 <button type="submit" style="float: right">검색</button></th>
             </tr>
@@ -123,72 +124,49 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./deleteMembersByIdx.do" method="post">
+		<form action="./deleteReviewByIdx.do" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
 						<th scope="col">선택</th>
+						<th scope="col">글번호</th>
+						<th scope="col">강의번호</th>
+						<th scope="col">강의명</th>
 						<th scope="col">회원번호</th>
 						<th scope="col">아이디</th>
-						<th scope="col">이름</th>
 						<th scope="col">닉네임</th>
-						<th scope="col">전화번호</th>
-						<th scope="col">주소</th>
-						<th scope="col">성별</th>
-						<th scope="col">생일</th>
-						<th scope="col">가입일</th>
-						<th scope="col">관심사1</th>
-						<th scope="col">관심사2</th>
-						<th scope="col">관심사3</th>
-						<th scope="col">최종학력</th>
-						<th scope="col">전공</th>
-						<th scope="col">직업</th>
-						<th scope="col">결혼유무</th>
+						<th scope="col">회원명</th>
+						<th scope="col">글제목</th>
+						<th scope="col">조회수</th>
+						<th scope="col">작성일</th>
 					</tr>
 				</thead>
 
 				<tbody>
 				
-
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
-						<c:forEach var="userDataList" items="${userDataList }">
+						<c:forEach var="reviewDataList" items="${reviewDataList }" varStatus="status">
 						<tr>
-							<th scope="row"><input type="checkbox" name="m_idx" value="${userDataList.m_idx }"></th>
-							<th scope="row">${userDataList.m_idx }</th>
-							<th scope="row">${userDataList.m_id }</th>
-							<th scope="row">${userDataList.m_name }</th>
-							<th scope="row">${userDataList.m_nick }</th>
-							<th scope="row">${userDataList.m_phone }</th>
-							<th scope="row">${userDataList.m_address }</th>
-							
-								<!-- lhe: 성별코드를 키워드로 치환 -->
-							<c:choose>
-							<c:when test="${userDataList.m_gender == 'M'}">
-							<th scope="row">남</th>
-							</c:when>
-							<c:when test="${userDataList.m_gender == 'F'}">
-							<th scope="row">여</th>
-							</c:when>
-							</c:choose>
-							
-							<th scope="row">${userDataList.m_birth }</th>
-							<th scope="row">${userDataList.m_joindate }</th>
-							<th scope="row">${userDataList.m_interest1 }</th>
-							<th scope="row">${userDataList.m_interest2 }</th>
-							<th scope="row">${userDataList.m_interest3 }</th>
-							<th scope="row">${userDataList.m_education }</th>
-							<th scope="row">${userDataList.m_major }</th>
-							<th scope="row">${userDataList.m_job }</th>
-							<th scope="row">${userDataList.m_maritalstatus }</th>
-							
+							<th scope="row"><input type="checkbox" name="b_referidx" value="${reviewDataList.contentDataVO.b_referidx}"></th>
+							<th scope="row">${status.count}</th>
+							<th scope="row">${reviewDataList.contentDataVO.b_referidx }</th>
+							<th scope="row">${reviewDataList.contentDataVO.p_idx }</th>
+							<th scope="row">${reviewDataList.productVO.p_name }</th>
+							<th scope="row">${reviewDataList.contentDataVO.m_idx }</th>
+							<th scope="row">${reviewDataList.memberDataVO.m_id }</th>
+							<th scope="row">${reviewDataList.memberDataVO.m_nick }</th>
+							<th scope="row">${reviewDataList.memberDataVO.m_name}</th>
+							<th scope="row">${reviewDataList.contentDataVO.b_title}</th>
+							<th scope="row">${reviewDataList.memberDataVO.m_name}</th>
+							<th scope="row">${reviewDataList.contentDataVO.b_count}</th>
+							<th scope="row">${reviewDataList.contentDataVO.b_postdate}</th>
 						</tr>
 						</c:forEach>
 				</tbody>
 			</table>
-			<button type="submit" id="btn-primary" style="float: right">탈퇴</button>
+			<button type="submit" style="float: right">삭제</button>
 			</form>
 		</div>
-
 	</div>
 
 

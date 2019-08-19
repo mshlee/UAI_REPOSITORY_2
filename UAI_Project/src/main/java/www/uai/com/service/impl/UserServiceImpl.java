@@ -1,13 +1,19 @@
 package www.uai.com.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import www.uai.com.mapper.UserSQLMapper;
 import www.uai.com.service.UserService;
+import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.SessionDataVO;
 
+@Service
 public class UserServiceImpl implements UserService{
+	
 	@Autowired
 	private UserSQLMapper userSQLMapper;
 	
@@ -44,6 +50,17 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		return false;
+	}
+
+	@Override
+	public ArrayList<MemberDataVO> getAllUserList() {
+		// TODO Auto-generated method stub
+		
+		ArrayList<MemberDataVO> userDataList = new ArrayList<MemberDataVO>();
+		
+		userDataList = userSQLMapper.getAllUserList();
+		
+		return userDataList;
 	}
 
 }
