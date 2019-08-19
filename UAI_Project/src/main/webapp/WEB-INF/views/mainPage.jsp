@@ -298,7 +298,7 @@
                   <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
                     <ul class="navbar-nav" id="top-menu-bar">
                       <li class="nav-item"><a class="nav-link" href="./noticeBoardPage">Notice</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#">Lecture</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./productListPage">Lecture</a></li>
                       <li class="nav-item"><a class="nav-link" href="./reviewBoardPage">Review</a></li>
                       <li class="nav-item"><a class="nav-link" href="./qnaBoardPage">Q & A</a></li>
                     </ul>

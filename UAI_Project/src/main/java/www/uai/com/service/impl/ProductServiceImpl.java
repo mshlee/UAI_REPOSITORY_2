@@ -1,86 +1,186 @@
 package www.uai.com.service.impl;
 
 import java.util.ArrayList;
-
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import www.uai.com.mapper.ProductSQLMapper;
+import www.uai.com.mapper.UploadFileSQLMapper;
 import www.uai.com.service.ProductService;
-import www.uai.com.vo.PageVO;
+import www.uai.com.vo.OrderDataVO;
 import www.uai.com.vo.PostnumVO;
-import www.uai.com.vo.ProductContentVO;
 import www.uai.com.vo.ProductDataVO;
-import www.uai.com.vo.ProductNPageDataVO;
 import www.uai.com.vo.ProductVO;
+import www.uai.com.vo.SessionDataVO;
+import www.uai.com.vo.UploadProductFileVO;
+import www.uai.com.vo.WishListVO;
+
 @Service
 public class ProductServiceImpl implements ProductService{
-	
-	private ProductSQLMapper productSQLMapper;
+   
+   @Autowired
+   private ProductSQLMapper productSQLMapper;
+   @Autowired
+   private UploadFileSQLMapper uploadFileSQLMapper;
+   
+   @Override
+   public ArrayList<ProductVO> getProductList(Model model, String nowPage, int limit) {
+      
+      ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
 
-	@Override
-	public ProductNPageDataVO getProductList(Model model, int nowPage) {
-		
-		ProductNPageDataVO productDataList = new ProductNPageDataVO();
-		
-		ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
-		
-		ArrayList<ProductDataVO> dataList = new ArrayList<ProductDataVO>();
-		
-		PageVO pageData = new PageVO(0,0,0);
-		
-		// 페이징 처리 구현
-		
-		pageData.setNowPage(nowPage);
-		System.out.println(nowPage);
-		
-		// 한 페이지에 보여줄 게시글 개수 설정
-		int limit = 10;
-		
-		// 한 페이지에 보여줄 페이지의 개수 설정
-		int pageGroupLimit = 5;
-		                                                                                             
-		// 게시글 총 개수 가져오기
-		int listCount = productSQLMapper.getListCount();                                                                                                                                          
-		System.out.println("리스트 총 개수 : " + listCount);
+      if(nowPage == null) {
+         nowPage = "1";
+      }
+      
+      int startPost = Integer.parseInt(nowPage)*limit-limit+1;
+      int endPost = Integer.parseInt(nowPage)*limit;
+      
+      PostnumVO postnum = new PostnumVO(startPost, endPost);
+      
+      productList = productSQLMapper.selectByPageNum(postnum);
+      
+      return productList;
+      
+   }
 
-		// 끝페이지 설정
-		int maxPage = (int)(Math.ceil((double) listCount/limit));       
-		System.out.println("끝 페이지 : "+ maxPage);
-		
-		// 각 페이지 별 첫페이지&끝페이지 설정
-		int startPage = (int)(Math.ceil((double) pageData.getNowPage()/pageGroupLimit));
-		System.out.println("첫 페이지 : " +startPage);
-		pageData.setStartOfPageGroup(startPage);
-		int endPage = startPage + (pageGroupLimit -1);                                                                       
-		if(endPage > maxPage) {                                                                            
-		    pageData.setEndOfPageGroup(maxPage);                                           
-		}else {
-			pageData.setEndOfPageGroup(endPage);
-		}
-		
-		// 각 페이지 별 시작 게시글 번호와 끝 번호 설정
-		int startPost = nowPage*limit-limit+1;
-		int endPost = nowPage*limit;
-		PostnumVO postnum = new PostnumVO(startPost, endPost);
-		
-		///////////////
-		
-		productList = productSQLMapper.selectByPageNum(postnum);
-		
-		for(ProductVO product : productList) {
-			
-			ProductContentVO productContent = productSQLMapper.selectByIdx(product.getP_idx());
-			
-			ProductDataVO data = new ProductDataVO(product,productContent);
-			
-			dataList.add(data);
-		}
-		
-		productDataList.setPageVO(pageData);
-		productDataList.setProductDataList(dataList);
-		
-		return productDataList;
-		
-	}
+   @Override
+   public ProductDataVO readProductPage(Model model, ProductVO productParam) {
+      
+      String p_idx = productParam.getP_idx();
+      
+      ProductVO productVO = productSQLMapper.selectByIdx(p_idx);
+      
+      ArrayList<UploadProductFileVO> fileList = new ArrayList<UploadProductFileVO>();
+      fileList = uploadFileSQLMapper.selectByP_idx(p_idx);
+      
+      ProductDataVO productDataVO = new ProductDataVO(productVO, fileList);
+      
+      return productDataVO;
+   }
+
+   @Override
+   public ArrayList<ProductDataVO> readwishlistPage(Model model, HttpSession session, String nowPage) {
+      
+      ArrayList<ProductDataVO> productData = new ArrayList<ProductDataVO>();
+
+      ArrayList<UploadProductFileVO> fileList = new ArrayList<UploadProductFileVO>();
+      
+      SessionDataVO sessionData = (SessionDataVO)session.getAttribute("sessionData");
+      
+      String m_idx = sessionData.getM_idx();
+      
+      //postnum에 시작점 끝점 정해주기
+      int limit = 5;
+      
+      if(nowPage == null) {
+         nowPage = "1";
+      }
+      
+      int startPost = Integer.parseInt(nowPage)*limit-limit+1;
+      int endPost = Integer.parseInt(nowPage)*limit;
+      
+      PostnumVO postnumVO = new PostnumVO(startPost,endPost,m_idx);
+      
+      ArrayList<WishListVO> wishlists = productSQLMapper.selectByMIdx(postnumVO);
+      
+      for(WishListVO wishlist : wishlists) {
+         
+         String p_idx = wishlist.getP_idx();
+         
+         ProductVO productVO = productSQLMapper.selectByIdx(p_idx);
+         
+         fileList = uploadFileSQLMapper.selectByP_idx(p_idx);
+         
+         ProductDataVO productDataVO = new ProductDataVO(productVO, fileList);
+         
+         productData.add(productDataVO);
+         
+      }
+      
+      return productData;
+   }
+
+   @Override
+   public void buyProductAction(OrderDataVO orderParam , HttpSession session ) {
+      
+	   SessionDataVO sessionData = (SessionDataVO)session.getAttribute("sessionData");
+	      
+     String m_idx = sessionData.getM_idx();
+	   orderParam.setM_idx(m_idx);
+      productSQLMapper.buyProductAction(orderParam);
+      
+   }
+
+   @Override
+   public boolean checkwishlist(Model model, HttpSession session, ProductVO productParam) {
+      
+      boolean IsWished = false;
+      
+      // 세션에서 m_idx 가져오기
+  SessionDataVO sessionData = (SessionDataVO)session.getAttribute("sessionData");
+      
+      String m_idx = sessionData.getM_idx();
+      
+      
+      // P_IDX 가져오기
+      String p_idx = productParam.getP_idx();
+      
+      // WishListVO 에 두 값 넣어주기
+      WishListVO wishListVO = new WishListVO();
+      wishListVO.setM_idx(m_idx);
+      wishListVO.setP_idx(p_idx);
+      
+      // wishlist의 값 가져오기
+      ArrayList<WishListVO> wishListdata = productSQLMapper.selectAllByMIdx(wishListVO);
+      
+      // wishList에 값이 있으면 상품이 wishlist에 담겨있다는 의미니까 IsWished 의 값을 true로 바꿔줄 것
+      if(wishListdata.size() != 0){
+         IsWished = true;
+      }
+      
+      return IsWished;
+   }
+
+   @Override
+   public void addWishlist(WishListVO wishlistVO, HttpSession session) {
+      
+      //세션의 m_idx를 넣어주기
+	   SessionDataVO sessionData = (SessionDataVO)session.getAttribute("sessionData");
+	      
+	      String m_idx = sessionData.getM_idx();
+      wishlistVO.setM_idx(m_idx);
+      
+      productSQLMapper.addWishlist(wishlistVO);
+   }
+
+   @Override
+   public void removeWishlist(WishListVO wishlistVO, HttpSession session) {
+      
+      //세션의 m_idx를 넣어주기
+	   SessionDataVO sessionData = (SessionDataVO)session.getAttribute("sessionData");
+	      
+	      String m_idx = sessionData.getM_idx();
+	      
+      wishlistVO.setM_idx(m_idx);
+      
+      productSQLMapper.removeWishlist(wishlistVO);
+   }
+
+   @Override
+   public int getProductListCount() {
+      
+      int productListCount = productSQLMapper.getProductListCount();
+      
+      return productListCount;
+   }
+
+   @Override
+   public int getWishListCount() {
+      
+      int wishListCount = productSQLMapper.getWishListCount();
+      
+      return wishListCount;
+   }
 
 }

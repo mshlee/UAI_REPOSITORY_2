@@ -59,7 +59,7 @@
                   </c:when>
                   <c:otherwise>
                  
-                  <form action="./readQnAContentPage?b_idx=${boardDataVO.contentDataVO.b_idx }">
+                  <form action="./readQnAContentPage" method="post">
                         <input type="hidden" name="b_idx" value="${boardDataVO.contentDataVO.b_idx }">
                         <input type="password" placeholder="비밀번호를 입력해주세요" name="b_pw">
                         <input type="submit"  value="확인">

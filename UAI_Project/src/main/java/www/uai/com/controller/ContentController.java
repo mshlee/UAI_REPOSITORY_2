@@ -300,8 +300,10 @@ public class ContentController {
    public String writeReviewAction(ContentDataVO requestReviewParam, HttpSession httpsession) {
       
       System.out.println(requestReviewParam.getB_title());
+      
       SessionDataVO sessionDataVO = (SessionDataVO)httpsession.getAttribute("sessionData");
       String m_idx = sessionDataVO.getM_idx();
+     
       requestReviewParam.setM_idx(m_idx);
       contentService.writeReview(requestReviewParam);
       
@@ -314,6 +316,7 @@ public class ContentController {
 	   return "/myPage";
 	   
    }
+   
    
    
 }

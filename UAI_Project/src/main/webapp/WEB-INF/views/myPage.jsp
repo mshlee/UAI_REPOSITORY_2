@@ -338,7 +338,7 @@
                         <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
                         <ul class="navbar-nav" id="top-menu-bar">
                             <li class="nav-item"><a class="nav-link" href="./noticeBoardPage">Notice</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Lecture</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./productListPage">Lecture</a></li>
                             <li class="nav-item"><a class="nav-link" href="./reviewBoardPage">Review</a></li>
                             <li class="nav-item"><a class="nav-link" href="qnaBoardPage">Q & A</a></li>
                         </ul>
@@ -441,7 +441,7 @@
                     <div id="show-wishlist">
                        <div class="empty-box2"><br></div>
                        <img src="./img/showWish.png" id="logo-wish">
-                        <a style="color: black" href="./showMyWishListPage">My Wish List</a>
+                        <a style="color: black" href="./readWishlistPage">My Wish List</a>
                     </div>
                     <br>
                     <div id="show-payment">
