@@ -87,7 +87,7 @@ public class BoardDataVO {
    public void setFileList(ArrayList<UploadFileVO> fileList) {
       this.fileList = fileList;
    }
-      
- 
+   
+
 
 }
