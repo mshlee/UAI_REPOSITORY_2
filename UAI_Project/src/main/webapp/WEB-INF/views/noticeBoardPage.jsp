@@ -13,12 +13,14 @@
          <c:when test="${!empty sessionData.m_idx }">
             ${sessionData.m_nick }님 환영합니다.
             <a href="./logoutAction">로그아웃</a>
+            <a href="./mainPage">메인페이지로</a>
             <br>
          </c:when>
          
          <c:when test="${!empty sessionData.ad_idx }">
             ${sessionData.ad_nick }님 환영합니다.
             <a href="./logoutAction">로그아웃</a>
+            <a href="./mainPage">메인페이지로</a>
             <br>
             </c:when>
             
@@ -50,9 +52,9 @@
       </c:if>
 
       <div id="search">
-      <form action="./noticeBoardPage" method="post">
+      <form action="./noticeBoardPage" method="get">
       <input type="hidden" name="b_type" value="0" >
-      <select name="searchTarget">
+      검색대상 : <select name="searchTarget">
          <option value="b_title" selected>제목</option>
          <option value="b_content">내용</option>
          <option value="ad_nick">작성자</option>

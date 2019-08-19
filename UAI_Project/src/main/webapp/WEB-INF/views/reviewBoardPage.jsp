@@ -49,7 +49,7 @@
 
       </table>
       <c:if test="${!empty sessionData }">
-         <a href="./writeQnAContentForm">질문 작성</a>
+         <a href="./writeReviewForm">질문 작성</a>
       </c:if>
 
       <br>

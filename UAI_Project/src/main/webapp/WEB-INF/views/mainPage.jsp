@@ -1,3 +1,5 @@
+원래 메인 페이지
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -79,7 +81,7 @@
                       margin-top: -8px;
                       margin-bottom: -8px;              
                       font-family: seasoned-hostess, sans-serif;
-                      font-weight: 800;
+                      font-weight: 900;
                       font-style: normal;
                       font-size: 15pt;
                       float: left;
@@ -124,6 +126,7 @@
                        margin-bottom:-35px;
                        font-weight: 300;
                        margin-left: 5px;
+                       margin-top:10px;
                     }
                     #login-success-function{
                       float: left;
@@ -209,25 +212,38 @@
                       float: left;
                     }
 
-                    #catchphrase{
-                      font-family: lemongrass-caps, sans-serif;
-                      font-weight: 400;
-                      font-style: italic;
-                    }
-
-          hr{
-            width: 1024px;
-            height: 3px;
-            color: black;
-            float: left;
-          }
 
           #bottom-box{
             width: 1024px;
-            height: 128px;
-            background-color: aliceblue;
+            height: 170px;
+            background-color: darkgray;
+            color: white;
             float: left;
+            
           }
+             #catchphrase{
+                font-family: seasoned-hostess, sans-serif;
+                font-weight: 300;
+                font-style: normal;
+                float: left;
+                font-size: 30pt;
+                margin-left: 30px;
+                color: black;
+                margin-top: 10px;
+                
+              }
+              
+              #bottom-phrase{
+                font-family: seasoned-hostess, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 15pt;
+                 float: right;
+                 margin-top:50px;
+                 margin-right: 10px;
+              }
+             
+             
         </style>
 
       <!-- Swiper styles -->
@@ -266,21 +282,24 @@
           <div id="top-box">
             <div id="top-small-1">
               <div id="top-menu">
-                HOME | LOGIN | NOTICE | MYPAGE            
+                <a style="color: black" href="./mainPage">HOME</a> | 
+                <a style="color: black" href="./loginForm">LOGIN</a> | 
+                <a style="color: black" href="./noticeBoardPage">NOTICE</a> | 
+                <a style="color: black" href="./myPage">MYPAGE</a>            
               </div>
               </div>
               <div id="top-small-2">
                 <div id="top-logo">
-                  <img id="top-logo" src="./img/logo.png">
+                  <a href="./mainPage"><img id="top-logo" src="./img/logo.png"></a>
                 </div>
               </div>
               <div id="top-small-3">
                 <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
                   <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
                     <ul class="navbar-nav" id="top-menu-bar">
-                      <li class="nav-item"><a class="nav-link" href="#">Notice</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./noticeBoardPage">Notice</a></li>
                       <li class="nav-item"><a class="nav-link" href="#">Lecture</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./reviewContentPage">Review</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./reviewBoardPage">Review</a></li>
                       <li class="nav-item"><a class="nav-link" href="./qnaBoardPage">Q & A</a></li>
                     </ul>
                 </nav>
@@ -339,7 +358,7 @@
                            <h4>Welcome,</h4> <h6>${sessionData.m_nick }</h6>
                            <br>
                            <div id="login-success-function">
-                           <a href="./logoutAction"><button class="btn btn-link">Logout</button></a>
+                           <a href="./logoutAction"><button class="btn btn-light">Logout</button></a>
                            <a href="./myPage"><button class="btn btn-info">My Page</button></a>
                            <br>
                            </div>
@@ -410,10 +429,15 @@
               
           </div><!--middle box div-->
           
-          <hr>
           
           <div id="bottom-box">
-          
+             
+             <div id="catchphrase">
+                UAI Project: Let us learn Something Worthy!          
+             </div>
+             <br>
+             <br>
+             <div id="bottom-phrase">Help | Feedback | Privacy | Terms | ⓒUAI Project Company</div>
           </div><!--bottom box div-->
        </div> <!--wrapper div-->
     
