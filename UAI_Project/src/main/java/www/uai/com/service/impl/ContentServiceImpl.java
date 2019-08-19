@@ -212,5 +212,10 @@ public class ContentServiceImpl implements ContentService{
 		return new BoardDataVO(null, null, null, null, null);
 	}
 
-	
+	   public void writeReview(ContentDataVO requestReviewParam){
+		      String reviewKey = contentSQLMapper.getReviewKey();
+		      
+		      requestReviewParam.setB_idx(reviewKey);
+		      contentSQLMapper.reviewInsert(requestReviewParam);
+		   }
 }

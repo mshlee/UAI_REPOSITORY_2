@@ -28,4 +28,6 @@ public interface ContentService {
 	public void writeQnAContent(ContentDataVO contentDataVO, ArrayList<UploadFileVO> fileList);
 	
 	public BoardDataVO checkedPW(ContentDataVO contentDataVO, String b_pw);
+	
+	public void writeReview(ContentDataVO requestReviewParam);
 }

@@ -61,6 +61,13 @@ public interface ContentSQLMapper {
 	
 	@Select("SELECT COUNT(*) FROM BOARD_CONTENT")
 	public int getListCount();
+	
+	@Select("SELECT BOARD_IDX_SEQ.NEXTVAL FROM DUAL")
+	   public String getReviewKey();
+
+	   @Insert("INSERT INTO BOARD_CONTENT VALUES(#{b_id},#{b_idx},#{b_type},#{b_title},#{b_content},SYSDATE,#{b_count},#{b_ishidden},#{b_pw},#{b_ispost},#{p_starrate},#{m_idx},#{p_idx},#{ad_idx},)")
+	   public void reviewInsert(ContentDataVO contentDataVO);
+	   
 }
 
 /*B_IDX NUMBER(8) PRIMARY KEY ,
