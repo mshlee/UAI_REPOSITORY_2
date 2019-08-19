@@ -9,10 +9,10 @@ import www.uai.com.vo.UploadFileVO;
 
 public interface UploadFileSQLMapper {
 
-	@Insert("INSERT INTO BOARD_UPLOADFILES VALUES(BOARD_UPLOADFILES_SEQ.NEXTVAL,#{c_idx},#{f_linkname},#{f_orifilename})")
+	@Insert("INSERT INTO Files VALUES(Files_Seq.NEXTVAL, #{b_idx},#{f_path},#{f_originalname})")
 	public void insert(UploadFileVO vo);
 
-	@Select("SELECT * FROM BOARD_UPLOADFILES WHERE B_IDX = #{b_idx}")
+	@Select("SELECT * FROM Files WHERE B_IDX = #{b_idx}")
 	public ArrayList<UploadFileVO> selectByB_idx(String b_idx);
 
 }

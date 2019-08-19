@@ -11,6 +11,23 @@ public class BoardDataVO {
       private ArrayList<UploadFileVO> fileList;
       
       
+    public BoardDataVO() {
+    	super();
+    }
+      
+    public BoardDataVO(ContentDataVO contentDataVO, MemberDataVO memberDataVO) {
+    	super();
+    	this.contentDataVO = contentDataVO;
+		this.memberDataVO = memberDataVO;
+    }
+    
+    public BoardDataVO(ContentDataVO contentDataVO, MemberDataVO memberDataVO, AdminDataVO adminDataVO) {
+    	super();
+    	this.contentDataVO = contentDataVO;
+		this.memberDataVO = memberDataVO;
+		this.adminDataVO = adminDataVO;
+    }
+      
 	public BoardDataVO(AdminDataVO adminDataVO, ContentDataVO contentDataVO, MemberDataVO memberDataVO,
 			OrderDataVO orderDataVO, ArrayList<UploadFileVO> fileList) {
 		super();

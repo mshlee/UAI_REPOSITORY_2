@@ -1,10 +1,12 @@
 package www.uai.com.controller;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import www.uai.com.service.ContentService;
-import www.uai.com.vo.BoardDataPageVO;
 import www.uai.com.vo.BoardDataVO;
 import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.UploadFileVO;
@@ -25,7 +26,7 @@ public class ContentController {
 	//사용할 메서드들 가져오기 
 	@Autowired
 	private ContentService contentService;
-
+	
 	// "/"이 붙으면 여기로!
 	@RequestMapping("/")
 	public String home() {
@@ -35,21 +36,46 @@ public class ContentController {
 	
 	@RequestMapping("/mainPage")
 	public String mainPage() {
-		return "";
+		return "mainPage";
 	}
 	
-	
-	@RequestMapping("/boardPage")
-	public String boardPage(Model model, String searchWord, String searchTarget, int nowPage, String b_type) { // 여러 개가 넘어올 경우 VO를 또 생성하여 받아올 수 있음. 싫으면 ContentVO에 string searchWord를 추가하던가.
-		
-		BoardDataPageVO list = contentService.getContentsList(searchWord, searchTarget, nowPage, b_type); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
-		
-		//model 객체에 넣어서 전달해주기
-		model.addAttribute("boardDataList", list);
-		
-		return "boardPage";
+	@RequestMapping("/myPage")
+	public String myPage() {
+		return "myPage";
 	}
 	
+	@RequestMapping("/noticeBoardPage")
+	public String noticeBoardPage(Model model, String searchWord, String searchTarget) { // 여러 개가 넘어올 경우 VO를 또 생성하여 받아올 수 있음. 싫으면 ContentVO에 string searchWord를 추가하던가.
+		
+		
+		String b_type = "0";
+		ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
+		model.addAttribute("boardDataList", dataList);
+		System.out.println(dataList.size());
+		return "noticeBoardPage";
+	}
+	@RequestMapping("/reviewBoardPage")
+	public String reviewBoardPage(Model model, String searchWord, String searchTarget) { // 여러 개가 넘어올 경우 VO를 또 생성하여 받아올 수 있음. 싫으면 ContentVO에 string searchWord를 추가하던가.
+		
+		
+		String b_type = "1";
+		ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
+		model.addAttribute("boardDataList", dataList);
+		System.out.println(dataList.size());
+		return "reviewBoardPage";
+	}
+	@RequestMapping("/qnaBoardPage")
+	public String qnaBoardPage(Model model, String searchWord, String searchTarget) { // 여러 개가 넘어올 경우 VO를 또 생성하여 받아올 수 있음. 싫으면 ContentVO에 string searchWord를 추가하던가.
+		
+		
+		String b_type = "2";
+		ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
+		model.addAttribute("boardDataList", dataList);
+		System.out.println(dataList.size());
+		return "qnaBoardPage";
+	}
+
+
 	//MultipartFile 사용하기 위한 요구 조건
 	//1. pon.xml 파일 관련 라이브러리 있어야 함
 	//2. servlet xml에 annotation-driven 이 있어야 함
@@ -63,9 +89,14 @@ public class ContentController {
 		
 		return "writeContentForm";
 	}
+	@RequestMapping("/writeQnAContentForm")
+	public String writeQNAContentForm() {
+		return "writeQNAContentForm";
+	}
+	
 	
 	@RequestMapping("/writeContentAction")
-	public String writeContentAction(MultipartFile [] files, ContentDataVO requestParam, HttpServletRequest request) { // request는 위치 받아오기 용도
+	public String writeContentAction(MultipartFile [] files, ContentDataVO contentDataVO, HttpServletRequest request) { // request는 위치 받아오기 용도
 		
 		// 파일 받아서 DB에 넣어주기 전 작업 (db에 넣어주려면 db의 열에 맞게 조정해야함)
 		ArrayList<UploadFileVO> fileList = new ArrayList<UploadFileVO>();
@@ -113,35 +144,129 @@ public class ContentController {
 			
 		}
 		
-		contentService.writeContent(requestParam,fileList);
+		contentService.writeContent(contentDataVO,fileList);
 		
-		return "redirect:boardPage";
+		return "redirect:noticeBoardPage";
+	}
+	@RequestMapping("/writeQnAContentAction")
+	public String writeQnAContentAction(MultipartFile [] files, ContentDataVO contentDataVO, HttpServletRequest request) {
+
+		// 파일 받아서 DB에 넣어주기 전 작업 (db에 넣어주려면 db의 열에 맞게 조정해야함)
+		ArrayList<UploadFileVO> fileList = new ArrayList<UploadFileVO>();
+		
+		// 파일 업로드 처리(파일 받아서 저장하기)
+			//파일을 넣는 폴더를 지정해주기
+		//String uploadRootFolderName = "C:\\dev_tools\\apache-tomcat-8.5.42\\wtpwebapps\\SpringMVC"; // 이렇게 해도 되지만 위치가 변할때마다 수정해주어야함
+		String uploadRootFolderName = request.getSession().getServletContext().getRealPath("/uploadimg/"); // window 기준으로는 자동으로 역슬래쉬로 들어감 //servletContext는 application 저장공간 
+			//파일 처리하기(파일 이름 받아오기)
+		for(MultipartFile file: files) {
+			
+			if(file.getSize()==0) //넘어온 값이 없을 때는 그냥 루프 빠져나가기
+				continue;
+			
+			String oriFilename = file.getOriginalFilename();
+			
+			//중복된 이름으로 저장하는 것 피하기(랜덤한 이름으로 저장하기)
+			String randomFilename = UUID.randomUUID().toString();
+			
+			//파일 확장자명 원본 그대로 받아오기(확장자명 가져오기)
+			randomFilename += oriFilename.substring(oriFilename.lastIndexOf('.')); //원본 이름에서 .을 뒤에서부터 찾아서 잘라내어 확장자명을 얻어내고 랜덤하게 설정된 이름에다가 붙인다.
+			
+			System.out.println("저장될 파일명 : " + uploadRootFolderName + randomFilename);
+			
+			//저장하기
+			try {
+				file.transferTo(new File(uploadRootFolderName + randomFilename)); //파일 위치 지정해주기
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//DATA 생성
+			//경로 구성
+			String link = request.getContextPath(); //springMVC/ 위치까지
+			link += "/uploadimg/";
+			link += randomFilename;
+			
+			//담아주기
+			UploadFileVO fileVO = new UploadFileVO();
+			fileList.add(fileVO);
+			
+		}
+		
+		contentService.writeQnAContent(contentDataVO,fileList);
+		
+		return "redirect:qnaBoardPage";
 	}
 	
-	@RequestMapping("/readContentPage")
-	public String readContentPage(ContentDataVO requestParam,Model model) { //직접 전달해준 거 이외에 추가적으로 넣고 싶은 애가 있을 때 : model 사용하기!(request와 동일한 쓰임)
+	@RequestMapping("/readNoticeContentPage")
+	public String readNoticeContentPage(ContentDataVO contentDataVO, Model model) {
 		
-		contentService.increaseCount(requestParam);
+		contentService.increaseCount(contentDataVO);
+		BoardDataVO boardData = contentService.readContent(contentDataVO);
+		model.addAttribute("boardDataVO", boardData);
 		
-		BoardDataVO boardData = contentService.readContent(requestParam);
-		
-		model.addAttribute("boardData", boardData);
-		
-		return "readContentPage";
+		return "readNoticeContentPage";
 	}
+	@RequestMapping("/readQnAContentPage")
+	public String readQnAContentPage(ContentDataVO contentDataVO, Model model) {
+		
+		BoardDataVO boardData = contentService.readContent(contentDataVO);
+		String contentPW = boardData.getContentDataVO().getB_pw();
+		String contentHidden = boardData.getContentDataVO().getB_isHidden();
+		
+		
+		if(contentHidden.equals("0")) {
+			
+			contentService.increaseCount(contentDataVO);
+			
+			model.addAttribute("boardDataVO", boardData);
+			
+			return "readQnAContentPage";
+	}else if(contentHidden.equals("1")){
+		
+		boardData = contentService.checkedPW(contentDataVO, contentHidden);
+		
+		System.out.println(boardData.getContentDataVO());
+		if(boardData.getContentDataVO() == null) {
+			return "falsePW";
+		
+		}else {
+			contentService.increaseCount(contentDataVO);
+			
+			model.addAttribute("boardDataVO", boardData);
+			
+			return "readQnAContentPage";
+		}
+	}
+		
+		return "falsePW";
+	}	
+	@RequestMapping("/readReviewContentPage")
+	public String readReviewContentPage(ContentDataVO contentDataVO, Model model) {
+		contentService.increaseCount(contentDataVO);
+		BoardDataVO boardData = contentService.readContent(contentDataVO);
+		model.addAttribute("boardDataVO", boardData);
+		
+		return "readQnAContentPage";
+	}
+	
 	
 	@RequestMapping("/deleteContentAction")
-	public String deleteContentAction(ContentDataVO requestParam) {
+	public String deleteContentAction(ContentDataVO contentDataVO, String b_type) {
 		
-		contentService.deleteContent(requestParam);
+		contentService.deleteContent(contentDataVO);
 		
 		return "redirect:boardPage";
 	}
 	
 	@RequestMapping("/updateContentForm")
-	public String updateContentForm(ContentDataVO requestParam,Model model) { //parameter에 c_idx의 정보가 아직 담겨 있음 ( ${param.c_idx} )로 jsp에서 받아와도 됨. )
+	public String updateContentForm(ContentDataVO contentDataVO, Model model) { //parameter에 c_idx의 정보가 아직 담겨 있음 ( ${param.c_idx} )로 jsp에서 받아와도 됨. )
 		
-		BoardDataVO boardData = contentService.readContent(requestParam);
+		BoardDataVO boardData = contentService.readContent(contentDataVO);
 		
 		model.addAttribute("boardData", boardData);
 		
@@ -149,12 +274,24 @@ public class ContentController {
 	}
 	
 	@RequestMapping("/updateContentAction")
-	public String updateContentAction(ContentDataVO requestParam) {
+	public String updateContentAction(ContentDataVO contentDataVO) {
 		
-		String b_idx = requestParam.getB_idx();
+		String b_idx = contentDataVO.getB_idx();
 		
-		contentService.updateContent(requestParam);
+		contentService.updateContent(contentDataVO);
 		
-		return "redirect:readContentPage?c_idx=" + b_idx;
+		return "redirect:readContentPage?b_idx=" + b_idx;
 	}
+	@RequestMapping("/checkPW")
+	public String checkPW(ContentDataVO contentDataVO, Model model) {
+
+		
+		return "checkPW";
+	}
+	@RequestMapping("/falsePW")
+	public String falsePW() {
+		return "falsePW";
+	}
+	
+	
 }

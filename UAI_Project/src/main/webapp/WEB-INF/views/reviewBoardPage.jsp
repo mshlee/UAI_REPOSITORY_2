@@ -13,16 +13,21 @@
          <c:when test="${!empty sessionData.m_idx }">
             ${sessionData.m_nick }님 환영합니다.
             <a href="./logoutAction">로그아웃</a>
+            <a href="./mainPage">메인페이지로</a>
             <br>
 
          </c:when>
-         <c:otherwise>
             <c:when test="${!empty sessionData.ad_idx }">
             ${sessionData.ad_nick }님 환영합니다.
             <a href="./logoutAction">로그아웃</a>
+            <a href="./mainPage">메인페이지로</a>
                <br>
             </c:when>
-
+	<c:otherwise>
+				비회원님 환영합니다.
+				<a href="./loginForm">로그인 페이지로</a><br>
+				<a href="./mainPage">메인페이지로</a>
+				<br>
          </c:otherwise>
       </c:choose>
       <table border="1">
@@ -30,42 +35,19 @@
             <td>제목</td>
             <td>작성자</td>
             <td>작성일</td>
-            <td>비밀글</td>
+            <td>조회수</td>
          </tr>
-         <c:choose>
-         <c:forEach var="boardData" items="${boardDataList }">
+  
+         <c:forEach var="boardDataVO" items="${boardDataList }">
             
             <tr>
-               <td>
-               <a href="./readQnAContent?b_idx=${boardDataVO.contentDataVO.b_idx }">
-               <c:when test="${boardDataVO.contentDataVO.b_type=2}">
-                  ${boardDataVO.contentDataVO.b_title}
-               </c:when></a>
-                </td>
-               <td>
-                  <c:when test="${boardDataVO.contentDataVO.b_type=2}">
-                  ${boardDataVO.memberDataVO.m_nick}
-               </c:when>
-                  </td>
-               <td><c:when test="${boardDataVO.contentDataVO.b_type=2}">
-                  ${boardDataVO.contentDataVO.b_postdate}
-               </c:when></td>
-               <td><c:when test="${boardDataVO.contentDataVO.b_type=2}">
-                  <c:choose>
-                  <c:when test="${boardDataVO.contentDataVO.b_isHidden=1}">
-                  비밀글입니다.
-                  </c:when>
-                  <c:otherwise>
-                     공개글입니다.
-                  </c:otherwise>   
-                  </c:choose>
-               </c:when></td>
-               
-
+               <td><a href="./readReviewContentPage?b_idx=${boardDataVO.contentDataVO.b_idx }">
+                 ${boardDataVO.contentDataVO.b_title }</a></td>
+               <td>${boardDataVO.memberDataVO.m_nick}</td>
+               <td>${boardDataVO.contentDataVO.b_postdate}</td>
+               <td>${boardDataVO.contentDataVO.b_count }</td>
             </tr>
-
          </c:forEach>
-</c:choose>
 
       </table>
       <c:if test="${!empty sessionData }">
