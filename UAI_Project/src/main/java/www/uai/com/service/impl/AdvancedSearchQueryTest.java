@@ -1,6 +1,6 @@
 package www.uai.com.service.impl;
 
-public class advancedSearchQeuryTest {
+public class AdvancedSearchQueryTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
