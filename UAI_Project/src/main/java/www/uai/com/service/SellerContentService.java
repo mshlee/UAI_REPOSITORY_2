@@ -2,6 +2,7 @@ package www.uai.com.service;
 
 import java.util.ArrayList;
 
+import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
@@ -30,6 +31,10 @@ public interface SellerContentService {
 	//lhe-판매자 관리 페이지 복수 항목 상태 변경용-arrayList 이용
 	public void updateOrderByIdx(ArrayList<PurchaseDataVO> requestVO);
 	public void updatePaycheckByIdx(ArrayList<PaycheckDataVO> requestVO);
+	public AdminDataVO getAdminDataByIdx(String ad_idx);
+	public void updateAdminByIdx(AdminDataVO requestVO);
+	public void insertAdminData(AdminDataVO requestVO);
+	
 
 	
 	

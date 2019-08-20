@@ -2,6 +2,7 @@ package www.uai.com.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import www.uai.com.service.SellerContentService;
+import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
@@ -28,39 +30,59 @@ public class SellerContentController {
 	
 	
 	//lhe-판매자 관리자 계정 관리에 대한 페이지들...
-	@RequestMapping("/seller/manageAdmin.do")
+	@RequestMapping("/sellerManageAdmin.do")
 
 	public String sellerAccountMainPage(SessionDataVO sessionVO) {
-		
-		
+	
 		return "sellerAccountManageMainPage";
 	}
 	
 	@RequestMapping("/sellerAdminEdit.do")
-	public String sellerAccountEditPage(SessionDataVO sessionVO) {
+	public String sellerAccountEditPage(Model model, SessionDataVO sessionVO) {
+		
+		AdminDataVO adminData = sellerContentService.getAdminDataByIdx(sessionVO.getAd_idx());
+		
+		model.addAttribute("adminData", adminData);
 		
 		return "sellerAccountEditPage";
 	}
+	
+	@RequestMapping("/sellerAdminEditAction.do")
+	public String sellerAccountEditAction(AdminDataVO requestVO) {
+		
+		sellerContentService.updateAdminByIdx(requestVO);
+		
+		return "redirect:sellerMainPage";
+	}
+	
 	@RequestMapping("/sellerNewAdmin.do")
 	public String sellerNewAccountPage(SessionDataVO sessionVO) {
 		
 		return "sellerNewAccountPage";
 	}
 	
+	@RequestMapping("/sellerNewAdminAction.do")
+	public String sellerNewAdminAction(AdminDataVO requestVO) {
+		
+		sellerContentService.insertAdminData(requestVO);
+		
+		return "redirect:sellerAccountManageMainPage";
+		
+	}
+	
 	
 	//관리자 메인 페이지
 	@RequestMapping ("/sellerIndex.do")
-	public String sellerMainPage(Model model, HttpSession sessionData){
-		
-		System.out.println(sessionData.getAttribute("ad_nick"));
-		
-		
-		if(sessionData==null){
+	public String sellerMainPage(HttpSession session){
+
+		if(session!=null) {
+			return "sellerMainPage";
+		}else {
 			
-			return "loginForm";
 		}
 		
-		return "sellerMainPage";
+		return "mainPage";
+		
 	}
 	
 	
@@ -91,7 +113,7 @@ public class SellerContentController {
 		//선택한 상품 목록 지우기
 		sellerContentService.deleteProductByIdx(productVO);
 		
-		return "redirect:sellerProductManagePage";
+		return "redirect:sellerManageProduct.do";
 
 	}
 	

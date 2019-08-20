@@ -45,7 +45,7 @@ public class UserController {
          //로그인 성공
          session.setAttribute("sessionData", sessionData);
       
-         return "redirect:sellerMainPage";
+         return "redirect:sellerIndex.do";
       }else {
          
       }

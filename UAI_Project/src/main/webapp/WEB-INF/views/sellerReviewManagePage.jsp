@@ -75,8 +75,8 @@
 		</div>
 		<br> <img src="" type="button">
 		<div id="header">
-			<a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="./manageOrder.do">주문 관리</a> | <a href="./manageMember.do">회원 관리</a> | 
-			<a href="./manageReview.do">리뷰 관리</a> | <a href="./manageQnA.do">QnA 관리</a> | <a href="./managePaycheck.do">지급 관리</a>
+			<a href="./sellerIndex.do">메인</a> | <a href="./sellerManageProduct.do">강의 관리</a> | <a href="./sellerManageOrder.do">주문 관리</a> | <a href="./sellerManageMember.do">회원 관리</a> | 
+			<a href="./sellerManageReview.do">리뷰 관리</a> | <a href="./sellerManageQnA.do">QnA 관리</a> | <a href="./sellerManagePaycheck.do">지급 관리</a>
 		</div>
 		<div id="left_box">
 			<div id="admin_menu">
@@ -91,7 +91,7 @@
 	
 		</div>
 		<div id="search_box">
-            <form action="./manageReview.do" method="get">
+            <form action="./sellerManageReview.do" method="get">
             <table>
             <tr class="table-primary">
             <th>작성일</th>
@@ -160,7 +160,7 @@
 							<th scope="row">${reviewDataList.memberDataVO.m_nick }</th>
 							<th scope="row">${reviewDataList.memberDataVO.m_name}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_title}</th>
-							<th scope="row">${reviewDataList.contentDataVO.p_starRate}</th>
+							<th scope="row">${reviewDataList.contentDataVO.b_starRate}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_count}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_postdate}</th>
 							<th scope="row"><a href="./deleteReviewByIdx?p_idx=${contentDataVO.b_idx}"><button>삭제</button></a></th>

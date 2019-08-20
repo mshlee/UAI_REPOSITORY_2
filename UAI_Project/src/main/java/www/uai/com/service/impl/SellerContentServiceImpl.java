@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import www.uai.com.mapper.SellerContentSQLMapper;
 import www.uai.com.service.SellerContentService;
+import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
@@ -23,7 +24,38 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 	@Autowired
 	private SellerContentSQLMapper sellerContentSQLMapper;
+	
+	
+	//lhe-어드민 계정 생성
+	@Override
+	public void insertAdminData(AdminDataVO requestVO) {
+		// TODO Auto-generated method stub
+		String ad_idx = sellerContentSQLMapper.newAdIdx();
+		sellerContentSQLMapper.insertAdminData(ad_idx, requestVO.getAd_id(), requestVO.getAd_pw(), requestVO.getAd_nick());
+		
+	}
 
+
+	
+	
+	//lhe-어드민 계정 정보 수정
+	@Override
+	public AdminDataVO getAdminDataByIdx(String ad_idx) {
+		// TODO Auto-generated method stub
+		
+		AdminDataVO adminData = sellerContentSQLMapper.getAdminDataByIdx(ad_idx);
+	
+		return adminData;
+	}
+
+	@Override
+	public void updateAdminByIdx(AdminDataVO requestVO) {
+		// TODO Auto-generated method stub
+		sellerContentSQLMapper.updateAdminByIdx(requestVO.getAd_pw(), requestVO.getAd_nick(), requestVO.getAd_idx());
+		
+	}
+
+	//판매자 상품 리스트 출력
 	@Override
 	public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO) {
 		// TODO Auto-generated method stub

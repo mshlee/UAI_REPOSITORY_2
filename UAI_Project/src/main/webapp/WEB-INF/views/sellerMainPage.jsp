@@ -115,7 +115,7 @@
                     }
                     #middle-small-1{
                       width: 216px;
-                      height: 250px;
+                      height: 300px;
                       float: left;
                       font-family: lemongrass-caps, sans-serif;
                     }
@@ -298,21 +298,17 @@
                     
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 </head>
 <body>
     <div id="wrapper">
         <div id="upper_bar"><a href="">쇼핑몰메인</a><a href="">로그아웃</a></div><br>
         <img src="" type="button">
-        <div id="header"><a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="./manageOrder.do">주문 관리</a> | <a href="./manageMember.do">회원관리</a> |  
-            <a href="./manageReview.do">리뷰 관리</a> | <a href="./manageQnA.do">QnA 관리</a> | <a href="./managePaycheck.do">지급 관리</a>
+        <div id="header"><a href="./sellerIndex.do">메인</a> | <a href="./sellerManageProduct.do">강의 관리</a> | <a href="./sellerManageOrder.do">주문 관리</a> | <a href="./sellerManageMember.do">회원관리</a> |  
+            <a href="./sellerManageReview.do">리뷰 관리</a> | <a href="./sellerManageQnA.do">QnA 관리</a> | <a href="./sellerManagePaycheck.do">지급 관리</a>
         </div>
         <div id="left_box">
             <div id="admin_menu">
-=======
-=======
->>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+
           #bottom-box{
             width: 1024px;
             height: 170px;
@@ -330,10 +326,7 @@
                 margin-left: 30px;
                 color: black;
                 margin-top: 10px;
-<<<<<<< HEAD
->>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
-=======
->>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+
                 
               }
               
@@ -402,13 +395,13 @@
                 <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
                   <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
                     <ul class="navbar-nav" id="top-menu-bar">
-                      <li class="nav-item"><a class="nav-link" href="./sellerMainPage">Main page</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerProductManagePage">상품 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerOrderManagePage">주문 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerMemberManagePage">회원 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerReviewManagePage">리뷰 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerQnAManagePage">Q & A 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerPaymentManagePage">지급 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerIndex.do">Main page</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageProduct.do">상품 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageOrder.do">주문 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageMember.do">회원 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageReview.do">리뷰 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageQnA.do">Q & A 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManagePayceck.do">지급 관리</a></li>
                     </ul>
                 </nav>
               </div>

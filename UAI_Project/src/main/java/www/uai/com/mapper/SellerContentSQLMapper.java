@@ -3,6 +3,7 @@ package www.uai.com.mapper;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -85,13 +86,30 @@ public interface SellerContentSQLMapper {
 	public void deletePostByIdx(String b_referidx);
 	
 	//lhe-판매자 주문 관리 페이지 복수 주문 결제상태 변경용
-	@Update("UPDATE TABLE Purchase SET PCH_ISPAID=#{pch_ispaid} WHERE o_idx=#{o_idx}")
+	@Update("UPDATE Purchase SET PCH_ISPAID=#{pch_ispaid} WHERE o_idx=#{o_idx}")
 	public void updatePurchaseByIdx(String pch_ispaid, String o_idx);
 
 
 	//lhe-판매자 주문 관리 페이지 복수 주문 결제상태 변경용
-	@Update("UPDATE TABLE Paycheck_Data SET PD_ISPAIDTOTEACHER=#{pd_isPaidToTeacher} WHERE o_idx=#{o_idx}")
+	@Update("UPDATE Paycheck_Data SET PD_ISPAIDTOTEACHER=#{pd_isPaidToTeacher} WHERE o_idx=#{o_idx}")
 	public void updatePaycheckByIdx(String pd_isPaidToTeacher, String o_idx);
+
+	//lhe-어드민 계정 관리용
+	@Select("SELECT Admin_seq.NEXTVAL FROM DUAL")
+	public String newAdIdx();
+	
+	@Insert("INSERT INTO Admins VALUES (#{ad_idx}, #{ad_id}, #{ad_pw}, #{ad_nick}")
+	public void insertAdminData(String ad_idx, String ad_id, String ad_pw, String ad_nick);
+	
+	@Select("SELECT * FROM Admins WHERE ad_idx=#{ad_idx}")
+	public AdminDataVO getAdminDataByIdx(String ad_idx);
+
+	@Update ("UPDATE Admins SET AD_PW = #{ad_pw}, AD_NICK=#{ad_nick} WHERE AD_IDX=#{ad_idx}")
+	public void updateAdminByIdx(String ad_pw, String ad_nick, String ad_idx);
+
+	
+
+	
 
 
 	

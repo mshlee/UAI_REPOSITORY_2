@@ -1,32 +1,32 @@
 package www.uai.com.vo;
 
+import java.util.ArrayList;
+
 public class ProductDataVO {
-	
-	private ProductVO productVO;
-	private ProductContentVO productContentVO;
-	
-	public ProductDataVO() {}
-	
-	public ProductDataVO(ProductVO productVO, ProductContentVO productContentVO) {
-		super();
-		this.productVO = productVO;
-		this.productContentVO = productContentVO;
-	}
+   
+   private ProductVO productVO;
+   private ArrayList<UploadProductFileVO> fileList;
 
-	public ProductVO getProductVO() {
-		return productVO;
-	}
+   public ProductDataVO(ProductVO productVO, ArrayList<UploadProductFileVO> fileList) {
+      super();
+      this.productVO = productVO;
+      this.fileList = fileList;
+   }
 
-	public void setProductVO(ProductVO productVO) {
-		this.productVO = productVO;
-	}
+   public ProductVO getProductVO() {
+      return productVO;
+   }
 
-	public ProductContentVO getProductContentVO() {
-		return productContentVO;
-	}
+   public void setProductVO(ProductVO productVO) {
+      this.productVO = productVO;
+   }
 
-	public void setProductContentVO(ProductContentVO productContentVO) {
-		this.productContentVO = productContentVO;
-	}
-	
+   public ArrayList<UploadProductFileVO> getFileList() {
+      return fileList;
+   }
+
+   public void setFileList(ArrayList<UploadProductFileVO> fileList) {
+      this.fileList = fileList;
+   }
+
 }

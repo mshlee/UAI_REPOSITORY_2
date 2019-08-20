@@ -76,15 +76,15 @@
 		
 		<br> <img src="" type="button">
 		<div id="header">
-			<a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="./manageOrder.do">주문 관리</a> | <a href="./manageMember.do">회원 관리</a> | 
-			<a href="./manageReview.do">리뷰 관리</a> | <a href="./manageQnA.do">QnA 관리</a> | <a href="./managePaycheck.do">지급 관리</a>
+			<a href="./sellerIndex.do">메인</a> | <a href="./sellerManageProduct.do">강의 관리</a> | <a href="./sellerManageOrder.do">주문 관리</a> | <a href="./sellerManageMember.do">회원 관리</a> | 
+			<a href="./sellerManageReview.do">리뷰 관리</a> | <a href="./sellerManageQnA.do">QnA 관리</a> | <a href="./sellerManagePaycheck.do">지급 관리</a>
 		</div>
 		<div id="left_box">
 			<div id="admin_menu">
 				환영합니다.<br>(닉네임아이디들어가야함)<br>
-				<button onclick="">로그아웃</button>
+				<a href="./logoutAction"><button>로그아웃</button></a>
 				<br>
-				<a href=""><button>관리자계정설정</button></a>
+				<a href="./sellerManageAdmin.do"><button>관리자계정설정</button></a>
 
 			</div>
 			<br>
@@ -92,7 +92,7 @@
 	
 		</div>
 		<div id="search_box">
-            <form action="./manageOrder.do" method="get">
+            <form action="./sellerManageOrder.do" method="get">
             <table>
             <tr class="table-primary">
             <th>주문날짜</th>
@@ -188,16 +188,6 @@
 							<th scope="row">카드</th>
 							</c:when>
 							</c:choose>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-							
-							
->>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
-=======
-							
-							
->>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">${orderDataList.purchaseDataVO.pch_paymentDate }</th>
 							<c:choose>
 							<c:when test="${orderDataList.purchaseDataVO.pch_isPaid == 0 }">
@@ -205,28 +195,14 @@
 							<c:when test="${orderDataList.purchaseDataVO.pch_isPaid == 1 }">
 							<th scope="row">결제완료</th></c:when>
 							</c:choose>
-<<<<<<< HEAD
-<<<<<<< HEAD
-							<th scope="row"><button>결제확인</button></th>
-=======
+
 							<th scope="row"><a href="./updateOrderByIdx?o_idx=${orderDataList.orderDataVO.o_idx }"><button>결제확인</button></a></th>
->>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
-=======
-							<th scope="row"><a href="./updateOrderByIdx?o_idx=${orderDataList.orderDataVO.o_idx }"><button>결제확인</button></a></th>
->>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+
 						</tr>
 						</c:forEach>
 				</tbody>
 			</table>
-<<<<<<< HEAD
-<<<<<<< HEAD
-			<button type="submit" style="float: right">결제확인</button>
-=======
 			<button type="submit" style="float: right">선택주문 결제확인</button>
->>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
-=======
-			<button type="submit" style="float: right">선택주문 결제확인</button>
->>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 			</form>
 		</div>
 

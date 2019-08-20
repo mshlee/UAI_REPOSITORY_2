@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
       
       if(result != null && result.getAd_pw().equals(vo.getAd_pw())) {
          //로그인 성공
-         sessionData = new SessionDataVO(result.getAd_id(), result.getAd_nick(), null, null);
+         sessionData = new SessionDataVO(null, null, result.getAd_idx(), result.getAd_nick());
       }else {
          //로그인 실패
       }

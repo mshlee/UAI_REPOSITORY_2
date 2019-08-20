@@ -27,7 +27,7 @@ public class ContentDataVO {
 	   private String b_pw;
 	   private String b_qCategory;
 	   private String b_isPost;
-	   private String p_starRate;
+	   private String b_starRate;
 	   private String m_idx;
 	   private String p_idx;
 	   private String ad_idx;
@@ -41,7 +41,7 @@ public class ContentDataVO {
 
 	public ContentDataVO(String b_idx, String b_referidx, String b_type, String b_title, String b_content,
 			String b_postdate, String b_count, String b_isHidden, String b_pw, String b_qCategory, String b_isPost,
-			String p_starRate, String m_idx, String p_idx, String ad_idx) {
+			String b_starRate, String m_idx, String p_idx, String ad_idx) {
 		
 		this.b_idx = b_idx;
 		this.b_referidx = b_referidx;
@@ -54,7 +54,7 @@ public class ContentDataVO {
 		this.b_pw = b_pw;
 		this.b_qCategory = b_qCategory;
 		this.b_isPost = b_isPost;
-		this.p_starRate = p_starRate;
+		this.b_starRate = b_starRate;
 		this.m_idx = m_idx;
 		this.p_idx = p_idx;
 		this.ad_idx = ad_idx;
@@ -192,14 +192,14 @@ public class ContentDataVO {
 
 
 
-	public String getP_starRate() {
-		return p_starRate;
+	public String getB_starRate() {
+		return b_starRate;
 	}
 
 
 
-	public void setP_starRate(String p_starRate) {
-		this.p_starRate = p_starRate;
+	public void setP_starRate(String b_starRate) {
+		this.b_starRate = b_starRate;
 	}
 
 
