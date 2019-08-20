@@ -16,3 +16,7 @@ UAI_Project/target/classes/www/uai/com/mapper/UserSQLMapper.class
 *.properties
 *.java
 UAI_Project/src/main/java/www/uai/com/mapper/AdminSQLMapper.java
+*.java
+*.class
+*.xml
+*.MF

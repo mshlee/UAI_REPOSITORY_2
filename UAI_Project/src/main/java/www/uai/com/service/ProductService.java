@@ -12,8 +12,12 @@ public interface ProductService {
 
 	public ProductNPageDataVO getProductList(Model model, int nowPage);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO);
 	
+=======
+
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c

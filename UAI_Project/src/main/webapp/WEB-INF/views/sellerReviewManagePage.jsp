@@ -130,7 +130,12 @@
 					<tr>
 						<th scope="col">선택</th>
 <<<<<<< HEAD
+<<<<<<< HEAD
 						<th scope="col">글번호</th>
+=======
+						<th scope="col">no.</th>
+						<th scopㄷ="col">글번호</th>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 						<th scope="col">no.</th>
 						<th scopㄷ="col">글번호</th>
@@ -143,13 +148,19 @@
 						<th scope="col">회원명</th>
 						<th scope="col">글제목</th>
 <<<<<<< HEAD
+<<<<<<< HEAD
 						<th scope="col">조회수</th>
 						<th scope="col">작성일</th>
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						<th scope="col">별점</th>
 						<th scope="col">조회수</th>
 						<th scope="col">작성일</th>
 						<th scope="col">삭제</th>
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 					</tr>
 				</thead>
@@ -157,6 +168,7 @@
 				<tbody>
 				
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
+<<<<<<< HEAD
 <<<<<<< HEAD
 						<c:forEach var="reviewDataList" items="${reviewDataList }" varStatus="status">
 						<tr>
@@ -166,6 +178,8 @@
 							<th scope="row">${reviewDataList.contentDataVO.p_idx }</th>
 							<th scope="row">${reviewDataList.productVO.p_name }</th>
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						<c:forEach var="reviewDataList" items="${reviewDataList }">
 						<tr>
 							<th scope="row"><input type="checkbox" name="b_referidx" value="${reviewDataList.contentDataVO.b_referidx}"></th>
@@ -173,6 +187,9 @@
 							<th scope="row">${reviewDataList.contentDataVO.b_referidx }</th>
 							<th scope="row">${reviewDataList.contentDataVO.p_idx }</th>
 							<th scope="row">${reviewDataList.productDataVO.p_name }</th>
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">${reviewDataList.contentDataVO.m_idx }</th>
 							<th scope="row">${reviewDataList.memberDataVO.m_id }</th>
@@ -180,14 +197,20 @@
 							<th scope="row">${reviewDataList.memberDataVO.m_name}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_title}</th>
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<th scope="row">${reviewDataList.memberDataVO.m_name}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_count}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_postdate}</th>
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">${reviewDataList.contentDataVO.p_starRate}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_count}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_postdate}</th>
 							<th scope="row"><a href="./deleteReviewByIdx?p_idx=${contentDataVO.b_idx}"><button>삭제</button></a></th>
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						</tr>
 						</c:forEach>

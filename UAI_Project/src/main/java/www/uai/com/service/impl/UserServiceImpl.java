@@ -8,15 +8,20 @@ import org.springframework.stereotype.Service;
 import www.uai.com.mapper.UserSQLMapper;
 import www.uai.com.service.UserService;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import www.uai.com.vo.AdvancedSearchDataVO;
 =======
 import www.uai.com.vo.AdminDataVO;
 >>>>>>> master
+=======
+import www.uai.com.vo.AdminDataVO;
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.SessionDataVO;
 
 @Service
 public class UserServiceImpl implements UserService{
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 	@Autowired
@@ -26,13 +31,18 @@ public class UserServiceImpl implements UserService{
 		userSQLMapper.insert(vo);
 	}
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
    @Autowired
    private UserSQLMapper userSQLMapper;
    
    public void joinMember(MemberDataVO vo) {
       userSQLMapper.insert(vo);
    }
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 
    @Override
    public SessionDataVO memberLoginProcess(MemberDataVO vo) {
@@ -68,6 +78,7 @@ public class UserServiceImpl implements UserService{
       
       return sessionData;
    }
+<<<<<<< HEAD
 
    @Override
    public boolean isExistMID(MemberDataVO requestParam) {
@@ -112,3 +123,34 @@ public class UserServiceImpl implements UserService{
 =======
 }
 >>>>>>> master
+=======
+
+   @Override
+   public boolean isExistMID(MemberDataVO requestParam) {
+      // TODO Auto-generated method stub
+      MemberDataVO memberdata = userSQLMapper.selectByMId(requestParam.getM_id());
+      //data가 어떤 값이냐가 중요한게 아니라, 있냐 없냐가 중요
+      if(memberdata != null) {
+         
+         return true;
+      }
+      
+      return false;
+   }
+   
+   @Override
+   public boolean isExistADID(AdminDataVO requestParam) {
+      // TODO Auto-generated method stub
+      AdminDataVO admindata = userSQLMapper.selectByADId(requestParam.getAd_id());
+      //data가 어떤 값이냐가 중요한게 아니라, 있냐 없냐가 중요
+      if(admindata != null) {
+         
+         return true;
+      }
+      
+      return false;
+   }
+   
+
+}
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c

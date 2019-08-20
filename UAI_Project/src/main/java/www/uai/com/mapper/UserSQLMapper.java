@@ -13,6 +13,7 @@ import www.uai.com.vo.MemberDataVO;
 public interface UserSQLMapper {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@Insert("INSERT INTO BOARD_MEMBERS VALUES(BOARD_MEMBERS_SEQ.NEXTVAL,#{m_id},#{m_pw},#{m_name},#{m_nick},#{m_phone},#{m_address},#{m_gender},#{m_birth},SYSDATE,#{m_interest1},#{m_interest2},#{m_interest3},#{m_education},#{m_major},#{m_job},#{m_maritalstatus})")
 	public void insert(MemberDataVO vo);
 	
@@ -32,6 +33,8 @@ public interface UserSQLMapper {
 
 }
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
    @Insert("INSERT INTO MEMBERS VALUES(MEMBERS_SEQ.NEXTVAL,#{m_id},#{m_pw},#{m_name},#{m_nick},#{m_phone},#{m_address},#{m_gender},#{m_birth},SYSDATE,#{m_interest1},#{m_interest2},#{m_interest3},#{m_education},#{m_major},#{m_job},#{m_maritalstatus})")
    public void insert(MemberDataVO vo);
    
@@ -51,5 +54,9 @@ public interface UserSQLMapper {
    @Update("UPDATE MEMBERS SET m_nick = #{m_nick} WHERE m_idx = #{m_idx}")
    public void update(MemberDataVO vo);
 
+<<<<<<< HEAD
 }
 >>>>>>> master
+=======
+}
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c

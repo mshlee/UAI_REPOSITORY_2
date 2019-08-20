@@ -17,6 +17,10 @@ AD_IDX NUMBER(8)
 );*/
 public class ContentDataVO {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	
 	   private String b_idx;
 	   private String b_referidx;
@@ -29,14 +33,29 @@ public class ContentDataVO {
 	   private String b_pw;
 	   private String b_qCategory;
 	   private String b_isPost;
+	   private String p_starRate;
 	   private String m_idx;
 	   private String p_idx;
 	   private String ad_idx;
 	   
+<<<<<<< HEAD
 	public ContentDataVO(String b_idx, String b_referidx, String b_type, String b_title, String b_content, String b_postdate,
 			String b_count, String b_isHidden, String b_pw, String b_qCategory, String b_isPost, String m_idx,
 			String p_idx, String ad_idx) {
 		super();
+=======
+	   
+	   
+	public ContentDataVO() {
+	}
+
+
+
+	public ContentDataVO(String b_idx, String b_referidx, String b_type, String b_title, String b_content,
+			String b_postdate, String b_count, String b_isHidden, String b_pw, String b_qCategory, String b_isPost,
+			String p_starRate, String m_idx, String p_idx, String ad_idx) {
+		
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 		this.b_idx = b_idx;
 		this.b_referidx = b_referidx;
 		this.b_type = b_type;
@@ -48,13 +67,18 @@ public class ContentDataVO {
 		this.b_pw = b_pw;
 		this.b_qCategory = b_qCategory;
 		this.b_isPost = b_isPost;
+		this.p_starRate = p_starRate;
 		this.m_idx = m_idx;
 		this.p_idx = p_idx;
 		this.ad_idx = ad_idx;
 	}
+
+
+
 	public String getB_idx() {
 		return b_idx;
 	}
+<<<<<<< HEAD
 	public void setB_idx(String b_referidx) {
 		this.b_referidx = b_referidx;
 	}
@@ -191,6 +215,8 @@ public class ContentDataVO {
 	public String getB_idx() {
 		return b_idx;
 	}
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 
 
 
@@ -367,6 +393,7 @@ public class ContentDataVO {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    public void setAd_idx(String ad_idx) {
       this.ad_idx = ad_idx;
    }
@@ -374,6 +401,11 @@ public class ContentDataVO {
    
 }
 >>>>>>> master
+=======
+	
+	   
+}
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 	
 	   

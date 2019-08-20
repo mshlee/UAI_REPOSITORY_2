@@ -3,6 +3,7 @@ package www.uai.com.vo;
 public class PaycheckDataVO {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	private String o_idx;
 	private String pd_totalPayment;
@@ -11,18 +12,24 @@ public class PaycheckDataVO {
 	private String pd_isPaidToTeacher;
 	
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	private String o_idx;
 	private String o_totalPrice;
 	private String pd_totalPaymentToTeacher;
 	private String p_teacher;
 	private String pd_isPaidToTeacher;
 	private String pd_paidDate;
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	
 	
 	public PaycheckDataVO() {
 	
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 
@@ -38,6 +45,8 @@ public class PaycheckDataVO {
 
 	
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 
 
 	public PaycheckDataVO(String o_idx, String o_totalPrice, String pd_totalPaymentToTeacher, String p_teacher,
@@ -52,6 +61,9 @@ public class PaycheckDataVO {
 	}
 
 
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	public String getO_idx() {
 		return o_idx;
@@ -61,6 +73,7 @@ public class PaycheckDataVO {
 	public void setO_idx(String o_idx) {
 		this.o_idx = o_idx;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	public String getPd_totalPayment() {
 		return pd_totalPayment;
@@ -87,6 +100,8 @@ public class PaycheckDataVO {
 		this.pd_isPaidToTeacher = pd_isPaidToTeacher;
 	}
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 
 
 	public String getO_totalPrice() {
@@ -142,6 +157,9 @@ public class PaycheckDataVO {
 
 
 	
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	
 	

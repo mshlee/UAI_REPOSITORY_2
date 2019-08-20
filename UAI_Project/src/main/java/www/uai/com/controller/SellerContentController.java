@@ -10,11 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import www.uai.com.service.ProductService;
 import www.uai.com.service.SellerContentService;
 import www.uai.com.service.UserService;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.BoardDataVO;
+=======
+import www.uai.com.service.SellerContentService;
+import www.uai.com.vo.AdvancedSearchDataVO;
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 import www.uai.com.service.SellerContentService;
 import www.uai.com.vo.AdvancedSearchDataVO;
@@ -35,6 +40,7 @@ public class SellerContentController {
 	@Autowired
 	private SellerContentService sellerContentService;
 	
+<<<<<<< HEAD
 	
 <<<<<<< HEAD
 	@Autowired
@@ -47,6 +53,11 @@ public class SellerContentController {
 	//lhe-판매자 관리자 계정 관리에 대한 페이지들...
 	@RequestMapping("/seller/manageAdmin.do")
 =======
+	//lhe-판매자 관리자 계정 관리에 대한 페이지들...
+	@RequestMapping("/sellerManageAdmin.do")
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
+	
 	//lhe-판매자 관리자 계정 관리에 대한 페이지들...
 	@RequestMapping("/sellerManageAdmin.do")
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -86,6 +97,7 @@ public class SellerContentController {
 	
 	//lhe-판매자 상품 관리 페이지 관련 맵핑
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@RequestMapping ("/seller/manageProduct.do")
 	public String productManagePage(Model model, AdvancedSearchDataVO searchDataVO){
 
@@ -95,6 +107,8 @@ public class SellerContentController {
 			
 		model.addAttribute("productList", productList);
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	@RequestMapping ("/sellerManageProduct.do")
 	public String productManagePage(Model model, AdvancedSearchDataVO searchDataVO, HttpSession sessionData){
 		
@@ -111,12 +125,17 @@ public class SellerContentController {
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 		
 		
+		
 		return "sellerProductManagePage";
 	}
 	
 	//lhe-판매자 상품 관리 페이지 복수 상품 삭제 명령
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@RequestMapping("/seller/deleteProductByIdx.do")
+=======
+	@RequestMapping("/sellerDeleteProductByIdx.do")
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 	@RequestMapping("/sellerDeleteProductByIdx.do")
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -126,7 +145,11 @@ public class SellerContentController {
 		sellerContentService.deleteProductByIdx(productVO);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return "redired:sellerProductManagePage";
+=======
+		return "redirect:sellerProductManagePage";
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 		return "redirect:sellerProductManagePage";
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -136,9 +159,12 @@ public class SellerContentController {
 	
 	//lhe-판매자 주문 관리 페이지 관련 맵핑
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@RequestMapping ("/seller/manageOrder.do")
 	public String orderManage(Model model, AdvancedSearchDataVO searchDataVO){
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	@RequestMapping ("/sellerManageOrder.do")
 	public String orderManage(Model model, AdvancedSearchDataVO searchDataVO,  HttpSession sessionData){
 		
@@ -146,6 +172,9 @@ public class SellerContentController {
 			
 			return "loginForm";
 		}
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 		
 		//lhe-주문 리스트 불러오기
@@ -158,6 +187,7 @@ public class SellerContentController {
 	}
 	
 	//lhe-판매자 주문 관리 페이지 복수 주문 결제상태 변경
+<<<<<<< HEAD
 <<<<<<< HEAD
 	@RequestMapping("/seller/updateOrderByIdx.do")
 	public String updateOrderByIdxAction(ArrayList<PurchaseDataVO> purchaseVO) {
@@ -173,11 +203,20 @@ public class SellerContentController {
 		sellerContentService.updateOrderByIdx(purchaseVO);
 		
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
+	@RequestMapping("/sellerUpdateOrderByIdx.do")
+	public String updateOrderByIdxAction(ArrayList<PurchaseDataVO> purchaseVO) {
+		
+		//선택한 주문 결제 상태 변경
+		sellerContentService.updateOrderByIdx(purchaseVO);
+		
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 		return "redirect:sellerOrderManagePage";
 	}
 	
 	
 	//lhe-판매자 회원 관리 페이지 관련 맵핑
+<<<<<<< HEAD
 <<<<<<< HEAD
 	@RequestMapping ("/seller/manageMember.do")
 	public String memberManage(Model model){
@@ -198,10 +237,24 @@ public class SellerContentController {
 		}
 
 		//회원 리스트 불러오기
+=======
+	@RequestMapping ("/sellerManageMember.do")
+	public String memberManage(Model model, HttpSession sessionData){
+		
+		if(sessionData==null){
+			
+			return "loginForm";
+		}
+
+		//회원 리스트 불러오기
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 		ArrayList<MemberDataVO> memberDataList = new ArrayList<MemberDataVO>();
 		memberDataList=sellerContentService.getAllMemberList();
 			
 		model.addAttribute("memberDataList", memberDataList);
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 		
 		return "sellerMemberManagePage";
@@ -210,7 +263,11 @@ public class SellerContentController {
 	
 	//lhe-판매자 회원 관리 페이지 복수 회원 탈퇴
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@RequestMapping("/seller/deleteMemberByIdx.do")
+=======
+	@RequestMapping("/sellerDeleteMemberByIdx.do")
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 	@RequestMapping("/sellerDeleteMemberByIdx.do")
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -223,6 +280,7 @@ public class SellerContentController {
 		}
 	
 	//lhe-판매자 리뷰 관리 페이지 관련 맵핑
+<<<<<<< HEAD
 <<<<<<< HEAD
 	@RequestMapping ("/seller/manageReview.do")
 	public String reviewManage(Model model){
@@ -243,11 +301,28 @@ public class SellerContentController {
 		model.addAttribute("reviewDataList", reviewDataList);
 <<<<<<< HEAD
 		
+=======
+	@RequestMapping ("/sellerManageReview.do")
+	public String reviewManage(Model model, HttpSession sessionData){
+		
+		if(sessionData==null){
+			
+			return "loginForm";
+		}
+		
+		//리뷰 리스트 불러오기
+		ArrayList<SellerContentVO> reviewDataList = new ArrayList<SellerContentVO>();
+		reviewDataList = sellerContentService.getAllReviewList();
+		
+		model.addAttribute("reviewDataList", reviewDataList);
+		
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 		
 		return "sellerReviewManagePage";
 	}
 	
 	//lhe-판매자 리뷰 관리 페이지 복수 리뷰 삭제
+<<<<<<< HEAD
 	@RequestMapping("/seller/deleteReviewByIdx.do")
 	public String deleteReviewByIdxAction (ArrayList<ContentDataVO> requestVO) {
 		
@@ -316,6 +391,17 @@ public class SellerContentController {
 				
 	}
 	
+=======
+	@RequestMapping("/sellerDeleteReviewByIdx.do")
+	public String deleteReviewByIdxAction (ArrayList<ContentDataVO> requestVO) {
+		
+		//선택한 리뷰 리스트 지우기
+		
+		return "redirect:sellerReviewManagePage";
+				
+	}
+	
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	//lhe-판매자 QnA 관리 페이지 관련 맵핑
 	@RequestMapping("/sellerManageQnA.do")
 	public String qnaManagePage(Model model, HttpSession sessionData) {
@@ -324,6 +410,7 @@ public class SellerContentController {
 			
 			return "loginForm";
 		}
+<<<<<<< HEAD
 		
 		
 		ArrayList<SellerContentVO> qnaDataList = new ArrayList<SellerContentVO>();
@@ -331,6 +418,15 @@ public class SellerContentController {
 		
 		model.addAttribute("qnaDataList", qnaDataList);
 		
+=======
+		
+		
+		ArrayList<SellerContentVO> qnaDataList = new ArrayList<SellerContentVO>();
+		qnaDataList = sellerContentService.getAllQnAList();
+		
+		model.addAttribute("qnaDataList", qnaDataList);
+		
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 		return "sellerQnAManagePage";		
 	}
 	
@@ -374,6 +470,9 @@ public class SellerContentController {
 		
 		
 		return "redirect:sellerPaycheckManagePage";
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	}
 	

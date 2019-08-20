@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 =======
 >>>>>>> master
+=======
+
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +30,10 @@ import www.uai.com.vo.ProductNPageDataVO;
 import www.uai.com.vo.ProductVO;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -33,12 +42,16 @@ import www.uai.com.vo.ProductVO;
 public class ProductServiceImpl implements ProductService {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@Autowired
 =======
 @Service
 public class ProductServiceImpl implements ProductService{
 	
 >>>>>>> master
+=======
+	@Autowired
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 	@Autowired
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -110,6 +123,7 @@ public class ProductServiceImpl implements ProductService{
 
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// lhe-상품전체리스트 출력용
 	public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO) {
@@ -189,6 +203,8 @@ public class ProductServiceImpl implements ProductService{
 			
 
 		
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	

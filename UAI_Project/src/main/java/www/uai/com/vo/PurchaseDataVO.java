@@ -2,7 +2,10 @@ package www.uai.com.vo;
 
 public class PurchaseDataVO {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	private String o_idx;

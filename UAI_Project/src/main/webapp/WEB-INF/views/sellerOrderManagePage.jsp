@@ -189,6 +189,11 @@
 							</c:when>
 							</c:choose>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+							
+							
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 							
 							
@@ -201,7 +206,11 @@
 							<th scope="row">결제완료</th></c:when>
 							</c:choose>
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<th scope="row"><button>결제확인</button></th>
+=======
+							<th scope="row"><a href="./updateOrderByIdx?o_idx=${orderDataList.orderDataVO.o_idx }"><button>결제확인</button></a></th>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 							<th scope="row"><a href="./updateOrderByIdx?o_idx=${orderDataList.orderDataVO.o_idx }"><button>결제확인</button></a></th>
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -210,7 +219,11 @@
 				</tbody>
 			</table>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<button type="submit" style="float: right">결제확인</button>
+=======
+			<button type="submit" style="float: right">선택주문 결제확인</button>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 			<button type="submit" style="float: right">선택주문 결제확인</button>
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c

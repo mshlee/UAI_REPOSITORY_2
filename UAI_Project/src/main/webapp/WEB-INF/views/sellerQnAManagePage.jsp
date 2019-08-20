@@ -130,7 +130,11 @@
 					<tr>
 						<th scope="col">선택</th>
 <<<<<<< HEAD
+<<<<<<< HEAD
 						<th scope="col">번호</th>
+=======
+						<th scope="col">no.</th>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 						<th scope="col">no.</th>
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -156,6 +160,7 @@
 						<tr>
 							<th scope="row"><input type="checkbox" name="b_referidx" value="${qnaDataList.contentDataVO.b_referidx}"></th>
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<th scope="row">${qnaDataList.contentDataVO.b_referidx }</th>
 							<th scope="row">${qnaDataList.contentDataVO.p_idx }</th>
 							<th scope="row">${qnaDataList.productVO.p_name }</th>
@@ -170,6 +175,8 @@
 							</c:when>
 							<c:when test="${qnaDataList.contentDataVO.b_qcategory==1}">
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">  </th>
 							<th scope="row">${qnaDataList.contentDataVO.b_referidx }</th>
 							<th scope="row">${qnaDataList.contentDataVO.p_idx }</th>
@@ -183,6 +190,9 @@
 							<th scope="row">강의문의</th>
 							</c:when>
 							<c:when test="${qnaDataList.contentDataVO.b_qCategory==1}">
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">결제문의</th>
 							</c:when>
@@ -190,7 +200,10 @@
 							
 							<th scope="row">${qnaDataList.contentDataVO.b_title}</th>
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<th scope="row">${qnaDataList.memberDataVO.m_name}</th>
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">${qnaDataList.contentDataVO.b_count}</th>

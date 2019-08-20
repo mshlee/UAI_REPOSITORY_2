@@ -155,6 +155,7 @@
 						<c:forEach var="memberDataList" items="${memberDataList }">
 						<tr>
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<th scope="row"><input type="checkbox" name="m_idx" value="${userDataList.m_idx }"></th>
 							<th scope="row">${userDataList.m_idx }</th>
 							<th scope="row">${userDataList.m_id }</th>
@@ -185,10 +186,27 @@
 							</c:when>
 							<c:when test="${memberDataList.m_gender == 'F'}">
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
+							<th scope="row"><input type="checkbox" name="m_idx" value="${memberDataList.m_idx }"></th>
+							<th scope="row">${memberDataList.m_idx }</th>
+							<th scope="row">${memberDataList.m_id }</th>
+							<th scope="row">${memberDataList.m_name }</th>
+							<th scope="row">${memberDataList.m_nick }</th>
+							<th scope="row">${memberDataList.m_phone }</th>
+							<th scope="row">${memberDataList.m_address }</th>
+							
+								<!-- lhe: 성별코드를 키워드로 치환 -->
+							<c:choose>
+							<c:when test="${memberDataList.m_gender == 'M'}">
+							<th scope="row">남</th>
+							</c:when>
+							<c:when test="${memberDataList.m_gender == 'F'}">
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">여</th>
 							</c:when>
 							</c:choose>
 							
+<<<<<<< HEAD
 <<<<<<< HEAD
 							<th scope="row">${userDataList.m_birth }</th>
 							<th scope="row">${userDataList.m_joindate }</th>
@@ -201,6 +219,8 @@
 							<th scope="row">${userDataList.m_maritalstatus }</th>
 							
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">${memberDataList.m_birth }</th>
 							<th scope="row">${memberDataList.m_joindate }</th>
 							<th scope="row">${memberDataList.m_interest1 }</th>
@@ -211,6 +231,9 @@
 							<th scope="row">${memberDataList.m_job }</th>
 							<th scope="row">${memberDataList.m_maritalstatus }</th>
 							<th scope="row"><a href="./deleteMemberByIdx?m_idx=${memberDataList.m_idx }"><button>탈퇴</button></a></th>
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						</tr>
 						</c:forEach>

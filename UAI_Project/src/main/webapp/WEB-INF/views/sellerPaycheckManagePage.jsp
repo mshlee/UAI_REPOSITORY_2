@@ -96,7 +96,11 @@
             <table>
             <tr class="table-primary">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <th>주문날짜</th>
+=======
+            <th>지급날짜</th>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
             <th>지급날짜</th>
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -104,6 +108,7 @@
                         
                         
             <tr class="table-secondary">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <th>주문금액</th>
                 <th><input type="text" name="minPrice">~<input type="text" name="maxPrice"></th></tr>
@@ -126,6 +131,8 @@
              <tr class="table-primary">
              
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
             <th>지급완료금액</th>
                 <th><input type="text" name="minPrice">~<input type="text" name="maxPrice"></th></tr>
                
@@ -138,6 +145,9 @@
             
             <tr class="table-secondary">
            
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
                  <th>키워드</th>
                 <th><select name="keyword">
@@ -146,10 +156,14 @@
                     <option value="p_idx">강의번호</option>
                     <option value="p_name">강의명</option>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <option value="m_idx">회원번호</option>
                     <option value="m_name">회원명</option>
                     <option value="m_id">아이디</option>
 
+=======
+                    <option value="p_teacher">강사명</option>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
                     <option value="p_teacher">강사명</option>
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -159,7 +173,11 @@
                     </tr>
             
 <<<<<<< HEAD
+<<<<<<< HEAD
             <tr class="table-secondary">
+=======
+            <tr class="table-primary">
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
             <tr class="table-primary">
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -171,7 +189,11 @@
         </div><br>
 		<div id="content_box">
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<form action="./updateOrdersByIdx.do" method="post">
+=======
+		<form action="./updatePaycheckByIdx.do" method="post">
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 		<form action="./updatePaycheckByIdx.do" method="post">
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -182,12 +204,15 @@
 						<th scope="col">주문번호</th>
 						<th scope="col">강의번호</th>
 <<<<<<< HEAD
+<<<<<<< HEAD
 						<th scope="col">강사명</th>
 						<th scope="col">지급예정금액</th>
 						<th scope="col">지급완료급액</th>
 						<th scope="col">지급날짜</th>
 						<th scope="col">지급여부</th>
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						<th scope="col">강의명</th>
 						<th scope="col">강사명</th>
 						<th scope="col">수수료율</th>
@@ -195,6 +220,9 @@
 						<th scope="col">지급완료금액</th>
 						<th scope="col">지급여부</th>
 						<th scope="col">지급날짜</th>
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						<th scope="col">지급확인</th>
 					</tr>
@@ -202,6 +230,7 @@
 				
 				<tbody>
 				
+<<<<<<< HEAD
 <<<<<<< HEAD
 				<!-- 미완 -->
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기
@@ -244,6 +273,8 @@
 						-->
 						
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 				
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="paycheckDataList" items="${paycheckDataList }">
@@ -284,13 +315,20 @@
 							<th scope="row"><a href=""><button>지급완료</button></a></th>
 						</tr>
 						</c:forEach>						
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						
 				</tbody>
 				
 			</table>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<button type="submit" style="float: right">결제확인</button>
+=======
+			<button type="submit" style="float: right">지급완료</button>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 			<button type="submit" style="float: right">지급완료</button>
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c

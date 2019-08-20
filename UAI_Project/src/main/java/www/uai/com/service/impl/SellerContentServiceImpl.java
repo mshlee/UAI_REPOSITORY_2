@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import www.uai.com.mapper.SellerContentSQLMapper;
 import www.uai.com.service.SellerContentService;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import www.uai.com.vo.AdvancedSearchDataVO;
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 =======
 import www.uai.com.vo.AdvancedSearchDataVO;
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
@@ -22,6 +26,7 @@ import www.uai.com.vo.SellerContentVO;
 @Service
 public class SellerContentServiceImpl implements SellerContentService {
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	@Autowired
 	private SellerContentSQLMapper sellerContentSQLMapper;
@@ -167,6 +172,8 @@ public class SellerContentServiceImpl implements SellerContentService {
 	
 	
 =======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 
 
 	@Autowired
@@ -244,6 +251,7 @@ public class SellerContentServiceImpl implements SellerContentService {
 			
 			}
 
+<<<<<<< HEAD
 >>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	
 		return productDataList;
@@ -322,6 +330,85 @@ public class SellerContentServiceImpl implements SellerContentService {
 	}
 	
 	
+=======
+	
+		return productDataList;
+	}
+
+	// lhe-판매자 상품 관리 목록 복수 항목 삭제
+	@Override
+	public void deleteProductByIdx(ArrayList<ProductVO> productVO) {
+		// TODO Auto-generated method stub
+
+		for (ProductVO product : productVO) {
+			sellerContentSQLMapper.deleteProductByIdx(product.getP_idx());
+		}
+
+	}
+	
+	//lhe-판매자 회원 관리 리스트 출력
+	@Override
+	public ArrayList<MemberDataVO> getAllMemberList() {
+		// TODO Auto-generated method stub
+		
+		ArrayList<MemberDataVO> memberDataList = new ArrayList<MemberDataVO>();
+		
+		memberDataList = sellerContentSQLMapper.getAllMemberList();
+
+		
+		return memberDataList;
+		
+	}
+
+
+	// lhe-판매자 회원 관리 목록 복수 항목 삭제
+	@Override
+	public void deleteMemberByIdx(ArrayList<MemberDataVO> memberVO) {
+		// TODO Auto-generated method stub
+
+		for (MemberDataVO members : memberVO) {
+			sellerContentSQLMapper.deleteMembersByIdx(members.getM_idx());
+		}
+
+	}
+
+	// lhe-판매자 주문 관리 목록 출력
+	@Override
+	public ArrayList<SellerContentVO> getAllOrderList() {
+		// TODO Auto-generated method stub
+		ArrayList<SellerContentVO> dataList = new ArrayList<SellerContentVO>();
+		ArrayList<OrderDataVO> orderDataList = new ArrayList<OrderDataVO>();
+		orderDataList = sellerContentSQLMapper.getAllOrderList();
+
+		for (OrderDataVO orders : orderDataList) {
+			ProductVO productVO = new ProductVO();
+			MemberDataVO memberVO = new MemberDataVO();
+			PurchaseDataVO purchaseVO = new PurchaseDataVO();
+
+			productVO = sellerContentSQLMapper.getProductListByIdx(orders.getP_idx());
+			memberVO = sellerContentSQLMapper.getMemberListByIdx(orders.getM_idx());
+			purchaseVO = sellerContentSQLMapper.getPurchaseListByIdx(orders.getO_idx());
+
+			SellerContentVO sellerVO = new SellerContentVO(productVO, orders, memberVO, purchaseVO, null, null);
+			dataList.add(sellerVO);
+		}
+
+		return dataList;
+	}
+
+	// lhe-판매자 주문 관리 목록 복수 항목의 결제 상태 변경
+	@Override
+	public void updateOrderByIdx(ArrayList<PurchaseDataVO> requestVO) {
+		// TODO Auto-generated method stub
+
+		for (PurchaseDataVO purchaseVO : requestVO) {
+			sellerContentSQLMapper.updatePurchaseByIdx(purchaseVO.getPch_isPaid(), purchaseVO.getO_idx());
+		}
+
+	}
+	
+	
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 
 	// lhe-판매자 리뷰 관리 목록 출력
 	@Override
