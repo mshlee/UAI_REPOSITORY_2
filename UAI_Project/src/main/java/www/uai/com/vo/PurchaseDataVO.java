@@ -1,7 +1,10 @@
 package www.uai.com.vo;
 
 public class PurchaseDataVO {
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	private String o_idx;
 	private String pch_paymentDate;
 	private String pch_isPaid;

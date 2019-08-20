@@ -2,15 +2,29 @@ package www.uai.com.service;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
+=======
+import www.uai.com.vo.AdvancedSearchDataVO;
+import www.uai.com.vo.ContentDataVO;
+import www.uai.com.vo.MemberDataVO;
+import www.uai.com.vo.PaycheckDataVO;
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 import www.uai.com.vo.ProductVO;
 import www.uai.com.vo.PurchaseDataVO;
 import www.uai.com.vo.SellerContentVO;
 
 public interface SellerContentService {
 	
+<<<<<<< HEAD
 	//lhe-판매자 관리 페이지 리스트 출력용
+=======
+
+	//lhe-판매자 관리 페이지 리스트 출력용
+	public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO);
+	public ArrayList<MemberDataVO> getAllMemberList();
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	public ArrayList<SellerContentVO> getAllOrderList();
 	public ArrayList<SellerContentVO> getAllReviewList();
 	public ArrayList<SellerContentVO> getAllQnAList();
@@ -21,10 +35,18 @@ public interface SellerContentService {
 	public void deleteMemberByIdx(ArrayList<MemberDataVO> memberVO);
 	public void deleteReviewByIdx(ArrayList<ContentDataVO> reviewVO);
 	public void deleteQnAByIdx(ArrayList<ContentDataVO> qnaVO);
+<<<<<<< HEAD
 	
 	//lhe-판매자 관리 페이지 복수 항목 상태 변경용-arrayList 이용
 	public void updateOrderByIdx(ArrayList<PurchaseDataVO> requestVO);
 	
+=======
+
+	//lhe-판매자 관리 페이지 복수 항목 상태 변경용-arrayList 이용
+	public void updateOrderByIdx(ArrayList<PurchaseDataVO> requestVO);
+	public void updatePaycheckByIdx(ArrayList<PaycheckDataVO> requestVO);
+
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	
 	
 

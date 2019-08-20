@@ -1,68 +1,304 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>UAI-판매자 메인</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <head>
+        <title>SellerMainPage</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        
+        <!-- Bootstrap CSS -->
+       <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      
+      <!-- slider 설정 -->
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
+        <!-- Include jQuery library and Flexslider script -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+      
+      <!-- Link Swiper's CSS -->
+        <link rel="stylesheet" href="css/swiper.min.css">
+      
+        
+        <!-- font 설정 -->
+        <link rel="stylesheet" href="https://use.typekit.net/kcj1cyn.css">
+        
+        <!--효은언니가 설정해 둔것-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<style>
-#wrapper{
-    width: 1366px;
-    height: 900px;
-    border: solid black 0.3px;
-    margin: 50px auto;
-}
-
-#upper_bar{
-    float:right;
-}
-#header{
-    width: 1166px;
-    height: 100px;
-    border: solid black 0.3px;
-    float: right;
-    padding: 10px;
-}
-#left_box{
-    width: 200px;
-    height: 500px;
-    float: left;
-    border: solid black 0.3px;
-
-}
-#admin_menu{
-    width: 180px;
-    height: 100px;
-    margin: 5px auto;
-    border: solid black 0.3px;
-}
-#main_box{
-    width: 1100px;
-    margin: 5px auto;
-    border: solid black 0.3px;
-    float: right;
-}
-#left_column{
-    width: 500px;
-    height:300px;
-    margin: 10px auto;
-    border: solid black 0.3px;
-    float: left;
-}
-#right_column{
-    width: 500px;
-    height:300px;
-    margin: 10px auto;
-    border: solid black 0.3px;
-    float: right;
-}
-</style>
+        
 
 
+        <style>
+        @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+        @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+        @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+        @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+          #wrapper{
+            width: 1024px;
+            margin: 0px auto;
+          }
+          #top-box{
+            width: 1024px;
+            height: 215px;
+            float: left;
+            margin-top: 10px;
+            margin-bottom:-10px;
+          }
+                    #top-small-1{
+                      width: 1024px;
+                      height: 10px; 
+                      float: left;
+                    }
+                    #top-menu{
+                      width:300px;
+                      height: 10px;
+                      float: right;
+                      font-family: lemongrass-caps, sans-serif;
+                      font-weight: 200;
+                      font-style: normal;
+                    } 
+                    #top-small-2{
+                      width: 1024px;
+                      height: 130px;
+                      float: left;
+                    }
+                    #top-logo{
+                      width: 130px;
+                      height: 120px;
+                      margin-left: 230px;
+                    }
+                    #top-small-3{
+                      width: 1024px;
+                      height: 60px;
+                      float: left;
+                    }
+                    #top-mini-logo{
+                      width: 25px;
+                      height: 25px;
+                      float: left;
+                    }
+                    #top-menu-bar{
+                      width: 1024px;
+                      margin-top: -8px;
+                      margin-bottom: -8px;              
+                      font-family: 'Nanum Gothic', sans-serif;
+                      font-weight: 900;
+                      font-style: normal;
+                      font-size: 13pt;
+                      float: left;
+                    }
+                    
+
+          
+          #middle-box{
+            width: 1024px;
+            height: 800px;
+            float: left;
+          }
+                    #middle-small-3{
+                      width:900px;
+                      height: 250px;
+                      float: left;
+                    }
+                    #middle-slide{
+                      width: 1000px;
+                      height: 250px;
+                      float: left;
+                      margin-left: 13px;
+                      margin-top:-10px;
+                    }
+                    #middle-small-1{
+                      width: 216px;
+                      height: 250px;
+                      float: left;
+                      font-family: lemongrass-caps, sans-serif;
+                    }
+                    #login-success-box{
+                       float: left;
+                       margin-top:9px;
+                    }
+                    #middle-empty1{
+                       float: left;
+                       width: 200px;
+                       height: 45px;
+                       font-family: lemongrass-script, sans-serif;
+                       font-size: 10pt;
+                       text-align: center;
+                       margin-bottom:-35px;
+                       font-weight: 300;
+                       margin-left: 5px;
+                       margin-top:10px;
+                    }
+                    #login-success-function{
+                      float: left;
+                      text-align: center;
+                      margin-left: 10px;
+                    }
+                    #logo-login-box-line2{
+                      width: 3px;
+                      height: 160px;
+                      float: right;
+                      margin-right: 15px;
+                    }
+                    #middle-login-box{
+                      width: 160px;
+                      height: 180px;
+                      float: left;
+                      border-radius: 5px;
+                      margin-left: 40px;
+                    }
+                    #logo-login-box-line{
+                      width: 3px;
+                      height: 160px;
+                      float: right;
+                      margin-top: 8px;
+                    }
+                    #sign-in{
+                      width: 140px;
+                      height: 80px;
+                      float: left;
+                      margin-top: 25px;
+                    }
+                    #logo-sign-in{
+                      width: 35px;
+                      height: 40px;
+                      float: left;
+                    }
+                    #sign-up{
+                      width: 140px;
+                      height: 80px;
+                      float: left;
+                      margin-top: 8px;
+                    }
+                    #logo-sign-up{
+                      width: 32px;
+                      height: 30px;
+                      float: left;
+                      margin-left: 3px;
+                    }
+                    .login-function{
+                      float: right;
+                      font-family: lemongrass-caps, sans-serif;
+                      font-weight: 400;
+                      font-style: normal; 
+                      font-size: 18pt;
+                      margin-right: 10px;
+                      margin-top: 3px;   
+                    }
+                                                                                                    #middle-small-2{
+                                                                                                        width: 795px;
+                                                                                                        height: 600px;
+                                                                                                        float: left;
+                                                                                                        margin-top: 5px;
+                                                                                                        font-size: 15pt;
+                                                                                                    }
+                                                                                                    
+                                                                              table {
+                                                                               width: 300px;
+                                                                               height: 100px;
+                                                                               border-top: 1px solid #444444;
+                                                                               border-collapse: collapse;
+                                                                               font-family: 'Nanum Gothic', sans-serif;
+                                                                               margin-left: 12px;
+                                                                               font-size: 12pt;
+                                                                               float:left;
+                                                                               margin-left: 50px;
+                                                                           }
+                                                                            th, td {
+                                                                               border-bottom: 1px solid #444444;
+                                                                               padding: 3px;
+                                                                               text-align: center;
+                                                                               font-family: 'Nanum Gothic', sans-serif;
+                                                                           }
+                                                                            th {
+                                                                               font-family: 'Nanum Gothic', sans-serif;
+                                                                             }
+                                                                            td {
+                                                                               font-family: 'Nanum Gothic', sans-serif;
+                                                                             }
+                                                                             
+                                                                           .white-table{
+                                                                              width: 300px;
+                                                                               height: 100px;
+                                                                               border-top: 1px solid #444444;
+                                                                               border-collapse: collapse;
+                                                                               font-family: 'Nanum Gothic', sans-serif;
+                                                                               margin-left: 12px;
+                                                                               font-size: 12pt;
+                                                                               float:left;
+                                                                               margin-left: 50px;
+                                                                           }
+                                                                           .white-th, .white-td {
+                                                                               border-bottom: 1px solid #444444;
+                                                                               padding: 3px;
+                                                                               text-align: center;
+                                                                               font-family: 'Nanum Gothic', sans-serif;
+                                                                           }
+                                                                            .white-th {
+                                                                               background-color: #bbdefb;
+                                                                               font-family: 'Nanum Gothic', sans-serif;
+                                                                             }
+                                                                            .white-td {
+                                                                               background-color: #e3f2fd;
+                                                                               font-family: 'Nanum Gothic', sans-serif;
+                                                                             }
+                                                                            .middle-title{
+                                                                               float:left;
+                                                                               text-align: left;
+                                                                               padding: 8px;
+                                                                               margin-left: 15px;
+                                                                              font-family: 'Jeju Gothic', sans-serif;
+                                                                            }
+                                                                             
+                                                                                                    #recent-order{
+                                                                                                        width: 390px;
+                                                                                                        height: 245px;
+                                                                                                        float: left;
+                                                                                                        background-color: white;
+                                                                                                        border-radius:10px;
+                                                                                                        text-align:center;
+                                                                                                    }
+                                                                                                    #recent-lecture{
+                                                                                                        width: 390px;
+                                                                                                        height: 245px;
+                                                                                                        float: left;
+                                                                                                        border-radius:10px;
+                                                                                                        background-color: aliceblue; 
+                                                                                                        text-align:center;
+                                                                                                    }
+                                                                                                    #recent-QnA{
+                                                                                                        width: 390px;
+                                                                                                        height: 245px;
+                                                                                                        float: left;
+                                                                                                        border-radius:10px;
+                                                                                                        background-color: aliceblue; 
+                                                                                                        text-align:center;
+                                                                                                    }
+                                                                                                    #recent-review{
+                                                                                                        width: 390px;
+                                                                                                        height: 245px;
+                                                                                                        float: left;
+                                                                                                        border-radius:10px;
+                                                                                                        background-color: white;
+                                                                                                        text-align:center;
+                                                                                                    }
+                                                                                                    #more{
+                                                                                                       float:right;
+                                                                                                       margin-right: 20px;
+                                                                                                       margin-top: 5px;
+                                                                                                       font-family: 'Jeju Gothic', sans-serif;
+                                                                                                       font-size: 10pt;
+                                                                                                    }
+                    
+
+
+<<<<<<< HEAD
 </head>
 <body>
     <div id="wrapper">
@@ -73,62 +309,320 @@
         </div>
         <div id="left_box">
             <div id="admin_menu">
-                
-                환영합니다. <br>(닉네임아이디들어가야함)<br>
-                <button onclick="">로그아웃</button><br>
-                <button onclick="">관리자계정설정</button>
-
-            </div>
-
-        </div>
-        <div id="main_box">
-            <div id="left_column">
-                <label>최신 주문</label><br>
-                <div>
-                    <!--forEach로 조건 설정하여 리스트 출력하기-->
-                    <li>최신 주문 내역</li>
-
-                </div>
-                <button style="float: right;" onclick="">더보기</button></div>
-           <div id="right_column"> 
-                <label>최신 상품</label><br>
-                <div>
-                    <!--forEach로 조건 설정하여 리스트 출력하기-->
-                    <li>최신 등록 상품</li>
-                
-                </div>
-                <button style="float: right;" onclick="">더보기</button></div>
-            <div id="left_column">     
-                <label>최신 QnA</label><br>
-                <div>
-                    <!--forEach로 조건 설정하여 리스트 출력하기-->
-                    <li>최신 등록 질문</li>
-                
-                </div>
-                <button style="float: right;" onclick="">더보기</button>
-            </div>
-            <div id="right_column">                
-                    <label>최신 리뷰</label><br>
-                    <div>
-                        <!--forEach로 조건 설정하여 리스트 출력하기-->
-                        <li>최신 등록 리뷰</li>
-                    
-                    </div>
-                    <button style="float: right;" onclick="">더보기</button>
-                </div>
-            </div>
+=======
+          #bottom-box{
+            width: 1024px;
+            height: 170px;
+            background-color: darkgray;
+            color: white;
+            float: left;
             
-        </div>
-        </div>
-        
+          }
+             #catchphrase{
+                font-family: seasoned-hostess, sans-serif;
+                font-weight: 300;
+                font-style: normal;
+                float: left;
+                font-size: 30pt;
+                margin-left: 30px;
+                color: black;
+                margin-top: 10px;
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+                
+              }
+              
+              #bottom-phrase{
+                font-family: seasoned-hostess, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 15pt;
+                 float: right;
+                 margin-top:50px;
+                 margin-right: 10px;
+              }
+             
+             
+        </style>
 
-    </div>
+      <!-- Swiper styles -->
+        <style>
+          .swiper-container {
+            width: 100%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+          }
+        </style>
 
+    </head>
 
+    <body>
+        <div id="wrapper">
 
+          <div id="top-box">
+            <div id="top-small-1">
+              <div id="top-menu">
+                <a style="color: black" href="./mainPage">Main Page</a> | 
+                <a style="color: black" href="./logoutAction">LOGOUT</a> | 
+                <a style="color: black" href="#">NOTICE</a> | 
+                <a style="color: black" href="./myPage">AD PAGE</a>    
+                
+              </div>
+              </div>
+              <div id="top-small-2">
+                <div id="top-logo">
+                  <a href="./mainPage"><img id="top-logo" src="./img/logo.png"></a>
+                </div>
+              </div>
+              <div id="top-small-3">
+                <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
+                  <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
+                    <ul class="navbar-nav" id="top-menu-bar">
+                      <li class="nav-item"><a class="nav-link" href="./sellerMainPage">Main page</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerProductManagePage">상품 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerOrderManagePage">주문 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerMemberManagePage">회원 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerReviewManagePage">리뷰 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerQnAManagePage">Q & A 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerPaymentManagePage">지급 관리</a></li>
+                    </ul>
+                </nav>
+              </div>
+            </div><!--top-box div-->
+          
+            <div id="middle-box">
+            
+              <div id="middle-small-3">
+                 <!-- Swiper -->
+              <div class="swiper-container" id="middle-slide">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+              </div>
+            
+              <!-- Swiper JS -->
+              <script src="js/swiper.min.js"></script>
+            
+              <!-- Initialize Swiper -->
+              <script>
+                var swiper = new Swiper('.swiper-container', {
+                  spaceBetween: 30,
+                  loop: true,
+                  centeredSlides: true,
+                  autoplay: {
+                    delay: 3500, //autoplay 시간
+                    disableOnInteraction: false,
+                  },
+                  pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                  },
+                  navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                  },
+                }); 
+              </script>
+              </div><!--middle-small-box-3-->
+            
 
+              <div id="middle-small-1">
+                  <c:choose>
+                      <c:when test="${!empty sessionData }">
+                        <div id="middle-empty1">Learn Something Worthy!</div>
+                        <div id="login-success-box">
+                           <h4>Welcome,</h4> <h6>${sessionData.ad_nick}</h6>
+                           <br>
+                           <div id="login-success-function">
+                           <a href="./logoutAction"><button class="btn btn-light">Logout</button></a>
+                           <a href="#"><button class="btn btn-info">Settings</button></a>
+                           <br>
+                           </div>
+                        
+                        </div>
+                        <img src="./img/loginBoxLine.png" id="logo-login-box-line2">
+                      </c:when>
+                      
+                      <c:otherwise>
+                         <div class="well" id="middle-login-box">
+                        <img src="./img/loginBoxLine.png" id="logo-login-box-line">
+                        <div id="sign-in">
+                          <img src="./img/signIn.png" id="logo-sign-in"> 
+                          <a class="login-function" style="color: black" href="./loginForm">Sign In</a>
+                        </div>
+                        <div id="sign-up">
+                          <img src="./img/signUp.png" id="logo-sign-up">
+                          <a class="login-function" style="color: black" href="#">AD Sign Up</a>
+                        </div>
+                      </div>
+                        <!-- Your ID was not found in our Data. Please try it again. <br>
+                        <a href="./loginForm">go back to Login Page</a> <br><br> -->
+                      </c:otherwise>      
+                    </c:choose>
+              </div><!--middle-small-box-1-->
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-</body>
+              <div id="middle-small-2">
+                    <div id="recent-order">
+                       <div class="middle-title" id="recent-order-title">
+                       최근 주문
+                       </div>
+                       <table class="white-table">
+                     <thead>
+                       <tr>
+                         <th>Lorem</th><th>Ipsum</th><th>Dolor</th><th>Sit</th><th>Amet</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                     </tbody>
+                   </table>
+                  <a href="./sellerOrderManagePage"><button class="btn btn-link" id="more">더 보기</button></a>                   
+                      </div><!-- recent-order -->
+                    
+                    
+                    <div id="recent-lecture">
+                       <div class="middle-title" id="recent-lecture-title">
+                       최근 상품
+                       </div>
+                       <table >
+                     <thead>
+                       <tr>
+                         <th>Lorem</th><th>Ipsum</th><th>Dolor</th><th>Sit</th><th>Amet</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                     </tbody>
+                   </table>
+                   <a href="./sellerProductManagePage"><button class="btn btn-link" id="more">더 보기</button></a>
+                    </div><!-- recent-lecture -->
+                    
+                    <br>
+                    <div id="recent-QnA">
+                       <div class="middle-title" id="recent-QnA-title">
+                       최근 QnA
+                       </div>
+                       <table class="white-table">
+                     <thead>
+                       <tr>
+                         <th>Lorem</th><th>Ipsum</th><th>Dolor</th><th>Sit</th><th>Amet</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                     </tbody>
+                   </table>
+                   <a href="./sellerQnAManagePage"><button class="btn btn-link" id="more">더 보기</button></a>
+                    </div><!-- recent QnA -->
+                    
+                    <div  id="recent-review">
+                       <div class="middle-title" id="recent-review-title">
+                       최근 리뷰
+                       </div>
+                       <table>
+                     <thead>
+                       <tr>
+                         <th>Lorem</th><th>Ipsum</th><th>Dolor</th><th>Sit</th><th>Amet</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                       <tr>
+                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                       </tr>
+                     </tbody>
+                   </table>
+                   <a href="./sellerReviewPage"><button class="btn btn-link" id="more">더 보기</button></a>
+                    </div><!-- recent-review -->
+                </div><!--middle-small-box-2-->
+              
+              
+              
+          </div><!--middle box div-->
+          
+          
+          <div id="bottom-box">
+             
+             <div id="catchphrase">
+                UAI Project: Let us learn Something Worthy!          
+             </div>
+             <br>
+             <br>
+             <div id="bottom-phrase">Help | Feedback | Privacy | Terms | ⓒUAI Project Company</div>
+          </div><!--bottom box div-->
+       </div> <!--wrapper div-->
+    
+       <!-- Optional JavaScript -->
+       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
 </html>

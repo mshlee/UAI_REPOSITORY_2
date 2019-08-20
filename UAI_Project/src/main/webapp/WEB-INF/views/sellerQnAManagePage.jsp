@@ -129,7 +129,11 @@
 				<thead>
 					<tr>
 						<th scope="col">선택</th>
+<<<<<<< HEAD
 						<th scope="col">번호</th>
+=======
+						<th scope="col">no.</th>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						<th scope="col">글번호</th>
 						<th scope="col">강의번호</th>
 						<th scope="col">강의명</th>
@@ -151,6 +155,7 @@
 						<c:forEach var="qnaDataList" items="${qnaDataList }">
 						<tr>
 							<th scope="row"><input type="checkbox" name="b_referidx" value="${qnaDataList.contentDataVO.b_referidx}"></th>
+<<<<<<< HEAD
 							<th scope="row">${qnaDataList.contentDataVO.b_referidx }</th>
 							<th scope="row">${qnaDataList.contentDataVO.p_idx }</th>
 							<th scope="row">${qnaDataList.productVO.p_name }</th>
@@ -164,12 +169,30 @@
 							<th scope="row">강의문의</th>
 							</c:when>
 							<c:when test="${qnaDataList.contentDataVO.b_qcategory==1}">
+=======
+							<th scope="row">  </th>
+							<th scope="row">${qnaDataList.contentDataVO.b_referidx }</th>
+							<th scope="row">${qnaDataList.contentDataVO.p_idx }</th>
+							<th scope="row">${qnaDataList.productDataVO.p_name }</th>
+							<th scope="row">${qnaDataList.contentDataVO.m_idx }</th>
+							<th scope="row">${qnaDataList.memberDataVO.m_id }</th>
+							<th scope="row">${qnaDataList.memberDataVO.m_nick }</th>	
+							<th scope="row">${qnaDataList.memberDataVO.m_name}</th>						
+							<c:choose>
+							<c:when test="${qnaDataList.contentDataVO.b_qCategory==0}">
+							<th scope="row">강의문의</th>
+							</c:when>
+							<c:when test="${qnaDataList.contentDataVO.b_qCategory==1}">
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">결제문의</th>
 							</c:when>
 							</c:choose>
 							
 							<th scope="row">${qnaDataList.contentDataVO.b_title}</th>
+<<<<<<< HEAD
 							<th scope="row">${qnaDataList.memberDataVO.m_name}</th>
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">${qnaDataList.contentDataVO.b_count}</th>
 							<th scope="row">${qnaDataList.contentDataVO.b_postdate}</th>
 							

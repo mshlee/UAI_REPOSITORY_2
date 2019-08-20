@@ -2,7 +2,15 @@ package www.uai.com.service.impl;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
+=======
+>>>>>>> master
+=======
+
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -15,11 +23,25 @@ import www.uai.com.vo.ProductContentVO;
 import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductNPageDataVO;
 import www.uai.com.vo.ProductVO;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
+<<<<<<< HEAD
 	@Autowired
+=======
+@Service
+public class ProductServiceImpl implements ProductService{
+	
+>>>>>>> master
+=======
+	@Autowired
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	private ProductSQLMapper productSQLMapper;
 
 	@Override
@@ -88,6 +110,7 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
+<<<<<<< HEAD
 	// lhe-상품전체리스트 출력용
 	public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO) {
 		// TODO Auto-generated method stub
@@ -166,6 +189,8 @@ public class ProductServiceImpl implements ProductService {
 			
 
 		
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 	
 			}
 			return dataList;

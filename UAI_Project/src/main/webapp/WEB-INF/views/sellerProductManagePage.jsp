@@ -152,7 +152,12 @@
 						<th scope="col">강의시간</th>
 						<th scope="col">강의일자</th>
 						<th scope="col">등록일</th>
+<<<<<<< HEAD
 						<th scope="col">수정</th>
+=======
+						<th scope="col">강의수정</th>
+						<th scope="col">강의삭제</th>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 					</tr>
 				</thead>
 
@@ -162,12 +167,18 @@
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="productList" items="${productList }">
 						<tr>
+<<<<<<< HEAD
 							<th scope="row"><input type="checkbox" name="p_idx" value="${productList.p_idx }"></th>
 							<th scope="row">${productList.p_idx }</th>
+=======
+							<th scope="row"><input type="checkbox" name="p_idx" value="${productDataList.p_idx }"></th>
+							<th scope="row">${productDataList.p_idx }</th>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							
 							
 							<!-- lhe: 상품 타입 번호를 키워드로 치환 -->
 							<c:choose>
+<<<<<<< HEAD
 							<c:when test="${productList.p_type == '0'}">
 							<th scope="row">언어</th>
 							</c:when>
@@ -204,6 +215,44 @@
 							<th scope="row">${productList.p_lectureDay }</th>
 							<th scope="row">${productList.p_postDate }</th>
 							<th scope="row"><a href="./updateProductByIdx?p_idx=${productList.p_idx }"><button>수정</button></a></th>
+=======
+							<c:when test="${productDataList.p_type == '0'}">
+							<th scope="row">언어</th>
+							</c:when>
+							<c:when test="${productDataList.p_type == '1'}">
+							<th scope="row">IT/컴퓨터</th>
+							</c:when>
+							<c:when test="${productDataList.p_type == '2'}">
+							<th scope="row">미술</th>
+							</c:when>
+							<c:when test="${productDataList.p_type == '3'}">
+							<th scope="row">음악</th>
+							</c:when>
+							<c:when test="${productDataList.p_type == '4'}">
+							<th scope="row">스포츠</th>
+							</c:when>
+							<c:when test="${productDataList.p_type == '5'}">
+							<th scope="row">기타</th>					
+							</c:when>
+							</c:choose>
+
+							<th scope="row">${productDataList.p_name }</th>
+							<th scope="row">${productDataList.p_discountRate }</th>
+							<th scope="row">${productDataList.p_originalPrice }</th>	
+							<th scope="row">${productDataList.p_nowPrice }</th>
+							<th scope="row">${productDataList.p_commissionRate }</th>
+							<th scope="row">${productDataList.p_teacher }</th>
+							<th scope="row">${productDataList.p_location }</th>
+							<th scope="row">0</th>
+							<th scope="row">${productDataList.p_maxStudent }</th>
+							<th scope="row">${productDataList.p_startDate }</th>
+							<th scope="row">${productDataList.p_lastDate }</th>
+							<th scope="row">${productDataList.p_lectureTime }</th>
+							<th scope="row">${productDataList.p_lectureDay }</th>
+							<th scope="row">${productDataList.p_postDate }</th>
+							<th scope="row"><a href="./updateProductByIdx?p_idx=${productDataList.p_idx }"><button>수정</button></a></th>
+							<th scope="row"><a href="./deleteProductByIdx?p_idx=${productDataList.p_idx }"><button>삭제</button></a></th>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						</tr>
 						</c:forEach>
 						
@@ -211,7 +260,11 @@
 				</tbody>
 			</table>
 			
+<<<<<<< HEAD
 			<button type="submit" style="float: right">삭제</button>
+=======
+			<button type="submit" style="float: right">선택삭제</button>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 			</form>
 		</div>
 

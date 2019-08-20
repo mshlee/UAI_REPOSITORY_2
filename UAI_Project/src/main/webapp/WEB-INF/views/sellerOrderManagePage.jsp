@@ -188,6 +188,11 @@
 							<th scope="row">카드</th>
 							</c:when>
 							</c:choose>
+<<<<<<< HEAD
+=======
+							
+							
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 							<th scope="row">${orderDataList.purchaseDataVO.pch_paymentDate }</th>
 							<c:choose>
 							<c:when test="${orderDataList.purchaseDataVO.pch_isPaid == 0 }">
@@ -195,12 +200,20 @@
 							<c:when test="${orderDataList.purchaseDataVO.pch_isPaid == 1 }">
 							<th scope="row">결제완료</th></c:when>
 							</c:choose>
+<<<<<<< HEAD
 							<th scope="row"><button>결제확인</button></th>
+=======
+							<th scope="row"><a href="./updateOrderByIdx?o_idx=${orderDataList.orderDataVO.o_idx }"><button>결제확인</button></a></th>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 						</tr>
 						</c:forEach>
 				</tbody>
 			</table>
+<<<<<<< HEAD
 			<button type="submit" style="float: right">결제확인</button>
+=======
+			<button type="submit" style="float: right">선택주문 결제확인</button>
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 			</form>
 		</div>
 

@@ -1,3 +1,10 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'hyoeun' of https\://github.com/mshlee/UAI_REPOSITORY_2.git
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
+=======
+encoding//src/main/webapp/WEB-INF/views/mainPage.jsp=UTF-8
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
 encoding/<project>=UTF-8
