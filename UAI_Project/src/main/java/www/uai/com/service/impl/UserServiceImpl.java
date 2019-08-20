@@ -11,6 +11,7 @@ import www.uai.com.vo.SessionDataVO;
 
 @Service
 public class UserServiceImpl implements UserService{
+
    @Autowired
    private UserSQLMapper userSQLMapper;
    
@@ -53,6 +54,7 @@ public class UserServiceImpl implements UserService{
       return sessionData;
    }
 
+
    @Override
    public boolean isExistMID(MemberDataVO requestParam) {
       // TODO Auto-generated method stub
@@ -79,5 +81,7 @@ public class UserServiceImpl implements UserService{
       return false;
    }
    
+
+
 
 }

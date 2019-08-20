@@ -1,5 +1,7 @@
 package www.uai.com.mapper;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -9,6 +11,7 @@ import www.uai.com.vo.MemberDataVO;
 
 
 public interface UserSQLMapper {
+
 
    @Insert("INSERT INTO MEMBERS VALUES(MEMBERS_SEQ.NEXTVAL,#{m_id},#{m_pw},#{m_name},#{m_nick},#{m_phone},#{m_address},#{m_gender},#{m_birth},SYSDATE,#{m_interest1},#{m_interest2},#{m_interest3},#{m_education},#{m_major},#{m_job},#{m_maritalstatus})")
    public void insert(MemberDataVO vo);
@@ -29,4 +32,6 @@ public interface UserSQLMapper {
    @Update("UPDATE MEMBERS SET m_nick = #{m_nick} WHERE m_idx = #{m_idx}")
    public void update(MemberDataVO vo);
 
+
 }
+

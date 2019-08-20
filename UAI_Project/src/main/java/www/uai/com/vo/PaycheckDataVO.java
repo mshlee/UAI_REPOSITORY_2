@@ -8,12 +8,11 @@ public class PaycheckDataVO {
 	private String p_teacher;
 	private String pd_isPaidToTeacher;
 	private String pd_paidDate;
-	
+
 	
 	public PaycheckDataVO() {
 	
 	}
-
 
 	public PaycheckDataVO(String o_idx, String o_totalPrice, String pd_totalPaymentToTeacher, String p_teacher,
 			String pd_isPaidToTeacher, String pd_paidDate) {
@@ -25,17 +24,15 @@ public class PaycheckDataVO {
 		this.pd_isPaidToTeacher = pd_isPaidToTeacher;
 		this.pd_paidDate = pd_paidDate;
 	}
-
+	
 
 	public String getO_idx() {
 		return o_idx;
 	}
 
-
 	public void setO_idx(String o_idx) {
 		this.o_idx = o_idx;
 	}
-
 
 	public String getO_totalPrice() {
 		return o_totalPrice;
@@ -85,10 +82,6 @@ public class PaycheckDataVO {
 	public void setPd_paidDate(String pd_paidDate) {
 		this.pd_paidDate = pd_paidDate;
 	}
-	
-	
-
-
 	
 	
 	

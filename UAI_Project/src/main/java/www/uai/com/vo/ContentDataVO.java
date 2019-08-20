@@ -15,9 +15,7 @@ M_IDX NUMBER(8),
 P_IDX NUMBER(8),
 AD_IDX NUMBER(8)
 );*/
-public class ContentDataVO {
-
-	
+public class ContentDataVO {	
 	   private String b_idx;
 	   private String b_referidx;
 	   private String b_type;
@@ -67,8 +65,6 @@ public class ContentDataVO {
 	public String getB_idx() {
 		return b_idx;
 	}
-
-
 
 	public void setB_idx(String b_idx) {
 		this.b_idx = b_idx;
@@ -242,6 +238,6 @@ public class ContentDataVO {
 		this.ad_idx = ad_idx;
 	}
 
-	
 	   
 }
+

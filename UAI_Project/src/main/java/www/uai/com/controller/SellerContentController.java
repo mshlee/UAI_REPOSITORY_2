@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import www.uai.com.service.SellerContentService;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.ContentDataVO;
@@ -29,7 +28,8 @@ public class SellerContentController {
 	
 	
 	//lhe-판매자 관리자 계정 관리에 대한 페이지들...
-	@RequestMapping("/sellerManageAdmin.do")
+	@RequestMapping("/seller/manageAdmin.do")
+
 	public String sellerAccountMainPage(SessionDataVO sessionVO) {
 		
 		
@@ -84,6 +84,7 @@ public class SellerContentController {
 	}
 	
 	//lhe-판매자 상품 관리 페이지 복수 상품 삭제 명령
+
 	@RequestMapping("/sellerDeleteProductByIdx.do")
 	public String deleteProductByIdxAction (ArrayList<ProductVO> productVO) {
 		
@@ -91,6 +92,7 @@ public class SellerContentController {
 		sellerContentService.deleteProductByIdx(productVO);
 		
 		return "redirect:sellerProductManagePage";
+
 	}
 	
 	
@@ -103,7 +105,6 @@ public class SellerContentController {
 			
 			return "loginForm";
 		}
-		
 		//lhe-주문 리스트 불러오기
 		ArrayList<SellerContentVO> orderDataList = new ArrayList<SellerContentVO>();
 		orderDataList=sellerContentService.getAllOrderList();
@@ -112,14 +113,14 @@ public class SellerContentController {
 		
 		return "sellerOrderManagePage";
 	}
-	
-	//lhe-판매자 주문 관리 페이지 복수 주문 결제상태 변경
+
 	@RequestMapping("/sellerUpdateOrderByIdx.do")
 	public String updateOrderByIdxAction(ArrayList<PurchaseDataVO> purchaseVO) {
 		
 		//선택한 주문 결제 상태 변경
 		sellerContentService.updateOrderByIdx(purchaseVO);
 		
+
 		return "redirect:sellerOrderManagePage";
 	}
 	
@@ -138,7 +139,6 @@ public class SellerContentController {
 		memberDataList=sellerContentService.getAllMemberList();
 			
 		model.addAttribute("memberDataList", memberDataList);
-		
 		return "sellerMemberManagePage";
 		
 	}
@@ -168,6 +168,7 @@ public class SellerContentController {
 		
 		model.addAttribute("reviewDataList", reviewDataList);
 		
+
 		
 		return "sellerReviewManagePage";
 	}
@@ -177,11 +178,13 @@ public class SellerContentController {
 	public String deleteReviewByIdxAction (ArrayList<ContentDataVO> requestVO) {
 		
 		//선택한 리뷰 리스트 지우기
+		sellerContentService.deleteReviewByIdx(requestVO);
 		
 		return "redirect:sellerReviewManagePage";
 				
 	}
 	
+
 	//lhe-판매자 QnA 관리 페이지 관련 맵핑
 	@RequestMapping("/sellerManageQnA.do")
 	public String qnaManagePage(Model model, HttpSession sessionData) {
@@ -190,7 +193,7 @@ public class SellerContentController {
 			
 			return "loginForm";
 		}
-		
+
 		
 		ArrayList<SellerContentVO> qnaDataList = new ArrayList<SellerContentVO>();
 		qnaDataList = sellerContentService.getAllQnAList();
@@ -236,13 +239,11 @@ public class SellerContentController {
 	public String updatePaycheckByIdxAction(ArrayList<PaycheckDataVO> requestVO) {
 		
 		//선택한 지급항목 변경하기
-		
+		sellerContentService.updatePaycheckByIdx(requestVO);
 		
 		
 		return "redirect:sellerPaycheckManagePage";
 	}
-	
-	
 	
 	//lhe: 상품 등록 페이지 맵핑
 	@RequestMapping("/sellerNewProduct.do")
@@ -250,10 +251,6 @@ public class SellerContentController {
 		
 		return "sellerNewProductPage";
 	}
-	
-	
-	
-	
-	
+
 	
 }

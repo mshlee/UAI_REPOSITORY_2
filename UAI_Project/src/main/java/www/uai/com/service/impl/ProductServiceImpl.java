@@ -2,11 +2,9 @@ package www.uai.com.service.impl;
 
 import java.util.ArrayList;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import www.uai.com.mapper.ProductSQLMapper;
 import www.uai.com.service.ProductService;
 import www.uai.com.vo.AdvancedSearchDataVO;
@@ -16,7 +14,6 @@ import www.uai.com.vo.ProductContentVO;
 import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductNPageDataVO;
 import www.uai.com.vo.ProductVO;
-
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -90,6 +87,4 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-	
-	
-}
+	}

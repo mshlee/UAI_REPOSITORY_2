@@ -2,7 +2,6 @@ package www.uai.com.vo;
 
 public class OrderDataVO {
 	
-
 	private String o_idx;
 	private String o_totalprice;
 	private String o_date;

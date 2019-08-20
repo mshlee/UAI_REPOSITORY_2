@@ -1123,6 +1123,6 @@
         case "previous": $slider.flexAnimate($slider.getTarget("prev"), true); break;
         default: if (typeof options === "number") $slider.flexAnimate(options, true);
       }
-    }
+    };
   }
 })(jQuery);

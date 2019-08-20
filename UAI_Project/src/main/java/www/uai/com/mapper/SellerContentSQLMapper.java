@@ -54,6 +54,7 @@ public interface SellerContentSQLMapper {
 	
 	@Select("SELECT * FROM Admins WHERE AD_IDX=#{ad_idx}")
 	public AdminDataVO getAdminListByIdx(String ad_idx);
+
 	
 	@Select("SELECT * FROM Orders WHERE O_IDX=#{o_idx}")
 	public OrderDataVO getOrderListByIdx(String o_idx);
@@ -78,6 +79,7 @@ public interface SellerContentSQLMapper {
 	@Delete("DELETE FROM Members WHERE M_IDX=#{m_idx}")
 	public void deleteMembersByIdx(String m_idx);
 	
+
 	//lhe-판매자 리뷰&질문글 관리 페이지 복수 목록 삭제용
 	@Delete ("DELTE FROM Post WHERE B_REFERIDX=#{b_referidx}")
 	public void deletePostByIdx(String b_referidx);
@@ -85,9 +87,10 @@ public interface SellerContentSQLMapper {
 	//lhe-판매자 주문 관리 페이지 복수 주문 결제상태 변경용
 	@Update("UPDATE TABLE Purchase SET PCH_ISPAID=#{pch_ispaid} WHERE o_idx=#{o_idx}")
 	public void updatePurchaseByIdx(String pch_ispaid, String o_idx);
-	
+
+
 	//lhe-판매자 주문 관리 페이지 복수 주문 결제상태 변경용
-	@Update("UPDATE TABLE Paycheck_Data SET PD_ISPAID=#{pch_ispaid} WHERE o_idx=#{o_idx}")
+	@Update("UPDATE TABLE Paycheck_Data SET PD_ISPAIDTOTEACHER=#{pd_isPaidToTeacher} WHERE o_idx=#{o_idx}")
 	public void updatePaycheckByIdx(String pd_isPaidToTeacher, String o_idx);
 
 

@@ -171,7 +171,7 @@
 							<th scope="row">여</th>
 							</c:when>
 							</c:choose>
-							
+						
 							<th scope="row">${memberDataList.m_birth }</th>
 							<th scope="row">${memberDataList.m_joindate }</th>
 							<th scope="row">${memberDataList.m_interest1 }</th>

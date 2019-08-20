@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import org.springframework.ui.Model;
 
 import www.uai.com.vo.AdvancedSearchDataVO;
-import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductNPageDataVO;
+import www.uai.com.vo.ProductVO;
 
 public interface ProductService {
 

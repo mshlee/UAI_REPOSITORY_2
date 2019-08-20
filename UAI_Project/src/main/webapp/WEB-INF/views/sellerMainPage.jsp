@@ -298,6 +298,21 @@
                     
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+</head>
+<body>
+    <div id="wrapper">
+        <div id="upper_bar"><a href="">쇼핑몰메인</a><a href="">로그아웃</a></div><br>
+        <img src="" type="button">
+        <div id="header"><a href="./index.do">메인</a> | <a href="./manageProduct.do">강의 관리</a> | <a href="./manageOrder.do">주문 관리</a> | <a href="./manageMember.do">회원관리</a> |  
+            <a href="./manageReview.do">리뷰 관리</a> | <a href="./manageQnA.do">QnA 관리</a> | <a href="./managePaycheck.do">지급 관리</a>
+        </div>
+        <div id="left_box">
+            <div id="admin_menu">
+=======
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
           #bottom-box{
             width: 1024px;
             height: 170px;
@@ -315,6 +330,10 @@
                 margin-left: 30px;
                 color: black;
                 margin-top: 10px;
+<<<<<<< HEAD
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
+=======
+>>>>>>> 98a4d0fde51b1c7e651429b122f3367a09cf230c
                 
               }
               
