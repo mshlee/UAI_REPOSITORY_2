@@ -15,6 +15,7 @@ import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.BoardDataVO;
 import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
+import www.uai.com.vo.ProductVO;
 import www.uai.com.vo.UploadFileVO;
 
 @Service
@@ -76,9 +77,9 @@ public class ContentServiceImpl implements ContentService{
 			
 			AdminDataVO admin = userSQLMapper.selectByADIdx(content.getAd_idx());
 			
-			MemberDataVO member = userSQLMapper.selectByMId(content.getM_idx()); 
+			MemberDataVO member = userSQLMapper.selectByMIdx(content.getM_idx()); 
 				
-			BoardDataVO data = new BoardDataVO(content, member, admin);
+			BoardDataVO data = new BoardDataVO(admin, content, member, null, null);
 				
 			dataList.add(data);
 		}
@@ -98,8 +99,8 @@ public class ContentServiceImpl implements ContentService{
 		ContentDataVO content = contentSQLMapper.selectByIdx(b_idx);
 		
 
-		AdminDataVO admin = adminSQLMapper.selectByIdx(content.getAd_idx());
-		MemberDataVO member = userSQLMapper.selectByMId(content.getM_idx());
+		AdminDataVO admin = userSQLMapper.selectByADIdx(content.getAd_idx());
+		MemberDataVO member = userSQLMapper.selectByMIdx(content.getM_idx());
 		ArrayList<UploadFileVO> fileList = new ArrayList<UploadFileVO>();
 		fileList = uploadFileSQLMapper.selectByB_idx(b_idx);
 		
@@ -127,7 +128,7 @@ public class ContentServiceImpl implements ContentService{
 	}
 
 	@Override
-	@Transactional //도중에 한 과정에서 오류가 발생하면 rollback 시킨다(atomicity)
+	@Transactional 
 	public void writeContent(ContentDataVO contentDataVO, ArrayList<UploadFileVO> fileList) {
 		// TODO Auto-generated method stub
 		
@@ -161,7 +162,31 @@ public class ContentServiceImpl implements ContentService{
 		
 		contentSQLMapper.increaseCount(b_idx);
 	}
-	
+	@Override
+	@Transactional 
+	public void writeReviewContent(ContentDataVO contentDataVO, ArrayList<UploadFileVO> fileList) {
+		// 키 가져오기(c_idx)
+		String key = contentSQLMapper.getKey();
+		
+		// 키 넣어주기(c_idx)
+		contentDataVO.setB_idx(key);
+		
+		//db에 넣기
+		contentSQLMapper.insertReview(contentDataVO);
+		
+		// 파일 업로드 시키기(파일은 여러 개일 수 있음)
+		for(UploadFileVO vo : fileList) {
+			
+			vo.setB_idx(key);
+			
+			uploadFileSQLMapper.insert(vo);
+			
+		}
+
+		
+	}
+	@Override
+	@Transactional 
 	public void writeQnAContent(ContentDataVO contentDataVO, ArrayList<UploadFileVO> fileList) {
 		
 				// 키 가져오기(c_idx)
@@ -190,6 +215,13 @@ public class ContentServiceImpl implements ContentService{
 					uploadFileSQLMapper.insert(vo);
 					
 				}
+	}
+	
+	public void writeReplyContent(ContentDataVO contentDataVO) {
+
+		contentSQLMapper.insertReply(contentDataVO);
+		
+	
 	}
 
 	@Override
@@ -228,29 +260,77 @@ public class ContentServiceImpl implements ContentService{
 		   }
 
 	@Override
-	public int getNoticeListCount() {
+	public int getBoardListCount(String b_type) {
 		// TODO Auto-generated method stub
-	      int noticeListCount = contentSQLMapper.getNoticeListCount();
-	      
-	      return noticeListCount;
-	   }
+	      int boardListCount = contentSQLMapper.getBoardListCount(b_type);
+	   
+	   return boardListCount;
+}
+
+	   public int getStarCount(ProductVO productVO) {
+		      
+		      int starNumber = contentSQLMapper.getStarCount(productVO) ;
+		      
+		      return starNumber;
+		   }
+
+	@Override
+	public int getBoardListCountByTitle(String b_type, String searchWord) {
+		// TODO Auto-generated method stub
+	      int boardListCount = contentSQLMapper.getBoardListCountByTitle(b_type, searchWord);
+		   
+	   return boardListCount;
+	}
+
+	@Override
+	public int getBoardListCountByContent(String b_type, String searchWord) {
+		// TODO Auto-generated method stub
+	      int boardListCount = contentSQLMapper.getBoardListCountByContent(b_type, searchWord);
+		   
+	   return boardListCount;
+	}
+
+	@Override
+	public int getBoardListCountByNICK(String b_type, String searchWord) {
+		// TODO Auto-generated method stub
+	      int boardListCount = contentSQLMapper.getBoardListCountByNICK(b_type, searchWord);
+		   
+	   return boardListCount;
+	}
+
+	@Override
+	public int getBoardListCountByADNICK(String b_type, String searchWord) {
+		// TODO Auto-generated method stub
+	      int boardListCount = contentSQLMapper.getBoardListCountByADNICK(b_type, searchWord);
+		   
+	   return boardListCount;
+	}
+
+	@Override
+	public ArrayList<BoardDataVO> getReplyList(ContentDataVO contentDataVO) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<BoardDataVO> dataList = new ArrayList<BoardDataVO>();
+		ArrayList<ContentDataVO> contentList = null;
+		
+		contentList = contentSQLMapper.getReplyList();
+		
+		for(ContentDataVO content : contentList) {
+			
+			AdminDataVO admin = userSQLMapper.selectByADIdx(content.getAd_idx());
+			
+			MemberDataVO member = userSQLMapper.selectByMIdx(content.getM_idx()); 
+				
+			BoardDataVO data = new BoardDataVO(admin, content, member, null, null);
+				
+			dataList.add(data);
+		}
+		
+		return dataList;
+	}
 	
 
-	@Override
-	public int getReviewListCount() {
-		// TODO Auto-generated method stub
-		int reviewListCount = contentSQLMapper.getReviewListCount();
-		
-		return reviewListCount;
-	}
+	
 
-	@Override
-	public int getQnAListCount() {
-		int qnaListCount = contentSQLMapper.getQnAListCount();
-		
-		return qnaListCount;
-		
-	}
-	   
-	   
+	
 }

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,11 +36,12 @@
     <div id="wrapper">
         <div id="upper_bar"><a href="./mainPage">쇼핑몰메인</a> <a href="./logoutAction">로그아웃</a></div><br>
         <div id="main_box">
-        ${sessionData.ad_nick }님, 어떤 작업을 수행하시겠습니까?
+        ${sessionData.ad_nick }님, 어떤 작업을 수행하시겠습니까?<br>
             <div id="content_box" style="float: left;">
             <a href="./sellerNewAdmin">새 관리자 계정 생성</a></div>
             <div id="content_box" style="float: right">
-            <a href="./sellerAdminEdit">기존 관리자 계정 수정</a></div>
+            
+            <a href="./sellerAdminEdit?ad_idx=${sessionData.ad_idx }">기존 관리자 계정 수정</a></div>
         </div>
     </div>
 

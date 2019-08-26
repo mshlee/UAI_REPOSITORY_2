@@ -1,11 +1,15 @@
 package www.uai.com.service;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.ui.Model;
+
 import www.uai.com.vo.OrderDataVO;
 import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductVO;
+import www.uai.com.vo.UploadProductFileVO;
 import www.uai.com.vo.WishListVO;
 
 public interface ProductService {
@@ -27,4 +31,9 @@ public interface ProductService {
    public int getProductListCount();
    
    public int getWishListCount();
+   
+   public void writeNewProduct(ProductVO ProductVOParam, ArrayList<UploadProductFileVO> fileList);
+   
+
+
 }

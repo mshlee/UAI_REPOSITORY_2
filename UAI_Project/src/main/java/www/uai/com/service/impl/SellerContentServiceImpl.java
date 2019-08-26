@@ -34,8 +34,6 @@ public class SellerContentServiceImpl implements SellerContentService {
 		sellerContentSQLMapper.insertAdminData(ad_idx, requestVO.getAd_id(), requestVO.getAd_pw(), requestVO.getAd_nick());
 		
 	}
-
-
 	
 	
 	//lhe-어드민 계정 정보 수정
@@ -132,14 +130,12 @@ public class SellerContentServiceImpl implements SellerContentService {
 		return productDataList;
 	}
 
-	// lhe-판매자 상품 관리 목록 복수 항목 삭제
+	// lhe-판매자 상품 관리 목록 단일 항목 삭제
 	@Override
-	public void deleteProductByIdx(ArrayList<ProductVO> productVO) {
+	public void deleteProductByIdx(String p_idx) {
 		// TODO Auto-generated method stub
-
-		for (ProductVO product : productVO) {
-			sellerContentSQLMapper.deleteProductByIdx(product.getP_idx());
-		}
+		
+		sellerContentSQLMapper.deleteProudctByIdx(p_idx);
 
 	}
 	
@@ -158,15 +154,12 @@ public class SellerContentServiceImpl implements SellerContentService {
 	}
 
 
-	// lhe-판매자 회원 관리 목록 복수 항목 삭제
+	// lhe-판매자 회원 관리 목록 단일 항목 삭제
 	@Override
-	public void deleteMemberByIdx(ArrayList<MemberDataVO> memberVO) {
+	public void deleteMemberByIdx(String m_idx) {
 		// TODO Auto-generated method stub
 
-		for (MemberDataVO members : memberVO) {
-			sellerContentSQLMapper.deleteMembersByIdx(members.getM_idx());
-		}
-
+		sellerContentSQLMapper.deleteMemberByIdx(m_idx);
 	}
 
 	// lhe-판매자 주문 관리 목록 출력
@@ -195,13 +188,11 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 	// lhe-판매자 주문 관리 목록 복수 항목의 결제 상태 변경
 	@Override
-	public void updateOrderByIdx(ArrayList<PurchaseDataVO> requestVO) {
+	public void updateOrderByIdx(String pch_ispaid, String o_idx) {
 		// TODO Auto-generated method stub
 
-		for (PurchaseDataVO purchaseVO : requestVO) {
-			sellerContentSQLMapper.updatePurchaseByIdx(purchaseVO.getPch_isPaid(), purchaseVO.getO_idx());
-		}
-
+			sellerContentSQLMapper.updatePurchaseByIdx(pch_ispaid, o_idx);
+	
 	}
 	
 	
@@ -225,14 +216,13 @@ public class SellerContentServiceImpl implements SellerContentService {
 		return reviewDataList;
 	}
 
-	// lhe-판매자 리뷰 관리 목록 복수 항목 삭제
+	// lhe-판매자 리뷰&Qna 관리 목록 단일 항목 삭제
 	@Override
-	public void deleteReviewByIdx(ArrayList<ContentDataVO> reviewVO) {
+	public void deletePostByIdx(String b_type, String b_referidx) {
 		// TODO Auto-generated method stub
 
-		for (ContentDataVO review : reviewVO) {
-			sellerContentSQLMapper.deletePostByIdx(review.getB_referidx());
-		}
+			sellerContentSQLMapper.deletePostByIdx(b_type, b_referidx);
+		
 	}
 
 	// lhe-판매자 qna 관리 목록 출력
@@ -255,16 +245,6 @@ public class SellerContentServiceImpl implements SellerContentService {
 		return qnaDataList;
 	}
 
-	// lhe-판매자 qna 관리 목록 복수 항목 삭제
-	@Override
-	public void deleteQnAByIdx(ArrayList<ContentDataVO> qnaVO) {
-		// TODO Auto-generated method stub
-
-		for (ContentDataVO qna : qnaVO) {
-			sellerContentSQLMapper.deletePostByIdx(qna.getB_referidx());
-		}
-
-	}
 
 	// lhe-판매자 지급 관리 목록 페이지 출력
 	@Override
@@ -289,13 +269,11 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 	// lhe-판매자 지급 관리 목록 복수 항목 지급완료 처리
 	@Override
-	public void updatePaycheckByIdx(ArrayList<PaycheckDataVO> requestVO) {
+	public void updatePaycheckByIdx(String pd_isPaidToTeacher, String o_idx) {
 		// TODO Auto-generated method stub
 		
 
-		for(PaycheckDataVO paycheck : requestVO) {
-			sellerContentSQLMapper.updatePaycheckByIdx(paycheck.getPd_isPaidToTeacher(), paycheck.getO_idx());
-		}
+		sellerContentSQLMapper.updatePaycheckByIdx(pd_isPaidToTeacher, o_idx);
 	
 		
 	}

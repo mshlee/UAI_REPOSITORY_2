@@ -284,7 +284,7 @@
               <div id="top-menu">
                 <a style="color: black" href="./mainPage">HOME</a> | 
                 <a style="color: black" href="./loginForm">LOGIN</a> | 
-                <a style="color: black" href="./noticeBoardPage">NOTICE</a> | 
+                <a style="color: black" href="./boardNoticePage">NOTICE</a> | 
                 <a style="color: black" href="./myPage">MYPAGE</a>            
               </div>
               </div>
@@ -297,10 +297,10 @@
                 <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
                   <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
                     <ul class="navbar-nav" id="top-menu-bar">
-                      <li class="nav-item"><a class="nav-link" href="./noticeBoardPage">Notice</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#">Lecture</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./reviewBoardPage">Review</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./qnaBoardPage">Q & A</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./boardNoticePage">Notice</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./productListPage">Lecture</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./boardReviewPage">Review</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./boardQnAPage">Q & A</a></li>
                     </ul>
                 </nav>
               </div>

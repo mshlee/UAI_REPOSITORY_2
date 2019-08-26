@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>SellerMainPage</title>
+        <title>UAI-관리자 메인 페이지</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -303,8 +303,8 @@
     <div id="wrapper">
         <div id="upper_bar"><a href="">쇼핑몰메인</a><a href="">로그아웃</a></div><br>
         <img src="" type="button">
-        <div id="header"><a href="./sellerIndex.do">메인</a> | <a href="./sellerManageProduct.do">강의 관리</a> | <a href="./sellerManageOrder.do">주문 관리</a> | <a href="./sellerManageMember.do">회원관리</a> |  
-            <a href="./sellerManageReview.do">리뷰 관리</a> | <a href="./sellerManageQnA.do">QnA 관리</a> | <a href="./sellerManagePaycheck.do">지급 관리</a>
+        <div id="header"><a href="./sellerIndex">메인</a> | <a href="./sellerManageProduct">강의 관리</a> | <a href="./sellerManageOrder">주문 관리</a> | <a href="./sellerManageMember">회원관리</a> |  
+            <a href="./sellerManageReview">리뷰 관리</a> | <a href="./sellerManageQnA">QnA 관리</a> | <a href="./sellerManagePaycheck">지급 관리</a>
         </div>
         <div id="left_box">
             <div id="admin_menu">
@@ -395,13 +395,13 @@
                 <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
                   <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
                     <ul class="navbar-nav" id="top-menu-bar">
-                      <li class="nav-item"><a class="nav-link" href="./sellerIndex.do">Main page</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerManageProduct.do">상품 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerManageOrder.do">주문 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerManageMember.do">회원 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerManageReview.do">리뷰 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerManageQnA.do">Q & A 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerManagePayceck.do">지급 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerIndex">Main page</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageProduct">상품 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageOrder">주문 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageMember">회원 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageReview">리뷰 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManageQnA">Q & A 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManagePayceck">지급 관리</a></li>
                     </ul>
                 </nav>
               </div>
@@ -512,7 +512,7 @@
                        </tr>
                      </tbody>
                    </table>
-                  <a href="./sellerOrderManagePage"><button class="btn btn-link" id="more">더 보기</button></a>                   
+                  <a href="./sellerManageOrder"><button class="btn btn-link" id="more">더 보기</button></a>                   
                       </div><!-- recent-order -->
                     
                     
@@ -541,7 +541,7 @@
                        </tr>
                      </tbody>
                    </table>
-                   <a href="./sellerProductManagePage"><button class="btn btn-link" id="more">더 보기</button></a>
+                   <a href="./sellerManageProduct"><button class="btn btn-link" id="more">더 보기</button></a>
                     </div><!-- recent-lecture -->
                     
                     <br>
@@ -570,7 +570,7 @@
                        </tr>
                      </tbody>
                    </table>
-                   <a href="./sellerQnAManagePage"><button class="btn btn-link" id="more">더 보기</button></a>
+                   <a href="./sellerManageQnA"><button class="btn btn-link" id="more">더 보기</button></a>
                     </div><!-- recent QnA -->
                     
                     <div  id="recent-review">
@@ -598,7 +598,7 @@
                        </tr>
                      </tbody>
                    </table>
-                   <a href="./sellerReviewPage"><button class="btn btn-link" id="more">더 보기</button></a>
+                   <a href="./sellerManageReview"><button class="btn btn-link" id="more">더 보기</button></a>
                     </div><!-- recent-review -->
                 </div><!--middle-small-box-2-->
               

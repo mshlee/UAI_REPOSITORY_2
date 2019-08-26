@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +52,7 @@
 <body>
         <div id="wrapper">
                 <div id="upper_bar"><a href="./mainPage">메인</a> <a href="./logoutAction">로그아웃</a></div><br>
-                <img src="./img/logouai.png" type="button">
+                <img src="./img/logo.png" type="button">
                 <div id="header">관리자 계정 수정</div>
                 <div id="left_box">
                     <label><a href="">관리자 메인</a></label><br>
@@ -59,11 +62,14 @@
                 <div id="main_box">
                     <div id="content_box">
         
-                        <form action="./sellerAdminEditAction" method="post">
+                        <form action="./sellerAdminEditAction?ad_idx=${sessionData.ad_idx }" method="post">
                             <br><br><br>
+                            <label>ID:</label>
                             <input type="text" name="ad_id" value="${adminData.ad_id}" disabled><br>
-                            <input type="text" name="ad_nick" placeholder="${adminData.ad_nick }"><input type="checkbox" name="ad_nick" value="${adminData.ad_nick }">수정안함<br>
-                            <input type="password" name="ad_pw" placeholder="${adminData.ad_pw }"><input type="checkbox" name="ad_nick" value="${adminData.ad_nick }">수정안함<br>
+                            <label>NICK:</label>
+                            <input type="text" name="ad_nick" value="${adminData.ad_nick }"><input type="checkbox" name="ad_nick" value="${adminData.ad_nick }">수정안함<br>
+                           	<label>PW:</label>
+                            <input type="password" name="ad_pw" value="${adminData.ad_pw }"><input type="checkbox" name="ad_nick" value="${adminData.ad_nick }">수정안함<br>
                             <input type="submit" value="수정"><br>
                         </form>
         

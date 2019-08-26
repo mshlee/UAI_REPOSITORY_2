@@ -74,24 +74,29 @@
 			<a href="">쇼핑몰 메인</a><a href="">로그아웃</a>
 		</div>
 		<br> <img src="" type="button">
-		<div id="header">
-			<a href="./sellerIndex.do">메인</a> | <a href="./sellerManageProduct.do">강의 관리</a> | <a href="./sellerManageOrder.do">주문 관리</a> | <a href="./sellerManageMember.do">회원 관리</a> | 
-			<a href="./sellerManageReview.do">리뷰 관리</a> | <a href="./sellerManageQnA.do">QnA 관리</a> | <a href="./sellerManagePaycheck.do">지급 관리</a>
+		<div id="header"><a href="./sellerIndex">메인</a> | <a href="./sellerManageProduct">강의 관리</a> | <a href="./sellerManageOrder">주문 관리</a> | <a href="./sellerManageMember">회원 관리</a> | 
+			<a href="./sellerManageReview">리뷰 관리</a> | <a href="./sellerManageQnA">QnA 관리</a> | <a href="./sellerManagePaycheck">지급 관리</a>
 		</div>
 		<div id="left_box">
 			<div id="admin_menu">
-				환영합니다.<br>(닉네임아이디들어가야함)<br>
-				<button onclick="">로그아웃</button>
+			<c:choose>
+			<c:when test="${!empty sessionData }">
+				환영합니다.<br>${sessionData.ad_nick }<br>
+				<a href="./logoutAction"><button>로그아웃</button></a>
 				<br>
-				<a href=""><button>관리자계정설정</button></a>
-
+				<a href="./sellerManageAdmin"><button>관리자계정설정</button></a>
+					</c:when>
+			<c:otherwise>
+			<a href="./loginForm">관리자 로그인</a>
+			</c:otherwise>
+			</c:choose>
 			</div>
 			<br>
 			
 	
 		</div>
 		<div id="search_box">
-            <form action="./manageQnA.do" method="get">
+            <form action="./sellerManageQnA" method="get">
             <table>
             <tr class="table-primary">
             <th>작성일</th>
@@ -106,7 +111,7 @@
                 <th>키워드</th>
                 <th><select name="keyword">
               		<option></option>
-              		<option value="b_referidx">글번호</option>
+              		<option value="b_referIdx">글번호</option>
               		<option value="b_title">글제목</option>
               		<option value="p_idx">강의번호</option>
               		<option value="p_name">강의명</option>
@@ -124,7 +129,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./deleteQnAByIdx.do" method="post">
+		<form action="./deleteQnAByIdx" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -150,9 +155,9 @@
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="qnaDataList" items="${qnaDataList }">
 						<tr>
-							<th scope="row"><input type="checkbox" name="b_referidx" value="${qnaDataList.contentDataVO.b_referidx}"></th>
+							<th scope="row"><input type="checkbox" name="b_referIdx" value="${qnaDataList.contentDataVO.b_referIdx}"></th>
 							<th scope="row">  </th>
-							<th scope="row">${qnaDataList.contentDataVO.b_referidx }</th>
+							<th scope="row">${qnaDataList.contentDataVO.b_referIdx }</th>
 							<th scope="row">${qnaDataList.contentDataVO.p_idx }</th>
 							<th scope="row">${qnaDataList.productDataVO.p_name }</th>
 							<th scope="row">${qnaDataList.contentDataVO.m_idx }</th>
@@ -172,7 +177,7 @@
 							<th scope="row">${qnaDataList.contentDataVO.b_count}</th>
 							<th scope="row">${qnaDataList.contentDataVO.b_postdate}</th>
 							
-							<th scope="row"><a href=><!-- qna게시판글번호기준url --><button>답변작성</button></a></th>
+							<th scope="row"><a href="./readQnAPage?b_idx=${qnaDataList.contentDataVO.b_idx}">답변작성</a></th>
 						</tr>
 						</c:forEach>
 				</tbody>

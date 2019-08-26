@@ -74,24 +74,29 @@
 			<a href="">쇼핑몰 메인</a><a href="">로그아웃</a>
 		</div>
 		<br> <img src="" type="button">
-		<div id="header">
-			<a href="./sellerIndex.do">메인</a> | <a href="./sellerManageProduct.do">강의 관리</a> | <a href="./sellerManageOrder.do">주문 관리</a> | <a href="./sellerManageMember.do">회원 관리</a> | 
-			<a href="./sellerManageReview.do">리뷰 관리</a> | <a href="./sellerManageQnA.do">QnA 관리</a> | <a href="./sellerManagePaycheck.do">지급 관리</a>
+		<div id="header"><a href="./sellerIndex">메인</a> | <a href="./sellerManageProduct">강의 관리</a> | <a href="./sellerManageOrder">주문 관리</a> | <a href="./sellerManageMember">회원 관리</a> | 
+			<a href="./sellerManageReview">리뷰 관리</a> | <a href="./sellerManageQnA">QnA 관리</a> | <a href="./sellerManagePaycheck">지급 관리</a>
 		</div>
 		<div id="left_box">
 			<div id="admin_menu">
-				환영합니다.<br>(닉네임아이디들어가야함)<br>
-				<button onclick="">로그아웃</button>
+		<c:choose>
+			<c:when test="${!empty sessionData }">
+				환영합니다.<br>${sessionData.ad_nick }<br>
+				<a href="./logoutAction"><button>로그아웃</button></a>
 				<br>
-				<a href=""><button>관리자계정설정</button></a>
-
+				<a href="./sellerManageAdmin"><button>관리자계정설정</button></a>
+					</c:when>
+			<c:otherwise>
+			<a href="./loginForm">관리자 로그인</a>
+			</c:otherwise>
+			</c:choose>
 			</div>
 			<br>
 			
 	
 		</div>
 		<div id="search_box">
-            <form action="./sellerManageReview.do" method="get">
+            <form action="./sellerManageReview" method="get">
             <table>
             <tr class="table-primary">
             <th>작성일</th>
@@ -124,7 +129,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./deleteReviewByIdx.do" method="post">
+		<form action="./deleteReviewByIdx" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -150,9 +155,9 @@
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="reviewDataList" items="${reviewDataList }">
 						<tr>
-							<th scope="row"><input type="checkbox" name="b_referidx" value="${reviewDataList.contentDataVO.b_referidx}"></th>
+							<th scope="row"><input type="checkbox" name="b_referIdx" value="${reviewDataList.contentDataVO.b_referIdx}"></th>
 							<th scopte="row">  </th>
-							<th scope="row">${reviewDataList.contentDataVO.b_referidx }</th>
+							<th scope="row">${reviewDataList.contentDataVO.b_referIdx }</th>
 							<th scope="row">${reviewDataList.contentDataVO.p_idx }</th>
 							<th scope="row">${reviewDataList.productDataVO.p_name }</th>
 							<th scope="row">${reviewDataList.contentDataVO.m_idx }</th>
@@ -163,7 +168,7 @@
 							<th scope="row">${reviewDataList.contentDataVO.b_starRate}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_count}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_postdate}</th>
-							<th scope="row"><a href="./deleteReviewByIdx?p_idx=${contentDataVO.b_idx}"><button>삭제</button></a></th>
+							<th scope="row"><a href="./deleteReviewByIdx?b_idx=${reviewDataList.contentDataVO.b_idx}">삭제</a></th>
 						</tr>
 						</c:forEach>
 				</tbody>

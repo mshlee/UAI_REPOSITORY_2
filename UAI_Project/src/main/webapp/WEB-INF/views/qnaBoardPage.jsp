@@ -1,133 +1,600 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-
- <script>
-  function showPopup() { 
-     window.open("checkPW", "비밀번호 확인", "width=400, height=300, left=100, top=50"); }
-  </script>
-</head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-   <div id="wrapper">
-      <c:choose>
-         <c:when test="${!empty sessionData.m_idx }">
-            ${sessionData.m_nick }님 환영합니다.
-            <a href="./logoutAction">로그아웃</a>
-            <a href="./mainPage">메인페이지로</a>
-            <br>
-
-         </c:when>
-         <c:when test="${!empty sessionData.ad_idx }">
-            ${sessionData.ad_nick }님 환영합니다.
-            <a href="./logoutAction">로그아웃</a>
-            <a href="./mainPage">메인페이지로</a>
-               <br>
-            </c:when>
-         <c:otherwise>
-            비회원님 환영합니다.
-            <a href="./loginForm">로그인 페이지로</a><br>
-            <a href="./mainPage">메인페이지로</a>
-         </c:otherwise>
-      </c:choose>
-      <table border="1">
-         <tr>
-            <td>문의</td>
-            <td>제목</td>
-            <td>작성자</td>
-            <td>작성일</td>
-            <td>비밀글</td>
-         </tr>
-            <c:forEach var="boardDataVO" items="${boardDataList }">
-            <tr>
-               <td><c:choose>
-               <c:when test="${boardDataVO.contentDataVO.b_qCategory eq'0'} ">
-               상품문의</c:when>
-               <c:otherwise>
-               결제문의
-               </c:otherwise>
-               </c:choose>
-                <td><c:choose>
-               <c:when test="${boardDataVO.contentDataVO.b_isHidden eq'0' }">
-               <a href="./readQnAContentPage?b_idx=${boardDataVO.contentDataVO.b_idx }">
-                  ${boardDataVO.contentDataVO.b_title}</a>
-                  </c:when>
-                  <c:otherwise>
-                 
-                  <form action="./readQnAContentPage?b_idx=${boardDataVO.contentDataVO.b_idx }">
-                        <input type="hidden" name="b_idx" value="${boardDataVO.contentDataVO.b_idx }">
-                        <input type="password" placeholder="비밀번호를 입력해주세요" name="b_pw">
-                        <input type="submit"  value="확인">
-                  </form>
-                  <!-- <input type="button" value="비밀글입니다" onclick="showPopup();" /> -->
-                  
-                  </c:otherwise>
-                </c:choose>
-               <td>${boardDataVO.memberDataVO.m_nick }</td>
-               <td>${boardDataVO.contentDataVO.b_postdate}</td>
-               <td><c:choose> 
-                        <c:when test="${boardDataVO.contentDataVO.b_isHidden eq'0' }">
-                     공개글
-                  </c:when>
-               <c:otherwise>비밀글</c:otherwise></c:choose></td>
-            </tr>
-               </c:forEach>
+    <head>
+        <title>Board QnA Page</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		  
+        <!-- Bootstrap CSS -->
+    	<link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
+		<!-- slider 설정 -->
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
+        <!-- Include jQuery library and Flexslider script -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+		
+		<!-- Link Swiper's CSS -->
+  		<link rel="stylesheet" href="css/swiper.min.css">
+		
+        
+        <!-- font 설정 -->
+        <link rel="stylesheet" href="https://use.typekit.net/kcj1cyn.css">
             
-      </table>
-      <br>
-      <c:if test="${!empty sessionData }">
-         <a href="./writeQnAContentForm">질문 작성</a>
-      </c:if>
+		<style>
+	      #pages{
+	         float: left;
+	         text-align: center;
+	         margin-left: 400px;
+	      }
+	      #page{
+	         text-align: center;
+	         float : left;
+	      }
+            #nowPage{
+	         float : left;
+	         text-align: center;
+	         
+	      }
+			</style>
+			<script>
+			function SirenFunction(title_box){
+			     if(document.getElementById("SirenDiv").style.display=="block"){ 
+			    	 document.getElementById("SirenDiv").style.display == "none"; }
+			      else{ 
+			    	  document.getElementById("SirenDiv").style.display == "block"; }
+			}
+			</script>
+			                
+        <style>
+        @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+        @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+        @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+        @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+            #wrapper{
+            width: 1024px;
+            margin: 0px auto;
+            }
+            #top-box{
+            width: 1024px;
+            height: 215px;
+            float: left;
+            margin-top: 10px;
+            margin-bottom:-10px;
+            }
+                    #top-small-1{
+                        width: 1024px;
+                        height: 10px; 
+                        float: left;
+                    }
+                    #top-menu{
+                        width:300px;
+                        height: 10px;
+                        float: right;
+                        font-family: lemongrass-caps, sans-serif;
+                        font-weight: 200;
+                        font-style: normal;
+                    } 
+                    #top-small-2{
+                        width: 1024px;
+                        height: 130px;
+                        float: left;
+                    }
+                    #top-logo{
+                        width: 130px;
+                        height: 120px;
+                        margin-left: 230px;
+                    }
+                    #top-small-3{
+                        width: 1024px;
+                        height: 60px;
+                        float: left;
+                    }
+                    #top-mini-logo{
+                        width: 25px;
+                        height: 25px;
+                        float: left;
+                    }
+                    #top-menu-bar{
+                        width: 1024px;
+                        margin-top: -8px;
+                        margin-bottom: -8px;              
+                        font-family: seasoned-hostess, sans-serif;
+                        font-weight: 900;
+                        font-style: normal;
+                        font-size: 15pt;
+                        float: left;
+                    }
+            #middle-box{
+                width: 1024px;
+                height: 800px;
+                float: left;
+                }
+                        #middle-small-3{
+                            width:900px;
+                            height: 250px;
+                            float: left;
+                        }
+                        #middle-slide{
+                            width: 1000px;
+                            height: 250px;
+                            float: left;
+                            margin-left: 13px;
+                            margin-top:-10px;
+                        }
+                        #middle-small-1{
+	                      width: 216px;
+	                      height: 250px;
+	                      float: left;
+	                      font-family: lemongrass-caps, sans-serif;
+	                    }
+	                    #login-success-box{
+	                    	float: left;
+	                    	margin-top:9px;
+	                    }
+	                    #middle-empty1{
+	                    	float: left;
+	                    	width: 200px;
+	                    	height: 45px;
+	                    	font-family: lemongrass-script, sans-serif;
+	                    	font-size: 10pt;
+	                    	text-align: center;
+	                    	margin-bottom:-35px;
+	                    	font-weight: 300;
+	                    	margin-left: 5px;
+	                    	margin-top:10px;
+	                    }
+	                    #login-success-function{
+	                      float: left;
+	                      text-align: center;
+	                      margin-left: 10px;
+	                    }
+	                    #logo-login-box-line2{
+	                      width: 3px;
+	                      height: 160px;
+	                      float: right;
+	                      margin-right: 15px;
+	                    }
+	                    #middle-login-box{
+	                      width: 160px;
+	                      height: 180px;
+	                      float: left;
+	                      border-radius: 5px;
+	                      margin-left: 40px;
+	                    }
+	                    #logo-login-box-line{
+	                      width: 3px;
+	                      height: 160px;
+	                      float: right;
+	                      margin-top: 8px;
+	                    }
+	                    #sign-in{
+	                      width: 140px;
+	                      height: 80px;
+	                      float: left;
+	                      margin-top: 25px;
+	                    }
+	                    #logo-sign-in{
+	                      width: 35px;
+	                      height: 40px;
+	                      float: left;
+	                    }
+	                    #sign-up{
+	                      width: 140px;
+	                      height: 80px;
+	                      float: left;
+	                      margin-top: 8px;
+	                    }
+	                    #logo-sign-up{
+	                      width: 32px;
+	                      height: 30px;
+	                      float: left;
+	                      margin-left: 3px;
+	                    }
+	                    .login-function{
+	                      float: right;
+	                      font-family: lemongrass-caps, sans-serif;
+	                      font-weight: 400;
+	                      font-style: normal; 
+	                      font-size: 18pt;
+	                      margin-right: 10px;
+	                      margin-top: 3px;   
+	                    }
+																				                        #middle-small-2{
+																				                            width: 795px;
+																				                            height: 600px;
+																				                            float: left;
+																				                            margin-top: 5px;
+																				                            font-size: 13pt;
+																				                            
+																				                        }
+																				                        #notice-title{
+																				                        	float: left;
+																				                        	width: 795px;
+																				                        	font-size: 24pt;
+																				                        	font-weight: 550;
+																				                        	background-color: darkgray;
+																				                        	border-radius:5px;
+																				                        	color: white;
+																				                        	font-family: seasoned-hostess, sans-serif;
+																				                        }
+																				                  
+																				                        #notice-table-box{
+																				                            width: 100%;
+																				                            height: 525px;
+																				                            float: left;
+																				                            border-radius:10px;
+																				                            background-color: aliceblue; 
+																				                            text-align:center;
+																				                            margin-top:-20px;
+																				                            font-family: 'Nanum Gothic', sans-serif;
+																				                        }
+																				                        
+																								      	.notice-table {
+																										    width: 750px;
+																										    height: 35px;
+																										    border-top: 1px solid #444444;
+																										    border-collapse: collapse;
+																										    font-family: 'Nanum Gothic', sans-serif;
+																										    float:left;
+																										    margin-left:20px;
+																										    margin-top: 10px;
+																										    margin-bottom: 15px;
+																										}
+																										#unlock, #lock{
+																											float: left;
+																											width: 30px;
+																											height: 30px;
+																											
+																										}
+																										 
+																								
+																									    th, td {
+																										    border-bottom: 1px solid #444444;
+																										    padding: 3px;
+																										    text-align: center;
+																										    font-family: 'Nanum Gothic', sans-serif;
+																										}
+																									    th {
+																										    font-family: 'Nanum Gothic', sans-serif;
+																										  }
+																									    td {
+																										    font-family: 'Nanum Gothic', sans-serif;
+																										  }
+																										#search{
+																										  	font-size: 11pt;
+																										  	float: left;
+																										  	margin-left: 150px;
+																										}
+																										#search-btn{
+																											font-size: 11pt;
+																											text-align:center;
+																										}
+																										#ad-box{
+																											float:right;
+																											font-size: 11pt;
+																											font-family: 'Nanum Gothic', sans-serif;
+																											margin-right: 20px;
+																											margin-top: 10px;
+																										}
+																										
+               #bottom-box{
+	            width: 1024px;
+	            height: 170px;
+	            background-color: darkgray;
+	            color: white;
+	            float: left;
+				margin-top: 80px;	            
+	          }
+          
+              #bottom-phrase{
+                font-family: seasoned-hostess, sans-serif;
+				font-weight: 400;
+				font-style: normal;
+				font-size: 15pt;
+              	float: right;
+              	margin-top:130px;
+              	margin-right: 10px;
+              }
 
-      <br>
-      </div>
-         <div id="search">
-      <form action="./qnaBoardPage" method="get">
-      <input type="hidden" name="b_type" value="2" >
-      검색대상 : <select name="searchTarget">
-         <option value="b_title" selected>제목</option>
-         <option value="b_content">내용</option>
-         <option value="m_nick">작성자</option>
+
+
+        </style>
+        <!-- Swiper styles -->
+        <style>
+            .swiper-container {
+                width: 100%;
+                height: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .swiper-slide {
+                text-align: center;
+                font-size: 18px;
+                background: #fff;
+                /* Center slide text vertically */
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                -webkit-align-items: center;
+                align-items: center;
+            }
+        </style>
+    </head>
+
+
+
+
+
+
+    <body>
+        <div id="wrapper">
+            <div id="top-box">
+                <div id="top-small-1">
+                    <div id="top-menu">
+	                    <a style="color: black" href="./mainPage">HOME</a> | 
+	                	<a style="color: black" href="./loginForm">LOGIN</a> | 
+	                	<a style="color: black" href="./noticeBoardPage">NOTICE</a> | 
+	                	<a style="color: black" href="./myPage">MYPAGE</a>            
+                    </div>
+                    </div>
+                    <div id="top-small-2">
+                    <div id="top-logo">
+                        <a href="./mainPage"><img id="top-logo" src="./img/logo.png"></a>
+                    </div>
+                    </div>
+                    <div id="top-small-3">
+                    <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
+                        <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
+                        <ul class="navbar-nav" id="top-menu-bar">
+                            <li class="nav-item"><a class="nav-link" href="./boardNoticePage">Notice</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./productListPage">Lecture</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="./boardReviewPage">Review</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="./boardQnAPage">Q & A</a></li>
+                        </ul>
+                    </nav>
+                    </div>
+                </div><!--top-box div-->
+        
+        <div id="middle-box">
+
+            <div id="middle-small-3">
+                <!-- Swiper -->
+                <div class="swiper-container" id="middle-slide">
+                    <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                    </div> 
+                    <!-- Add Pagination --> 
+                    <div class="swiper-pagination"></div> 
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                
+                <!-- Swiper JS --> 
+                <script src="js/swiper.min.js"></script>
+                
+                <!-- Initialize Swiper -->
+                <script>
+                    var swiper = new Swiper('.swiper-container', {
+                    spaceBetween: 30,
+                    loop: true,
+                    centeredSlides: true,
+                    autoplay: {
+                        delay: 3500, //autoplay 시간
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    });
+                </script>
+                </div><!--middle-small-box-3-->
+            
+
+                <div id="middle-small-1">
+                        <c:choose>
+                            <c:when test="${!empty sessionData.m_idx }">
+                              <div id="middle-empty1">Learn Something Worthy!</div>
+                              <div id="login-success-box">
+                                  <h4>Welcome,</h4> <h6>${sessionData.m_nick }</h6>
+                                  <br>
+                                  <div id="login-success-function">
+                                  <a style="color: black" href="./logoutAction"><button class="btn btn-light">Logout</button></a>
+                                  <a href="./mainPage"><button class="btn btn-secondary">◀  Main</button></a>
+                                  <br>
+                                  </div>
+                              </div>
+                              <img src="./img/loginBoxLine.png" id="logo-login-box-line2">
+                            </c:when>
+                            
+                            <c:when test="${!empty sessionData.ad_idx }">
+                             <div id="middle-empty1">Learn Something Worthy!</div>
+                              <div id="login-success-box">
+                                  <h4>Welcome,</h4> <h6>${sessionData.ad_nick }</h6>
+                                  <br>
+                                  <div id="login-success-function">
+                                  <a style="color: black" href="./logoutAction"><button class="btn btn-light">Logout</button></a>
+                                  <a href="./mainPage"><button class="btn btn-secondary">◀  Main</button></a>
+                                  <br>
+                                  </div>
+                              </div>
+                              <img src="./img/loginBoxLine.png" id="logo-login-box-line2">
+							<br>
+							</c:when>
+                            
+                            <c:otherwise>
+                                <div class="well" id="middle-login-box">
+                                <img src="./img/loginBoxLine.png" id="logo-login-box-line">
+                                <div id="sign-in">
+                                  <img src="./img/signIn.png" id="logo-sign-in"> 
+                                  <a class="login-function" style="color: black" href="./loginForm">Sign In</a>
+                                </div>
+                                <div id="sign-up">
+                                  <img src="./img/signUp.png" id="logo-sign-up">
+                                  <a class="login-function" style="color: black" href="./joinMemberForm">Sign Up</a>
+                                </div>
+                              </div>
+                              <!-- Your ID was not found in our Data. Please try it again. <br>
+                              <a href="./loginForm">go back to Login Page</a> <br><br> -->
+                            </c:otherwise>		
+                          </c:choose>
+                    </div><!--middle-small-box-1-->
+      
+				
+                <div id="middle-small-2">
+                	<div id="notice-title">
+                	▶   Q & A
+                	</div>
+                    <br>
+                    <br>
+                    <br>
+                    
+                    <div id="notice-table-box">
+                    	<table class="notice-table">
+					        <tr>
+					        <td>분류</td>
+				            <td>&nbsp; 제목 &nbsp;</td>
+			        	    <td>작성자</td>
+				            <td>작성일</td>
+				            <td>글 타입</td>
+					         </tr>
+					          
+					          <c:forEach var="boardDataVO" items="${boardDataList }">
+									<tr>
+										<th>
+											<c:choose>
+											<c:when test="${boardDataVO.contentDataVO.b_qCategory eq 0} ">상품문의</c:when>
+											<c:otherwise>결제문의</c:otherwise>
+											</c:choose>
+										</th>
+										 <th>
+											 <c:choose>
+											 <c:when test="${!empty sessionData.ad_idx}">
+											 	 <a href="./readQnAPageByAdmin?b_idx=${boardDataVO.contentDataVO.b_idx }">
+											 	 ${boardDataVO.contentDataVO.b_title }
+											 </a>
+											 
+											 </c:when>
+								               <c:when test="${boardDataVO.contentDataVO.b_isHidden eq 0 }">
+									               <a href="./readQnAPage?b_idx=${boardDataVO.contentDataVO.b_idx }">
+									                  ${boardDataVO.contentDataVO.b_title}</a>
+						                	   </c:when>
+						                  	   <c:otherwise>
+						       				 		<img src="./img/lock.png" id="lock">
+						       				 		${boardDataVO.contentDataVO.b_title}
+						       				 		<form action="./readQnAPage" method="post" id="PW_box" style="display:block">
+						                  				<input type="hidden" name="b_title" value="${boardDataVO.contentDataVO.b_title }">
+						                  				<input type="hidden" name="b_idx" value="${boardDataVO.contentDataVO.b_idx }">
+						                  				<input type="hidden" name="ad_idx" value="${boardDataVO.contentDataVO.ad_idx }">
+						                  				PW : <input type="password" name="b_pw">
+						                  				<input type="submit" value="비밀번호확인">
+						                  			</form>
+					                  		  </c:otherwise>
+					                  		</c:choose>
+				                  		</th>
+					                  
+										<th>${boardDataVO.memberDataVO.m_nick }</th>
+										<th>${boardDataVO.contentDataVO.b_postdate}</th>
+										<th><c:choose> 
+					               			<c:when test="${boardDataVO.contentDataVO.b_isHidden eq'0' }">공개글</c:when>
+											<c:otherwise>비밀글</c:otherwise></c:choose></th>
+								</c:forEach>
+								
+					        </table>   
+							      <br>
+							      <br>
+							      <div id="ad-box">
+								      <c:if test="${!empty sessionData.m_idx }">
+								      <a href="./writeQnAForm"><button class="btn btn-info" style="width:75pt; height:28pt;">질문 작성</button></a>
+								      </c:if>
+							      </div>
+							       <br>
+								<div id="search">
+									<form action="./boardQnAPage" method="get">
+									<input type="hidden" name="b_type" value="1" >
+									<br>
+									<br>
+									&nbsp; &nbsp; 검색 대상 : <select name="searchTarget">
+										<option value="b_title" selected>제목</option>
+										<option value="b_content">내용</option>
+										<option value="m_nick">작성자</option>
+									</select>
+									&nbsp; &nbsp;
+										검색어 : <input type="text" name="searchWord"> &nbsp;
+										<input class="btn btn-light active" id="search-btn" style="width:50pt; height:25pt;" type="submit" value="Search">
+										
+									</form>
+							
+							      <br>
+							     </div>
+						
+								<br>
+							      <div id="pages">
+								         <c:if test="${pageVO.startOfPageGroup != 1}">
+								            <a href="boardQnAPage?changePage=previous&nowPage=${pageVO.nowPage }">이전</a>
+								         </c:if>
+								         <c:forEach var="i" begin="${pageVO.startOfPageGroup }" end="${pageVO.endOfPageGroup }" step="1">
+								            <c:choose>
+								               <c:when test="${i == pageVO.nowPage}">
+								                  <div id="nowPage">${i }</div>
+								               </c:when>
+								               <c:otherwise>
+								                  <div id="page"><a href="./boardQnAPage?nowPage=${i }">${i }</a></div>
+								               </c:otherwise>
+								            </c:choose>
+								         </c:forEach>
+								         <c:if test="${pageVO.endOfPageGroup != pageVO.maxPage}">
+								            <a href="boardQnAPage?changePage=next&nowPage=${pageVO.nowPage }">다음</a>
+								         </c:if>
+						      	</div>
+							
+
+                    
+                    </div><!-- notice-table-box -->
+                    
+                </div><!--middle-small-box-2-->
+              
+        </div><!--middle box-->
+        
+        
+        
+        
+       
+      <div id="bottom-box">
+        
+          	<div id="bottom-phrase">Help | Feedback | Privacy | Terms | ⓒUAI Project Company</div>
+        
+        
          
-      </select>
-         검색어 : <input type="text" name="searchWord">
-         <input type="submit" value="serach">
-         
-      </form>
-      </div>
-<script>
-/*
-var goodURL  = "#"  //이곳에 인증이 되었을때 이동할 페이지  입력
-    alert("패스워드를 입력하셔야 합니다.")
-
-var password =  prompt("PASSWD 입력","")
-
-   function checkPW(){
-
-    if (password == null)  {
-        alert("출입금지")
-        location  = history.back();        // 실패시 이동 주소       history.back();를 넣어도 됨
-    }
-    else  {
-        var  combo =  password
-        var  total =  combo.toLowerCase()
-
-    if  (total == "1234")  {                // 비밀번호
-        location  =  goodURL
-    }
-    else  {
-        alert("출입금지")
-        location  = history.back();    // 실패시 이동 주소      history.back();를 넣어도 됨
-    }
-   }
-}
-*/
-</script>
-
-</body>
+        </div><!-- bottom box div -->
+        
+         </div><!-- wrapper -->
+	<!-- Optional JavaScript -->
+     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
 </html>

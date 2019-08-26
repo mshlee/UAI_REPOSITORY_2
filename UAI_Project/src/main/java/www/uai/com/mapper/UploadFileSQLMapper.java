@@ -10,7 +10,8 @@ import www.uai.com.vo.UploadProductFileVO;
 
 public interface UploadFileSQLMapper {
 
-	@Insert("INSERT INTO Files VALUES(Files_Seq.NEXTVAL, #{b_idx},#{f_path},#{f_originalname})")
+
+	@Insert("INSERT INTO Files VALUES(Files_Seq.NEXTVAL, #{b_idx},#{f_path},#{f_originalName})")
 	public void insert(UploadFileVO vo);
 
 	@Select("SELECT * FROM Files WHERE B_IDX = #{b_idx}")
@@ -18,5 +19,9 @@ public interface UploadFileSQLMapper {
 
 	 @Select("SELECT * FROM PRODUCT_FILES WHERE P_IDX = #{p_idx }")
 	 public ArrayList<UploadProductFileVO> selectByP_idx(String p_idx);
+	 
+	   @Insert("INSERT INTO PRODUCT_FILES VALUES(PRODUCT_FILES_SEQ.NEXTVAL,#{p_idx},#{f_path},#{f_originalname})")
+	   public void insertProductFile(UploadProductFileVO fileList);
+
 
 }

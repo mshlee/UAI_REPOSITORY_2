@@ -6,8 +6,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
+import www.uai.com.mapper.ContentSQLMapper;
 import www.uai.com.mapper.ProductSQLMapper;
 import www.uai.com.mapper.UploadFileSQLMapper;
 import www.uai.com.service.ProductService;
@@ -26,6 +28,8 @@ public class ProductServiceImpl implements ProductService{
    private ProductSQLMapper productSQLMapper;
    @Autowired
    private UploadFileSQLMapper uploadFileSQLMapper;
+   @Autowired
+   private ContentSQLMapper contentSQLMapper;
    
    @Override
    public ArrayList<ProductVO> getProductList(Model model, String nowPage, int limit) {
@@ -185,5 +189,25 @@ public class ProductServiceImpl implements ProductService{
       
       return wishListCount;
    }
+   
+
+   @Override
+   @Transactional
+   public void writeNewProduct(ProductVO ProductVOParam, ArrayList<UploadProductFileVO> fileList) {
+      // TODO Auto-generated method stub
+      
+      String key = productSQLMapper.getPKey();
+      
+      ProductVOParam.setP_idx(key);
+      productSQLMapper.insertProduct(ProductVOParam);
+      
+      for(UploadProductFileVO uploadProductFileVO : fileList) {
+         uploadProductFileVO.setP_idx(key);
+         uploadFileSQLMapper.insertProductFile(uploadProductFileVO);
+      }
+   
+   }
+
+
 
 }

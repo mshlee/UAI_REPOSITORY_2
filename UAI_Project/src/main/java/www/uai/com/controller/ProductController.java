@@ -1,7 +1,9 @@
 package www.uai.com.controller;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,18 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import www.uai.com.service.ContentService;
 import www.uai.com.service.PageService;
 import www.uai.com.service.ProductService;
 import www.uai.com.vo.OrderDataVO;
 import www.uai.com.vo.PageVO;
 import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductVO;
-import www.uai.com.vo.SessionDataVO;
 import www.uai.com.vo.WishListVO;
 
 @Controller
 public class ProductController {
-
+	@Autowired
+	private ContentService contentService;
+	
    @Autowired
    private ProductService productService;
    @Autowired
@@ -42,7 +46,7 @@ public class ProductController {
       nowPage = pageVO.getNowPage();
             
       ArrayList<ProductVO> productDataList= productService.getProductList(model, nowPage, limit);
-      
+      model.addAttribute("listCount", listCount);
       model.addAttribute("productDataList", productDataList);
       model.addAttribute("pageVO", pageVO);
       
@@ -59,6 +63,10 @@ public class ProductController {
       Boolean IsWished = productService.checkwishlist(model, session, productParam);
       model.addAttribute("IsWished", IsWished);
 
+      //별점 준 리뷰의 수를 보여주세요
+      int starCount = contentService.getStarCount(productParam);
+      model.addAttribute("starCount",starCount);
+      
       return "readProductPage";
    }
    

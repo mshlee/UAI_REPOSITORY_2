@@ -75,23 +75,30 @@
 		</div>
 		<br> <img src="" type="button">
 		<div id="header">
-			<a href="./sellerIndex.do">메인</a> | <a href="./sellerManageProduct.do">강의 관리</a> | <a href="./sellerManageOrder.do">주문 관리</a> | <a href="./sellerManageMember.do">회원 관리</a> | 
-			<a href="./sellerManageReview.do">리뷰 관리</a> | <a href="./sellerManageQnA.do">QnA 관리</a> | <a href="./sellerManagePaycheck.do">지급 관리</a>
+			<a href="./sellerIndex">메인</a> | <a href="./sellerManageProduct">강의 관리</a> | <a href="./sellerManageOrder">주문 관리</a> | <a href="./sellerManageMember">회원 관리</a> | 
+			<a href="./sellerManageReview">리뷰 관리</a> | <a href="./sellerManageQnA">QnA 관리</a> | <a href="./sellerManagePaycheck">지급 관리</a>
 		</div>
 		<div id="left_box">
+		
 			<div id="admin_menu">
-				환영합니다.<br>(닉네임아이디들어가야함)<br>
+			<c:choose>
+			<c:when test="${!empty sessionData }">
+				환영합니다.<br>${sessionData.ad_nick }<br>
 				<a href="./logoutAction"><button>로그아웃</button></a>
 				<br>
-				<a href="./sellerManageAdmin.do"><button>관리자계정설정</button></a>
-
+				<a href="./sellerManageAdmin"><button>관리자계정설정</button></a>
+					</c:when>
+			<c:otherwise>
+			<a href="./loginForm">관리자 로그인</a>
+			</c:otherwise>
+			</c:choose>
 			</div>
 			<br>
-			<a href="./newProduct.do">강의 등록</a>
+			<a href="./sellerNewProduct">강의 등록</a>
 	
 		</div>
 		<div id="search_box">
-            <form action="./sellerManageProduct.do" method="get">
+            <form action="./sellerManageProduct" method="get">
             <table>
             <tr class="table-primary">
                 <th>카테고리</th>
@@ -131,7 +138,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./sellerDeleteProductByIdx.do" method="post">
+		<form action="./sellerDeleteProductByIdx" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
