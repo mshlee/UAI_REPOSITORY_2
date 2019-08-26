@@ -50,6 +50,7 @@
 }
 
 #content_box {
+   overflow: auto;
    width: 1100px;
    height: 750px;
    margin: 5px auto;

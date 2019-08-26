@@ -58,6 +58,7 @@
 }
 
 #content_box {
+	overflow: auto;
 	width: 1100px;
 	height: 550px;
 	margin: 5px auto;
@@ -197,7 +198,7 @@
 							
 							<c:choose>
 							<c:when test="${paycheckDataList.paycheckDataVO.pd_isPaidToTeacher == 0}">
-							<th scope="row"><a href="./sellerUpdatePaycheckAction?o_idx=${paycheckDataList.paycheckDataVO.o_idx }&pd_isPaidToTeacher=1"><button>지급완료</button></a></th>
+							<th scope="row"><a href="./sellerUpdatePaycheckByIdx?o_idx=${paycheckDataList.paycheckDataVO.o_idx }">지급완료</a></th>
 							</c:when>
 							<c:when test="${paycheckDataList.paycheckDataVO.pd_isPaidToTeacher == 1}">
 							<th scope="row">지급완료</th>

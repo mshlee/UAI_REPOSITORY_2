@@ -58,6 +58,7 @@
 }
 
 #content_box {
+	overflow: auto;
 	width: 1100px;
 	height: 550px;
 	margin: 5px auto;
@@ -186,7 +187,7 @@
 							<th scope="row">${memberDataList.m_major }</th>
 							<th scope="row">${memberDataList.m_job }</th>
 							<th scope="row">${memberDataList.m_maritalstatus }</th>
-							<th scope="row"><a href="./deleteMemberByIdx?m_idx=${memberDataList.m_idx }"><button>탈퇴</button></a></th>
+							<th scope="row"><a href="./sellerDeleteMemberByIdx?m_idx=${memberDataList.m_idx }">탈퇴</a></th>
 						</tr>
 						</c:forEach>
 				</tbody>

@@ -104,5 +104,5 @@ public interface ContentSQLMapper {
 	
 	@Select("SELECT * FROM BOARD_CONTENT WHERE B_ISPOST = 0")
 	public ArrayList<ContentDataVO> getReplyList();
-
+	
 	}

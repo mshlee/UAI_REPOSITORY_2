@@ -40,6 +40,7 @@
     float: right;
 }
 #content_box{
+	overflow: auto;
     width: 900px;
     height: 700px;
     border: solid black 0.3px;

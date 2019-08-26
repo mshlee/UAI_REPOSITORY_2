@@ -22,19 +22,20 @@ public interface SellerContentService {
 	public ArrayList<SellerContentVO> getAllQnAList();
 	public ArrayList<SellerContentVO> getAllPaycheckList();
 	
-	//lhe-판매자 관리 페이지 단일 항목 삭제용
+	//lhe-판매자 관리 페이지 단일 항목 삭제 및 상태 변경용
 	public void deleteProductByIdx(String p_idx);
 	public void deleteMemberByIdx(String m_idx);
-	public void deletePostByIdx(String b_type, String b_referidx);
-
-	//lhe-판매자 관리 페이지 단일 항목 상태 변경용-arrayList 이용
-	public void updateOrderByIdx(String pch_ispaid, String o_idx);
-	public void updatePaycheckByIdx(String pd_isPaidToTeacher, String o_idx);
+	public void deletePostByIdx(String b_referIdx);
+	public void updateOrderByIdx(String o_idx);
+	public void updatePaycheckByIdx(String o_idx);
 	
 	
 	public AdminDataVO getAdminDataByIdx(String ad_idx);
 	public void updateAdminByIdx(AdminDataVO requestVO);
 	public void insertAdminData(AdminDataVO requestVO);
+	
+	//lhe-판매자 관리 페이지 복수 항목 삭제 및 상태 변경용 (arrayList 이용)
+	public void deleteProductsByIdx(ArrayList<ProductVO> productVO);
 	
 
 	

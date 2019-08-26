@@ -168,7 +168,7 @@
 							<th scope="row">${reviewDataList.contentDataVO.b_starRate}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_count}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_postdate}</th>
-							<th scope="row"><a href="./deleteReviewByIdx?b_idx=${reviewDataList.contentDataVO.b_idx}">삭제</a></th>
+							<th scope="row"><a href="./sellerDeleteReviewByIdx?b_referIdx=${reviewDataList.contentDataVO.b_referIdx}">삭제</a></th>
 						</tr>
 						</c:forEach>
 				</tbody>

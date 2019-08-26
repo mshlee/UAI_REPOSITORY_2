@@ -147,6 +147,7 @@
 						<th scope="col">조회수</th>
 						<th scope="col">작성일</th>
 						<th scope="col">답변작성</th>
+						<th scope="col">문의글 삭제</th>
 					</tr>
 				</thead>
 
@@ -177,7 +178,8 @@
 							<th scope="row">${qnaDataList.contentDataVO.b_count}</th>
 							<th scope="row">${qnaDataList.contentDataVO.b_postdate}</th>
 							
-							<th scope="row"><a href="./readQnAPage?b_idx=${qnaDataList.contentDataVO.b_idx}">답변작성</a></th>
+							<th scope="row"><a href="./readQnAPageByAdmin?b_idx=${qnaDataList.contentDataVO.b_idx}">답변작성</a></th>
+							<th scope="row"><a href="./sellerDeleteQnAByIdx?b_referIdx=${qnaDataList.contentDataVO.b_referIdx}">삭제</a></th>
 						</tr>
 						</c:forEach>
 				</tbody>

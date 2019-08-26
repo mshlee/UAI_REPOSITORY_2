@@ -139,6 +139,20 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 	}
 	
+	// lhe-판매자 상품 관리 목록 복수 항목 삭제
+	@Override
+	public void deleteProductsByIdx(ArrayList<ProductVO> productVO) {
+		// TODO Auto-generated method stub
+		
+		for(ProductVO product : productVO) {
+		
+		sellerContentSQLMapper.deleteProudctByIdx(product.getP_idx());
+		}
+		
+	}
+
+
+	
 	//lhe-판매자 회원 관리 리스트 출력
 	@Override
 	public ArrayList<MemberDataVO> getAllMemberList() {
@@ -186,12 +200,12 @@ public class SellerContentServiceImpl implements SellerContentService {
 		return dataList;
 	}
 
-	// lhe-판매자 주문 관리 목록 복수 항목의 결제 상태 변경
+	// lhe-판매자 주문 관리 목록 단일 항목의 결제 상태 변경
 	@Override
-	public void updateOrderByIdx(String pch_ispaid, String o_idx) {
+	public void updateOrderByIdx(String o_idx) {
 		// TODO Auto-generated method stub
 
-			sellerContentSQLMapper.updatePurchaseByIdx(pch_ispaid, o_idx);
+			sellerContentSQLMapper.updatePurchaseByIdx(o_idx);
 	
 	}
 	
@@ -218,10 +232,10 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 	// lhe-판매자 리뷰&Qna 관리 목록 단일 항목 삭제
 	@Override
-	public void deletePostByIdx(String b_type, String b_referidx) {
+	public void deletePostByIdx(String b_referIdx) {
 		// TODO Auto-generated method stub
 
-			sellerContentSQLMapper.deletePostByIdx(b_type, b_referidx);
+			sellerContentSQLMapper.deletePostByIdx(b_referIdx);
 		
 	}
 
@@ -267,13 +281,13 @@ public class SellerContentServiceImpl implements SellerContentService {
 		return paycheckDataList;
 	}
 
-	// lhe-판매자 지급 관리 목록 복수 항목 지급완료 처리
+	// lhe-판매자 지급 관리 목록 단일 항목 지급완료 처리
 	@Override
-	public void updatePaycheckByIdx(String pd_isPaidToTeacher, String o_idx) {
+	public void updatePaycheckByIdx(String o_idx) {
 		// TODO Auto-generated method stub
 		
 
-		sellerContentSQLMapper.updatePaycheckByIdx(pd_isPaidToTeacher, o_idx);
+		sellerContentSQLMapper.updatePaycheckByIdx(o_idx);
 	
 		
 	}

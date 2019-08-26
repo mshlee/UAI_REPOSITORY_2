@@ -17,11 +17,9 @@ import www.uai.com.service.ProductService;
 import www.uai.com.service.SellerContentService;
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
-import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
-import www.uai.com.vo.PaycheckDataVO;
+import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductVO;
-import www.uai.com.vo.PurchaseDataVO;
 import www.uai.com.vo.SellerContentVO;
 import www.uai.com.vo.SessionDataVO;
 import www.uai.com.vo.UploadProductFileVO;
@@ -135,19 +133,25 @@ public class SellerContentController {
 	}
 	
 	
-	/*
+	
 	//lhe-판매자 상품 관리 페이지 복수 상품 삭제 명령
 
-	@RequestMapping("/sellerDeleteProductByIdx.do")
+	@RequestMapping("/sellerDeleteProductsByIdx")
 	public String deleteProductByIdxAction (ArrayList<ProductVO> productVO) {
+		int i=1;
+		for(ProductVO product : productVO) {
+			
+			System.out.println(i+"번째: "+product.getP_idx());
+			i++;
+		}
 		
 		//선택한 상품 목록 지우기
-		sellerContentService.deleteProductByIdx(productVO);
+		//sellerContentService.deleteProductsByIdx(productVO);
 		
-		return "redirect:sellerManageProduct.do";
+		return "redirect:sellerManageProduct";
 
 	}
-	*/
+	
 	
 	
 	//lhe-판매자 주문 관리 페이지 관련 맵핑
@@ -169,13 +173,13 @@ public class SellerContentController {
 
 	
 	@RequestMapping("/sellerUpdateOrderByIdx")
-	public String updateOrderByIdxAction(String pch_ispaid, String o_idx) {
+	public String updateOrderByIdxAction(String o_idx) {
 		
 		//선택한 주문 결제 상태 변경
-		sellerContentService.updateOrderByIdx(pch_ispaid, o_idx);
+		sellerContentService.updateOrderByIdx(o_idx);
 		
 
-		return "redirect:sellerOrderManagePage";
+		return "redirect:sellerManageOrder";
 	}
 	
 	
@@ -204,7 +208,7 @@ public class SellerContentController {
 		//선택한 회원 리스트 지우기
 		sellerContentService.deleteMemberByIdx(m_idx);
 			
-			return "redirect:sellerMemberManagePage";
+			return "redirect:sellerManageMember";
 		}
 	
 	//lhe-판매자 리뷰 관리 페이지 관련 맵핑
@@ -229,12 +233,12 @@ public class SellerContentController {
 	
 	//lhe-판매자 리뷰 관리 페이지 단일 리뷰 삭제
 	@RequestMapping("/sellerDeleteReviewByIdx")
-	public String deleteReviewByIdxAction (String b_type, String b_referidx) {
-		
+	public String deleteReviewByIdxAction (String b_referIdx) {
+			
 		//선택한 리뷰 리스트 지우기
-		sellerContentService.deletePostByIdx(b_type, b_referidx);
+		sellerContentService.deletePostByIdx(b_referIdx);
 		
-		return "redirect:sellerReviewManagePage";
+		return "redirect:sellerManageReview";
 				
 	}
 	
@@ -260,12 +264,13 @@ public class SellerContentController {
 	
 	//lhe-판매자 QnA 관리 페이지 단일 항목 삭제
 	@RequestMapping("/sellerDeleteQnAByIdx")
-	public String deleteQnAByIdxAction(String b_type, String b_referidx) {
+	public String deleteQnAByIdxAction(String b_referIdx) {
 		
+
 		//선택한 질문글 지우기
-		sellerContentService.deletePostByIdx(b_type, b_referidx);
+		sellerContentService.deletePostByIdx(b_referIdx);
 		
-		return "redirect:sellerQnAManagePage";
+		return "redirect:sellerManageQnA";
 	}
 	
 	
@@ -290,13 +295,13 @@ public class SellerContentController {
 	
 	//lhe-판매자 지급 관리 페이지 복수 항목 변경
 	@RequestMapping("/sellerUpdatePaycheckByIdx")
-	public String updatePaycheckByIdxAction(String o_idx, String pd_isPaidToTeacher) {
+	public String updatePaycheckByIdxAction(String o_idx) {
 		
 		//선택한 지급항목 변경하기
-		sellerContentService.updatePaycheckByIdx(pd_isPaidToTeacher, o_idx);
+		sellerContentService.updatePaycheckByIdx(o_idx);
 		
 		
-		return "redirect:sellerPaycheckManagePage";
+		return "redirect:sellerManagePaycheck";
 	}
 	
 	
@@ -359,6 +364,17 @@ public class SellerContentController {
 	  
 	  return "redirect:/sellerManageProduct";
 	 }
+	 
+	//jys: 상품 수정 페이지 맵핑
+	    @RequestMapping("/sellerUpdateProductByIdx")
+	    public String sellerUpdateProduct(Model model, MultipartFile [] files, ProductVO ProductVOParam, UploadProductFileVO UploadProductFileVOParam, HttpSession session, HttpServletRequest request){
+	        
+	       ProductDataVO productData = productService.readProductPage(model, ProductVOParam);
+	       
+	       model.addAttribute("updateData", productData);
+	       
+	        return "sellerUpdateProductPage";
+	       }
 
 
 

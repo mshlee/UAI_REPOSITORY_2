@@ -58,6 +58,7 @@
 }
 
 #content_box {
+	overflow: auto;
 	width: 1100px;
 	height: 550px;
 	margin: 5px auto;
@@ -138,7 +139,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./sellerDeleteProductByIdx" method="post">
+		<form action="./sellerDeleteProductsByIdx" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -210,8 +211,8 @@
 							<th scope="row">${productDataList.p_lectureTime }</th>
 							<th scope="row">${productDataList.p_lectureDay }</th>
 							<th scope="row">${productDataList.p_postDate }</th>
-							<th scope="row"><a href="./sellerUpdateProductByIdx?p_idx=${productDataList.p_idx }"><button>수정</button></a></th>
-							<th scope="row"><a href="./sellerDeleteProductByIdx?p_idx=${productDataList.p_idx }"><button>삭제</button></a></th>
+							<th scope="row"><a href="./sellerUpdateProductByIdx?p_idx=${productDataList.p_idx }">수정</a></th>
+							<th scope="row"><a href="./sellerDeleteProductByIdx?p_idx=${productDataList.p_idx }">삭제</a></th>
 						</tr>
 						</c:forEach>
 						

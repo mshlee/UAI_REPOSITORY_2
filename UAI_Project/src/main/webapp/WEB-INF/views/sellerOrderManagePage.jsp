@@ -58,6 +58,7 @@
 }
 
 #content_box {
+	overflow: auto;
 	width: 1100px;
 	height: 550px;
 	margin: 5px auto;
@@ -205,7 +206,7 @@
 							
 							<c:choose>
 							<c:when test="${orderDataList.purchaseDataVO.pch_isPaid == 0 }">
-							<th scope="row"><a href="./sellerUpdateOrderByIdx?o_idx=${orderDataList.orderDataVO.o_idx }&pch_isPaid=1"><button>결제확인</button></a></th>
+							<th scope="row"><a href="./sellerUpdateOrderByIdx?o_idx=${orderDataList.orderDataVO.o_idx }">결제확인</a></th>
 							</c:when>
 							<c:when test="${orderDataList.purchaseDataVO.pch_isPaid == 1 }">
 							<th scope="row">결제완료</th></c:when>

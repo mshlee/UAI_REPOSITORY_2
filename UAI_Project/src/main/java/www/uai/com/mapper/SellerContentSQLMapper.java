@@ -97,16 +97,18 @@ public interface SellerContentSQLMapper {
 	public void deleteMemberByIdx(String m_idx);
 	
 	//lhe-판매자 리뷰&질문글 관리 페이지 단일 게시물 삭제용
-	@Update("DELETE FROM Board_Content WHERE B_TYPE=#{b_type} AND B_REFERIDX=#{b_referidx}")
-	public void deletePostByIdx(String b_type, String p_idx);
+	@Delete("DELETE FROM Board_Content WHERE B_REFERIDX=#{b_referIdx}")
+	public void deletePostByIdx(String b_referIdx);
 	
-	//lhe-판매자 주문 관리 페이지 복수 주문 결제상태 변경용
-	@Update("UPDATE Purchase SET PCH_ISPAID=#{pch_ispaid} WHERE o_idx=#{o_idx}")
-	public void updatePurchaseByIdx(String pch_ispaid, String o_idx);
+	//lhe-판매자 주문 관리 페이지 단일 주문건 결제상태 변경용
+	@Update("UPDATE Purchase SET PCH_ISPAID=1, PCH_PAYMENTDATE=SYSDATE WHERE o_idx=#{o_idx}")
+	public void updatePurchaseByIdx(String o_idx);
 
-	//lhe-판매자 지급 관리 페이지 복수 건 지급상태 변경용
-	@Update("UPDATE Paycheck_Data SET PD_ISPAIDTOTEACHER=#{pd_isPaidToTeacher} WHERE o_idx=#{o_idx}")
-	public void updatePaycheckByIdx(String pd_isPaidToTeacher, String o_idx);
+	//lhe-판매자 지급 관리 페이지 단일 지급건 상태 변경용
+	@Update("UPDATE Paycheck_Data SET PD_ISPAIDTOTEACHER=1, PD_PAIDDATE=SYSDATE WHERE o_idx=#{o_idx}")
+	public void updatePaycheckByIdx(String o_idx);
+
+	
 
 
 	/*
