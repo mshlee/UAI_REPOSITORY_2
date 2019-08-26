@@ -1,7 +1,9 @@
 package www.uai.com.controller;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -137,12 +139,11 @@ public class SellerContentController {
 	//lhe-판매자 상품 관리 페이지 복수 상품 삭제 명령
 
 	@RequestMapping("/sellerDeleteProductsByIdx")
-	public String deleteProductByIdxAction (ArrayList<ProductVO> productVO) {
-		int i=1;
-		for(ProductVO product : productVO) {
-			
-			System.out.println(i+"번째: "+product.getP_idx());
-			i++;
+	public String deleteProductByIdxAction (String p_idx[]) {
+		
+		
+		for(int i=0; i<=p_idx.length; i++) {
+			System.out.println(p_idx[i]);
 		}
 		
 		//선택한 상품 목록 지우기

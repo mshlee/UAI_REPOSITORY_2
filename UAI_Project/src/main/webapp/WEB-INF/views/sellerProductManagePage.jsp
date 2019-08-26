@@ -66,7 +66,48 @@
 	float: right;
 }
 </style>
+<script type="text/javascript">
 
+function submitArray(f){
+	//같이 보낼 값 정리 
+	
+	    if (typeof(f.elements['p_idx[]'].length) == 'undefined') //단일 
+	
+	    { 
+	
+	        if (f.elements['p_idx[]'].checked==false)  
+	
+	        { 
+	
+	            f.elements['field_a[]'].disabled=true;  
+	
+	            f.elements['field_b[]'].disabled=true;  
+	
+	        } 
+	
+	    } else { //다중 
+	
+	        for (i=0; i<f.elements['chk[]'].length; i++)  
+	
+	        { 
+	
+	            if (f.elements['chk[]'][i].checked==false) 
+	
+	            { 
+	
+	                f.elements['field_a[]'][i].disabled=true; 
+	
+	                f.elements['field_b[]'][i].disabled=true; 
+	
+	            } 
+	
+	        } 
+
+
+	
+}
+
+</script>
 
 </head>
 <body>
@@ -171,7 +212,7 @@
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="productDataList" items="${productDataList }">
 						<tr>
-							<th scope="row"><input type="checkbox" name="p_idx" value="${productDataList.p_idx }"></th>
+							<th scope="row"><input type="checkbox" name="p_idx[]" value="${productDataList.p_idx }"></th>
 							<th scope="row">${productDataList.p_idx }</th>
 							
 							
