@@ -129,7 +129,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./deleteQnAByIdx" method="post">
+		<form action="./sellerDeleteQnAsByIdx" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -156,7 +156,7 @@
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="qnaDataList" items="${qnaDataList }">
 						<tr>
-							<th scope="row"><input type="checkbox" name="b_referIdx" value="${qnaDataList.contentDataVO.b_referIdx}"></th>
+							<th scope="row"><input type="checkbox" name="idx[]" value="${qnaDataList.contentDataVO.b_referIdx}"></th>
 							<th scope="row">  </th>
 							<th scope="row">${qnaDataList.contentDataVO.b_referIdx }</th>
 							<th scope="row">${qnaDataList.contentDataVO.p_idx }</th>

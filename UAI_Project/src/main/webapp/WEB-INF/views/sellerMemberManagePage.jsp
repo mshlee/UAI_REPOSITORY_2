@@ -97,7 +97,7 @@
 	
 		</div>
 		<div id="search_box">
-            <form action="./manageMember" method="get">
+            <form action="./sellerManageMember" method="get">
             <table>
             <tr class="table-primary">
             <th>가입일</th>
@@ -129,7 +129,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./deleteMembersByIdx" method="post">
+		<form action="./sellerDeleteMembersByIdx" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -160,7 +160,7 @@
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="memberDataList" items="${memberDataList }">
 						<tr>
-							<th scope="row"><input type="checkbox" name="m_idx" value="${memberDataList.m_idx }"></th>
+							<th scope="row"><input type="checkbox" name="idx[]" value="${memberDataList.m_idx }"></th>
 							<th scope="row">${memberDataList.m_idx }</th>
 							<th scope="row">${memberDataList.m_id }</th>
 							<th scope="row">${memberDataList.m_name }</th>
@@ -192,7 +192,7 @@
 						</c:forEach>
 				</tbody>
 			</table>
-			<button type="submit" id="btn-primary" style="float: right">선택회원 탈퇴</button>
+			<button type="submit" style="float: right">선택회원 탈퇴</button>
 			</form>
 		</div>
 

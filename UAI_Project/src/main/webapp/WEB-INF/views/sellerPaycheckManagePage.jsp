@@ -139,7 +139,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./updatePaycheckByIdx" method="post">
+		<form action="./sellerUpdatePaychecksByIdx" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -164,7 +164,7 @@
 						<c:forEach var="paycheckDataList" items="${paycheckDataList }">
 						<tr>
 							<th scope="row">
-							<input type="checkbox" name="o_idx" value="${paycheckDataList.paycheckDataVO.o_idx }">
+							<input type="checkbox" name="idx[]" value="${paycheckDataList.paycheckDataVO.o_idx }">
 							<input type="hidden" name="pd_isPaidToTeacher" value="1">
 							</th>
 							<th scope="row">${paycheckDataList.paycheckDataVO.o_idx }</th>

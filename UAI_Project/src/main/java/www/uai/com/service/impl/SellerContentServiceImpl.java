@@ -10,6 +10,7 @@ import www.uai.com.service.SellerContentService;
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.ContentDataVO;
+import www.uai.com.vo.IdxVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.OrderDataVO;
 import www.uai.com.vo.PaycheckDataVO;
@@ -141,12 +142,12 @@ public class SellerContentServiceImpl implements SellerContentService {
 	
 	// lhe-판매자 상품 관리 목록 복수 항목 삭제
 	@Override
-	public void deleteProductsByIdx(ArrayList<ProductVO> productVO) {
+	public void deleteProductsByIdx(ArrayList<IdxVO> idxList) {
 		// TODO Auto-generated method stub
 		
-		for(ProductVO product : productVO) {
+		for(IdxVO idx : idxList) {
 		
-		sellerContentSQLMapper.deleteProudctByIdx(product.getP_idx());
+		sellerContentSQLMapper.deleteProudctByIdx(idx.getIdx());
 		}
 		
 	}
@@ -174,6 +175,18 @@ public class SellerContentServiceImpl implements SellerContentService {
 		// TODO Auto-generated method stub
 
 		sellerContentSQLMapper.deleteMemberByIdx(m_idx);
+	}
+	
+	// lhe-판매자 회원 관리 목록 복수 항목 삭제
+	@Override
+	public void deleteMembersByIdx(ArrayList<IdxVO> idxList) {
+		// TODO Auto-generated method stub
+		
+		for(IdxVO idx : idxList) {
+			
+			sellerContentSQLMapper.deleteMemberByIdx(idx.getIdx());;
+			}
+		
 	}
 
 	// lhe-판매자 주문 관리 목록 출력
@@ -209,6 +222,18 @@ public class SellerContentServiceImpl implements SellerContentService {
 	
 	}
 	
+	// lhe-판매자 주문 관리 목록 복수 항목의 결제 상태 변경
+	@Override
+	public void updateOrdersByIdx(ArrayList<IdxVO> idxList) {
+		// TODO Auto-generated method stub
+		
+		for(IdxVO idx : idxList) {
+			
+			sellerContentSQLMapper.updatePurchaseByIdx(idx.getIdx());
+			}
+		
+	}
+	
 	
 
 	// lhe-판매자 리뷰 관리 목록 출력
@@ -238,6 +263,19 @@ public class SellerContentServiceImpl implements SellerContentService {
 			sellerContentSQLMapper.deletePostByIdx(b_referIdx);
 		
 	}
+	
+	// lhe-판매자 리뷰&Qna 관리 목록 복수 항목 삭제
+	@Override
+	public void deletePostsByIdx(ArrayList<IdxVO> idxList) {
+		// TODO Auto-generated method stub
+		
+			for(IdxVO idx : idxList) {
+			
+			sellerContentSQLMapper.deletePostByIdx(idx.getIdx());
+			}
+		
+	}
+
 
 	// lhe-판매자 qna 관리 목록 출력
 	@Override
@@ -289,6 +327,21 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 		sellerContentSQLMapper.updatePaycheckByIdx(o_idx);
 	
+		
+	}
+
+
+	// lhe-판매자 지급 관리 목록 복수 항목 지급완료 처리
+	@Override
+	public void updatePaychecksByIdx(ArrayList<IdxVO> idxList) {
+		// TODO Auto-generated method stub
+		
+
+		for(IdxVO idx : idxList) {
+			
+			sellerContentSQLMapper.updatePaycheckByIdx(idx.getIdx());
+			}
+		
 		
 	}
 

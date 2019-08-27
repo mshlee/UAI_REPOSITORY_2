@@ -1,9 +1,8 @@
 package www.uai.com.controller;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import www.uai.com.service.ProductService;
 import www.uai.com.service.SellerContentService;
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
+import www.uai.com.vo.IdxVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductVO;
@@ -134,20 +135,26 @@ public class SellerContentController {
 		
 	}
 	
-	
-	
+
 	//lhe-판매자 상품 관리 페이지 복수 상품 삭제 명령
 
 	@RequestMapping("/sellerDeleteProductsByIdx")
-	public String deleteProductByIdxAction (String p_idx[]) {
+	public String deleteProductsByIdxAction (
+			@RequestParam(value="idx[]") List<String> arrayParams
+			) {
 		
+		//중복 체크된 idx를 배열로 저장하기
+		ArrayList<IdxVO> idxList = new ArrayList<IdxVO>();
 		
-		for(int i=0; i<=p_idx.length; i++) {
-			System.out.println(p_idx[i]);
-		}
-		
+		for (String params : arrayParams) {
+			System.out.println(params);
+			IdxVO idxVO = new IdxVO(params);
+			System.out.println("1번째 리스트:"+idxVO.getIdx());
+			idxList.add(idxVO);
+		}		
+	
 		//선택한 상품 목록 지우기
-		//sellerContentService.deleteProductsByIdx(productVO);
+		sellerContentService.deleteProductsByIdx(idxList);
 		
 		return "redirect:sellerManageProduct";
 
@@ -173,6 +180,7 @@ public class SellerContentController {
 	}
 
 	
+	//lhe-판매자 주문관리 페이지 단일 항목 변경 명령
 	@RequestMapping("/sellerUpdateOrderByIdx")
 	public String updateOrderByIdxAction(String o_idx) {
 		
@@ -182,6 +190,49 @@ public class SellerContentController {
 
 		return "redirect:sellerManageOrder";
 	}
+	
+
+	//lhe- 파라미터 테스트 컨트롤러
+	@RequestMapping("/sellerTest.do")
+	public void testParam(
+			@RequestParam(value="idx[]") List<String> arrayParams
+			) {
+	
+		ArrayList<IdxVO> idxList = new ArrayList<IdxVO>();
+		
+		for (String params : arrayParams) {
+			System.out.println(params);
+			IdxVO idxVO = new IdxVO(params);
+			System.out.println("1번째 리스트:"+idxVO.getIdx());
+			idxList.add(idxVO);
+		}		
+
+	}
+	
+	//lhe-판매자 주문관리 페이지 복수 항목 변경 명령
+	@RequestMapping("/sellerUpdateOrdersByIdx")
+	public String updateOrdersByIdxAction(
+			@RequestParam(value="idx[]") List<String> arrayParams
+			) {
+		
+		ArrayList<IdxVO> idxList = new ArrayList<IdxVO>();
+		
+		for (String params : arrayParams) {
+			System.out.println(params);
+			IdxVO idxVO = new IdxVO(params);
+			System.out.println("1번째 리스트:"+idxVO.getIdx());
+			idxList.add(idxVO);
+		}		
+		
+		
+		//선택한 주문 결제 상태 변경
+		sellerContentService.updateOrdersByIdx(idxList);
+		
+
+		return "redirect:sellerManageOrder";
+	}
+	
+	
 	
 	
 	//lhe-판매자 회원 관리 페이지 관련 맵핑
@@ -203,14 +254,27 @@ public class SellerContentController {
 	}
 	
 	//lhe-판매자 회원 관리 페이지 복수 회원 탈퇴
-	@RequestMapping("/sellerDeleteMemberByIdx")
-		public String deleteMemberByIdxAction (String m_idx) {
-		
+	@RequestMapping("/sellerDeleteMembersByIdx")
+		public String deleteMemberByIdxAction (
+				@RequestParam(value="idx[]") List<String> arrayParams
+				) {
+			
+			ArrayList<IdxVO> idxList = new ArrayList<IdxVO>();
+			
+			for (String params : arrayParams) {
+				System.out.println(params);
+				IdxVO idxVO = new IdxVO(params);
+				System.out.println("1번째 리스트:"+idxVO.getIdx());
+				idxList.add(idxVO);
+			}		
+			
 		//선택한 회원 리스트 지우기
-		sellerContentService.deleteMemberByIdx(m_idx);
+		sellerContentService.deleteMembersByIdx(idxList);
 			
 			return "redirect:sellerManageMember";
 		}
+	
+	
 	
 	//lhe-판매자 리뷰 관리 페이지 관련 맵핑
 	@RequestMapping ("/sellerManageReview")
@@ -243,6 +307,30 @@ public class SellerContentController {
 				
 	}
 	
+	//lhe-판매자 리뷰 관리 페이지 복수 리뷰 삭제
+		@RequestMapping("/sellerDeleteReviewsByIdx")
+		public String deleteReviewByIdxAction (
+				@RequestParam(value="idx[]") List<String> arrayParams
+				) {
+
+			ArrayList<IdxVO> idxList = new ArrayList<IdxVO>();
+
+			for (String params : arrayParams) {
+				System.out.println(params);
+				IdxVO idxVO = new IdxVO(params);
+				System.out.println("1번째 리스트:"+idxVO.getIdx());
+				idxList.add(idxVO);
+			}		
+				
+			//선택한 리뷰 리스트 지우기
+			sellerContentService.deletePostsByIdx(idxList);
+			
+			return "redirect:sellerManageReview";
+					
+		}
+	
+
+	
 
 	//lhe-판매자 QnA 관리 페이지 관련 맵핑
 	@RequestMapping("/sellerManageQnA")
@@ -274,6 +362,26 @@ public class SellerContentController {
 		return "redirect:sellerManageQnA";
 	}
 	
+	//lhe-판매자 QnA 관리 페이지 복수 항목 삭제
+		@RequestMapping("/sellerDeleteQnAsByIdx")
+		public String deleteQnAsByIdxAction(
+				@RequestParam(value="idx[]") List<String> arrayParams
+				) {
+
+			ArrayList<IdxVO> idxList = new ArrayList<IdxVO>();
+
+			for (String params : arrayParams) {
+				System.out.println(params);
+				IdxVO idxVO = new IdxVO(params);
+				System.out.println("1번째 리스트:"+idxVO.getIdx());
+				idxList.add(idxVO);
+			}		
+			//선택한 질문글 지우기
+			sellerContentService.deletePostsByIdx(idxList);
+			
+			return "redirect:sellerManageQnA";
+		}
+	
 	
 	//lhe-판매자 지급관리 페이지 리스트 출력
 	@RequestMapping("/sellerManagePaycheck")
@@ -294,12 +402,35 @@ public class SellerContentController {
 		return "sellerPaycheckManagePage";		
 	}
 	
-	//lhe-판매자 지급 관리 페이지 복수 항목 변경
+	//lhe-판매자 지급 관리 페이지 단일 항목 변경
 	@RequestMapping("/sellerUpdatePaycheckByIdx")
 	public String updatePaycheckByIdxAction(String o_idx) {
 		
 		//선택한 지급항목 변경하기
 		sellerContentService.updatePaycheckByIdx(o_idx);
+		
+		
+		return "redirect:sellerManagePaycheck";
+	}
+	
+	
+	//lhe-판매자 지급 관리 페이지 복수 항목 변경
+	@RequestMapping("/sellerUpdatePaychecksByIdx")
+	public String updatePaychecksByIdxAction(
+			@RequestParam(value="idx[]") List<String> arrayParams
+			) {
+
+		ArrayList<IdxVO> idxList = new ArrayList<IdxVO>();
+
+		for (String params : arrayParams) {
+			System.out.println(params);
+			IdxVO idxVO = new IdxVO(params);
+			System.out.println("1번째 리스트:"+idxVO.getIdx());
+			idxList.add(idxVO);
+		}		
+		
+		//선택한 지급항목 변경하기
+		sellerContentService.updatePaychecksByIdx(idxList);
 		
 		
 		return "redirect:sellerManagePaycheck";
@@ -312,6 +443,7 @@ public class SellerContentController {
 	  
 	  return "sellerNewProductPage";
 	 }
+	 
 	 
 	//jys: 상품 등록 기능 맵핑
 	 @RequestMapping("/newProductAction")

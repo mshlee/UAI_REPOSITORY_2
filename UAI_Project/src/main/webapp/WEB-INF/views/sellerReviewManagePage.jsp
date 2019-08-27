@@ -129,7 +129,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./deleteReviewByIdx" method="post">
+		<form action="./sellerDeleteReviewsByIdx" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -155,7 +155,7 @@
 						<!--lhe: forEach문으로 반복해서 리스트 가져오기-->
 						<c:forEach var="reviewDataList" items="${reviewDataList }">
 						<tr>
-							<th scope="row"><input type="checkbox" name="b_referIdx" value="${reviewDataList.contentDataVO.b_referIdx}"></th>
+							<th scope="row"><input type="checkbox" name="idx[]" value="${reviewDataList.contentDataVO.b_referIdx}"></th>
 							<th scopte="row">  </th>
 							<th scope="row">${reviewDataList.contentDataVO.b_referIdx }</th>
 							<th scope="row">${reviewDataList.contentDataVO.p_idx }</th>

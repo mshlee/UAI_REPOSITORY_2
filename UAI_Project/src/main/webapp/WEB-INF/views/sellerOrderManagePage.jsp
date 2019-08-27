@@ -150,7 +150,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./updateOrdersByIdx" method="post">
+		<form action="./sellerUpdateOrdersByIdx" method="post">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -174,7 +174,7 @@
 						<c:forEach var="orderDataList" items="${orderDataList }">
 						<tr>
 							<th scope="row">
-							<input type="checkbox" name="o_idx" value="${orderDataList.orderDataVO.o_idx }">
+							<input type="checkbox" name="idx[]" value="${orderDataList.orderDataVO.o_idx }">
 							<input type="hidden" name="pch_isPaid" value="1">
 							</th>
 							<th scope="row">${orderDataList.orderDataVO.o_idx }</th>
