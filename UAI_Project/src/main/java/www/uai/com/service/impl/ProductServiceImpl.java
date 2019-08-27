@@ -1,6 +1,7 @@
 package www.uai.com.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,22 +33,72 @@ public class ProductServiceImpl implements ProductService{
    private ContentSQLMapper contentSQLMapper;
    
    @Override
-   public ArrayList<ProductVO> getProductList(Model model, String nowPage, int limit) {
-      
+   public ArrayList<ProductVO> getProductList(Model model, String nowPage, int limit, String p_type, String p_location,
+         String searchWord) {
+
       ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
 
-      if(nowPage == null) {
+      if (nowPage == null) {
          nowPage = "1";
       }
-      
-      int startPost = Integer.parseInt(nowPage)*limit-limit+1;
-      int endPost = Integer.parseInt(nowPage)*limit;
-      
-      PostnumVO postnum = new PostnumVO(startPost, endPost);
-      
-      productList = productSQLMapper.selectByPageNum(postnum);
-      
+
+      int startPost = Integer.parseInt(nowPage) * limit - limit + 1;
+      int endPost = Integer.parseInt(nowPage) * limit;
+
+      PostnumVO postnum = new PostnumVO();
+      postnum.setStartPostNum(startPost);
+      postnum.setEndPostNum(endPost);
+
+      //조건 검색 쿼리문 만들기
+
+      //""으로 넘어온 경우 null 처리
+      if(p_type != null) {
+         if(p_type.length()==0) { p_type=null; }
+         if(p_location.length()==0) { p_location=null; }
+         if(searchWord.length()==0) { searchWord=null; }
+      } 
+
+      boolean isEmpty = false;
+
+      if (p_type == null && p_location == null && searchWord == null) {
+         isEmpty = true;
+      }
+
+      if (isEmpty == true) {
+
+         productList = productSQLMapper.selectByPageNum(postnum);
+
+      } else if (isEmpty == false) {
+
+         String searchQuery = "";
+         String andPhrase = " AND ";
+         String orPhrase = " OR ";
+
+         if (p_type != null) {
+            searchQuery += "P_TYPE=" + p_type;
+            if (p_location != null || searchWord != null) {
+               searchQuery += andPhrase;
+            }
+         }
+         if (p_location != null) {
+            searchQuery += "P_LOCATION LIKE " + "'%" + p_location + "%'";
+            if (searchWord != null) {
+               searchQuery += andPhrase;
+            }
+         }
+         if (searchWord != null) {
+            searchQuery += "(" + "P_NAME LIKE " + "'%" + searchWord + "%'" + orPhrase + "P_TEACHER LIKE " + "'%"
+                  + searchWord + "%'" + orPhrase + "P_LECTUREINFO LIKE" + "'%" + searchWord + "%'" + orPhrase
+                  + "P_TEACHERINFO LIKE" + "'%" + searchWord + "%'" + orPhrase + "P_OTHERINFO LIKE" + "'%" + searchWord
+                  + "%'" + ")";
+         }
+
+         productList = productSQLMapper.selectByCondition(searchQuery, startPost, endPost);
+
+      }
+
       return productList;
+
       
    }
 
@@ -175,9 +226,50 @@ public class ProductServiceImpl implements ProductService{
    }
 
    @Override
-   public int getProductListCount() {
+   public int getProductListCount(String p_type, String p_location, String searchWord) {
+
+      int productListCount = 0; 
       
-      int productListCount = productSQLMapper.getProductListCount();
+      //""으로 넘어온 경우 null 처리
+      if(p_type != null) {
+         if(p_location != null || searchWord != null) {
+            if(p_type.length()==0) { p_type=null; }
+            if(p_location.length()==0) { p_location=null; }
+            if(searchWord.length()==0) { searchWord=null; }
+         } 
+      }
+      
+      if ((p_type == null || p_type.length() == 0) && (p_location == null || p_location.length() == 0)
+            && (searchWord == null || searchWord.length() == 0)) {
+         productListCount = productSQLMapper.getProductListCount();
+      } else {
+
+         String searchQuery = "";
+         String andPhrase = " AND ";
+         String orPhrase = " OR ";
+
+         if (p_type != null) {
+            searchQuery += "P_TYPE=" + p_type;
+            if (p_location != null || searchWord != null) {
+               searchQuery += andPhrase;
+            }
+         }
+         if (p_location != null) {
+            searchQuery += "P_LOCATION LIKE " + "'%" + p_location + "%'";
+            if (searchWord != null) {
+               searchQuery += andPhrase;
+            }
+         }
+         if (searchWord != null) {
+            searchQuery += "(" + "P_NAME LIKE " + "'%" + searchWord + "%'" + orPhrase + "P_TEACHER LIKE " + "'%"
+                  + searchWord + "%'" + orPhrase + "P_LECTUREINFO LIKE " + "'%" + searchWord + "%'" + orPhrase
+                  + "P_TEACHERINFO LIKE " + "'%" + searchWord + "%'" + orPhrase + "P_OTHERINFO LIKE " + "'%" + searchWord
+                  + "%'" + ")";
+         } 
+         
+         productListCount = productSQLMapper.getListCountByCondition(searchQuery); 
+         
+      }
       
       return productListCount;
    }
@@ -189,8 +281,51 @@ public class ProductServiceImpl implements ProductService{
       
       return wishListCount;
    }
-   
+   @Override
+   public void increaseBuyCount(String p_idx) {
 
+      ProductVO productVO = productSQLMapper.selectByIdx(p_idx);
+
+      productSQLMapper.increaseBuyCount(productVO);
+
+   }
+
+   @Override
+   public List<String> autoSearchWord(String keyword) {
+
+      List<String> nameList = productSQLMapper.searchByKeyword(keyword);
+
+      return nameList;
+   }
+
+   @Override
+   public ArrayList<String> getLocationList(String p_type) {
+
+      ArrayList<String> locationList = new ArrayList<String>();
+
+      if (p_type == null || p_type.length() == 0) {
+
+         locationList = productSQLMapper.selectAllDistinctLocation();
+
+      } else {
+
+         locationList = productSQLMapper.selectDistinctLocation(p_type);
+
+      } 
+
+      return locationList;
+   }
+
+   @Override
+   public String getProductThumbnail(String p_idx) {
+      
+      String thumbnail = productSQLMapper.getProductThumbnail(p_idx);
+      
+      return thumbnail;
+   }
+
+   
+   //ys
    @Override
    @Transactional
    public void writeNewProduct(ProductVO ProductVOParam, ArrayList<UploadProductFileVO> fileList) {

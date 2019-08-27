@@ -66,6 +66,7 @@ public class SellerContentServiceImpl implements SellerContentService {
 		String maxPrice = searchDataVO.getMaxPrice();
 		String keyword = searchDataVO.getKeyword();
 		String value = searchDataVO.getValue();
+		
 
 		// vo 객체 null값 여부 확인
 		boolean isEmpty = false;
@@ -88,24 +89,12 @@ public class SellerContentServiceImpl implements SellerContentService {
 			
 		} else if (isEmpty==false) {
 			
-			
-			//empty string 예외처리
-			if(p_type.length()==0) {
-				p_type=null;
-			}if(startDate.length()==0) {
-				startDate=null;
-			}if(minPrice.length()==0) {
-				minPrice=null;
-			}if(keyword.length()==0) {
-				keyword=null;
-			}if(value.length()==0) {
-				value=null;
-			}
-			
+			/*
+			String queryHead="SELECT * FROM PRODUCT WHERE";
 			String query = "";
 			String andPhrase = " AND ";
-
 			if (p_type != null) {
+				query += andPhrase;
 				query += "P_TYPE=" + p_type;
 				query += andPhrase;
 			}if (startDate != null && endDate != null) {
@@ -126,6 +115,58 @@ public class SellerContentServiceImpl implements SellerContentService {
 			productDataList = sellerContentSQLMapper.getProductListBySearchWord(query);
 			
 			}
+			*/
+			
+
+			//empty string 예외처리
+			if(p_type.length()==0) {
+				p_type=null;
+			}if(startDate.length()==0) {
+				startDate=null;
+			}if(minPrice.length()==0) {
+				minPrice=null;
+			}if(keyword.length()==0) {
+				keyword=null;
+			}if(value.length()==0) {
+				value=null;
+			}
+
+			
+			String queryHead = "SELECT * FROM PRODUCT WHERE";
+			String query = " AND ";
+		
+			String andPhrase = " AND ";
+			if (p_type != null) {
+				query = query.substring(0, query.length() - 5);
+				query += "P_TYPE=" + p_type;
+				query += andPhrase;
+			}
+			if (startDate != null && endDate != null) {
+				query = query.substring(0, query.length() - 5);
+				query += "P_POSTDATE BETWEEN " + "'" + startDate + "'" + " AND " + "'" + endDate + "'";
+				query += andPhrase;
+			}
+			if (minPrice != null && maxPrice != null) {
+				query = query.substring(0, query.length() - 5);
+				query += "P_ORIGINALPRICE BETWEEN " + minPrice + " AND " + maxPrice;
+				query += andPhrase;
+			}
+			if (keyword != null && value != null) {
+				query = query.substring(0, query.length() - 5);
+				query += keyword.toUpperCase() + " LIKE " + "'%'" + "'" + value + "'" + "'%'";
+				query += andPhrase;
+			}
+
+			query = query.substring(0, query.length() - 5);
+			
+			if(query.length()<1) {
+				productDataList = sellerContentSQLMapper.getAllProductList();
+			}else {
+				queryHead += query;
+				productDataList = sellerContentSQLMapper.getProductListBySearchWord(query);
+			}
+			
+		}
 
 	
 		return productDataList;
@@ -156,7 +197,7 @@ public class SellerContentServiceImpl implements SellerContentService {
 	
 	//lhe-판매자 회원 관리 리스트 출력
 	@Override
-	public ArrayList<MemberDataVO> getAllMemberList() {
+	public ArrayList<MemberDataVO> getAllMemberList() {	
 		// TODO Auto-generated method stub
 		
 		ArrayList<MemberDataVO> memberDataList = new ArrayList<MemberDataVO>();

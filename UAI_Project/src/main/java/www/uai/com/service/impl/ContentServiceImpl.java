@@ -2,10 +2,10 @@ package www.uai.com.service.impl;
 
 import java.util.ArrayList;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import www.uai.com.mapper.AdminSQLMapper;
 import www.uai.com.mapper.ContentSQLMapper;
 import www.uai.com.mapper.UploadFileSQLMapper;
@@ -15,7 +15,9 @@ import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.BoardDataVO;
 import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
+import www.uai.com.vo.PostnumVO;
 import www.uai.com.vo.ProductVO;
+import www.uai.com.vo.SessionDataVO;
 import www.uai.com.vo.UploadFileVO;
 
 @Service
@@ -144,7 +146,7 @@ public class ContentServiceImpl implements ContentService{
 		// 파일 업로드 시키기(파일은 여러 개일 수 있음)
 		for(UploadFileVO vo : fileList) {
 			
-			vo.setB_idx(key);
+			
 			
 			uploadFileSQLMapper.insert(vo);
 			
@@ -177,8 +179,8 @@ public class ContentServiceImpl implements ContentService{
 		// 파일 업로드 시키기(파일은 여러 개일 수 있음)
 		for(UploadFileVO vo : fileList) {
 			
+	
 			vo.setB_idx(key);
-			
 			uploadFileSQLMapper.insert(vo);
 			
 		}
@@ -210,8 +212,8 @@ public class ContentServiceImpl implements ContentService{
 				// 파일 업로드 시키기(파일은 여러 개일 수 있음)
 				for(UploadFileVO vo : fileList) {
 					
-					vo.setB_idx(key);
 					
+					vo.setB_idx(key);
 					uploadFileSQLMapper.insert(vo);
 					
 				}
@@ -253,9 +255,8 @@ public class ContentServiceImpl implements ContentService{
 	}
 
 	   public void writeReview(ContentDataVO contentDataVO){
-		      String reviewKey = contentSQLMapper.getKey();
 		      
-		      contentDataVO.setB_idx(reviewKey);
+		   
 		      contentSQLMapper.insertReview(contentDataVO);
 		   }
 
@@ -310,6 +311,8 @@ public class ContentServiceImpl implements ContentService{
 	public ArrayList<BoardDataVO> getReplyList(ContentDataVO contentDataVO) {
 		// TODO Auto-generated method stub
 		
+		
+		
 		ArrayList<BoardDataVO> dataList = new ArrayList<BoardDataVO>();
 		ArrayList<ContentDataVO> contentList = null;
 		
@@ -329,9 +332,22 @@ public class ContentServiceImpl implements ContentService{
 		return dataList;
 	}
 
+
+
+	@Override
+	public void updateFileContent(ArrayList<UploadFileVO> fileList,String b_idx) {
+		// TODO Auto-generated method stub
+		
+		// 파일 업로드 시키기(파일은 여러 개일 수 있음)
+		for(UploadFileVO vo : fileList) {
+			
+			vo.setB_idx(b_idx);
+			uploadFileSQLMapper.insert(vo);
+			
+		}
+	}
 	
-	
-	
+
 	
 
 	

@@ -158,7 +158,7 @@
                     </div>
 
                     <div id="admin-login">
-                        <form class="form-horizontal" action="./adminLoginAction" method="post" >
+                        <form class="form-horizontal" action="./adminLoginAction" method="post">
                             <div class="form-group">
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" placeholder="Admin ID" name="ad_id">

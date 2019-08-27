@@ -11,7 +11,6 @@ import www.uai.com.vo.SessionDataVO;
 
 @Service
 public class UserServiceImpl implements UserService{
-
    @Autowired
    private UserSQLMapper userSQLMapper;
    
@@ -20,13 +19,13 @@ public class UserServiceImpl implements UserService{
    }
 
    @Override
-   public SessionDataVO memberLoginProcess(MemberDataVO vo) {
+   public SessionDataVO memberLoginProcess(MemberDataVO memberDataVO) {
       // TODO Auto-generated method stub
-      MemberDataVO result = userSQLMapper.selectByMId(vo.getM_id());
+      MemberDataVO result = userSQLMapper.selectByMId(memberDataVO.getM_id());
       
       SessionDataVO sessionData = null;
       
-      if(result != null && result.getM_pw().equals(vo.getM_pw())) {
+      if(result != null && result.getM_pw().equals(memberDataVO.getM_pw())) {
          //로그인 성공
          sessionData = new SessionDataVO(result.getM_idx(), result.getM_nick(), null, null);
       }else {
@@ -35,25 +34,30 @@ public class UserServiceImpl implements UserService{
       
       return sessionData;
    }
-   
+   /*		this.m_idx = m_idx;
+		this.m_nick = m_nick;
+		this.ad_idx = ad_idx;
+		this.ad_nick = ad_nick;
+*/
    
    @Override
    public SessionDataVO adminLoginProcess(AdminDataVO vo) {
       // TODO Auto-generated method stub
-	   AdminDataVO result = userSQLMapper.selectByADId(vo.getAd_id());
+      AdminDataVO result = userSQLMapper.selectByADId(vo.getAd_id());
       
       SessionDataVO sessionData = null;
       
+      System.out.println(result);
       if(result != null && result.getAd_pw().equals(vo.getAd_pw())) {
          //로그인 성공
          sessionData = new SessionDataVO(null, null, result.getAd_idx(), result.getAd_nick());
       }else {
          //로그인 실패
       }
+      System.out.println(sessionData);
       
       return sessionData;
    }
-
 
    @Override
    public boolean isExistMID(MemberDataVO requestParam) {
@@ -81,7 +85,5 @@ public class UserServiceImpl implements UserService{
       return false;
    }
    
-
-
 
 }

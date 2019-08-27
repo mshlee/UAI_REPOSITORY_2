@@ -84,7 +84,7 @@
                     }
             #middle-box{
                 width: 1024px;
-                height: 1100px;
+                height: 800px;
                 float: left;
                 }
                         #middle-small-3{
@@ -289,7 +289,7 @@
                 align-items: center;
             }
         </style>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+                <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
         <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
         <script type="text/javascript">
         
@@ -348,7 +348,7 @@
                         type        :   "post",
                         data        :   objParams,
                         success     :   function(retVal){
- 					//url = form action 위치와 동일. 이후 리다이렉트하여 돌아갈 위치는 밑의 location.href= 에 작성.
+ //url = form action 위치와 동일. 이후 리다이렉트하여 돌아갈 위치는 밑의 location.href= 에 작성.
                             if(retVal.code == "OK") {
                                 alert(retVal.message);
                                 location.href = "/boardReviewPage";  
@@ -367,6 +367,31 @@
                  
             });
         </script>
+	<script type="text/javascript">
+		function getExtension(filename) {
+			return filename.split('.').pop().toLowerCase();
+		}
+		function fileCheck() {
+			var uploadFile = $("input[name=files]").val();
+			if (uploadFile == "") {
+				alert("파일을 첨부하지 않았습니다")
+				return;
+			} else {
+				var extension = getExtension(uploadFile);
+				alert(extension);
+				switch (extension) {
+				case 'jpg':
+				case 'jpeg':
+				case 'png':
+				case 'bmp':
+					$("#uploadForm").submit();
+					break;
+				default:
+					alert("이미지 파일만 업로드 가능합니다.");
+				}
+			}
+		}
+	</script> 
     </head>
 
 
@@ -381,7 +406,7 @@
                     <div id="top-menu">
                        <a style="color: black" href="./mainPage">HOME</a> | 
                       <a style="color: black" href="./loginForm">LOGIN</a> | 
-                      <a style="color: black" href="./boardNoticePage">NOTICE</a> | 
+                      <a style="color: black" href="#">NOTICE</a> | 
                       <a style="color: black" href="./myPage">MYPAGE</a>            
                     </div>
                     </div>
@@ -394,10 +419,10 @@
                     <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
                         <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
                         <ul class="navbar-nav" id="top-menu-bar">
-                          <li class="nav-item"><a class="nav-link" href="./boardNoticePage">Notice</a></li>
-	                      <li class="nav-item"><a class="nav-link" href="./productListPage">Lecture</a></li>
-	                      <li class="nav-item"><a class="nav-link" href="./boardReviewPage">Review</a></li>
-	                      <li class="nav-item"><a class="nav-link" href="./boardQnAPage">Q & A</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Notice</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Lecture</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Review</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Q & A</a></li>
                         </ul>
                     </nav>
                     </div>
@@ -506,7 +531,7 @@
                       <input type="text" readonly="readonly" title="File Route">
                   </div>
                   <div id="reivew-button">
-                      <input class="btn btn-info" type="submit" value="Submit">
+                      <input class="btn btn-info" type="submit" value="Submit" onclick="fileCheck()">
                    </div>
                     </form>
                     

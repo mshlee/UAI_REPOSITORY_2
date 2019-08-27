@@ -2,12 +2,10 @@ package www.uai.com.service;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import www.uai.com.vo.*;
-import www.uai.com.vo.BoardDataVO;
-import www.uai.com.vo.ContentDataVO;
-import www.uai.com.vo.UploadFileVO;
-
 
 //impl 에서 사용할 메서드들 총 정리
 public interface ContentService {
@@ -48,6 +46,8 @@ public interface ContentService {
 	
 	public ArrayList<BoardDataVO> getReplyList(ContentDataVO contentDataVO);
 	
+	public void updateFileContent(ArrayList<UploadFileVO> fileList, String b_idx);
 	
+
 
 }

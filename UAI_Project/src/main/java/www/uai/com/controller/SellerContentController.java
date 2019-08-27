@@ -191,23 +191,6 @@ public class SellerContentController {
 		return "redirect:sellerManageOrder";
 	}
 	
-
-	//lhe- 파라미터 테스트 컨트롤러
-	@RequestMapping("/sellerTest.do")
-	public void testParam(
-			@RequestParam(value="idx[]") List<String> arrayParams
-			) {
-	
-		ArrayList<IdxVO> idxList = new ArrayList<IdxVO>();
-		
-		for (String params : arrayParams) {
-			System.out.println(params);
-			IdxVO idxVO = new IdxVO(params);
-			System.out.println("1번째 리스트:"+idxVO.getIdx());
-			idxList.add(idxVO);
-		}		
-
-	}
 	
 	//lhe-판매자 주문관리 페이지 복수 항목 변경 명령
 	@RequestMapping("/sellerUpdateOrdersByIdx")
@@ -237,7 +220,7 @@ public class SellerContentController {
 	
 	//lhe-판매자 회원 관리 페이지 관련 맵핑
 	@RequestMapping ("/sellerManageMember")
-	public String memberManage(Model model, HttpSession sessionData){
+	public String memberManage(Model model, AdvancedSearchDataVO searchDataVO, HttpSession sessionData){
 		
 		if(sessionData==null){
 			
@@ -278,7 +261,7 @@ public class SellerContentController {
 	
 	//lhe-판매자 리뷰 관리 페이지 관련 맵핑
 	@RequestMapping ("/sellerManageReview")
-	public String reviewManage(Model model, HttpSession sessionData){
+	public String reviewManage(Model model, AdvancedSearchDataVO searchDataVO, HttpSession sessionData){
 		
 		if(sessionData==null){
 			
@@ -334,7 +317,7 @@ public class SellerContentController {
 
 	//lhe-판매자 QnA 관리 페이지 관련 맵핑
 	@RequestMapping("/sellerManageQnA")
-	public String qnaManagePage(Model model, HttpSession sessionData) {
+	public String qnaManagePage(Model model, AdvancedSearchDataVO searchDataVO, HttpSession sessionData) {
 		
 		if(sessionData==null){
 			
@@ -385,7 +368,7 @@ public class SellerContentController {
 	
 	//lhe-판매자 지급관리 페이지 리스트 출력
 	@RequestMapping("/sellerManagePaycheck")
-	public String paycheckManagePage(Model model, HttpSession sessionData) {
+	public String paycheckManagePage(Model model, AdvancedSearchDataVO searchDataVO, HttpSession sessionData) {
 		
 		
 		if(sessionData==null){
@@ -434,6 +417,14 @@ public class SellerContentController {
 		
 		
 		return "redirect:sellerManagePaycheck";
+	}
+	
+	//lhe-판매자 통계 대시보드 페이지 맵핑
+	@RequestMapping("/sellerDashboard")
+	public String sellerDashboardPage() {
+		
+		return "sellerDashboardPage";
+		
 	}
 	
 	

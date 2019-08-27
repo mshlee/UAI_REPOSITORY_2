@@ -1,9 +1,11 @@
 package www.uai.com.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import www.uai.com.service.ProductService;
 import www.uai.com.vo.OrderDataVO;
 import www.uai.com.vo.PageVO;
 import www.uai.com.vo.ProductDataVO;
+import www.uai.com.vo.ProductThumbnailVO;
 import www.uai.com.vo.ProductVO;
 import www.uai.com.vo.WishListVO;
 
@@ -31,26 +34,55 @@ public class ProductController {
    private PageService pageService;
    
    @RequestMapping("/productListPage")
-   public String productListPage(Model model, String nowPage, String changePage) {
-      
+   public String productListPage(Model model, String nowPage, String changePage, String p_type, String p_location,
+         String searchWord) {
+
       // 페이지 처리한 거 여기다 분리해서 적어주기
       int limit = 3;
       int pageGroupLimit = 5;
+
+      int listCount = 0;
+
+      ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
+      PageVO pageVO = new PageVO();
+      ArrayList<String> locationList = new ArrayList<String>();
+      ArrayList<ProductThumbnailVO> productListWithImage = new ArrayList<ProductThumbnailVO>();
+      ProductThumbnailVO productThumbnailVO = new ProductThumbnailVO();
       
-      //전체글 개수 가져오기 
-      int listCount = productService.getProductListCount();
-      
-      PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-      
-      //페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
+      listCount = productService.getProductListCount(p_type, p_location, searchWord);
+        
+      pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
+        
       nowPage = pageVO.getNowPage();
-            
-      ArrayList<ProductVO> productDataList= productService.getProductList(model, nowPage, limit);
-      model.addAttribute("listCount", listCount);
-      model.addAttribute("productDataList", productDataList);
-      model.addAttribute("pageVO", pageVO);
+        
+      productList= productService.getProductList(model, nowPage, limit, p_type, p_location, searchWord);
       
+      for(ProductVO product: productList) {
+         String p_idx = product.getP_idx();
+         
+         String thumbnail = productService.getProductThumbnail(p_idx);
+         
+         productThumbnailVO.setProductVO(product);
+         productThumbnailVO.setThumbnail(thumbnail);
+         
+         productListWithImage.add(productThumbnailVO);
+      }
+      
+      locationList = productService.getLocationList(p_type);
+        
+      model.addAttribute("locationList", locationList);
+      model.addAttribute("listCount", listCount);
+      model.addAttribute("productDataList", productListWithImage);
+      model.addAttribute("pageVO", pageVO);
+       
+      
+      // 페이지 이동해도 조건을 계속 들고있기 위함
+      model.addAttribute("p_type", p_type);
+      model.addAttribute("p_location", p_location);
+      model.addAttribute("searchWord", searchWord);
+
       return "productListPage";
+
    }
    
    @RequestMapping("/readProductPage")
@@ -105,6 +137,10 @@ public class ProductController {
       
       productService.buyProductAction(orderParam,session);
       
+      // 구매수 올리기
+      String p_idx = orderParam.getP_idx();
+      productService.increaseBuyCount(p_idx);
+      
       return "buyProductCompletePage";
    }
    
@@ -127,4 +163,19 @@ public class ProductController {
       
       productService.removeWishlist(wishParam, session);
    }
+   @RequestMapping(value = "/autosearchWord", produces = "application/text; charset=utf8")
+   @ResponseBody
+   public String autoSearchWord(@RequestParam String keyword) {
+
+      List<String> nameList = productService.autoSearchWord(keyword);
+
+      // json으로 쪼개주기
+      JSONObject jsonObject = new JSONObject();
+      jsonObject.put("keyword", nameList);
+      String jsonInfo = jsonObject.toString();
+
+      return jsonInfo;
+
+   }
+   
 }

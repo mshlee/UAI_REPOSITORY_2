@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -85,6 +86,9 @@ public interface SellerContentSQLMapper {
 	@Select ("SELECT * FROM PRODUCT WHERE ${value}")
 	public ArrayList<ProductVO> getProductListBySearchWord(String query);
 	
+	 // 검색용
+	 @Select("SELECT bd2.* FROM (SELECT bd.*, ROWNUM AS rnum FROM (SELECT * FROM PRODUCT WHERE ${searchQuery} ORDER BY P_IDX DESC) bd) bd2 WHERE rnum BETWEEN ${startPostNum} AND ${endPostNum}")
+	 public ArrayList<ProductVO> selectByCondition(String searchQuery);
 	
 	
 

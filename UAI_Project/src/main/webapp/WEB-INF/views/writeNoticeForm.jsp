@@ -22,7 +22,32 @@
       
       <!-- Link Swiper's CSS -->
         <link rel="stylesheet" href="css/swiper.min.css">
-      
+      	<script type="text/javascript">
+		function getExtension(filename) {
+			return filename.split('.').pop().toLowerCase();
+		}
+		function fileCheck() {
+			var uploadFile = $("input[name=files]").val();
+			if (uploadFile == "") {
+				alert("파일을 첨부하지 않았습니다")
+				return;
+			} else {
+				var extension = getExtension(uploadFile);
+				alert(extension);
+				switch (extension) {
+				case 'jpg':
+				case 'jpeg':
+				case 'png':
+				case 'bmp':
+					$("#uploadForm").submit();
+					break;
+				default:
+					alert("이미지 파일만 업로드 가능합니다.");
+				}
+			}
+		}
+	</script>
+	
         
         <!-- font 설정 -->
         <link rel="stylesheet" href="https://use.typekit.net/kcj1cyn.css">
@@ -84,7 +109,7 @@
                     }
             #middle-box{
                 width: 1024px;
-                height: 1200px;
+                height: 800px;
                 float: left;
                 }
                         #middle-small-3{
@@ -366,6 +391,32 @@
                  
             });
         </script>
+
+	<script type="text/javascript">
+		function getExtension(filename) {
+			return filename.split('.').pop().toLowerCase();
+		}
+		function fileCheck() {
+			var uploadFile = $("input[name=files]").val();
+			if (uploadFile == "") {
+				alert("파일을 첨부하지 않았습니다")
+				return;
+			} else {
+				var extension = getExtension(uploadFile);
+				alert(extension);
+				switch (extension) {
+				case 'jpg':
+				case 'jpeg':
+				case 'png':
+				case 'bmp':
+					$("#uploadForm").submit();
+					break;
+				default:
+					alert("이미지 파일만 업로드 가능합니다.");
+				}
+			}
+		}
+	</script>        
     </head>
 
 
@@ -505,7 +556,7 @@
                       <input type="text" readonly="readonly" title="File Route">
                   </div>
                   <div id="reivew-button">
-                      <input class="btn btn-info" type="submit" value="Submit" id="save">
+                      <input class="btn btn-info" type="submit" value="Submit" id="save"  onclick="fileCheck()">
                    </div>
                     </form>
                     
