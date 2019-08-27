@@ -13,11 +13,11 @@ public interface SellerContentService {
 
 	//lhe-판매자 관리 페이지 리스트 출력용
 	public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO);
-	public ArrayList<MemberDataVO> getAllMemberList();
-	public ArrayList<SellerContentVO> getAllOrderList();
-	public ArrayList<SellerContentVO> getAllReviewList();
-	public ArrayList<SellerContentVO> getAllQnAList();
-	public ArrayList<SellerContentVO> getAllPaycheckList();
+	public ArrayList<MemberDataVO> getAllMemberList(AdvancedSearchDataVO searchDataVO);
+	public ArrayList<SellerContentVO> getAllOrderList(AdvancedSearchDataVO searchDataVO);
+	public ArrayList<SellerContentVO> getAllReviewList(AdvancedSearchDataVO searchDataVO);
+	public ArrayList<SellerContentVO> getAllQnAList(AdvancedSearchDataVO searchDataVO);
+	public ArrayList<SellerContentVO> getAllPaycheckList(AdvancedSearchDataVO searchDataVO);
 	
 	//lhe-판매자 관리 페이지 단일 항목 삭제 및 상태 변경용
 	public void deleteProductByIdx(String p_idx);

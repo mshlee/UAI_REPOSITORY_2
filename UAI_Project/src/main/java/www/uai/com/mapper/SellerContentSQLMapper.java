@@ -78,13 +78,19 @@ public interface SellerContentSQLMapper {
 
 	
 
+
+	
+	//lhe-판매자 상품 관리 상세검색용
+	@Select ("SELECT * FROM PRODUCT WHERE ${value}")
+	public ArrayList<ProductVO> getProductListBySearchWord(String query);
+	
 	//lhe-판매자 주문 관리 페이지 상세검색 리스트 출력용
 	@Select("SELECT * FROM Orders WHERE ${value}")
 	public ArrayList<OrderDataVO> getOrderListBySearchWord(String query);
 	
 	//lhe-판매자 상품 관리 상세검색용
-	@Select ("SELECT * FROM PRODUCT WHERE ${value}")
-	public ArrayList<ProductVO> getProductListBySearchWord(String query);
+	@Select ("SELECT * FROM Members WHERE ${value}")
+	public ArrayList<MemberDataVO> getMemberListBySearchWord(String query);
 	
 	 // 검색용
 	 @Select("SELECT bd2.* FROM (SELECT bd.*, ROWNUM AS rnum FROM (SELECT * FROM PRODUCT WHERE ${searchQuery} ORDER BY P_IDX DESC) bd) bd2 WHERE rnum BETWEEN ${startPostNum} AND ${endPostNum}")
@@ -111,6 +117,8 @@ public interface SellerContentSQLMapper {
 	//lhe-판매자 지급 관리 페이지 단일 지급건 상태 변경용
 	@Update("UPDATE Paycheck_Data SET PD_ISPAIDTOTEACHER=1, PD_PAIDDATE=SYSDATE WHERE o_idx=#{o_idx}")
 	public void updatePaycheckByIdx(String o_idx);
+
+	
 
 	
 

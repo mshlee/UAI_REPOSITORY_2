@@ -172,7 +172,7 @@ public class SellerContentController {
 		}
 		//lhe-주문 리스트 불러오기
 		ArrayList<SellerContentVO> orderDataList = new ArrayList<SellerContentVO>();
-		orderDataList=sellerContentService.getAllOrderList();
+		orderDataList=sellerContentService.getAllOrderList(searchDataVO);
 		
 		model.addAttribute("orderDataList", orderDataList);
 		
@@ -229,7 +229,7 @@ public class SellerContentController {
 
 		//회원 리스트 불러오기
 		ArrayList<MemberDataVO> memberDataList = new ArrayList<MemberDataVO>();
-		memberDataList=sellerContentService.getAllMemberList();
+		memberDataList=sellerContentService.getAllMemberList(searchDataVO);
 			
 		model.addAttribute("memberDataList", memberDataList);
 		return "sellerMemberManagePage";
@@ -270,7 +270,7 @@ public class SellerContentController {
 		
 		//리뷰 리스트 불러오기
 		ArrayList<SellerContentVO> reviewDataList = new ArrayList<SellerContentVO>();
-		reviewDataList = sellerContentService.getAllReviewList();
+		reviewDataList = sellerContentService.getAllReviewList(searchDataVO);
 		
 		model.addAttribute("reviewDataList", reviewDataList);
 		
@@ -326,7 +326,7 @@ public class SellerContentController {
 
 		
 		ArrayList<SellerContentVO> qnaDataList = new ArrayList<SellerContentVO>();
-		qnaDataList = sellerContentService.getAllQnAList();
+		qnaDataList = sellerContentService.getAllQnAList(searchDataVO);
 		
 		model.addAttribute("qnaDataList", qnaDataList);
 		
@@ -378,7 +378,7 @@ public class SellerContentController {
 		
 		
 		ArrayList<SellerContentVO> paycheckDataList = new ArrayList<SellerContentVO>();
-		paycheckDataList = sellerContentService.getAllPaycheckList();
+		paycheckDataList = sellerContentService.getAllPaycheckList(searchDataVO);
 		
 		model.addAttribute("paycheckDataList", paycheckDataList);
 		

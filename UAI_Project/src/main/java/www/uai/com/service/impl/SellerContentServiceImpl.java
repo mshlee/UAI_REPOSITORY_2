@@ -162,7 +162,6 @@ public class SellerContentServiceImpl implements SellerContentService {
 			if(query.length()<1) {
 				productDataList = sellerContentSQLMapper.getAllProductList();
 			}else {
-				queryHead += query;
 				productDataList = sellerContentSQLMapper.getProductListBySearchWord(query);
 			}
 			
@@ -197,10 +196,121 @@ public class SellerContentServiceImpl implements SellerContentService {
 	
 	//lhe-판매자 회원 관리 리스트 출력
 	@Override
-	public ArrayList<MemberDataVO> getAllMemberList() {	
+	public ArrayList<MemberDataVO> getAllMemberList(AdvancedSearchDataVO searchDataVO) {	
 		// TODO Auto-generated method stub
 		
+
+		String startDate = searchDataVO.getStartDate();
+		String endDate = searchDataVO.getEndDate();
+		String radiobox = searchDataVO.getRadiobox();
+		String radioboxValue = searchDataVO.getRadioboxValue();
+		String keyword = searchDataVO.getKeyword();
+		String value = searchDataVO.getValue();
+		
+
+		// vo 객체 null값 여부 확인
+		boolean isEmpty = false;
+
+		if (startDate == null && radioboxValue == null && keyword == null) {
+			isEmpty = true;
+		}
+		
+
+		// lhe-상세검색기능 추가 (다중 조건 정렬 이용)
 		ArrayList<MemberDataVO> memberDataList = new ArrayList<MemberDataVO>();
+		
+
+		if (isEmpty==true) {
+
+
+			memberDataList = sellerContentSQLMapper.getAllMemberList();
+
+	
+			
+		} else if (isEmpty==false) {
+			
+			/*
+			String queryHead="SELECT * FROM PRODUCT WHERE";
+			String query = "";
+			String andPhrase = " AND ";
+			if (p_type != null) {
+				query += andPhrase;
+				query += "P_TYPE=" + p_type;
+				query += andPhrase;
+			}if (startDate != null && endDate != null) {
+				query += "P_POSTDATE BETWEEN " + "'"+startDate +"'"+ " AND " + "'"+endDate+"'";
+				query += andPhrase;
+			}if (minPrice != null && maxPrice != null) {
+				query += "P_ORIGINALPRICE BETWEEN " + minPrice + " AND " + maxPrice;
+				query += andPhrase;
+			}if (keyword != null && value != null) {
+				query += keyword.toUpperCase() + " LIKE "+ "'%'" + "'"+value +"'"+ "'%'" ;
+				query += andPhrase;
+			}
+			
+			
+			query = query.substring(0, query.length() - 4);
+			System.out.println(query);
+			
+			productDataList = sellerContentSQLMapper.getProductListBySearchWord(query);
+			
+			}
+			*/
+			
+
+			//empty string 예외처리
+			if(startDate.length()==0) {
+				startDate=null;
+			}if(endDate.length()==0) {
+				startDate=null;
+			}if(radioboxValue.length()==0) {
+				radioboxValue=null;
+			}if(keyword.length()==0) {
+				keyword=null;
+			}if(value.length()==0) {
+				value=null;
+			}
+
+			
+			String query = "";
+			String andPhrase = " AND ";
+		
+			if (startDate != null && endDate != null) {
+				//query = query.substring(0, query.length() - 5);
+				query += "M_JOINDATE BETWEEN " + "'" + startDate + "'" + " AND " + "'" + endDate + "'";
+				query += andPhrase;
+			}
+			if (radiobox != null && radioboxValue != null) {
+				//query = query.substring(0, query.length() - 5);
+				query += "M_GENDER= " + radioboxValue;
+				query += andPhrase;
+			}
+			if (keyword != null && value != null) {
+				//query = query.substring(0, query.length() - 5);
+				
+				if(keyword=="m_idx") {
+					query += "M_IDX= " + value;
+					query += andPhrase;
+				}else {
+					query += keyword.toUpperCase() + " LIKE " + "'%'" + "'" + value + "'" + "'%'";
+					query += andPhrase;
+				}
+					
+					
+				
+			}
+
+			query = query.substring(0, query.length() - 5);
+			
+			if(query.length()<1) {
+				memberDataList = sellerContentSQLMapper.getAllMemberList();
+			}else {
+				memberDataList = sellerContentSQLMapper.getMemberListBySearchWord(query);
+			}
+			
+		}
+		
+		
 		
 		memberDataList = sellerContentSQLMapper.getAllMemberList();
 
@@ -232,7 +342,7 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 	// lhe-판매자 주문 관리 목록 출력
 	@Override
-	public ArrayList<SellerContentVO> getAllOrderList() {
+	public ArrayList<SellerContentVO> getAllOrderList(AdvancedSearchDataVO searchDataVO) {
 		// TODO Auto-generated method stub
 		ArrayList<SellerContentVO> dataList = new ArrayList<SellerContentVO>();
 		ArrayList<OrderDataVO> orderDataList = new ArrayList<OrderDataVO>();
@@ -279,7 +389,7 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 	// lhe-판매자 리뷰 관리 목록 출력
 	@Override
-	public ArrayList<SellerContentVO> getAllReviewList() {
+	public ArrayList<SellerContentVO> getAllReviewList(AdvancedSearchDataVO searchDataVO) {
 		// TODO Auto-generated method stub
 		ArrayList<SellerContentVO> reviewDataList = new ArrayList<SellerContentVO>();
 		ArrayList<ContentDataVO> reviewVO = sellerContentSQLMapper.getAllReviewList();
@@ -320,7 +430,7 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 	// lhe-판매자 qna 관리 목록 출력
 	@Override
-	public ArrayList<SellerContentVO> getAllQnAList() {
+	public ArrayList<SellerContentVO> getAllQnAList(AdvancedSearchDataVO searchDataVO) {
 		// TODO Auto-generated method stub
 
 		ArrayList<SellerContentVO> qnaDataList = new ArrayList<SellerContentVO>();
@@ -341,7 +451,7 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 	// lhe-판매자 지급 관리 목록 페이지 출력
 	@Override
-	public ArrayList<SellerContentVO> getAllPaycheckList() {
+	public ArrayList<SellerContentVO> getAllPaycheckList(AdvancedSearchDataVO searchDataVO) {
 		// TODO Auto-generated method stub
 
 		ArrayList<SellerContentVO> paycheckDataList = new ArrayList<SellerContentVO>();

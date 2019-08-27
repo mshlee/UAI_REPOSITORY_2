@@ -18,14 +18,9 @@ public class AdvancedSearchQueryTest {
 		 * searchDataVO.getMaxPrice(); String keyword = searchDataVO.getKeyword();
 		 * String value = searchDataVO.getValue();
 		 */
-
-		String p_type = "";
-		String startDate = "";
-		String endDate = "";
-		String minPrice = "";
-		String maxPrice = "";
-		String keyword = "";
-		String value = "";
+	
+		
+	
 		/*
 		// empty string 예외처리
 		if (p_type.length() == 0) {
@@ -60,31 +55,63 @@ public class AdvancedSearchQueryTest {
 
 			System.out.println("검색조건없음");
 
-		} else */if (true) {
 
-			String queryHead = "SELECT * FROM PRODUCT WHERE";
-			String query = " AND ";
-			System.out.println(query.length());
+
+		} else */
+		
+		
+		String startDate = "";
+		String endDate = "";
+		String radiobox = "";
+		String radioboxValue = "";
+		String keyword = "";
+		String value = "";
+		
+		
+		if (true) {
+			
+			/*
+			if(startDate.length()==0) {
+				startDate=null;
+			}if(endDate.length()==0) {
+				startDate=null;
+			}if(radioboxValue.length()==0) {
+				radioboxValue=null;
+			}if(keyword.length()==0) {
+				keyword=null;
+			}if(value.length()==0) {
+				value=null;
+			}
+			*/
+
+		
+			String query = "";
+		
 			String andPhrase = " AND ";
-			if (p_type != null) {
-				query = query.substring(0, query.length() - 5);
-				query += "P_TYPE=" + p_type;
-				query += andPhrase;
-			}
+		
 			if (startDate != null && endDate != null) {
-				query = query.substring(0, query.length() - 5);
-				query += "P_POSTDATE BETWEEN " + "'" + startDate + "'" + " AND " + "'" + endDate + "'";
+				//query = query.substring(0, query.length() - 5);
+				query += "M_JOINDATE BETWEEN " + "'" + startDate + "'" + " AND " + "'" + endDate + "'";
 				query += andPhrase;
 			}
-			if (minPrice != null && maxPrice != null) {
-				query = query.substring(0, query.length() - 5);
-				query += "P_ORIGINALPRICE BETWEEN " + minPrice + " AND " + maxPrice;
+			if (radiobox != null && radioboxValue != null) {
+				//query = query.substring(0, query.length() - 5);
+				query += "M_GENDER= " + radioboxValue;
 				query += andPhrase;
 			}
 			if (keyword != null && value != null) {
-				query = query.substring(0, query.length() - 5);
-				query += keyword.toUpperCase() + " LIKE " + "'%'" + "'" + value + "'" + "'%'";
-				query += andPhrase;
+				//query = query.substring(0, query.length() - 5);
+				
+				if(keyword=="M_IDX") {
+					query += "M_IDX= " + value;
+					query += andPhrase;
+				}else {
+					query += keyword.toUpperCase() + " LIKE " + "'%'" + "'" + value + "'" + "'%'";
+					query += andPhrase;
+				}
+					
+					
+				
 			}
 
 			query = query.substring(0, query.length() - 5);
