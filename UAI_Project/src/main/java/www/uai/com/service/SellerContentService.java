@@ -1,6 +1,9 @@
 package www.uai.com.service;
 
 import java.util.ArrayList;
+
+import org.json.JSONObject;
+
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.ContentDataVO;
@@ -45,6 +48,9 @@ public interface SellerContentService {
 	public void deletePostsByIdx(ArrayList<IdxVO> IdxVO);
 	public void updateOrdersByIdx(ArrayList<IdxVO> IdxVO);
 	public void updatePaychecksByIdx(ArrayList<IdxVO> IdxVO);
+	
+	//lhe-판매자 대시보드 관리용
+	public JSONObject getAllOrderStatList();
 	
 
 	

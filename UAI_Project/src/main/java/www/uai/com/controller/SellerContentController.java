@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -434,7 +435,14 @@ public class SellerContentController {
 	
 	//lhe-판매자 통계 대시보드 페이지 맵핑
 	@RequestMapping("/sellerDashboard")
-	public String sellerDashboardPage() {
+	public String sellerDashboardPage(Model model) {
+		
+		
+		//통계 데이터 리스트 받아오기
+		JSONObject dashJSON = sellerContentService.getAllOrderStatList();
+		
+		
+		model.addAttribute("dashJSON", dashJSON);
 		
 		return "sellerDashboardPage";
 		

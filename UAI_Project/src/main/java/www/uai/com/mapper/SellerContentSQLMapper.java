@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.ContentDataVO;
+import www.uai.com.vo.DashboardVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.OrderDataVO;
 import www.uai.com.vo.PaycheckDataVO;
@@ -137,6 +137,9 @@ public interface SellerContentSQLMapper {
 	@Update("UPDATE Paycheck_Data SET PD_ISPAIDTOTEACHER=1, PD_PAIDDATE=SYSDATE WHERE o_idx=#{o_idx}")
 	public void updatePaycheckByIdx(String o_idx);
 
+	//lhe-판매자 대시보드 구성용
+	@Select("SELECT * FROM OrderStats")
+	public ArrayList<DashboardVO> getOrderStats();
 	
 
 	

@@ -2,6 +2,9 @@ package www.uai.com.service.impl;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import www.uai.com.service.SellerContentService;
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.ContentDataVO;
+import www.uai.com.vo.DashboardVO;
 import www.uai.com.vo.IdxVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.OrderDataVO;
@@ -849,6 +853,43 @@ public class SellerContentServiceImpl implements SellerContentService {
 			sellerContentSQLMapper.updatePaycheckByIdx(idx.getIdx());
 		}
 
+	}
+	
+	
+	//lhe-판매자 대시보드 데이터 호출 명령
+	@Override
+	public JSONObject getAllOrderStatList() {
+		// TODO Auto-generated method stub
+		
+		ArrayList<DashboardVO> dashVO=sellerContentSQLMapper.getOrderStats();
+		
+		//JSON 파싱
+		
+		try {
+		JSONObject statsJSON = new  JSONObject();
+		JSONArray statsArrJSON = new JSONArray();
+		
+		for(int i = 0; i< dashVO.size(); i++) {
+			JSONObject obj = new JSONObject();
+			obj.put("s_date", dashVO.get(i).getS_date());
+			obj.put("s_dailySum", dashVO.get(i).getS_dailySum());
+			obj.put("s_dailyCount", dashVO.get(i).getS_dailyCount());
+			obj.put("s_dailyAvg", dashVO.get(i).getS_dailyAvg());
+			
+			statsArrJSON.put(obj);
+		}
+		
+		statsJSON.put("statType", "orders");
+		statsJSON.put("duration", "daily");
+		statsJSON.put("items", statsArrJSON);
+		
+		System.out.println(statsJSON.toString());
+
+		}catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 
