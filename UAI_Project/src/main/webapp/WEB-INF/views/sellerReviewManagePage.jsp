@@ -66,6 +66,13 @@
 }
 </style>
 
+<script type="text/javascript">
+
+function delchk(){
+    return confirm("정말 삭제하시겠습니까?");
+}
+
+</script>
 
 </head>
 <body>
@@ -104,21 +111,19 @@
                
             <tr class="table-secondary">
             <th>별점</th>
-               <th><input type="text" name="minRate">~<input type="text" name="maxRate"></th>
+               <th><input type="text" name="minPrice">~<input type="text" name="maxPrice"></th>
                     </tr>
             
             <tr class="table-primary">
                 <th>키워드</th>
                 <th><select name="keyword">
               		<option></option>
-              		<option value="b_referidx">글번호</option>
-              		<option value="b_title">글제목</option>
-              		<option value="p_idx">강의번호</option>
-              		<option value="p_name">강의명</option>
-                    <option value="m_idx">회원번호</option>
-                    <option value="m_name">이름</option>
-                    <option value="m_id">아이디</option>
-                    <option value="m_nick">닉네임</option>
+              		<option value="B_REFERIDX">글번호</option>
+              		<option value="B_TITLE">글제목</option>
+              		<option value="P_IDX">강의번호</option>
+              		<option value="P_NAME">강의명</option>
+                    <option value="M_IDX">회원번호</option>
+                    <option value="M_ID">아이디</option>
                 </select><input type="text" name="value"></th>
             </tr>
             <tr class="table-secondary">
@@ -129,7 +134,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./sellerDeleteReviewsByIdx" method="post">
+		<form action="./sellerDeleteReviewsByIdx" name="list" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?')">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -168,7 +173,7 @@
 							<th scope="row">${reviewDataList.contentDataVO.b_starRate}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_count}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_postdate}</th>
-							<th scope="row"><a href="./sellerDeleteReviewByIdx?b_referIdx=${reviewDataList.contentDataVO.b_referIdx}">삭제</a></th>
+							<th scope="row"><a href="./sellerDeleteReviewByIdx?b_referIdx=${reviewDataList.contentDataVO.b_referIdx} onclick="return delchk()">삭제</a></th>
 						</tr>
 						</c:forEach>
 				</tbody>

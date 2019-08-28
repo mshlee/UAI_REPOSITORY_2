@@ -32,13 +32,30 @@ public interface SellerContentSQLMapper {
 	@Update ("UPDATE Admins SET AD_PW = #{ad_pw}, AD_NICK=#{ad_nick} WHERE AD_IDX=#{ad_idx}")
 	public void updateAdminByIdx(String ad_pw, String ad_nick, String ad_idx);
 
+	
+	
+	
+	//lhe-판매자 관리페이지 메인 리스트 출력용
+	@Select ("SELECT * FROM Orders ORDER BY O_DATE DESC")
+	public ArrayList<OrderDataVO> getOrderListForMain();
+	
+	@Select ("SELECT * FROM Product ORDER BY P_POSTDATE DESC")
+	public ArrayList<ProductVO> getProductListForMain();
+	
+	@Select ("SELECT * FROM Board_Content WHERE B_TYPE=1 ORDER BY B_POSTDATE DESC")
+	public ArrayList<ContentDataVO> getReviewListForMain();
+	
+	@Select ("SELECT * FROM Board_Content WHERE B_TYPE=2 AND B_ISPOST=1 ORDER BY B_POSTDATE DESC")
+	public ArrayList<ContentDataVO> getQnAListForMain();
 
+	
+	
 	//lhe-판매자 상품 관리 페이지 리스트 출력용
 	@Select ("SELECT * FROM Product ORDER BY P_IDX")
 	public ArrayList<ProductVO> getAllProductList();
 	
 	//lhe-판매자 주문 관리 페이지 주문 리스트 출력용
-	@Select("SELECT * FROM Orders")
+	@Select("SELECT * FROM Orders ORDER BY O_IDX")
 	public ArrayList<OrderDataVO> getAllOrderList();
 	
 	//lhe-판매자 회원 관리 페이지 리스트 출력용
@@ -54,7 +71,7 @@ public interface SellerContentSQLMapper {
 	public ArrayList<ContentDataVO> getAllQnAList();
 	
 	//lhe- 판매자 지급 관리 페이지 리스트 출력용
-	@Select("SELECT * FROM Paycheck_Data")
+	@Select("SELECT * FROM Paycheck_Data ORDER BY O_IDX")
 	public ArrayList<PaycheckDataVO> getAllPaycheckList();
 
 	
@@ -72,7 +89,6 @@ public interface SellerContentSQLMapper {
 	@Select("SELECT * FROM Admins WHERE AD_IDX=#{ad_idx}")
 	public AdminDataVO getAdminListByIdx(String ad_idx);
 
-	
 	@Select("SELECT * FROM Orders WHERE O_IDX=#{o_idx}")
 	public OrderDataVO getOrderListByIdx(String o_idx);
 
@@ -81,21 +97,24 @@ public interface SellerContentSQLMapper {
 
 	
 	//lhe-판매자 상품 관리 상세검색용
-	@Select ("SELECT * FROM PRODUCT WHERE ${value}")
+	@Select ("SELECT * FROM PRODUCT WHERE ${value} ORDER BY P_IDX")
 	public ArrayList<ProductVO> getProductListBySearchWord(String query);
 	
 	//lhe-판매자 주문 관리 페이지 상세검색 리스트 출력용
-	@Select("SELECT * FROM Orders WHERE ${value}")
+	@Select("SELECT * FROM Orders WHERE ${value} ORDER BY O_IDX")
 	public ArrayList<OrderDataVO> getOrderListBySearchWord(String query);
 	
 	//lhe-판매자 상품 관리 상세검색용
-	@Select ("SELECT * FROM Members WHERE ${value}")
+	@Select ("SELECT * FROM Members WHERE ${value} ORDER BY M_IDX")
 	public ArrayList<MemberDataVO> getMemberListBySearchWord(String query);
 	
-	 // 검색용
-	 @Select("SELECT bd2.* FROM (SELECT bd.*, ROWNUM AS rnum FROM (SELECT * FROM PRODUCT WHERE ${searchQuery} ORDER BY P_IDX DESC) bd) bd2 WHERE rnum BETWEEN ${startPostNum} AND ${endPostNum}")
-	 public ArrayList<ProductVO> selectByCondition(String searchQuery);
+	//lhe-판매자 리뷰&QnA 관리 상세검색용
+	@Select("SELECT * FROM Board_Content WHERE ${value} ORDER BY B_IDX")
+	public ArrayList<ContentDataVO> getPostListBySearchWord(String query);
 	
+	//lhe-판매자 지급관리 상세검색용
+	@Select("SELECT * FROM Paycheck_Data WHERE ${value} ORDER BY O_IDX")
+	public ArrayList<PaycheckDataVO> getPaycheckListBySearchWord(String query);
 	
 
 	//lhe-판매자 상품 관리 페이지 단일 상품 삭제용

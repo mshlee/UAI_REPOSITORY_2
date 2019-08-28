@@ -3,13 +3,21 @@ package www.uai.com.service;
 import java.util.ArrayList;
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
+import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.IdxVO;
 import www.uai.com.vo.MemberDataVO;
+import www.uai.com.vo.OrderDataVO;
 import www.uai.com.vo.ProductVO;
 import www.uai.com.vo.SellerContentVO;
 
 public interface SellerContentService {
 	
+	//lhe-판매자 관리 페이지 메인 리스트 출력용
+	public ArrayList<ProductVO> getProductListForMain();
+	public ArrayList<OrderDataVO> getOrderListForMain();
+	public ArrayList<ContentDataVO> getQnaListForMain();
+	public ArrayList<ContentDataVO> getReviewListForMain();
+
 
 	//lhe-판매자 관리 페이지 리스트 출력용
 	public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO);
@@ -37,6 +45,7 @@ public interface SellerContentService {
 	public void deletePostsByIdx(ArrayList<IdxVO> IdxVO);
 	public void updateOrdersByIdx(ArrayList<IdxVO> IdxVO);
 	public void updatePaychecksByIdx(ArrayList<IdxVO> IdxVO);
+	
 
 	
 	

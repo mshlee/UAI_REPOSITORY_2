@@ -494,22 +494,18 @@
                        <table class="white-table">
                      <thead>
                        <tr>
-                         <th>Lorem</th><th>Ipsum</th><th>Dolor</th><th>Sit</th><th>Amet</th>
+                         <th>주문번호</th><th>주문금액</th><th>결제방법</th><th>주문날짜</th>
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                    <c:forEach var="orderListForMain" items="${orderListForMain }" begin="1" end="4" step="1">
+                     	<tr>
+                         <td>${orderListForMain.o_idx }</td>
+                         <td>${orderListForMain.o_id }</td>
+                         <td>${orderListForMain.o_o_paymentMethod }</td>
+                         <td>${orderListForMain.o_date }</td>
                        </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
+                       </c:forEach>
                      </tbody>
                    </table>
                   <a href="./sellerManageOrder"><button class="btn btn-link" id="more">더 보기</button></a>                   
@@ -523,22 +519,18 @@
                        <table >
                      <thead>
                        <tr>
-                         <th>Lorem</th><th>Ipsum</th><th>Dolor</th><th>Sit</th><th>Amet</th>
+                        <th>강의번호</th><th>강의명</th><th>강의가격</th><th>등록날짜</th>
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                    <c:forEach var="productListForMain" items="${productListForMain }" begin="1" end="4" step="1">
+                     	<tr>
+                         <td>${productListForMain.p_idx }</td>
+                         <td><a href="./readProductPage?p_idx=${productListForMain.p_idx}">${productListForMain.p_name }</a></td>
+                         <td>${productListForMain.p_originalPrice }</td>
+                         <td>${productListForMain.p_postdate }</td>
                        </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
+                       </c:forEach>
                      </tbody>
                    </table>
                    <a href="./sellerManageProduct"><button class="btn btn-link" id="more">더 보기</button></a>
@@ -552,22 +544,18 @@
                        <table class="white-table">
                      <thead>
                        <tr>
-                         <th>Lorem</th><th>Ipsum</th><th>Dolor</th><th>Sit</th><th>Amet</th>
+                         <th>글번호</th><th>제목</th><th>질문유형</th><th>작성날짜</th>
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                    <c:forEach var="qnaListForMain" items="${qnaListForMain }" begin="1" end="4" step="1">
+                     	<tr>
+                         <td>${qnaListForMain.b_referIdx }</td>
+                         <td><a href="./readQnAPageByAdmin?b_idx=${qnaListForMain.b_idx }">${qnaListForMain.b_title }</a></td>
+                         <td>${qnaListForMain.b_qCategory }</td>
+                         <td>${qnaListForMain.b_postdate }</td>
                        </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
+                       </c:forEach>
                      </tbody>
                    </table>
                    <a href="./sellerManageQnA"><button class="btn btn-link" id="more">더 보기</button></a>
@@ -580,22 +568,18 @@
                        <table>
                      <thead>
                        <tr>
-                         <th>Lorem</th><th>Ipsum</th><th>Dolor</th><th>Sit</th><th>Amet</th>
+                         <th>글번호</th><th>제목</th><th>별점</th><th>작성날짜</th>
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
+                     <c:forEach var="reviewListForMain" items="${reviewListForMain }" begin="1" end="4" step="1">
+                     	<tr>
+                         <td>${reviewListForMain.b_referIdx }</td>
+                         <td><a href="./readReviewPage?b_idx=${reviewListForMain.b_idx }">${reviewListForMain.b_title }</a></td>
+                         <td>${reviewListForMain.b_starrate }</td>
+                         <td>${reviewListForMain.b_postdate }</td>
                        </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
-                       <tr>
-                         <td>Lorem</td><td>Ipsum</td><td>Dolor</td><td>Sit</td><td>Amet</td>
-                       </tr>
+                       </c:forEach>
                      </tbody>
                    </table>
                    <a href="./sellerManageReview"><button class="btn btn-link" id="more">더 보기</button></a>

@@ -66,6 +66,13 @@
 }
 </style>
 
+<script type="text/javascript">
+
+function delchk(){
+    return confirm("정말 삭제하시겠습니까?");
+}
+
+</script>
 
 </head>
 <body>
@@ -104,21 +111,20 @@
                
             <tr class="table-secondary">
             <th>질문유형</th>
-               <th><input type="checkbox" name="b_qcategory" value="0">강의문의 <input type="checkbox" name="b_qcategory" value="1">결제문의</th>
+               <th><input type="radio" name="radioboxValue" value="0">강의문의 |
+               <input type="radio" name="radioboxValue" value="1">결제문의</th>
                     </tr>
             
             <tr class="table-primary">
                 <th>키워드</th>
                 <th><select name="keyword">
               		<option></option>
-              		<option value="b_referIdx">글번호</option>
-              		<option value="b_title">글제목</option>
-              		<option value="p_idx">강의번호</option>
-              		<option value="p_name">강의명</option>
-                    <option value="m_idx">회원번호</option>
-                    <option value="m_name">이름</option>
-                    <option value="m_id">아이디</option>
-                    <option value="m_nick">닉네임</option>
+              		<option value="B_IDX">글번호</option>
+              		<option value="B_TITLE">글제목</option>
+              		<option value="P_IDX">강의번호</option>
+              		<option value="P_NAME">강의명</option>
+                    <option value="M_IDX">회원번호</option>
+                    <option value="M_ID">아이디</option>
                 </select><input type="text" name="value"></th>
             </tr>
             <tr class="table-secondary">
@@ -129,7 +135,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./sellerDeleteQnAsByIdx" method="post">
+		<form action="./sellerDeleteQnAsByIdx" name="list" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?')">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -179,7 +185,7 @@
 							<th scope="row">${qnaDataList.contentDataVO.b_postdate}</th>
 							
 							<th scope="row"><a href="./readQnAPageByAdmin?b_idx=${qnaDataList.contentDataVO.b_idx}">답변작성</a></th>
-							<th scope="row"><a href="./sellerDeleteQnAByIdx?b_referIdx=${qnaDataList.contentDataVO.b_referIdx}">삭제</a></th>
+							<th scope="row"><a href="./sellerDeleteQnAByIdx?b_referIdx=${qnaDataList.contentDataVO.b_referIdx}" onclick="return delchk()">삭제</a></th>
 						</tr>
 						</c:forEach>
 				</tbody>

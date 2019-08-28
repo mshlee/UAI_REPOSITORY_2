@@ -67,6 +67,13 @@
 }
 </style>
 
+<script type="text/javascript">
+
+function delchk(){
+    return confirm("정말 삭제하시겠습니까?");
+}
+
+</script>
 
 </head>
 <body>
@@ -139,7 +146,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./sellerDeleteProductsByIdx" method="post">
+		<form action="./sellerDeleteProductsByIdx" name="list" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?')">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -212,7 +219,7 @@
 							<th scope="row">${productDataList.p_lectureDay }</th>
 							<th scope="row">${productDataList.p_postDate }</th>
 							<th scope="row"><a href="./sellerUpdateProductByIdx?p_idx=${productDataList.p_idx }">수정</a></th>
-							<th scope="row"><a href="./sellerDeleteProductByIdx?p_idx=${productDataList.p_idx }">삭제</a></th>
+							<th scope="row"><a href="./sellerDeleteProductByIdx?p_idx=${productDataList.p_idx }" onclick="return delchk()">삭제</a></th>
 						</tr>
 						</c:forEach>
 						

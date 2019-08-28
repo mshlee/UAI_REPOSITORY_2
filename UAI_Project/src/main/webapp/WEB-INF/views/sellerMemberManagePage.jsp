@@ -67,6 +67,14 @@
 }
 </style>
 
+<script type="text/javascript">
+
+function delchk(){
+    return confirm("해당 회원정보를 삭제하시겠습니까?");
+}
+
+</script>
+
 
 </head>
 <body>
@@ -105,20 +113,20 @@
                
             <tr class="table-secondary">
                 <th>성별</th>
-                    <th><input type="radio" name="m_gender" value="M">남  
-                    <input type="radio" name="m_gender" value="F">여</th>
+                    <th><input type="radio" name="radioboxValue" value="M">남  
+                    <input type="radio" name="radioboxValue" value="F">여</th>
                     </tr>
             
             <tr class="table-primary">
                 <th>키워드</th>
                 <th><select name="keyword">
               		<option></option>
-                    <option value="m_idx">회원번호</option>
-                    <option value="m_name">이름</option>
-                    <option value="m_id">아이디</option>
-                    <option value="m_nick">닉네임</option>
-                    <option value="m_address">주소</option>
-                    <option value="m_phone">전화번호</option>
+                    <option value="M_IDX">회원번호</option>
+                    <option value="M_NAME">이름</option>
+                    <option value="M_ID">아이디</option>
+                    <option value="M_NICK">닉네임</option>
+                    <option value="M_ADDRESS">주소</option>
+                    <option value="M_PHONE">전화번호</option>
                 </select><input type="text" name="value"></th>
             </tr>
             <tr class="table-primary">
@@ -129,7 +137,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./sellerDeleteMembersByIdx" method="post">
+		<form action="./sellerDeleteMembersByIdx" name="list" method="post" onsubmit="return confirm('회원정보를 삭제하시겠습니까?')">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>

@@ -67,6 +67,13 @@
 }
 </style>
 
+<script type="text/javascript">
+
+function delchk(){
+    return confirm("지급 상태를 변경 하시겠습니까?");
+}
+
+</script>
 
 </head>
 <body>
@@ -113,8 +120,8 @@
             <tr class="table-primary">
                 <th>지급여부</th>
                     <th>
-                    <input type="radio" name="pd_isPaidToTeacher" value="0">미지급  |
-                    <input type="radio" name="pd_isPaidToTeacher" value="1">지급완료</th>
+                    <input type="radio" name="radioboxValue" value="0">미지급  |
+                    <input type="radio" name="radioboxValue" value="1">지급완료</th>
                     </tr>
             
             <tr class="table-secondary">
@@ -122,10 +129,9 @@
                  <th>키워드</th>
                 <th><select name="keyword">
               		<option></option>
-                    <option value="o_idx">주문번호</option>
-                    <option value="p_idx">강의번호</option>
-                    <option value="p_name">강의명</option>
-                    <option value="p_teacher">강사명</option>
+                    <option value="O_IDX">주문번호</option>
+                    <option value="P_IDX">강의번호</option>
+                    <option value="P_TEACHER">강사명</option>
                 </select>
                 <input type="text" name="value"></th>
                    
@@ -139,7 +145,7 @@
                 </form>
         </div><br>
 		<div id="content_box">
-		<form action="./sellerUpdatePaychecksByIdx" method="post">
+		<form action="./sellerUpdatePaychecksByIdx" name="list" method="post" onsubmit="return confirm('지급 상태를 변경 삭제하시겠습니까?')">
 			<table class="table-responsive table-hover">
 				<thead>
 					<tr>
@@ -198,7 +204,7 @@
 							
 							<c:choose>
 							<c:when test="${paycheckDataList.paycheckDataVO.pd_isPaidToTeacher == 0}">
-							<th scope="row"><a href="./sellerUpdatePaycheckByIdx?o_idx=${paycheckDataList.paycheckDataVO.o_idx }">지급완료</a></th>
+							<th scope="row"><a href="./sellerUpdatePaycheckByIdx?o_idx=${paycheckDataList.paycheckDataVO.o_idx }" onclick="return delchk()">지급완료</a></th>
 							</c:when>
 							<c:when test="${paycheckDataList.paycheckDataVO.pd_isPaidToTeacher == 1}">
 							<th scope="row">지급완료</th>

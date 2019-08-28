@@ -19,8 +19,10 @@ import www.uai.com.service.ProductService;
 import www.uai.com.service.SellerContentService;
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
+import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.IdxVO;
 import www.uai.com.vo.MemberDataVO;
+import www.uai.com.vo.OrderDataVO;
 import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductVO;
 import www.uai.com.vo.SellerContentVO;
@@ -92,13 +94,24 @@ public class SellerContentController {
 	
 	//관리자 메인 페이지
 	@RequestMapping ("/sellerIndex")
-	public String sellerMainPage(HttpSession session){
+	public String sellerMainPage(Model model, HttpSession session){
 
 		if(session!=null) {
 			return "sellerMainPage";
 		}else {
 			
 		}
+		
+		//메인 리스트 4개 불러오기
+		ArrayList<OrderDataVO> orderListForMain = sellerContentService.getOrderListForMain();
+		ArrayList<ProductVO> productListForMain = sellerContentService.getProductListForMain();
+		ArrayList<ContentDataVO> qnaListForMain = sellerContentService.getQnaListForMain();
+		ArrayList<ContentDataVO> reviewListForMain = sellerContentService.getReviewListForMain();
+		
+		model.addAttribute("orderListForMain", orderListForMain);
+		model.addAttribute("productListForMain", productListForMain);
+		model.addAttribute("qnaListForMain", qnaListForMain);
+		model.addAttribute("reviewListForMain", reviewListForMain);
 		
 		return "mainPage";
 		
@@ -221,7 +234,7 @@ public class SellerContentController {
 	//lhe-판매자 회원 관리 페이지 관련 맵핑
 	@RequestMapping ("/sellerManageMember")
 	public String memberManage(Model model, AdvancedSearchDataVO searchDataVO, HttpSession sessionData){
-		
+				
 		if(sessionData==null){
 			
 			return "loginForm";
@@ -319,11 +332,11 @@ public class SellerContentController {
 	@RequestMapping("/sellerManageQnA")
 	public String qnaManagePage(Model model, AdvancedSearchDataVO searchDataVO, HttpSession sessionData) {
 		
+		
 		if(sessionData==null){
 			
 			return "loginForm";
 		}
-
 		
 		ArrayList<SellerContentVO> qnaDataList = new ArrayList<SellerContentVO>();
 		qnaDataList = sellerContentService.getAllQnAList(searchDataVO);

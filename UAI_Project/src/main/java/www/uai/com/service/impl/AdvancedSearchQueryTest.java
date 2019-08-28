@@ -60,69 +60,96 @@ public class AdvancedSearchQueryTest {
 		} else */
 		
 		
-		String startDate = "";
+		String startDate = "2018-01-01";
 		String endDate = "";
-		String radiobox = "";
-		String radioboxValue = "";
-		String keyword = "";
-		String value = "";
+		String minPrice = "";
+		String maxPrice = "";
+		String radioboxValue = "on";
+		String checkboxValue = "0";
+		String keyword = "m_idx";
+		String value = "tie";
 		
 		
 		if (true) {
 			
-			/*
+			
 			if(startDate.length()==0) {
 				startDate=null;
 			}if(endDate.length()==0) {
-				startDate=null;
-			}if(radioboxValue.length()==0) {
+				endDate=null;
+			}if (minPrice.length() == 0) {
+				minPrice = null;
+			}if (maxPrice.length() == 0) {
+				maxPrice = null;
+			}
+			if(radioboxValue=="on") {
 				radioboxValue=null;
-			}if(keyword.length()==0) {
+			}/*if(checkboxValue=="on") {
+				checkboxValue=null;
+			}
+			*/
+			if(keyword.length()==0) {
 				keyword=null;
 			}if(value.length()==0) {
 				value=null;
 			}
-			*/
+			
 
 		
 			String query = "";
-		
 			String andPhrase = " AND ";
 		
-			if (startDate != null && endDate != null) {
+			if (startDate != null || endDate != null) {
+				
+				if(startDate==null || endDate ==null){
+				
+				}else {
+					//query = query.substring(0, query.length() - 5);
+					query += "PD_PAIDDATE BETWEEN " + "'" + startDate + "'" + " AND " + "'" + endDate + "'";
+					query += andPhrase;
+				}
+				
+			}
+			
+			if (minPrice != null && maxPrice != null) {
+				
 				//query = query.substring(0, query.length() - 5);
-				query += "M_JOINDATE BETWEEN " + "'" + startDate + "'" + " AND " + "'" + endDate + "'";
+				query += "PD_TOTALPAYMENTTOTEACHER BETWEEN " + minPrice + " AND " + maxPrice;
+				query += andPhrase;
+				
+			}
+			
+			
+			if (radioboxValue != null) {
+				//query = query.substring(0, query.length() - 5);
+				query += "PD_ISPAIDTOTEACHER= " + radioboxValue;
 				query += andPhrase;
 			}
-			if (radiobox != null && radioboxValue != null) {
+			/*
+			if (checkboxValue != null) {
 				//query = query.substring(0, query.length() - 5);
-				query += "M_GENDER= " + radioboxValue;
+				query += "O_PAYMENTMETHOD= " + checkboxValue;
 				query += andPhrase;
 			}
+			*/
 			if (keyword != null && value != null) {
 				//query = query.substring(0, query.length() - 5);
 				
-				if(keyword=="M_IDX") {
+				if(keyword=="O_IDX") {
 					query += "M_IDX= " + value;
 					query += andPhrase;
-				}else {
-					query += keyword.toUpperCase() + " LIKE " + "'%'" + "'" + value + "'" + "'%'";
+				}else if(keyword=="P_IDX") {
+					query += "P_IDX= " + value;
 					query += andPhrase;
-				}
-					
-					
+				}else {
+					query += keyword.toUpperCase() + " LIKE " + "'%" + value + "%'";
+					query += andPhrase;
+				}					
 				
 			}
 
-			query = query.substring(0, query.length() - 5);
-			/*
-			if(query.length()<1) {
-				productDataList = sellerContentSQLMapper.getAllProductList();
-			}else {
-				queryHead += query;
-				productDataList = sellerContentSQLMapper.getProductListBySearchWord(query);
-			}
-			*/
+			//query = query.substring(0, query.length() - 5);
+		
 			System.out.println(query);
 
 		}
