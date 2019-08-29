@@ -66,7 +66,7 @@ public class AdvancedSearchQueryTest {
 		String maxPrice = "";
 		String radioboxValue = "on";
 		String checkboxValue = "0";
-		String keyword = "m_idx";
+		String keyword = "P_IDX";
 		String value = "tie";
 		
 		
@@ -148,7 +148,7 @@ public class AdvancedSearchQueryTest {
 				
 			}
 
-			//query = query.substring(0, query.length() - 5);
+			query = query.substring(0, query.length() - 5);
 		
 			System.out.println(query);
 

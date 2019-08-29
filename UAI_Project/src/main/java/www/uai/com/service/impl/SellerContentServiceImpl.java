@@ -481,15 +481,13 @@ public class SellerContentServiceImpl implements SellerContentService {
 
 		String startDate = searchDataVO.getStartDate();
 		String endDate = searchDataVO.getEndDate();
-		String minPrice = searchDataVO.getMinPrice();
-		String maxPrice = searchDataVO.getMaxPrice();
 		String keyword = searchDataVO.getKeyword();
 		String value = searchDataVO.getValue();
 
 		// vo 객체 null값 여부 확인
 		boolean isEmpty = false;
 
-		if (startDate == null && minPrice == null && keyword == null) {
+		if (startDate == null && keyword == null) {
 			isEmpty = true;
 		}
 
@@ -510,12 +508,6 @@ public class SellerContentServiceImpl implements SellerContentService {
 			}
 			if (endDate.length() == 0) {
 				endDate = null;
-			}
-			if (minPrice.length() == 0) {
-				minPrice = null;
-			}
-			if (maxPrice.length() == 0) {
-				maxPrice = null;
 			}
 			if (keyword.length() == 0) {
 				keyword = null;
@@ -538,26 +530,19 @@ public class SellerContentServiceImpl implements SellerContentService {
 				}
 
 			}
-			if (minPrice != null && maxPrice != null) {
-
-				// query = query.substring(0, query.length() - 5);
-				query += "B_STARRATE BETWEEN " + minPrice + " AND " + maxPrice;
-				query += andPhrase;
-
-			}
 			if (keyword != null && value != null) {
 				// query = query.substring(0, query.length() - 5);
 
 				if (keyword == "M_IDX") {
 					query += "M_IDX= " + value;
 					query += andPhrase;
-				} else if (keyword == "P_IDX") {
+				}else if (keyword == "P_IDX") {
 					query += "P_IDX= " + value;
 					query += andPhrase;
-				} else if (keyword == "B_REFERIDX") {
+				}else if (keyword == "B_REFERIDX") {
 					query += "B_REFERIDX=" + value;
 					query += andPhrase;
-				} else {
+				}else {
 					query += keyword.toUpperCase() + " LIKE " + "'%" + value + "%'";
 					query += andPhrase;
 				}
