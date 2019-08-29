@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import www.uai.com.vo.UploadFileVO;
 import www.uai.com.vo.UploadProductFileVO;
@@ -22,9 +23,8 @@ public interface UploadFileSQLMapper {
 	 
 	   @Insert("INSERT INTO PRODUCT_FILES VALUES(PRODUCT_FILES_SEQ.NEXTVAL,#{p_idx},#{f_path},#{f_originalname})")
 	   public void insertProductFile(UploadProductFileVO fileList);
-
-		@Delete("DELETE FROM FILES WHERE P_IDX = #{p_idx}")
-		public void deleteFileForm(String p_idx);
-		
 	   
+	   @Delete("DELETE FROM FILES WHERE P_IDX = #{p_idx}")
+		public void deleteFileForm(String p_idx);
+
 }

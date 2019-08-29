@@ -10,7 +10,6 @@ public class PageVO {
    public PageVO() {
 	   
    }
-   
    public PageVO(String nowPage, int startOfPageGroup, int endOfPageGroup, int maxPage) {
       super();
       this.nowPage = nowPage;

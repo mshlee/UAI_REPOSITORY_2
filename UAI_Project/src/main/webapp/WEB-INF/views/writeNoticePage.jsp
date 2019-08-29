@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>My Page</title>
+        <title>write Notice Form</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -84,7 +84,7 @@
                     }
             #middle-box{
                 width: 1024px;
-                height: 800px;
+                height: 1200px;
                 float: left;
                 }
                         #middle-small-3{
@@ -185,82 +185,61 @@
                             font-family: lemongrass-caps, sans-serif;
                             font-size: 15pt;
                         }
-                        #my-page-title{
-                           float: left;
-                           width: 795px;
-                           font-size: 24pt;
-                           font-weight: 550;
-                           background-color: darkgray;
-                           border-radius:5px;
-                           color: white;
-                           font-family: seasoned-hostess, sans-serif;
-                        }
-                        #update-member{
-                            width: 390px;
-                            height: 245px;
+                        #review-page-title{
                             float: left;
-                            background-color: white;
-                            border-radius:10px;
-                            text-align:center;
+                            width: 795px;
+                            font-size: 24pt;
+                            font-weight: 550;
+                            background-color: darkgray;
+                            border-radius:5px;
+                            color: white;
+                            font-family: seasoned-hostess, sans-serif;
                         }
-                        #logo-update{
-                           float:left;
-                           width: 170px;
-                           height: 160px;
-                           margin-top:20px;
-                           margin-right:80px;
-                        }
-                        #show-payment{
-                            width: 390px;
-                            height: 245px;
+                        #review-box{
                             float: left;
-                            border-radius:10px;
-                            background-color: aliceblue; 
-                            text-align:center;
+                            font-family: lemongrass-caps, sans-serif;
+                            margin-left: 30px;
+                            font-size: 15pt;
+
                         }
-                        #logo-pay{
-                           float:left;
-                           width: 160px;
-                           height: 160px;
-                           margin-top:20px;
-                           margin-right:90px;
-                        }
-                        #show-wishlist{
-                            width: 390px;
-                            height: 245px;
-                            float: left;
-                            border-radius:10px;
-                            background-color: aliceblue; 
-                            text-align:center;
-                        }
-                        #logo-wish{
-                           float:left;
-                           width: 160px;
-                           height: 160px;
-                           margin-top:20px;
-                           margin-right:90px;
-                        }
-                        #write-review{
-                            width: 390px;
-                            height: 245px;
-                            float: left;
-                            border-radius:10px;
-                            background-color: white;
-                            text-align:center;
-                        }
-                        #logo-review{
-                           float:left;
-                           width: 160px;
-                           height: 160px;
-                           margin-top:20px;
-                           margin-right:90px;
-                        }
-                        .empty-box2{
-                           float: left;
-                           width: 115px;
-                           height: 100px;
+                        #reivew-button{
+                           float: right;
                            
                         }
+                        .file_input{
+                           margin-top: 5px;
+                        }
+                        .file_input label {
+                      position:relative;
+                      cursor:pointer;
+                      display:inline-block;
+                      vertical-align:middle;
+                      overflow:hidden;
+                      width:100px;
+                      height:30px;
+                      background:#777;
+                      color:#fff;
+                      text-align:center;
+                      line-height:30px;
+                  }
+                  .file_input label input {
+                      position:absolute;
+                      width:0;
+                      height:0;
+                      overflow:hidden;
+                  }
+                  .file_input input[type=text] {
+                      vertical-align:middle;
+                      display:inline-block;
+                      width:400px;
+                      height:28px;
+                      line-height:28px;
+                      font-size:11px;
+                      padding:0;
+                      border:0;
+                      border:1px solid #777;
+                  }
+                                                                                           
                #bottom-box{
                width: 1024px;
                height: 170px;
@@ -310,6 +289,109 @@
                 align-items: center;
             }
         </style>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+        <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+        <script type="text/javascript">
+        
+        	//id= b_content가 있는 곳을 CKEDITOR로 대신함.
+        	
+            $(document).ready(function(){
+                 
+                CKEDITOR.replace( 'b_content' );
+                CKEDITOR.config.height = 500;
+            
+                //밑의 list 버튼 클릭 시 위치 설정
+                $("#list").click(function(){
+                    location.href = "/boardNoticePage";
+                });
+                 
+                $("#save").click(function(){
+                     
+                    //에디터 내용 가져옴
+                    var b_content = CKEDITOR.instances.content.getData();
+                     
+                    //널 검사
+                    if($("#b_title").val().trim() == ""){
+                        alert("제목을 입력하세요.");
+                        $("#b_title").focus();
+                        return false;
+                    }
+                     
+  				       if($("#b_content").val().trim() == ""){
+                        alert("작성자를 입력하세요.");
+                        $("#b_content").focus();
+                        return false;
+                    }
+              
+                     
+                    //값 셋팅
+                    //id= idx
+                    //subject = title
+                    //writer = nick
+                    //password = pw
+                    //content = content
+                    var objParams = {
+                            
+                            id          : $("#b_idx").val(),
+                            subject     : $("#b_title").val(),
+                            writer      : $("#sessionData.ad_nick").val(),
+                            password    : $("#b_pw").val(),
+                            content     : content
+                    };
+                     
+                    //ajax 호출
+                    $.ajax({
+                        url         :   "/writeNoticeAction",
+                        dataType    :   "json",
+                        contentType :   "application/x-www-form-urlencoded; charset=UTF-8",
+                        type        :   "post",
+                        data        :   objParams,
+                        success     :   function(retVal){
+ //url = form action 위치와 동일. 이후 리다이렉트하여 돌아갈 위치는 밑의 location.href= 에 작성.
+                            if(retVal.code == "OK") {
+                                alert(retVal.message);
+                                location.href = "/boardNoticePage";  
+                            } else {
+                                alert(retVal.message);
+                            }
+                             
+                        },
+                        error       :   function(request, status, error){
+                            console.log("AJAX_ERROR");
+                        }
+                    });
+                     
+                     
+                });
+                 
+            });
+        </script>
+        
+        	<script type="text/javascript">
+		function getExtension(filename) {
+			return filename.split('.').pop().toLowerCase();
+		}
+		function fileCheck() {
+			var uploadFile = $("input[name=files]").val();
+			if (uploadFile == "") {
+				alert("파일을 첨부하지 않았습니다")
+				return;
+			} else {
+				var extension = getExtension(uploadFile);
+				alert(extension);
+				switch (extension) {
+				case 'jpg':
+				case 'jpeg':
+				case 'png':
+				case 'bmp':
+					$("#uploadForm").submit();
+					break;
+				default:
+					alert("이미지 파일만 업로드 가능합니다.");
+				}
+			}
+		}
+	</script>    
     </head>
 
 
@@ -337,10 +419,10 @@
                     <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
                         <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
                         <ul class="navbar-nav" id="top-menu-bar">
-                            <li class="nav-item"><a class="nav-link" href="./boardNoticePage">Notice</a></li>
+                           <li class="nav-item"><a class="nav-link" href="./boardNoticePage">Notice</a></li>
                             <li class="nav-item"><a class="nav-link" href="./productListPage">Lecture</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./boardReviewPage">Review</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./boardQnAPage">Q & A</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="./boardReviewPage">Review</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="./boardQnAPage">Q & A</a></li>
                         </ul>
                     </nav>
                     </div>
@@ -392,14 +474,14 @@
 
                 <div id="middle-small-1">
                         <c:choose>
-                            <c:when test="${!empty sessionData }">
+                            <c:when test="${!empty sessionData.ad_idx }">
                               <div id="middle-empty1">Learn Something Worthy!</div>
                               <div id="login-success-box">
-                                  <h4>Welcome,</h4> <h6>${sessionData.m_nick }</h6>
+                                  <h4>Welcome,</h4> <h6>${sessionData.ad_nick }</h6>
                                   <br>
                                   <div id="login-success-function">
                                   <a style="color: black" href="./logoutAction"><button class="btn btn-light">Logout</button></a>
-                                  <a href="./myPage"><button class="btn btn-secondary">My Page</button></a>
+                                  <a href="./sellerIndex.do"><button class="btn btn-info">Settings</button></a>
                                   <br>
                                   </div>
                               
@@ -427,33 +509,54 @@
       
             
                 <div id="middle-small-2">
-                   <div id="my-page-title">
-                   ▶   My Page
+                   <div id="review-page-title">
+            	          ▶   Write Notice
                    </div>
                     <br>
                     <br>
-                    <br>
-                    <div id="update-member">
-                       <div class="empty-box2"><br></div>
-                   <img src="./img/updateMember.png" id="logo-update">
-                        <a style="color: black" href="./updateMemberPage">Update Information</a>
-                    </div>
-                    <div id="show-wishlist">
-                       <div class="empty-box2"><br></div>
-                       <img src="./img/showWish.png" id="logo-wish">
-                        <a style="color: black" href="./readWishlistPage">My Wish List</a>
-                    </div>
-                    <br>
-                    <div id="show-payment">
-                       <div class="empty-box2"><br></div>
-                       <img src="./img/showPayment.png" id="logo-pay">
-                        <a style="color: black" href="#">My Lecture</a>
-                    </div>
-                    <div id="write-review">
-                       <div class="empty-box2"><br></div>
-                       <img src="./img/writeReview2.png" id="logo-review">
-                        <a style="color: black" href="./writeReviewForm">Write Review</a>
-                    </div>
+                    <form action="./updateNoticeAction" method="post" enctype="multipart/form-data" id="review-box">
+                        Nick : ${sessionData.ad_nick } <br>
+                        <input type="hidden" name="b_idx" value="${boardDataVO.contentDataVO.b_idx }" id="b_idx">
+                        <input type="hidden" value="${sessionData.ad_idx}"  name="ad_idx" id="ad_idx">
+                       	<input type="hidden" name="b_pw" value="noticePW">
+                       	<input type="hidden" name="b_type" value="0">
+                        Title : <input type="text" name="b_title" id="b_title"> <br>
+                        Text <br>
+                        <textarea rows="10" cols="65" name="b_content" id="b_content">${boardDataVO.contentDataVO.b_content }</textarea>
+                        <br>
+
+                  <div id="reivew-button">
+                      <input class="btn btn-info" type="submit" value="Submit" id="save">
+                   </div>
+                    </form>
+                    <br><br>
+			<c:forEach var="file" items="${boardDataVO.fileList }">
+				미리보기:<img src="${file.f_path }"style = "width:200px; height:150">${file.f_originalName } 
+				<form action="./fileDeleteActionByWritePage" method="post">
+				<input type="hidden" name="f_idx" value="${file.f_idx }">
+				<input type="hidden" name="b_idx" value="${file.b_idx }">
+				<input type="hidden" name="b_type" value="0">
+				<input type="submit" value="삭제">
+				</form>
+				
+			</c:forEach>
+		<form id="uploadForm" action="./fileUploadActionByWritePage" method="post"
+			enctype="multipart/form-data">
+			<input type="hidden" name="b_idx" value="${boardDataVO.contentDataVO.b_idx }">
+			<input type="hidden" name="b_type" value="0">
+			<table>
+				<tr>
+					<th>파일선택</th>
+					<td><input type="file" name="files" multiple="multiple"/></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td><input type="button" value="업로드" onclick="fileCheck()" /></td>
+				</tr>
+			</table>
+		
+			 
+		</form> 
                 </div><!--middle-small-box-2-->
               
         </div><!--middle box-->

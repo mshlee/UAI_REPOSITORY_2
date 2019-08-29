@@ -1,5 +1,3 @@
-원래 메인 페이지
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -277,7 +275,7 @@
     </head>
 
     <body>
-        <div id="wrapper">
+        <div class="container-fluid" id="wrapper">
 
           <div id="top-box">
             <div id="top-small-1">
@@ -312,10 +310,10 @@
                  <!-- Swiper -->
               <div class="swiper-container" id="middle-slide">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
-                  <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
-                  <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
-                  <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide0.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide1.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide2.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide3.png"></div>
                 </div>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
@@ -352,7 +350,7 @@
 
               <div id="middle-small-1">
                   <c:choose>
-                      <c:when test="${!empty sessionData }">
+                      <c:when test="${!empty sessionData.m_idx }">
                         <div id="middle-empty1">Learn Something Worthy!</div>
                         <div id="login-success-box">
                            <h4>Welcome,</h4> <h6>${sessionData.m_nick }</h6>
@@ -360,6 +358,21 @@
                            <div id="login-success-function">
                            <a href="./logoutAction"><button class="btn btn-light">Logout</button></a>
                            <a href="./myPage"><button class="btn btn-info">My Page</button></a>
+                           <br>
+                           </div>
+                        
+                        </div>
+                        <img src="./img/loginBoxLine.png" id="logo-login-box-line2">
+                      </c:when>
+                      
+                      <c:when test="${!empty sessionData.ad_idx }">
+                        <div id="middle-empty1">Learn Something Worthy!</div>
+                        <div id="login-success-box">
+                           <h4>Welcome,</h4> <h6>${sessionData.ad_nick }</h6>
+                           <br>
+                           <div id="login-success-function">
+                           <a href="./logoutAction"><button class="btn btn-light">Logout</button></a>
+                            <a href="./sellerIndex.do"><button class="btn btn-secondary">Settings</button></a>
                            <br>
                            </div>
                         

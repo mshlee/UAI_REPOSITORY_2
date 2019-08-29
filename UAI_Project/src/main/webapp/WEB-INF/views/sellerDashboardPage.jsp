@@ -15,66 +15,98 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 
-<!--Load the AJAX API-->
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
-	
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <script type="text/javascript">
-	// Load the Visualization API and the controls package.
-	// Packages for all the other charts you need will be loaded
-	// automatically by the system.
-	google.charts.load('current', {
-		'packages' : [ 'corechart', 'controls' ]
-	});
 
-	// Set a callback to run when the Google Visualization API is loaded.
-	google.charts.setOnLoadCallback(drawDashboard);
 
-	// Callback that creates and populates a data table,
-	// instantiates a dashboard, a range slider and a pie chart,
-	// passes in the data and draws it.
-	function drawDashboard() {
-
-		var dashboard = new google.visualization.Dashboard(document
-				.getElementById('dashboard_div'));
-
-		// Create our data table.
-		var data = google.visualization.arrayToDataTable([ [ '날짜', '총 주문금액' ],
-				[ '2019-08-28', 1000000 ], [ '2019-08-29', 1500000 ],
-				[ '2019-08-30', 1000000 ], [ '2019-09-01', 800000 ] ]);
-
-		var options = {
-			title : '일별 주문금액 추이',
-			curveType : 'function',
-			legend : {
-				position : 'bottom'
-			}
-		};
-
-		var programmaticSlider = new google.visualization.ControlWrapper({
-			'controlType' : 'DateRangeFilter',
-			'containerId' : 'programmatic_control_div',
-			'options' : {
-				'filterColumnLabel' : '날짜 조정',
-				'ui' : {
-					'labelStacking' : 'vertical'
-				}
-			}
-		});
-
-		var chart = new google.visualization.LineChart(document
-				.getElementById('curve_chart'));
-
-		dashboard.bind(programmaticSlider, chart);
-
-		chart.draw(data, options);
-	}
-	
-	//JSON 객체 받아오기 테스트
-	var paramOne =<c:out value="${dashVO}"/>
 </script>
 
+	  
+<script type="text/javascript">	   
+	  
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawSumChart);
 
+      function drawSumChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['날짜', '총 주문액'],
+          ['2019-08-28',  100000],
+          ['2018-08-29',  200000],
+          ['2018-08-30',  100000],
+          ['2018-09-01',  200000]
+        ]
+        		
+        );
+
+        var options = {
+          title: '일별 주문액 통계(원)',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart1'));
+
+        chart.draw(data, options);
+      }
+      
+      
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawAvgChart);
+      
+      function drawAvgChart() {
+          var data = google.visualization.arrayToDataTable([
+            ['날짜', '건당 평균 주문액'],
+            ['2019-08-28',  1000],
+            ['2018-08-29',  5000],
+            ['2018-08-30',  8000],
+            ['2018-09-01',  4000]
+          ]);
+
+          var options = {
+            title: '일별 주문 건당 평균 주문액 통계(원)',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('curve_chart2'));
+
+          chart.draw(data, options);
+        }
+      
+      
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawCountChart);
+       
+
+      function drawCountChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['강의 이름', '수강건수'],
+          ['강의1',     10],
+          ['강의2',      9],
+          ['강의3',  8]
+        ]);
+
+        var options = {
+          title: 'TOP 3 강의 (수강건수 기준)',
+       	  pieHole: 0.4,
+       	
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+
+        chart.draw(data, options);
+      }
+      
+      
+      
+
+    </script>
+
+ 
 
 <style>
 #wrapper {
@@ -155,14 +187,29 @@
 
 		</div>
 		<div id="content_box">
+		
+		<search>
+		<c:forEach items="${result }" var="result">
+		<result>
+		<c:out value="${result.s_dailySum }"/>
+		<c:out value="${result.s_date }"/>
+		</result>
+		</c:forEach>
+		</search>
 
 
 			<!--Divs that will hold each control and chart-->
-			<div id="dashboard_div">
-				<div id="programmatic_control_div"></div>
-				<div id="curve_chart"></div>
-			</div>
-
+			<div id="dashWrapper">
+			<label>1. 주문관련 통계</label><br>
+			<div id="order_wrapper">
+					<div id="curve_chart1" style="width: 500px; height: 300px; float: left; padding: 10px;"></div>
+			<div id="curve_chart2" style="width: 500px; height: 300px; float: right; padding: 10px;"></div>
+			</div><br>
+			<label>2. 상품관련 통계</label><br>
+			<div id="pie_chart" style="width: 500px; height: 300px; padding: 10px;" ></div>
+			
+			
+		</div>
 
 
 

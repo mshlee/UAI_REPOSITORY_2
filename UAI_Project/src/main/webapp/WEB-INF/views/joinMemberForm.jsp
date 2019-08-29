@@ -11,7 +11,7 @@
    
 </head>
 <body>
-<div id="wrapper">
+<div class="container-fluid" id="wrapper">
       회원 가입 <br>
       <form action="./joinMemberAction" method="post">
          ID : <input id = "inputID" type="text" name="m_id" onblur = "confirmID()"><br>

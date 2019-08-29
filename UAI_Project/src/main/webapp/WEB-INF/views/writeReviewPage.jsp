@@ -185,82 +185,61 @@
                             font-family: lemongrass-caps, sans-serif;
                             font-size: 15pt;
                         }
-                        #my-page-title{
-                           float: left;
-                           width: 795px;
-                           font-size: 24pt;
-                           font-weight: 550;
-                           background-color: darkgray;
-                           border-radius:5px;
-                           color: white;
-                           font-family: seasoned-hostess, sans-serif;
-                        }
-                        #update-member{
-                            width: 390px;
-                            height: 245px;
+                        #review-page-title{
                             float: left;
-                            background-color: white;
-                            border-radius:10px;
-                            text-align:center;
+                            width: 795px;
+                            font-size: 24pt;
+                            font-weight: 550;
+                            background-color: darkgray;
+                            border-radius:5px;
+                            color: white;
+                            font-family: seasoned-hostess, sans-serif;
                         }
-                        #logo-update{
-                           float:left;
-                           width: 170px;
-                           height: 160px;
-                           margin-top:20px;
-                           margin-right:80px;
-                        }
-                        #show-payment{
-                            width: 390px;
-                            height: 245px;
+                        #review-box{
                             float: left;
-                            border-radius:10px;
-                            background-color: aliceblue; 
-                            text-align:center;
+                            font-family: lemongrass-caps, sans-serif;
+                            margin-left: 30px;
+                            font-size: 15pt;
+
                         }
-                        #logo-pay{
-                           float:left;
-                           width: 160px;
-                           height: 160px;
-                           margin-top:20px;
-                           margin-right:90px;
-                        }
-                        #show-wishlist{
-                            width: 390px;
-                            height: 245px;
-                            float: left;
-                            border-radius:10px;
-                            background-color: aliceblue; 
-                            text-align:center;
-                        }
-                        #logo-wish{
-                           float:left;
-                           width: 160px;
-                           height: 160px;
-                           margin-top:20px;
-                           margin-right:90px;
-                        }
-                        #write-review{
-                            width: 390px;
-                            height: 245px;
-                            float: left;
-                            border-radius:10px;
-                            background-color: white;
-                            text-align:center;
-                        }
-                        #logo-review{
-                           float:left;
-                           width: 160px;
-                           height: 160px;
-                           margin-top:20px;
-                           margin-right:90px;
-                        }
-                        .empty-box2{
-                           float: left;
-                           width: 115px;
-                           height: 100px;
+                        #reivew-button{
+                           float: right;
                            
                         }
+                        .file_input{
+                           margin-top: 5px;
+                        }
+                        .file_input label {
+                      position:relative;
+                      cursor:pointer;
+                      display:inline-block;
+                      vertical-align:middle;
+                      overflow:hidden;
+                      width:100px;
+                      height:30px;
+                      background:#777;
+                      color:#fff;
+                      text-align:center;
+                      line-height:30px;
+                  }
+                  .file_input label input {
+                      position:absolute;
+                      width:0;
+                      height:0;
+                      overflow:hidden;
+                  }
+                  .file_input input[type=text] {
+                      vertical-align:middle;
+                      display:inline-block;
+                      width:400px;
+                      height:28px;
+                      line-height:28px;
+                      font-size:11px;
+                      padding:0;
+                      border:0;
+                      border:1px solid #777;
+                  }
+                                                                                           
                #bottom-box{
                width: 1024px;
                height: 170px;
@@ -310,6 +289,109 @@
                 align-items: center;
             }
         </style>
+                <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+        <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+        <script type="text/javascript">
+        
+        	//id= b_content가 있는 곳을 CKEDITOR로 대신함.
+        	
+            $(document).ready(function(){
+                 
+                CKEDITOR.replace( 'b_content' );
+                CKEDITOR.config.height = 500;
+            
+                //밑의 list 버튼 클릭 시 위치 설정
+                $("#list").click(function(){
+                    location.href = "/boardReviewPage";
+                });
+                 
+                $("#save").click(function(){
+                     
+                    //에디터 내용 가져옴
+                    var b_content = CKEDITOR.instances.content.getData();
+                     
+                    //널 검사
+                    if($("#b_title").val().trim() == ""){
+                        alert("제목을 입력하세요.");
+                        $("#b_title").focus();
+                        return false;
+                    }
+                     
+  				       if($("#b_content").val().trim() == ""){
+                        alert("내용을 입력하세요.");
+                        $("#b_content").focus();
+                        return false;
+                    }
+  				    
+              
+                     
+                    //값 셋팅
+                    //id= idx
+                    //subject = title
+                    //writer = nick
+                    //password = pw
+                    //content = content
+                    var objParams = {
+                            
+                            id          : $("#b_idx").val(),
+                            subject     : $("#b_title").val(),
+                            writer      : $("#sessionData.m_nick").val(),
+                            password    : $("#b_pw").val(),
+                            content     : content
+                    };
+                     
+                    //ajax 호출
+                    $.ajax({
+                        url         :   "/writeReviewAction",
+                        dataType    :   "json",
+                        contentType :   "application/x-www-form-urlencoded; charset=UTF-8",
+                        type        :   "post",
+                        data        :   objParams,
+                        success     :   function(retVal){
+ //url = form action 위치와 동일. 이후 리다이렉트하여 돌아갈 위치는 밑의 location.href= 에 작성.
+                            if(retVal.code == "OK") {
+                                alert(retVal.message);
+                                location.href = "/boardReviewPage";  
+                            } else {
+                                alert(retVal.message);
+                            }
+                             
+                        },
+                        error       :   function(request, status, error){
+                            console.log("AJAX_ERROR");
+                        }
+                    });
+                     
+                     
+                });
+                 
+            });
+        </script>
+	<script type="text/javascript">
+		function getExtension(filename) {
+			return filename.split('.').pop().toLowerCase();
+		}
+		function fileCheck() {
+			var uploadFile = $("input[name=files]").val();
+			if (uploadFile == "") {
+				alert("파일을 첨부하지 않았습니다")
+				return;
+			} else {
+				var extension = getExtension(uploadFile);
+				alert(extension);
+				switch (extension) {
+				case 'jpg':
+				case 'jpeg':
+				case 'png':
+				case 'bmp':
+					$("#uploadForm").submit();
+					break;
+				default:
+					alert("이미지 파일만 업로드 가능합니다.");
+				}
+			}
+		}
+	</script> 
     </head>
 
 
@@ -318,13 +400,13 @@
 
 
     <body>
-        <div class="container-fluid" id="wrapper">
+        <div id="wrapper">
             <div id="top-box">
                 <div id="top-small-1">
                     <div id="top-menu">
                        <a style="color: black" href="./mainPage">HOME</a> | 
                       <a style="color: black" href="./loginForm">LOGIN</a> | 
-                      <a style="color: black" href="./boardNoticePage">NOTICE</a> | 
+                      <a style="color: black" href="#">NOTICE</a> | 
                       <a style="color: black" href="./myPage">MYPAGE</a>            
                     </div>
                     </div>
@@ -337,10 +419,10 @@
                     <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
                         <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
                         <ul class="navbar-nav" id="top-menu-bar">
-                            <li class="nav-item"><a class="nav-link" href="./boardNoticePage">Notice</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./productListPage">Lecture</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./boardReviewPage">Review</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./boardQnAPage">Q & A</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Notice</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Lecture</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Review</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Q & A</a></li>
                         </ul>
                     </nav>
                     </div>
@@ -352,10 +434,10 @@
                 <!-- Swiper -->
                 <div class="swiper-container" id="middle-slide">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="./img/middleSlide0.png"></div>
-                  <div class="swiper-slide"><img src="./img/middleSlide1.png"></div>
-                  <div class="swiper-slide"><img src="./img/middleSlide2.png"></div>
-                  <div class="swiper-slide"><img src="./img/middleSlide3.png"></div>
+                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
                     </div> 
                     <!-- Add Pagination --> 
                     <div class="swiper-pagination"></div> 
@@ -427,33 +509,34 @@
       
             
                 <div id="middle-small-2">
-                   <div id="my-page-title">
-                   ▶   My Page
+                   <div id="review-page-title">
+                   ▶   Write Review
                    </div>
                     <br>
                     <br>
-                    <br>
-                    <div id="update-member">
-                       <div class="empty-box2"><br></div>
-                   <img src="./img/updateMember.png" id="logo-update">
-                        <a style="color: black" href="./updateMemberPage">Update Information</a>
-                    </div>
-                    <div id="show-wishlist">
-                       <div class="empty-box2"><br></div>
-                       <img src="./img/showWish.png" id="logo-wish">
-                        <a style="color: black" href="./readWishlistPage">My Wish List</a>
-                    </div>
-                    <br>
-                    <div id="show-payment">
-                       <div class="empty-box2"><br></div>
-                       <img src="./img/showPayment.png" id="logo-pay">
-                        <a style="color: black" href="#">My Lecture</a>
-                    </div>
-                    <div id="write-review">
-                       <div class="empty-box2"><br></div>
-                       <img src="./img/writeReview2.png" id="logo-review">
-                        <a style="color: black" href="./writeReviewForm">Write Review</a>
-                    </div>
+                    <form action="./writeReviewAction" method="post" enctype="multipart/form-data" id="review-box">
+                        Nick : ${sessionData.m_nick } <br>
+                        <input type="hidden" name="b_idx" value="${boardDataVO.contentDataVO.b_idx }">
+                        <input type="hidden" name="p_idx" value="${boardDataVO.contentDataVO.p_idx }">
+                        <input type="hidden" name="b_pw" value="reviewPW">
+                        Title : <input type="text" name="b_title"> <br>
+                        Text <br>
+                        <textarea rows="10" cols="65" name="b_content" >${boardDataVO.contentDataVO.b_content }</textarea>
+                        <br>
+                        <div class="file_input">
+                      <label>
+                          File
+                          <input type="file" multiple="multiple" name="files">
+                      </label>
+                      <input type="text" readonly="readonly" title="File Route">
+                  </div>
+                  <div id="reivew-button">
+                      <input class="btn btn-info" type="submit" value="Submit" onclick="fileCheck()">
+                   </div>
+                    </form>
+                    
+
+
                 </div><!--middle-small-box-2-->
               
         </div><!--middle box-->

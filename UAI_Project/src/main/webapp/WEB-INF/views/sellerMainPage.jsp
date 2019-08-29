@@ -460,7 +460,7 @@
                            <br>
                            <div id="login-success-function">
                            <a href="./logoutAction"><button class="btn btn-light">Logout</button></a>
-                           <a href="#"><button class="btn btn-info">Settings</button></a>
+                           <a href="./sellerManageAdmin"><button class="btn btn-info">Settings</button></a>
                            <br>
                            </div>
                         

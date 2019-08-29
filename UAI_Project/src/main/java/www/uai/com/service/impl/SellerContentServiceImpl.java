@@ -858,29 +858,48 @@ public class SellerContentServiceImpl implements SellerContentService {
 	
 	//lhe-판매자 대시보드 데이터 호출 명령
 	@Override
-	public JSONObject getAllOrderStatList() {
+	public ArrayList<DashboardVO> getOrderStatList() {
 		// TODO Auto-generated method stub
 		
-		ArrayList<DashboardVO> dashVO=sellerContentSQLMapper.getOrderStats();
+		ArrayList<DashboardVO> dashVO=sellerContentSQLMapper.getOrderSumStats();
+		
+		/*
+		[
+         ['날짜', '총 주문액'],
+         ['2019-08-28',  100000],
+         ['2018-08-29',  200000],
+         ['2018-08-30',  100000],
+         ['2018-09-01',  200000]
+       ]
+       */
+		
+    		   String lineChartArray=""; //= "['날짜', '총 주문액'],";
+		
+		for(DashboardVO dash : dashVO) {
+			
+			lineChartArray+="["+dash.getS_date().substring(0, dash.getS_date().length()-9)+","+dash.getS_dailySum()+"],";
+		}
+		
+		lineChartArray=lineChartArray.substring(0, lineChartArray.length()-1);
+		//System.out.println(lineChartArray);
+		
+		
 		
 		//JSON 파싱
-		
-		try {
 		JSONObject statsJSON = new  JSONObject();
 		JSONArray statsArrJSON = new JSONArray();
 		
+		try {
+	
+		
 		for(int i = 0; i< dashVO.size(); i++) {
 			JSONObject obj = new JSONObject();
-			obj.put("s_date", dashVO.get(i).getS_date());
-			obj.put("s_dailySum", dashVO.get(i).getS_dailySum());
-			obj.put("s_dailyCount", dashVO.get(i).getS_dailyCount());
-			obj.put("s_dailyAvg", dashVO.get(i).getS_dailyAvg());
+			obj.put("날짜", dashVO.get(i).getS_date());
+			obj.put("총 주문액", dashVO.get(i).getS_dailySum());
 			
 			statsArrJSON.put(obj);
 		}
 		
-		statsJSON.put("statType", "orders");
-		statsJSON.put("duration", "daily");
 		statsJSON.put("items", statsArrJSON);
 		
 		System.out.println(statsJSON.toString());
@@ -889,7 +908,11 @@ public class SellerContentServiceImpl implements SellerContentService {
 			e.printStackTrace();
 		}
 		
-		return null;
+		String strJson = statsJSON.toString();
+		
+		
+		
+		return dashVO;
 	}
 
 

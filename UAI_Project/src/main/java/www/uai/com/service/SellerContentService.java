@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.ContentDataVO;
+import www.uai.com.vo.DashboardVO;
 import www.uai.com.vo.IdxVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.OrderDataVO;
@@ -50,7 +51,7 @@ public interface SellerContentService {
 	public void updatePaychecksByIdx(ArrayList<IdxVO> IdxVO);
 	
 	//lhe-판매자 대시보드 관리용
-	public JSONObject getAllOrderStatList();
+	public ArrayList<DashboardVO> getOrderStatList();
 	
 
 	

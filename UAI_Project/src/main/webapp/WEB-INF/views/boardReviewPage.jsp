@@ -26,20 +26,25 @@
         
         <!-- font 설정 -->
         <link rel="stylesheet" href="https://use.typekit.net/kcj1cyn.css">
-                <STYLE>
-      #pages{
-         border: 1px solid blue;
-      }
-      #page{
-         border: 1px solid bule;
-         float : left;
-      }
-            #nowPage{
-         border : 1px solid black;
-         background-color: cyan;
-         float : left;
-      }
-</STYLE>
+      
+      
+      	 <style>
+	      #pages{
+		         float: left;
+		         text-align: center;
+		         margin-left: 400px;
+		      }
+		      #page{
+		         text-align: center;
+		         float : left;
+		      }
+	            #nowPage{
+		         float : left;
+		         text-align: center;
+		         
+		      }
+	      }
+	 </style>
                 
                 
         <style>
@@ -234,7 +239,8 @@
 																										    font-family: 'Nanum Gothic', sans-serif;
 																										    float:left;
 																										    margin-left:20px;
-																										    margin-top: 10px;
+																										    margin-top: 20px;
+																										    font-size: 13pt;
 																										}
 																									    th, td {
 																										    border-bottom: 1px solid #444444;
@@ -248,9 +254,12 @@
 																									    td {
 																										    font-family: 'Nanum Gothic', sans-serif;
 																										  }
-																										#search{
+																										 #search{
 																										  	font-size: 11pt;
-																										}
+																										  	float: left;
+																										  	margin-left: 150px;
+																										  	margin-top: 30px;
+																										  }
 																										#search-btn{
 																											font-size: 11pt;
 																											text-align:center;
@@ -313,7 +322,7 @@
 
 
     <body>
-        <div id="wrapper">
+        <div class="container-fluid" id="wrapper">
             <div id="top-box">
                 <div id="top-small-1">
                     <div id="top-menu">
@@ -347,10 +356,10 @@
                 <!-- Swiper -->
                 <div class="swiper-container" id="middle-slide">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
-                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
-                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
-                    <div class="swiper-slide"><img src="./img/middleSlide4.png"></div>
+                   <div class="swiper-slide"><img src="./img/middleSlide0.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide1.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide2.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide3.png"></div>
                     </div> 
                     <!-- Add Pagination --> 
                     <div class="swiper-pagination"></div> 

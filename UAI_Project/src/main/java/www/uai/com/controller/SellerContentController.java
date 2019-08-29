@@ -12,8 +12,10 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import www.uai.com.service.ProductService;
@@ -21,6 +23,7 @@ import www.uai.com.service.SellerContentService;
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.AdvancedSearchDataVO;
 import www.uai.com.vo.ContentDataVO;
+import www.uai.com.vo.DashboardVO;
 import www.uai.com.vo.IdxVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.OrderDataVO;
@@ -439,10 +442,17 @@ public class SellerContentController {
 		
 		
 		//통계 데이터 리스트 받아오기
-		JSONObject dashJSON = sellerContentService.getAllOrderStatList();
+		ArrayList<DashboardVO> lineChartArray= sellerContentService.getOrderStatList();
+	
+
+	
+		
+		//String stringfied = dashJSON.toString();
+		//System.out.println("toString: "+ stringfied);
 		
 		
-		model.addAttribute("dashJSON", dashJSON);
+
+		//model.addAttribute("lineChartArray", lineChartArray);
 		
 		return "sellerDashboardPage";
 		
@@ -496,11 +506,6 @@ public class SellerContentController {
 	      }
 
 	    
-	    
-	  //SessionDataVO sessionData = (SessionDataVO)session.getAttribute("sessionData");
-	  
-	  //String ad_idx = sessionData.getAd_idx();
-	  
 	  //테스트
 	  String p_originalPrice = ProductVOParam.getP_originalPrice();
 	  ProductVOParam.setP_nowPrice(p_originalPrice);

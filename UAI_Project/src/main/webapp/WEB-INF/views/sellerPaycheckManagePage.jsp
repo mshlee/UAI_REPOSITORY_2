@@ -154,8 +154,7 @@ function delchk(){
 						<th scope="col">강의번호</th>
 						<th scope="col">강의명</th>
 						<th scope="col">강사명</th>
-						<th scope="col">수수료율</th>
-						<th scope="col">지급예정금액(주문금액*수수료율)</th>
+						<th scope="col">지급예정금액</th>
 						<th scope="col">지급완료금액</th>
 						<th scope="col">지급여부</th>
 						<th scope="col">지급날짜</th>
@@ -177,8 +176,7 @@ function delchk(){
 							<th scope="row">${paycheckDataList.orderDataVO.p_idx }</th>
 							<th scope="row">${paycheckDataList.productDataVO.p_name }</th>
 							<th scope="row">${paycheckDataList.paycheckDataVO.p_teacher }</th>
-							<th scope="row">${paycheckDataList.productDataVO.p_commissionRate }</th>
-							<th scope="row">tbd</th>
+							<th scope="row">${paycheckDataList.orderDataVO.o_totalPrice }</th>
 							
 							<!-- lhe: 지급여부에 따라 지급 완료금액/미지급으로 분기 나눔.-->
 							<c:choose>

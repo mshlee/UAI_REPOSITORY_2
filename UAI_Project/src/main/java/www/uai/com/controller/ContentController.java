@@ -1,6 +1,7 @@
 package www.uai.com.controller;
 
 import java.awt.Image;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,28 +23,29 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import www.uai.com.service.ContentService;
 import www.uai.com.service.PageService;
+import www.uai.com.service.ProductService;
 import www.uai.com.vo.BoardDataVO;
 import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.PageVO;
+import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductVO;
 import www.uai.com.vo.SessionDataVO;
 import www.uai.com.vo.UploadFileVO;
 
 @Controller
 public class ContentController {
-
 	// 사용할 메서드들 가져오기
 	@Autowired
 	private ContentService contentService;
-
 	@Autowired
 	private PageService pageService;
+	@Autowired
+	private ProductService productService;
 
 	// "/"이 붙으면 여기로!
 	@RequestMapping("/")
 	public String home() {
-
 		return "mainPage";
 	}
 
@@ -61,7 +63,6 @@ public class ContentController {
 	@RequestMapping("/boardNoticePage")
 	public String boardNoticePage(Model model, String searchWord, String searchTarget, String nowPage,
 			String changePage) {
-
 		String b_type = "0";
 		// 페이지 처리한 거 여기다 분리해서 적어주기
 		int limit = 10;
@@ -69,9 +70,7 @@ public class ContentController {
 		// Target과 searchWord로 결과 나누기
 		if (searchWord == null) {
 			int listCount = contentService.getBoardListCount(b_type);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
 
@@ -82,14 +81,10 @@ public class ContentController {
 			System.out.println(dataList.size());
 			return "boardNoticePage";
 		} else if (searchTarget.equals("b_title")) {
-
 			int listCount = contentService.getBoardListCountByTitle(b_type, searchWord);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -97,14 +92,10 @@ public class ContentController {
 			System.out.println(dataList.size());
 			return "boardNoticePage";
 		} else if (searchTarget.equals("b_content")) {
-
 			int listCount = contentService.getBoardListCountByContent(b_type, searchWord);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -112,14 +103,10 @@ public class ContentController {
 			System.out.println(dataList.size());
 			return "boardNoticePage";
 		} else if (searchTarget.equals("ad_nick")) {
-
 			int listCount = contentService.getBoardListCountByADNICK(b_type, searchWord);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -128,12 +115,9 @@ public class ContentController {
 			return "boardNoticePage";
 		} else {
 			int listCount = contentService.getBoardListCountByNICK(b_type, searchWord);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -142,25 +126,20 @@ public class ContentController {
 			return "boardNoticePage";
 
 		}
-
 	}
 
 	@RequestMapping("/boardReviewPage")
 	public String boardReviewPage(Model model, String searchWord, String searchTarget, String nowPage,
 			String changePage) { // 여러 개가 넘어올 경우 VO를 또 생성하여 받아올 수 있음. 싫으면 ContentVO에 string searchWord를 추가하던가.
-
 		String b_type = "1";
 		// 페이지 처리한 거 여기다 분리해서 적어주기
 		int limit = 10;
 		int pageGroupLimit = 5;
 		if (searchWord == null) {
 			int listCount = contentService.getBoardListCount(b_type);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -169,12 +148,9 @@ public class ContentController {
 			return "boardReviewPage";
 		} else if (searchTarget.equals("b_title")) {
 			int listCount = contentService.getBoardListCountByTitle(b_type, searchWord);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -183,12 +159,9 @@ public class ContentController {
 			return "boardReviewPage";
 		} else if (searchTarget.equals("b_content")) {
 			int listCount = contentService.getBoardListCountByContent(b_type, searchWord);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -197,12 +170,9 @@ public class ContentController {
 			return "boardReviewPage";
 		} else {
 			int listCount = contentService.getBoardListCountByNICK(b_type, searchWord);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -210,42 +180,20 @@ public class ContentController {
 			System.out.println(dataList.size());
 			return "boardReviewPage";
 		}
-
 	}
 
 	@RequestMapping("/boardQnAPage")
-	public String boardQnAPage(Model model, String searchWord, String searchTarget, String nowPage, String changePage) { // 여러
-																															// 개가
-																															// 넘어올
-																															// 경우
-																															// VO를
-																															// 또
-																															// 생성하여
-																															// 받아올
-																															// 수
-																															// 있음.
-																															// 싫으면
-																															// ContentVO에
-																															// string
-																															// searchWord를
-																															// 추가하던가.
-
+	public String boardQnAPage(Model model, String searchWord, String searchTarget, String nowPage, String changePage) { 
 		String b_type = "2";
-		// 페이지 처리한 거 여기다 분리해서 적어주기
-
 		// 전체글 개수 가져오기
 		if (searchWord == null) {
 			int limit = 10;
 			int pageGroupLimit = 5;
 			int listCount = contentService.getBoardListCount(b_type);
-
 			System.out.println("전체 글 갯수는 : " + listCount);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -256,14 +204,10 @@ public class ContentController {
 			int limit = 10;
 			int pageGroupLimit = 5;
 			int listCount = contentService.getBoardListCountByTitle(b_type, searchWord);
-
 			System.out.println("전체 글 갯수는 : " + listCount);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -274,14 +218,10 @@ public class ContentController {
 			int limit = 10;
 			int pageGroupLimit = 5;
 			int listCount = contentService.getBoardListCountByContent(b_type, searchWord);
-
 			System.out.println("전체 글 갯수는 : " + listCount);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -292,14 +232,10 @@ public class ContentController {
 			int limit = 10;
 			int pageGroupLimit = 5;
 			int listCount = contentService.getBoardListCountByNICK(b_type, searchWord);
-
 			System.out.println("전체 글 갯수는 : " + listCount);
-
 			PageVO pageVO = pageService.showPage(nowPage, limit, pageGroupLimit, changePage, listCount);
-
 			// 페이지 이동(이전 or 다음)으로 인한 nowPage의 변화
 			nowPage = pageVO.getNowPage();
-
 			ArrayList<BoardDataVO> dataList = contentService.getContentsList(searchWord, searchTarget, b_type, nowPage,
 					limit); // getContentsList 내부에서 검색어 있음/없음 분기를 나누던가, 아니면 또다른 메서드를 한 개 더 만들던가.
 			model.addAttribute("boardDataList", dataList);
@@ -310,225 +246,95 @@ public class ContentController {
 	}
 
 //글쓰기 페이지 불러오기
+	//공지사항 글쓰기 로직
 	@RequestMapping("/writeNoticeForm")
 	public String writeNoticeForm() {
+		String b_idx = contentService.insertFraktsiya();
 
-		return "writeNoticeForm";
+		return "redirect:writeNoticePage?b_idx="+b_idx;
 	}
-
+	
+	@RequestMapping("/writeNoticePage")
+	public String writeNoticePage(ContentDataVO contentDataVO, Model model) {
+		BoardDataVO boardData = contentService.readContent(contentDataVO);
+		model.addAttribute("boardDataVO", boardData);
+		
+		return "writeNoticePage";
+	}
+	//QnA글쓰기 로직
 	@RequestMapping("/writeQnAForm")
 	public String writeQNAForm() {
-		return "writeQnAForm";
+		String b_idx = contentService.insertFraktsiya();
+		
+		return "redirect:writeQnAPage?b_idx="+b_idx;
 	}
+	@RequestMapping("/writeQnAPage")
+	public String writeQnAPage(ContentDataVO contentDataVO, Model model) {
 
+		BoardDataVO boardData = contentService.readContent(contentDataVO);
+		model.addAttribute("boardDataVO", boardData);
+		int limit= 5000;
+		ArrayList<ProductVO> productVO = productService.getProductList(null, null, limit, null, null, null, null);
+		model.addAttribute("productVO", productVO);
+		
+		
+		return "writeQnAPage";
+	}
+	//리뷰 글쓰기 로직
 	@RequestMapping("/writeReviewForm")
 	public String writeReviewForm() {
-		return "writeReviewForm";
+		String b_idx = contentService.insertFraktsiya();
+		
+		return "redirect:writeReviewPage?b_idx="+b_idx;
+	}
+	@RequestMapping("/writeReviewPage")
+	public String writeReviewPage(ContentDataVO contentDataVO, Model model) {
+		BoardDataVO boardData = contentService.readContent(contentDataVO);
+		model.addAttribute("boardDataVO", boardData);
+		
+		return "writeReviewPage";
 	}
 
 //글쓰기 액션
+	//공지사항 액션
 	@RequestMapping("/writeNoticeAction")
-	public String writeNoticeAction(MultipartFile[] files, ContentDataVO contentDataVO, HttpServletRequest request) { // request는
-																														// 위치
-																														// 받아오기
-																														// 용도
+	public String writeNoticeAction(ContentDataVO contentDataVO) { // request는
 
-		// 파일 받아서 DB에 넣어주기 전 작업 (db에 넣어주려면 db의 열에 맞게 조정해야함)
-		ArrayList<UploadFileVO> fileList = new ArrayList<UploadFileVO>();
-
-		// 파일 업로드 처리(파일 받아서 저장하기)
-		// String uploadRootFolderName =
-		// "C:\\dev_tools\\apache-tomcat-8.5.42\\wtpwebapps\\SpringMVC"; // 이렇게 해도 되지만
-		// 위치가 변할때마다 수정해주어야함
-		String uploadRootFolderName = request.getSession().getServletContext().getRealPath("/uploadimg/"); // window
-																											// 기준으로는
-																											// 자동으로
-																											// 역슬래쉬로 들어감
-																											// //servletContext는
-																											// application
-																											// 저장공간
-		// 파일 처리하기(파일 이름 받아오기)
-		for (MultipartFile file : files) {
-
-			if (file.getSize() == 0) // 넘어온 값이 없을 때는 그냥 루프 빠져나가기
-				continue;
-
-			String oriFilename = file.getOriginalFilename();
-
-			// 중복된 이름으로 저장하는 것 피하기(랜덤한 이름으로 저장하기)
-			String randomFilename = UUID.randomUUID().toString();
-
-			// 파일 확장자명 원본 그대로 받아오기(확장자명 가져오기)
-			randomFilename += oriFilename.substring(oriFilename.lastIndexOf('.')); // 원본 이름에서 .을 뒤에서부터 찾아서 잘라내어 확장자명을
-																					// 얻어내고 랜덤하게 설정된 이름에다가 붙인다.
-
-			System.out.println("저장될 파일명 : " + uploadRootFolderName + randomFilename);
-
-			// 저장하기
-			try {
-				file.transferTo(new File(uploadRootFolderName + randomFilename)); // 파일 위치 지정해주기
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			// DATA 생성
-			// 경로 구성
-			String link = request.getContextPath(); // springMVC/ 위치까지
-			link += "/uploadimg/";
-			link += randomFilename;
-
-			// 담아주기
-			UploadFileVO fileVO = new UploadFileVO(null, null, link, oriFilename);
-			fileList.add(fileVO);
-
-		}
-
-		contentService.writeContent(contentDataVO, fileList);
+		contentService.updateNoticeContent(contentDataVO);
 
 		return "redirect:boardNoticePage";
 	}
-
+	//QnA액션
 	@RequestMapping("/writeQnAAction")
-	public String writeQnAAction(MultipartFile[] files, ContentDataVO contentDataVO, HttpServletRequest request) {
+	public String writeQnAAction(ContentDataVO contentDataVO) {
 
-		// 파일 받아서 DB에 넣어주기 전 작업 (db에 넣어주려면 db의 열에 맞게 조정해야함)
-		ArrayList<UploadFileVO> fileList = new ArrayList<UploadFileVO>();
-
-		// 파일 업로드 처리(파일 받아서 저장하기)
-		// 파일을 넣는 폴더를 지정해주기
-		// String uploadRootFolderName =
-		// "C:\\dev_tools\\apache-tomcat-8.5.42\\wtpwebapps\\SpringMVC"; // 이렇게 해도 되지만
-		// 위치가 변할때마다 수정해주어야함
-		String uploadRootFolderName = request.getSession().getServletContext().getRealPath("/uploadimg/"); // window
-																											// 기준으로는
-																											// 자동으로
-																											// 역슬래쉬로 들어감
-																											// //servletContext는
-																											// application
-																											// 저장공간
-		// 파일 처리하기(파일 이름 받아오기)
-		for (MultipartFile file : files) {
-
-			if (file.getSize() == 0) // 넘어온 값이 없을 때는 그냥 루프 빠져나가기
-				continue;
-
-			String oriFilename = file.getOriginalFilename();
-
-			// 중복된 이름으로 저장하는 것 피하기(랜덤한 이름으로 저장하기)
-			String randomFilename = UUID.randomUUID().toString();
-
-			// 파일 확장자명 원본 그대로 받아오기(확장자명 가져오기)
-			randomFilename += oriFilename.substring(oriFilename.lastIndexOf('.')); // 원본 이름에서 .을 뒤에서부터 찾아서 잘라내어 확장자명을
-																					// 얻어내고 랜덤하게 설정된 이름에다가 붙인다.
-
-			System.out.println("저장될 파일명 : " + uploadRootFolderName + randomFilename);
-
-			// 저장하기
-			try {
-				file.transferTo(new File(uploadRootFolderName + randomFilename)); // 파일 위치 지정해주기
-			} catch (IllegalStateException e) {
-
-				e.printStackTrace();
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-
-			// DATA 생성
-			// 경로 구성
-			String link = request.getContextPath(); // springMVC/ 위치까지
-			link += "/uploadimg/";
-			link += randomFilename;
-
-			// 담아주기
-			UploadFileVO fileVO = new UploadFileVO(null, null, link, oriFilename);
-			fileList.add(fileVO);
-
-		}
-
-		contentService.writeQnAContent(contentDataVO, fileList);
+		contentService.updateQnAContent(contentDataVO);
 
 		return "redirect:boardQnAPage";
 	}
-
+	//리뷰액션
 	@RequestMapping("/writeReviewAction")
-	public String writeReviewAction(MultipartFile[] files, ContentDataVO contentDataVO, HttpServletRequest request) {
+	public String writeReviewAction(ContentDataVO contentDataVO) {
 
-		// 파일 받아서 DB에 넣어주기 전 작업 (db에 넣어주려면 db의 열에 맞게 조정해야함)
-		ArrayList<UploadFileVO> fileList = new ArrayList<UploadFileVO>();
-
-		// 파일 업로드 처리(파일 받아서 저장하기)
-		// 파일을 넣는 폴더를 지정해주기
-		// String uploadRootFolderName =
-		// "C:\\dev_tools\\apache-tomcat-8.5.42\\wtpwebapps\\SpringMVC"; // 이렇게 해도 되지만
-		// 위치가 변할때마다 수정해주어야함
-		String uploadRootFolderName = request.getSession().getServletContext().getRealPath("/uploadimg/"); // window
-																											// 기준으로는
-																											// 자동으로
-																											// 역슬래쉬로 들어감
-																											// //servletContext는
-																											// application
-																											// 저장공간
-		// 파일 처리하기(파일 이름 받아오기)
-		for (MultipartFile file : files) {
-
-			if (file.getSize() == 0) // 넘어온 값이 없을 때는 그냥 루프 빠져나가기
-				continue;
-
-			String oriFilename = file.getOriginalFilename();
-
-			// 중복된 이름으로 저장하는 것 피하기(랜덤한 이름으로 저장하기)
-			String randomFilename = UUID.randomUUID().toString();
-
-			// 파일 확장자명 원본 그대로 받아오기(확장자명 가져오기)
-			randomFilename += oriFilename.substring(oriFilename.lastIndexOf('.')); // 원본 이름에서 .을 뒤에서부터 찾아서 잘라내어 확장자명을
-																					// 얻어내고 랜덤하게 설정된 이름에다가 붙인다.
-
-			System.out.println("저장될 파일명 : " + uploadRootFolderName + randomFilename);
-
-			// 저장하기
-			try {
-				file.transferTo(new File(uploadRootFolderName + randomFilename)); // 파일 위치 지정해주기
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			// DATA 생성
-			// 경로 구성
-			String link = request.getContextPath(); // springMVC/ 위치까지
-			link += "/uploadimg/";
-			link += randomFilename;
-
-			// 담아주기
-			UploadFileVO fileVO = new UploadFileVO(null, null, link, oriFilename);
-			fileList.add(fileVO);
-
-		}
-
-		contentService.writeReviewContent(contentDataVO, fileList);
+		contentService.updateReviewContent(contentDataVO);
 
 		return "redirect: boardReviewPage";
 	}
-
+	//댓글액션
 	@RequestMapping("/writeReplyAction")
-	public String writeReplyAction(ContentDataVO contentDataVO, String b_type, String b_idx) {
+	public String writeReplyAction(ContentDataVO contentDataVO, String b_idx, String b_type) {
 
 		contentService.writeReplyContent(contentDataVO);
-
-		return "writeReplyComplete";
-
+		if(b_type.equals("0")){
+			return "redirect:readNoticePage?b_idx="+b_idx;
+		}else if(b_type.equals("1")) {
+			return "redirect:readReviewPage?b_idx="+b_idx;
+		}else {
+			return "redirect:readQnAPageByAdmin?b_idx="+b_idx;
+		}
 	}
-
 //글 읽기 페이지
-
+	//공지사항 읽기
 	@RequestMapping("/readNoticePage")
 	public String readNoticePage(ContentDataVO contentDataVO, Model model) {
 
@@ -540,7 +346,7 @@ public class ContentController {
 		model.addAttribute("boardDataReplyList", boardDataReply);
 		return "readNoticePage";
 	}
-
+	//QnA운영자가 읽기
 	@RequestMapping("/readQnAPageByAdmin")
 	public String readQnAPageByAdmin(ContentDataVO contentDataVO, Model model) {
 
@@ -553,7 +359,7 @@ public class ContentController {
 		return "readQnAPage";
 
 	}
-
+	//QnA 일반 회원들이 읽기
 	@RequestMapping("/readQnAPage")
 	public String readQnAPage(ContentDataVO contentDataVO, Model model) {
 
@@ -589,12 +395,12 @@ public class ContentController {
 
 		return "falsePW";
 	}
-
+	//QnA비밀글 비밀번호 확인 실패 페이지
 	@RequestMapping("/falsePW")
 	public String falsePW() {
 		return "falsePW";
 	}
-
+	//리뷰 읽기
 	@RequestMapping("/readReviewPage")
 	public String readReviewPage(ContentDataVO contentDataVO, Model model) {
 		contentService.increaseCount(contentDataVO);
@@ -617,96 +423,55 @@ public class ContentController {
 
 	// 업데이트 페이지
 	@RequestMapping("/updateNoticeForm")
-	public String updateNoticeForm(ContentDataVO contentDataVO, Model model) { // parameter에 c_idx의 정보가 아직 담겨 있음 (
-																				// ${param.c_idx} )로 jsp에서 받아와도 됨. )
-
+	public String updateNoticeForm(ContentDataVO contentDataVO, Model model) {
+																				
 		BoardDataVO boardData = contentService.readContent(contentDataVO);
-
 		model.addAttribute("boardDataVO", boardData);
 
-		return "updateNoticeForm";
+		return "updateNoticePage";
 	}
+	@RequestMapping("/updateQnAForm")
+	public String updateQnAForm(ContentDataVO contentDataVO, Model model) {
+		
+		BoardDataVO boardData = contentService.readContent(contentDataVO);
+		model.addAttribute("boardDataVO", boardData);
+		int limit= 5000;
+		ArrayList<ProductVO> productVO = productService.getProductList(null, null, limit, null, null, null, null);
+		model.addAttribute("productVO", productVO);
+		return "updateQnAPage";
+	}
+	@RequestMapping("updateReviewForm")
+	public String updateReviewForm(ContentDataVO contentDataVO, Model model) {
+		
+		BoardDataVO boardData = contentService.readContent(contentDataVO);
+		model.addAttribute("boardDataVO", boardData);
 
+		return "updateReviewPage";
+	}
+	
 	// 업데이트 액션
 	@RequestMapping("/updateNoticeAction")
-	public String updateNoticeAction(ContentDataVO contentDataVO, MultipartFile[] files, HttpServletRequest request) {
-
-		ArrayList<UploadFileVO> fileList = new ArrayList<UploadFileVO>();
-
-		String uploadRootFolderName = request.getSession().getServletContext().getRealPath("/uploadimg/");
-
-		for (MultipartFile file : files) {
-			if (file.getSize() == 0) //
-				continue;
-
-			String oriFilename = file.getOriginalFilename();
-
-			String randomFilename = UUID.randomUUID().toString();
-
-			randomFilename += oriFilename.substring(oriFilename.lastIndexOf('.'));
-
-			System.out.println("저장될 파일명 : " + uploadRootFolderName + randomFilename);
-
-			// 저장하기
-			try {
-				file.transferTo(new File(uploadRootFolderName + randomFilename)); // 파일 위치 지정해주기
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			// DATA 생성
-			// 경로 구성
-			String link = request.getContextPath(); // springMVC/ 위치까지
-			link += "/uploadimg/";
-			link += randomFilename;
-
-			// 담아주기
-			UploadFileVO fileVO = new UploadFileVO(null, null, link, oriFilename);
-			fileList.add(fileVO);
-
-		}
-
-		contentService.updateContent(contentDataVO);
-
+	public String updateNoticeAction(ContentDataVO contentDataVO) {
+		contentService.updateNoticeContent(contentDataVO);
 		return "redirect:boardNoticePage";
 	}
-
-	@RequestMapping("/test")
-	public String test() {
-		return "test";
+	
+	@RequestMapping("/updateQnAAction")
+	public String updateQnAAction(ContentDataVO contentDataVO) {
+		contentService.updateQnAContent(contentDataVO);
+		return "redirect:boardQnAPage";
+	}
+	
+	@RequestMapping("/updateReviewAction")
+	public String updateReviewAction(ContentDataVO contentDataVO) {
+		contentService.updateReviewContent(contentDataVO);
+		return "redirect:boardReviewPage";
 	}
 
-//카트 삭제
-	/*
-	@ResponseBody
-	@RequestMapping(value = "/deleteFileForm", method = RequestMethod.POST)
-	public int deleteFileForm(@RequestParam(value = "chbox[]") List<String> chArr, UploadFileVO cart)
-			throws Exception {
-		
-
-
-
-		int result = 0;
-		int cartNum = 0;
-
-
-
-			for (String i : chArr) {
-				cartNum = Integer.parseInt(i);
-				cart.setF_idx(cartNum);
-				.deleteFileForm(cart);
-			}
-			result = 1;
-		
-		return result;
-	}
-*/
-	@RequestMapping("/fileUpdateAction")
-	public String fileUpdateAction(MultipartFile[] files, HttpServletRequest request, String b_idx, Model model, String b_type) {
+//보드에서 파일을 사용하는 곳은 총 6곳, 각각의 보드 writePage와 updatePage... b_type으로 묶을 수 있으니 업로드 로직과 삭제 로직을 넣어 총 4개를 만든다.
+	//글쓰기 페이지에서 사용하는 파일 업로드 로직
+	@RequestMapping("/fileUploadActionByWritePage")
+	public String fileUploadActionByWritePage(MultipartFile[] files, HttpServletRequest request, String b_idx, Model model, String b_type) {
 		ArrayList<UploadFileVO> fileList = new ArrayList<UploadFileVO>();
 
 		String uploadRootFolderName = request.getSession().getServletContext().getRealPath("/uploadimg/");
@@ -715,41 +480,97 @@ public class ContentController {
 			if (file.getSize() == 0) //
 				continue;
 
-			String oriFilename = file.getOriginalFilename();
-
+			String oriFilename = file.getOriginalFilename();			
 			String randomFilename = UUID.randomUUID().toString();
-
 			randomFilename += oriFilename.substring(oriFilename.lastIndexOf('.'));
-
-			System.out.println("저장될 파일명 : " + uploadRootFolderName + randomFilename);
-
+			System.out.println("저장된 파일명 : " + uploadRootFolderName + randomFilename);
 			// 저장하기
 			try {
 				file.transferTo(new File(uploadRootFolderName + randomFilename)); // 파일 위치 지정해주기
 			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			// DATA 생성
 			// 경로 구성
 			String link = request.getContextPath(); // springMVC/ 위치까지
 			link += "/uploadimg/";
 			link += randomFilename;
+			//세션 뽑기
 
 			// 담아주기
 			UploadFileVO fileVO = new UploadFileVO(null, null, link, oriFilename);
 			fileList.add(fileVO);
-
+			
 		}
 		model.addAttribute("fileList", fileList);
-		
 		contentService.updateFileContent(fileList, b_idx);
 		if(b_type.equals("0")) {
 		
+		return "redirect:writeNoticePage?b_idx=" + b_idx;
+		}else if(b_type.equals("1")) {
+			return "redirect:writeReviewPage?b_idx=" + b_idx;
+		}else {
+			return "redirect:writeQnAPage?b_idx=" + b_idx;
+		}
+			
+	}
+	//글쓰기 페이지에서 사용하는 파일 삭제 로직
+	@RequestMapping("/fileDeleteActionByWritePage")
+	public String fileDeleteActionByWritePage(UploadFileVO uploadFileVO, ContentDataVO contentDataVO, String b_type) {
+		
+		String b_idx = contentDataVO.getB_idx();
+		
+		contentDataVO.setB_idx(b_idx);
+		
+		contentService.deleteFile(uploadFileVO);
+		
+		if(b_type.equals("0")) {
+			return "redirect:writeNoticePage?b_idx=" + b_idx;
+		}else if(b_type.equals("1")) {
+			return "redirect:writeReviewPage?b_idx="+b_idx;
+		}else {
+			return "redirect:writeQnAPage?b_idx="+b_idx;
+		}
+			
+	}
+	//수정 페이지에서 사용하는 파일 업로드 로직
+	@RequestMapping("/fileUploadActionByUpdatePage")
+	public String fileUploadActionByUpdatePage(MultipartFile[] files, HttpServletRequest request, String b_idx, Model model, String b_type) {
+		ArrayList<UploadFileVO> fileList = new ArrayList<UploadFileVO>();
+
+		String uploadRootFolderName = request.getSession().getServletContext().getRealPath("/uploadimg/");
+
+		for (MultipartFile file : files) {
+			if (file.getSize() == 0) //
+				continue;
+
+			String oriFilename = file.getOriginalFilename();			
+			String randomFilename = UUID.randomUUID().toString();
+			randomFilename += oriFilename.substring(oriFilename.lastIndexOf('.'));
+			System.out.println("저장된 파일명 : " + uploadRootFolderName + randomFilename);
+			// 저장하기
+			try {
+				file.transferTo(new File(uploadRootFolderName + randomFilename)); // 파일 위치 지정해주기
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			// 경로 구성
+			String link = request.getContextPath(); // springMVC/ 위치까지
+			link += "/uploadimg/";
+			link += randomFilename;
+			//세션 뽑기
+
+			// 담아주기
+			UploadFileVO fileVO = new UploadFileVO(null, null, link, oriFilename);
+			fileList.add(fileVO);
+			
+		}
+		model.addAttribute("fileList", fileList);
+		contentService.updateFileContent(fileList, b_idx);
+		if(b_type.equals("0")) {
 		return "redirect:updateNoticeForm?b_idx=" + b_idx;
 		}else if(b_type.equals("1")) {
 			return "redirect:updateReviewForm?b_idx=" + b_idx;
@@ -758,12 +579,31 @@ public class ContentController {
 		}
 			
 	}
-	@RequestMapping("./fileDeleteAction")
-	public String fileDeleteAction(MultipartFile[] files, HttpServletRequest request, String b_idx, Model model) {
-return null;
+	//수정 페이지에서 사용하는 파일 삭제 로직
+	@RequestMapping("/fileDeleteActionByUpdatePage")
+	public String fileDeleteActionByUpdatePage(UploadFileVO uploadFileVO, ContentDataVO contentDataVO, String b_type) {
 		
+		String b_idx = contentDataVO.getB_idx();
+		
+		contentDataVO.setB_idx(b_idx);
+		
+		contentService.deleteFile(uploadFileVO);
+		
+		if(b_type.equals("0")) {
+			return "redirect:updateNoticePage?b_idx=" + b_idx;
+		}else if(b_type.equals("1")) {
+			return "redirect:updateReviewPage?b_idx="+b_idx;
+		}else {
+			return "redirect:updateQnAPage?b_idx="+b_idx;
+		}			
 	}
-	
-	
+
+	//jsp 테스트 용도로 만듬...
+	@RequestMapping("/test")
+	public String test() {
+		return "test";
+	}
+
+
 	
 }

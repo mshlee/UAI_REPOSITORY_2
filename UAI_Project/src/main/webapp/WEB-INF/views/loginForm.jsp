@@ -116,11 +116,11 @@
     </head>
 
     <body>
-        <div id="wrapper">
+        <div class="container-fluid" id="wrapper">
            
             <div id="top-box">
                 <div id="top-small-box1"></div>
-                <img  id="logo-login-form" src="./img/logo.png">
+                <a href="./mainPage"><img  id="logo-login-form" src="./img/logo.png"></a>
             </div> <!--top div-->
             
             <div id="middle-box">

@@ -21,13 +21,14 @@ import www.uai.com.vo.PageVO;
 import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductThumbnailVO;
 import www.uai.com.vo.ProductVO;
+import www.uai.com.vo.SessionDataVO;
 import www.uai.com.vo.WishListVO;
 
 @Controller
 public class ProductController {
+	
 	@Autowired
 	private ContentService contentService;
-	
    @Autowired
    private ProductService productService;
    @Autowired
@@ -35,10 +36,10 @@ public class ProductController {
    
    @RequestMapping("/productListPage")
    public String productListPage(Model model, String nowPage, String changePage, String p_type, String p_location,
-         String searchWord) {
+         String searchWord, String order) {
 
       // 페이지 처리한 거 여기다 분리해서 적어주기
-      int limit = 3;
+      int limit = 6;
       int pageGroupLimit = 5;
 
       int listCount = 0;
@@ -55,7 +56,7 @@ public class ProductController {
         
       nowPage = pageVO.getNowPage();
         
-      productList= productService.getProductList(model, nowPage, limit, p_type, p_location, searchWord);
+      productList= productService.getProductList(model, nowPage, limit, p_type, p_location, searchWord, order);
       
       for(ProductVO product: productList) {
          String p_idx = product.getP_idx();
@@ -68,7 +69,7 @@ public class ProductController {
          productListWithImage.add(productThumbnailVO);
       }
       
-      locationList = productService.getLocationList(p_type);
+      locationList = productService.getLocationList(p_type, p_location, searchWord);
         
       model.addAttribute("locationList", locationList);
       model.addAttribute("listCount", listCount);
@@ -133,15 +134,18 @@ public class ProductController {
    }
    
    @RequestMapping("/buyProductAction")
-   public String buyProductAction(OrderDataVO orderParam, HttpSession session ) {
-      
-      productService.buyProductAction(orderParam,session);
-      
-      // 구매수 올리기
-      String p_idx = orderParam.getP_idx();
-      productService.increaseBuyCount(p_idx);
-      
-      return "buyProductCompletePage";
+   public String buyProductAction(OrderDataVO orderParam, HttpSession session) {
+
+		// 로그인되면 session에서 처리
+		orderParam.setM_idx("1");
+
+		productService.buyProductAction(orderParam, session);
+
+		// 구매수 올리기
+		String p_idx = orderParam.getP_idx();
+		productService.increaseBuyCount(p_idx);
+
+		return "buyProductCompletePage";
    }
    
    @RequestMapping("/addWishlist")
@@ -157,24 +161,25 @@ public class ProductController {
    @RequestMapping("/removeWishlist")
    @ResponseBody
    public void removeWishlist(@RequestParam String p_idx, HttpSession session) {
-      
-      WishListVO wishParam = new WishListVO();
-      wishParam.setP_idx(p_idx);
-      
-      productService.removeWishlist(wishParam, session);
+
+		WishListVO wishParam = new WishListVO();
+		wishParam.setP_idx(p_idx);
+
+		productService.removeWishlist(wishParam, session);
    }
+   
    @RequestMapping(value = "/autosearchWord", produces = "application/text; charset=utf8")
    @ResponseBody
    public String autoSearchWord(@RequestParam String keyword) {
 
-      List<String> nameList = productService.autoSearchWord(keyword);
+	   List<ProductVO> dataList = productService.autoSearchWord(keyword);
 
-      // json으로 쪼개주기
-      JSONObject jsonObject = new JSONObject();
-      jsonObject.put("keyword", nameList);
-      String jsonInfo = jsonObject.toString();
+		// json으로 쪼개주기
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("keyword", dataList);
+		String jsonInfo = jsonObject.toString();
 
-      return jsonInfo;
+		return jsonInfo;
 
    }
    

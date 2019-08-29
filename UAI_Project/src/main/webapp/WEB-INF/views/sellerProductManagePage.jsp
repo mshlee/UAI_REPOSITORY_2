@@ -154,10 +154,8 @@ function delchk(){
 						<th scope="col">강의번호</th>
 						<th scope="col">카테고리</th>
 						<th scope="col">강의명</th>
-						<th scope="col">할인율</th>
 						<th scope="col">원 가격</th>
 						<th scope="col">판매 가격</th>
-						<th scope="col">수수료</th>
 						<th scope="col">강사명</th>
 						<th scope="col">지역</th>
 						<th scope="col">현재수강인원</th>
@@ -205,10 +203,8 @@ function delchk(){
 							</c:choose>
 
 							<th scope="row">${productDataList.p_name }</th>
-							<th scope="row">${productDataList.p_discountRate }</th>
 							<th scope="row">${productDataList.p_originalPrice }</th>	
 							<th scope="row">${productDataList.p_nowPrice }</th>
-							<th scope="row">${productDataList.p_commissionRate }</th>
 							<th scope="row">${productDataList.p_teacher }</th>
 							<th scope="row">${productDataList.p_location }</th>
 							<th scope="row">0</th>

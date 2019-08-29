@@ -1,24 +1,29 @@
 package www.uai.com.vo;
 
 public class OrderDataVO {
-	
+
 	private String o_idx;
-	private String o_totalprice;
+	private String o_totalPrice;
 	private String o_date;
 	private String o_paymentMethod;
 	private String p_idx;
 	private String m_idx;
-	
+	private String pch_isPaid;
+
 	public OrderDataVO() {
+
 	}
-	
-	public OrderDataVO(String o_idx, String o_totalprice, String o_date, String o_paymentMethod, String p_idx, String m_idx) {
+
+	public OrderDataVO(String o_idx, String o_totalPrice, String o_date, String o_paymentMethod, String p_idx,
+			String m_idx, String pch_isPaid) {
+
 		this.o_idx = o_idx;
-		this.o_totalprice = o_totalprice;
+		this.o_totalPrice = o_totalPrice;
 		this.o_date = o_date;
 		this.o_paymentMethod = o_paymentMethod;
 		this.p_idx = p_idx;
 		this.m_idx = m_idx;
+		this.pch_isPaid = pch_isPaid;
 	}
 
 	public String getO_idx() {
@@ -29,12 +34,12 @@ public class OrderDataVO {
 		this.o_idx = o_idx;
 	}
 
-	public String getO_totalprice() {
-		return o_totalprice;
+	public String getO_totalPrice() {
+		return o_totalPrice;
 	}
 
-	public void setO_totalprice(String o_totalprice) {
-		this.o_totalprice = o_totalprice;
+	public void setO_totalPrice(String o_totalPrice) {
+		this.o_totalPrice = o_totalPrice;
 	}
 
 	public String getO_date() {
@@ -69,5 +74,12 @@ public class OrderDataVO {
 		this.m_idx = m_idx;
 	}
 
+	public String getPch_isPaid() {
+		return pch_isPaid;
+	}
+
+	public void setPch_isPaid(String pch_isPaid) {
+		this.pch_isPaid = pch_isPaid;
+	}
+
 }
-	

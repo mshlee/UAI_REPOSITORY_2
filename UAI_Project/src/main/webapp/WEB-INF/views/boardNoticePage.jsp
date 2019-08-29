@@ -1,56 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-<title>Board Notice Page</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <head>
+        <title>Board Notice Page</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		  
+        <!-- Bootstrap CSS -->
+    	<link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
+		<!-- slider 설정 -->
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
+        <!-- Include jQuery library and Flexslider script -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+		
+		<!-- Link Swiper's CSS -->
+  		<link rel="stylesheet" href="css/swiper.min.css">
+		
+        
+        <!-- font 설정 -->
+        <link rel="stylesheet" href="https://use.typekit.net/kcj1cyn.css">
 
-<!-- Bootstrap CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-
-<!-- slider 설정 -->
-<link rel="stylesheet" href="css/flexslider.css" type="text/css"
-	media="screen">
-<!-- Include jQuery library and Flexslider script -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-<!-- Link Swiper's CSS -->
-<link rel="stylesheet" href="css/swiper.min.css">
-
-
-<!-- font 설정 -->
-<link rel="stylesheet" href="https://use.typekit.net/kcj1cyn.css">
-<STYLE>
-#pages {
-	float: left;
-	text-align: center;
-	margin-left: 400px;
-}
-
-#page {
-	text-align: center;
-	float: left;
-}
-
-#nowPage {
-	float: left;
-	text-align: center;
-}
-</STYLE>
+      <style>
+	      #pages{
+		         float: left;
+		         text-align: center;
+		         margin-left: 400px;
+		      }
+		      #page{
+		         text-align: center;
+		         float : left;
+		      }
+	            #nowPage{
+		         float : left;
+		         text-align: center;
+		         
+		      }
+	      }
+	 </style>
         <style>
         @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
         @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -243,7 +236,7 @@
 																										    font-family: 'Nanum Gothic', sans-serif;
 																										    float:left;
 																										    margin-left:20px;
-																										    margin-top: 10px;
+																										    margin-top: 30px;
 																										    margin-bottom: 15px;
 																										}
 																									    th, td {
@@ -295,262 +288,245 @@
 
 
         </style>
-<!-- Swiper styles -->
-<style>
-.swiper-container {
-	width: 100%;
-	height: 100%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.swiper-slide {
-	text-align: center;
-	font-size: 18px;
-	background: #fff;
-	/* Center slide text vertically */
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	-webkit-justify-content: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	-webkit-align-items: center;
-	align-items: center;
-}
-</style>
-</head>
-
+        <!-- Swiper styles -->
+        <style>
+            .swiper-container {
+                width: 100%;
+                height: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .swiper-slide {
+                text-align: center;
+                font-size: 18px;
+                background: #fff;
+                /* Center slide text vertically */
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                -webkit-align-items: center;
+                align-items: center;
+            }
+        </style>
+    </head>
 
 
 
 
 
-<body>
-	<div id="wrapper">
-		<div id="top-box">
-			<div id="top-small-1">
-				<div id="top-menu">
-					<a style="color: black" href="./mainPage">HOME</a> | <a
-						style="color: black" href="./loginForm">LOGIN</a> | <a
-						style="color: black" href="./noticeBoardPage">NOTICE</a> | <a
-						style="color: black" href="./myPage">MYPAGE</a>
-				</div>
-			</div>
-			<div id="top-small-2">
-				<div id="top-logo">
-					<a href="./mainPage"><img id="top-logo" src="./img/logo.png"></a>
-				</div>
-			</div>
-			<div id="top-small-3">
-				<nav class="navbar navbar-expand navbar-light bg-light sticky-top">
-					<a class="navbar-brand"><img id="top-mini-logo"
-						src="./img/topMiniLogo.png"></a>
-					<ul class="navbar-nav" id="top-menu-bar">
-						<li class="nav-item"><a class="nav-link"
-							href="./boardNoticePage">Notice</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="./productListPage">Lecture</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="./boardReviewPage">Review</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="./boardQnAPage">Q & A</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-		<!--top-box div-->
 
-		<div id="middle-box">
+    <body>
+        <div class="container-fluid" id="wrapper">
+            <div id="top-box">
+                <div id="top-small-1">
+                    <div id="top-menu">
+	                    <a style="color: black" href="./mainPage">HOME</a> | 
+	                	<a style="color: black" href="./loginForm">LOGIN</a> | 
+	                	<a style="color: black" href="./noticeBoardPage">NOTICE</a> | 
+	                	<a style="color: black" href="./myPage">MYPAGE</a>            
+                    </div>
+                    </div>
+                    <div id="top-small-2">
+                    <div id="top-logo">
+                        <a href="./mainPage"><img id="top-logo" src="./img/logo.png"></a>
+                    </div>
+                    </div>
+                    <div id="top-small-3">
+                    <nav class="navbar navbar-expand navbar-light bg-light sticky-top">
+                        <a class="navbar-brand"><img id="top-mini-logo" src="./img/topMiniLogo.png"></a>
+                        <ul class="navbar-nav" id="top-menu-bar">
+							<li class="nav-item"><a class="nav-link" href="./boardNoticePage">Notice</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./productListPage">Lecture</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="./boardReviewPage">Review</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="./boardQnAPage">Q & A</a></li>
+                        </ul>
+                    </nav>
+                    </div>
+                </div><!--top-box div-->
+        
+        <div id="middle-box">
 
-			<div id="middle-small-3">
-				<!-- Swiper -->
-				<div class="swiper-container" id="middle-slide">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide">
-							<img src="./img/middleSlide4.png">
-						</div>
-						<div class="swiper-slide">
-							<img src="./img/middleSlide4.png">
-						</div>
-						<div class="swiper-slide">
-							<img src="./img/middleSlide4.png">
-						</div>
-						<div class="swiper-slide">
-							<img src="./img/middleSlide4.png">
-						</div>
-					</div>
-					<!-- Add Pagination -->
-					<div class="swiper-pagination"></div>
-					<!-- Add Arrows -->
-					<div class="swiper-button-next"></div>
-					<div class="swiper-button-prev"></div>
-				</div>
+            <div id="middle-small-3">
+                <!-- Swiper -->
+                <div class="swiper-container" id="middle-slide">
+                    <div class="swiper-wrapper">
+                   <div class="swiper-slide"><img src="./img/middleSlide0.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide1.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide2.png"></div>
+                  <div class="swiper-slide"><img src="./img/middleSlide3.png"></div>
+                    </div> 
+                    <!-- Add Pagination --> 
+                    <div class="swiper-pagination"></div> 
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                
+                <!-- Swiper JS --> 
+                <script src="js/swiper.min.js"></script>
+                
+                <!-- Initialize Swiper -->
+                <script>
+                    var swiper = new Swiper('.swiper-container', {
+                    spaceBetween: 30,
+                    loop: true,
+                    centeredSlides: true,
+                    autoplay: {
+                        delay: 3500, //autoplay 시간
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    });
+                </script>
+                </div><!--middle-small-box-3-->
+            
 
-				<!-- Swiper JS -->
-				<script src="js/swiper.min.js"></script>
-
-				<!-- Initialize Swiper -->
-				<script>
-					var swiper = new Swiper('.swiper-container', {
-						spaceBetween : 30,
-						loop : true,
-						centeredSlides : true,
-						autoplay : {
-							delay : 3500, //autoplay 시간
-							disableOnInteraction : false,
-						},
-						pagination : {
-							el : '.swiper-pagination',
-							clickable : true
-						},
-						navigation : {
-							nextEl : '.swiper-button-next',
-							prevEl : '.swiper-button-prev',
-						},
-					});
-				</script>
-			</div>
-			<!--middle-small-box-3-->
-
-
-			<div id="middle-small-1">
-				<c:choose>
-					<c:when test="${!empty sessionData.m_idx }">
-						<div id="middle-empty1">Learn Something Worthy!</div>
-						<div id="login-success-box">
-							<h4>Welcome,</h4>
-							<h6>${sessionData.m_nick }</h6>
+                <div id="middle-small-1">
+                        <c:choose>
+                            <c:when test="${!empty sessionData.m_idx }">
+                              <div id="middle-empty1">Learn Something Worthy!</div>
+                              <div id="login-success-box">
+                                  <h4>Welcome,</h4> <h6>${sessionData.m_nick }</h6>
+                                  <br>
+                                  <div id="login-success-function">
+                                  <a style="color: black" href="./logoutAction"><button class="btn btn-light">Logout</button></a>
+                                  <a href="./mainPage"><button class="btn btn-secondary">◀  Main</button></a>
+                                  <br>
+                                  </div>
+                              </div>
+                              <img src="./img/loginBoxLine.png" id="logo-login-box-line2">
+                            </c:when>
+                            
+                            <c:when test="${!empty sessionData.ad_idx }">
+                             <div id="middle-empty1">Learn Something Worthy!</div>
+                              <div id="login-success-box">
+                                  <h4>Welcome,</h4> <h6>${sessionData.ad_nick }</h6>
+                                  <br>
+                                  <div id="login-success-function">
+                                  <a style="color: black" href="./logoutAction"><button class="btn btn-light">Logout</button></a>
+                                  <a href="./mainPage"><button class="btn btn-secondary">◀  Main</button></a>
+                                  <br>
+                                  </div>
+                              </div>
+                              <img src="./img/loginBoxLine.png" id="logo-login-box-line2">
 							<br>
-							<div id="login-success-function">
-								<a style="color: black" href="./logoutAction"><button
-										class="btn btn-light">Logout</button></a> <a href="./mainPage"><button
-										class="btn btn-secondary">◀ Main</button></a> <br>
-							</div>
-						</div>
-						<img src="./img/loginBoxLine.png" id="logo-login-box-line2">
-					</c:when>
-
-					<c:when test="${!empty sessionData.ad_idx }">
-						<div id="middle-empty1">Learn Something Worthy!</div>
-						<div id="login-success-box">
-							<h4>Welcome,</h4>
-							<h6>${sessionData.ad_nick }</h6>
-							<br>
-							<div id="login-success-function">
-								<a style="color: black" href="./logoutAction"><button
-										class="btn btn-light">Logout</button></a> <a href="./mainPage"><button
-										class="btn btn-secondary">◀ Main</button></a> <br>
-							</div>
-						</div>
-						<img src="./img/loginBoxLine.png" id="logo-login-box-line2">
-						<br>
-					</c:when>
-
-					<c:otherwise>
-						<div class="well" id="middle-login-box">
-							<img src="./img/loginBoxLine.png" id="logo-login-box-line">
-							<div id="sign-in">
-								<img src="./img/signIn.png" id="logo-sign-in"> <a
-									class="login-function" style="color: black" href="./loginForm">Sign
-									In</a>
-							</div>
-							<div id="sign-up">
-								<img src="./img/signUp.png" id="logo-sign-up"> <a
-									class="login-function" style="color: black"
-									href="./joinMemberForm">Sign Up</a>
-							</div>
-						</div>
-						<!-- Your ID was not found in our Data. Please try it again. <br>
+							</c:when>
+                            
+                            <c:otherwise>
+                                <div class="well" id="middle-login-box">
+                                <img src="./img/loginBoxLine.png" id="logo-login-box-line">
+                                <div id="sign-in">
+                                  <img src="./img/signIn.png" id="logo-sign-in"> 
+                                  <a class="login-function" style="color: black" href="./loginForm">Sign In</a>
+                                </div>
+                                <div id="sign-up">
+                                  <img src="./img/signUp.png" id="logo-sign-up">
+                                  <a class="login-function" style="color: black" href="./joinMemberForm">Sign Up</a>
+                                </div>
+                              </div>
+                              <!-- Your ID was not found in our Data. Please try it again. <br>
                               <a href="./loginForm">go back to Login Page</a> <br><br> -->
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<!--middle-small-box-1-->
-
-
-			<div id="middle-small-2">
-				<div id="notice-title">▶ NOTICE</div>
-				<br> <br> <br>
-
-				<div id="notice-table-box">
-					<table class="notice-table">
-						<tr>
-							<td>&nbsp; &nbsp; &nbsp; &nbsp; 제목 &nbsp; &nbsp; &nbsp;
-								&nbsp;</td>
-							<td>작성자</td>
-							<td>작성일</td>
-						</tr>
-						<c:forEach var="boardDataVO" items="${boardDataList }">
-							<tr>
-								<td><a
-									href="./readNoticePage?b_idx=${boardDataVO.contentDataVO.b_idx }">
-										${boardDataVO.contentDataVO.b_title}</a></td>
-								<td>${boardDataVO.adminDataVO.ad_nick}</td>
-								<td>${boardDataVO.contentDataVO.b_postdate}</td>
-							</tr>
-						</c:forEach>
-					</table>
-
-					<div id="ad-box">
-						<br> <br>
-						<c:if test="${!empty sessionData.ad_idx }">
-							<a href="./writeNoticeForm"><button class="btn btn-info"
-									style="width: 60pt; height: 28pt;">글 쓰기</button></a>
-						</c:if>
-					</div>
-					<br> <br>
-					<div id="search">
-						<form action="./boardNoticePage" method="get">
-							<input type="hidden" name="b_type" value="1"> 검색 대상 : <select
-								name="searchTarget">
-								<option value="b_title" selected>제목</option>
-								<option value="b_content">내용</option>
-								<option value="ad_nick">작성자</option>
-							</select> &nbsp; &nbsp; 검색어 : <input type="text" name="searchWord">
-							&nbsp; <input class="btn btn-light active" id="search-btn"
-								style="width: 50pt; height: 25pt;" type="submit" value="Search">
-
-						</form>
-
-						<br>
-					</div>
-					<div id="pages">
-						<c:if test="${pageVO.startOfPageGroup != 1}">
-							<a
-								href="boardNoticePage?changePage=previous&nowPage=${pageVO.nowPage }">이전</a>
-						</c:if>
-						<c:forEach var="i" begin="${pageVO.startOfPageGroup }"
-							end="${pageVO.endOfPageGroup }" step="1">
-							<c:choose>
-								<c:when test="${i == pageVO.nowPage}">
-									<div id="nowPage">${i }</div>
-								</c:when>
-								<c:otherwise>
-									<div id="page">
-										<a href="./boardNoticePage?nowPage=${i }">${i }</a>
-									</div>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<c:if test="${pageVO.endOfPageGroup != pageVO.maxPage}">
-							<a href="boardNoticePage?changePage=next&nowPage=${pageVO.nowPage }">다음</a>
-						</c:if>
-					</div>
-				</div>
-
-               </div><!--middle-small-box-2-->
+                            </c:otherwise>		
+                          </c:choose>
+                    </div><!--middle-small-box-1-->
+      
+				
+                <div id="middle-small-2">
+                	<div id="notice-title">
+                	▶   NOTICE
+                	</div>
+                    <br>
+                    <br>
+                    <br>
+                    
+                    <div id="notice-table-box">
+                    	<table class="notice-table">
+					        <tr>
+					            <td>&nbsp; &nbsp; &nbsp; &nbsp; 제목 &nbsp; &nbsp; &nbsp; &nbsp;</td>
+					            <td>작성자</td>
+					            <td>작성일</td>
+					         </tr>
+					            <c:forEach var="boardDataVO" items="${boardDataList }">
+					               <tr>
+					               <td><a href="./readNoticePage?b_idx=${boardDataVO.contentDataVO.b_idx }">
+					                     ${boardDataVO.contentDataVO.b_title}</a></td>
+					               <td>${boardDataVO.adminDataVO.ad_nick}</td>
+					               <td>${boardDataVO.contentDataVO.b_postdate}</td>
+					               </tr>
+					            </c:forEach>
+					         </table>   
+							      
+							      <div id="ad-box">
+							      <br>
+							      <br>
+								      <c:if test="${!empty sessionData.ad_idx }">
+								      <a href="./writeNoticeForm"><button class="btn btn-info" style="width:60pt; height:28pt;">글 쓰기</button></a>
+								      </c:if>
+							      </div>
+								<br>
+								<br>
+								<br>
+								<br>
+								
+							      <div id="search">
+							      <br>
+									<form action="./boardNoticePage" method="get">
+									<input type="hidden" name="b_type" value="1" >
+									검색 대상 : <select name="searchTarget">
+										<option value="b_title" selected>제목</option>
+										<option value="b_content">내용</option>
+										<option value="ad_nick">작성자</option>
+									</select>
+									&nbsp; &nbsp;
+										검색어 : <input type="text" name="searchWord"> &nbsp;
+										<input class="btn btn-light active" id="search-btn" style="width:50pt; height:25pt;" type="submit" value="Search">
+										
+									</form>
+							
+							      <br>
+							      </div>
+							        <div id="pages">
+								         <c:if test="${pageVO.startOfPageGroup != 1}">
+								            <a href="boardNoticePage?changePage=previous&nowPage=${pageVO.nowPage }">이전</a>
+								         </c:if>
+								         <c:forEach var="i" begin="${pageVO.startOfPageGroup }" end="${pageVO.endOfPageGroup }" step="1">
+								            <c:choose>
+								               <c:when test="${i == pageVO.nowPage}">
+								                  <div id="nowPage">${i }</div>
+								               </c:when>
+								               <c:otherwise>
+								                  <div id="page"><a href="./boardNoticePage?nowPage=${i }">${i }</a></div>
+								               </c:otherwise>
+								            </c:choose>
+								         </c:forEach>
+								         <c:if test="${pageVO.endOfPageGroup != pageVO.maxPage}">
+								            <a href="boardNoticePage?changePage=next&nowPage=${pageVO.nowPage }">다음</a>
+								         </c:if>
+						      	</div>
+                    </div>
+                    
+                </div><!--middle-small-box-2-->
               
         </div><!--middle box-->
         
         
         <div id="bottom-box">
         
-          	<div id="bottom-phrase">Help | Feedback | Privacy | Terms | ��UAI Project Company</div>
+          	<div id="bottom-phrase">Help | Feedback | Privacy | Terms | ⓒUAI Project Company</div>
         
         
         

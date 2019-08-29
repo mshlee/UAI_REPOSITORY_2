@@ -9,6 +9,7 @@ public class BoardDataVO {
       private MemberDataVO memberDataVO;
       private OrderDataVO orderDataVO;
       private ArrayList<UploadFileVO> fileList;
+      private ProductVO productVO;
       
       
     public BoardDataVO() {
@@ -19,13 +20,14 @@ public class BoardDataVO {
 
       
 	public BoardDataVO(AdminDataVO adminDataVO, ContentDataVO contentDataVO, MemberDataVO memberDataVO,
-			OrderDataVO orderDataVO, ArrayList<UploadFileVO> fileList) {
+			OrderDataVO orderDataVO, ArrayList<UploadFileVO> fileList,ProductVO productVO) {
 		super();
 		this.adminDataVO = adminDataVO;
 		this.contentDataVO = contentDataVO;
 		this.memberDataVO = memberDataVO;
 		this.orderDataVO = orderDataVO;
 		this.fileList = fileList;
+		this.productVO = productVO;
 	}
 
 
@@ -77,7 +79,13 @@ public class BoardDataVO {
 	public void setFileList(ArrayList<UploadFileVO> fileList) {
 		this.fileList = fileList;
 	}
-      
- 
 
+	public ProductVO getProductVO() {
+		return productVO;
+	}
+
+	public void setProductVO(ProductVO productVO) {
+		this.productVO = productVO;
+	}
+      
 }

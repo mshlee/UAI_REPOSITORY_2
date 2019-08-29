@@ -110,10 +110,6 @@ function delchk(){
                 <th><input type="date" name="startDate">~<input type="date" name="endDate"></th></tr>
                
             <tr class="table-secondary">
-            <th>별점</th>
-               <th><input type="text" name="minPrice">~<input type="text" name="maxPrice"></th>
-                    </tr>
-            
             <tr class="table-primary">
                 <th>키워드</th>
                 <th><select name="keyword">
@@ -148,7 +144,6 @@ function delchk(){
 						<th scope="col">닉네임</th>
 						<th scope="col">회원명</th>
 						<th scope="col">글제목</th>
-						<th scope="col">별점</th>
 						<th scope="col">조회수</th>
 						<th scope="col">작성일</th>
 						<th scope="col">삭제</th>
@@ -170,7 +165,6 @@ function delchk(){
 							<th scope="row">${reviewDataList.memberDataVO.m_nick }</th>
 							<th scope="row">${reviewDataList.memberDataVO.m_name}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_title}</th>
-							<th scope="row">${reviewDataList.contentDataVO.b_starRate}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_count}</th>
 							<th scope="row">${reviewDataList.contentDataVO.b_postdate}</th>
 							<th scope="row"><a href="./sellerDeleteReviewByIdx?b_referIdx=${reviewDataList.contentDataVO.b_referIdx} onclick="return delchk()">삭제</a></th>

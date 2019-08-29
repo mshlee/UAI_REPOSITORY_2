@@ -65,7 +65,7 @@
 
                 <form action="" method="post">
                     <br><br><br>
-                    <input type="text" name="ad_id"> <button>중복체크</button><br>
+                    <input type="text" name="ad_id"><br>
                     <input type="text" name="ad_nick"><br>
                     <input type="password" name="ad_pw"><br>
                     <input type="submit" value="생성"><br>

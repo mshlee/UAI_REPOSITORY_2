@@ -190,7 +190,7 @@ function delchk(){
 							<th scope="row">${orderDataList.memberDataVO.m_name }</th>
 							<th scope="row">${orderDataList.memberDataVO.m_id }</th>
 							<th scope="row">${orderDataList.orderDataVO.o_date }</th>
-							<th scope="row">${orderDataList.orderDataVO.o_totalprice }</th>
+							<th scope="row">${orderDataList.orderDataVO.o_totalPrice }</th>
 							
 							<!-- lhe: 결제수단 타입 숫자->키워드로 치환 -->
 							<c:choose>

@@ -1,6 +1,7 @@
 package www.uai.com.vo;
 
 public class PurchaseDataVO {
+	
 	private String o_idx;
 	private String pch_paymentDate;
 	private String pch_isPaid;

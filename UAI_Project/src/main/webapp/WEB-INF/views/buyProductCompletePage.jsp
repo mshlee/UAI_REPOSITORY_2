@@ -5,10 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	a{
+		text-decoration: none;
+		color: black;
+	}
+</style>
 </head>
 <body>
-   구매완료!
-   <a href="./productListPage">다른 강의 둘러보기</a>
-   <a href="./mainPage">메인 페이지로</a>
+	구매완료!
+	<a href="./productListPage">다른 강의 둘러보기</a>
 </body>
 </html>

@@ -18,8 +18,12 @@ public interface ContentService {
 
 	public void deleteContent(ContentDataVO contentDataVO);
 
-	public void updateContent(ContentDataVO contentDataVO);
+	public void updateNoticeContent(ContentDataVO contentDataVO);
 
+	public void updateQnAContent(ContentDataVO contentDataVO);
+	
+	public void updateReviewContent(ContentDataVO contentDataVO);
+	
 	public void writeContent(ContentDataVO contentDataVO, ArrayList<UploadFileVO> fileList);
 
 	public void increaseCount(ContentDataVO contentDataVO);
@@ -47,7 +51,8 @@ public interface ContentService {
 	public ArrayList<BoardDataVO> getReplyList(ContentDataVO contentDataVO);
 	
 	public void updateFileContent(ArrayList<UploadFileVO> fileList, String b_idx);
+
+	public void deleteFile(UploadFileVO uploadFileVO);
 	
-
-
+	public String insertFraktsiya();
 }

@@ -14,7 +14,7 @@ import www.uai.com.vo.WishListVO;
 public interface ProductService {
 
 //dy
-	   public ArrayList<ProductVO> getProductList(Model model, String nowPage, int limit, String p_type, String p_location, String searchWord);
+	   public ArrayList<ProductVO> getProductList(Model model, String nowPage, int limit, String p_type, String p_location, String searchWord, String order);
 	   
 	   public ProductDataVO readProductPage(Model model, ProductVO productParam);
 	   
@@ -34,9 +34,9 @@ public interface ProductService {
 	   
 	   public void increaseBuyCount(String p_idx);
 	   
-	   public List<String> autoSearchWord(String keyword);
+	   public List<ProductVO> autoSearchWord(String keyword);
 	   
-	   public ArrayList<String> getLocationList(String p_type);
+	   public ArrayList<String> getLocationList(String p_type, String p_location, String searchWord);
 	   
 	   public String getProductThumbnail(String p_idx);
 	   
