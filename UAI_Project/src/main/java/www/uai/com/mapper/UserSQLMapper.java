@@ -28,5 +28,9 @@ public interface UserSQLMapper {
    //회원정보 수정...
    @Update("UPDATE MEMBERS SET m_nick = #{m_nick} WHERE m_idx = #{m_idx}")
    public void update(MemberDataVO vo);
+   
+   @Select("SELECT * FROM MEMBERS WHERE M_NICK = #{m_nick}")
+   public MemberDataVO selectByMNick(String m_nick);
+
 
 }

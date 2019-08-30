@@ -89,9 +89,10 @@ public class SellerContentController {
 	@RequestMapping("/sellerNewAdminAction")
 	public String sellerNewAdminAction(AdminDataVO requestVO) {
 		
+		
 		sellerContentService.insertAdminData(requestVO);
 		
-		return "redirect:sellerAccountManageMainPage";
+		return "redirect:sellerManageAdmin";
 		
 	}
 	

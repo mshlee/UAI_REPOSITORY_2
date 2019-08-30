@@ -1,11 +1,8 @@
 package www.uai.com.controller;
 
-import java.awt.Image;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,22 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import www.uai.com.service.ContentService;
 import www.uai.com.service.PageService;
 import www.uai.com.service.ProductService;
 import www.uai.com.vo.BoardDataVO;
 import www.uai.com.vo.ContentDataVO;
-import www.uai.com.vo.MemberDataVO;
+import www.uai.com.vo.OrderListVO;
 import www.uai.com.vo.PageVO;
-import www.uai.com.vo.ProductDataVO;
 import www.uai.com.vo.ProductVO;
-import www.uai.com.vo.SessionDataVO;
 import www.uai.com.vo.UploadFileVO;
 
 @Controller
@@ -602,6 +593,19 @@ public class ContentController {
 	@RequestMapping("/test")
 	public String test() {
 		return "test";
+	}
+	
+	@RequestMapping("/readMyOrderPage")
+	public String readMyOrderPage(Model model, HttpSession session){
+		
+		//세션에서 가져오기
+		String m_idx = "1";
+		
+		ArrayList<OrderListVO> orderList = contentService.readMyOrderPage(m_idx) ;
+		
+		model.addAttribute("orderList", orderList);
+		
+		return "readOrderPage";
 	}
 
 

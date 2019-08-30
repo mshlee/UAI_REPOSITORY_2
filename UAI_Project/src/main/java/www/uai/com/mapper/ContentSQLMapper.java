@@ -8,7 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import www.uai.com.vo.*;
+import www.uai.com.vo.ContentDataVO;
+import www.uai.com.vo.OrderDataVO;
+import www.uai.com.vo.ProductVO;
+import www.uai.com.vo.PurchaseDataVO;
 
 
 public interface ContentSQLMapper {
@@ -103,6 +106,12 @@ public interface ContentSQLMapper {
 																				AD_IDX NUMBER(8)*/
 	@Select("SELECT bd.B_IDX FROM (SELECT * FROM BOARD_CONTENT ORDER BY B_IDX DESC)bd WHERE ROWNUM = 1")
 	public String selectNoticeFraktsiya();
+	
+	@Select("SELECT * FROM Orders WHERE M_IDX = ${m_idx}")
+	public ArrayList<OrderDataVO> selectOrderByIdx(OrderDataVO orderDataVO);
+	
+	@Select("SELECT * FROM purchase WHERE O_IDX = ${o_idx}")
+	public PurchaseDataVO selectPurchaseByIdx(OrderDataVO orderDataVO);
 
 
 	}

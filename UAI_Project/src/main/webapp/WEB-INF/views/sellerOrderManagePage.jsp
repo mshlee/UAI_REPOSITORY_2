@@ -249,7 +249,7 @@
 <script type="text/javascript">
 
 function delchk(){
-    return confirm("지급상태를 변경하시겠습니까?");
+    return confirm("결제상태를 변경하시겠습니까?");
 }
 
 </script>

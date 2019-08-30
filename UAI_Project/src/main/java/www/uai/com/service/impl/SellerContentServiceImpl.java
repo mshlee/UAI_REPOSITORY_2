@@ -32,9 +32,8 @@ public class SellerContentServiceImpl implements SellerContentService {
 	@Override
 	public void insertAdminData(AdminDataVO requestVO) {
 		// TODO Auto-generated method stub
-		String ad_idx = sellerContentSQLMapper.newAdIdx();
-		sellerContentSQLMapper.insertAdminData(ad_idx, requestVO.getAd_id(), requestVO.getAd_pw(),
-				requestVO.getAd_nick());
+		//String ad_idx = sellerContentSQLMapper.newAdIdx();
+		sellerContentSQLMapper.insertAdminData(requestVO);
 
 	}
 

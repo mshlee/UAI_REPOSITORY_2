@@ -485,7 +485,7 @@
                        </tr>
                      </thead>
                      <tbody>
-                    <c:forEach var="orderListForMain" items="${orderListForMain }" begin="1" end="4" step="1">
+                    <c:forEach var="orderListForMain" items="${orderListForMain }" begin="1" end="3" step="1">
                      	<tr>
                          <td>${orderListForMain.o_idx }</td>
                          <td>${orderListForMain.o_totalPrice }</td>
@@ -542,7 +542,7 @@
                        </tr>
                      </thead>
                      <tbody>
-          			  <c:forEach var="qnaListForMain" items="${qnaListForMain }" begin="1" end="4" step="1">
+          			  <c:forEach var="qnaListForMain" items="${qnaListForMain }" begin="1" end="3" step="1">
                      	<tr>
                          <td>${qnaListForMain.b_referIdx }</td>
                          <td><a href="./readQnAPageByAdmin?b_idx=${qnaListForMain.b_idx }">${qnaListForMain.b_title }</a></td>
@@ -573,7 +573,7 @@
                        </tr>
                      </thead>
                      <tbody>
-   		 			   <c:forEach var="reviewListForMain" items="${reviewListForMain }" begin="1" end="4" step="1">
+   		 			   <c:forEach var="reviewListForMain" items="${reviewListForMain }" begin="1" end="3" step="1">
                      	<tr>
                          <td>${reviewListForMain.b_referIdx }</td>
                          <td><a href="./readReviewPage?b_idx=${reviewListForMain.b_idx }">${reviewListForMain.b_title }</a></td>

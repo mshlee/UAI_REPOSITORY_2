@@ -17,4 +17,6 @@ public interface UserService {
    public boolean isExistMID(MemberDataVO requestParam);
    
    public boolean isExistADID(AdminDataVO requestParam);
+   
+   public boolean isExistMNick(MemberDataVO requestParam);
 }

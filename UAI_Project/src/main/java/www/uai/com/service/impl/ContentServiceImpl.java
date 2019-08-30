@@ -2,10 +2,10 @@ package www.uai.com.service.impl;
 
 import java.util.ArrayList;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import www.uai.com.mapper.AdminSQLMapper;
 import www.uai.com.mapper.ContentSQLMapper;
 import www.uai.com.mapper.ProductSQLMapper;
@@ -16,9 +16,10 @@ import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.BoardDataVO;
 import www.uai.com.vo.ContentDataVO;
 import www.uai.com.vo.MemberDataVO;
-import www.uai.com.vo.PostnumVO;
+import www.uai.com.vo.OrderDataVO;
+import www.uai.com.vo.OrderListVO;
 import www.uai.com.vo.ProductVO;
-import www.uai.com.vo.SessionDataVO;
+import www.uai.com.vo.PurchaseDataVO;
 import www.uai.com.vo.UploadFileVO;
 
 @Service
@@ -285,4 +286,35 @@ public class ContentServiceImpl implements ContentService{
 		
 		return b_idx;
 	}
+	
+
+	@Override
+	public ArrayList<OrderListVO> readMyOrderPage(String m_idx) {
+		
+		OrderDataVO orderDataVO = new OrderDataVO();
+		orderDataVO.setM_idx(m_idx);
+		
+		ArrayList<OrderListVO> orderList = new ArrayList<OrderListVO>();
+		
+		ArrayList<OrderDataVO> orderData = contentSQLMapper.selectOrderByIdx(orderDataVO);
+	
+		ProductVO product = new ProductVO();
+		
+		PurchaseDataVO purchase = new PurchaseDataVO();
+		
+		for(OrderDataVO order: orderData) {
+			
+			String p_idx = order.getP_idx();
+			product = productSQLMapper.selectByIdx(p_idx);
+			purchase = contentSQLMapper.selectPurchaseByIdx(order);
+					
+			OrderListVO orderListVO = new OrderListVO(order, product,purchase);
+			
+			orderList.add(orderListVO);
+			
+		}
+		
+		return orderList;
+	}
+	
 }

@@ -447,7 +447,7 @@
                     <div id="show-payment">
                        <div class="empty-box2"><br></div>
                        <img src="./img/showPayment.png" id="logo-pay">
-                        <a style="color: black" href="#">My Lecture</a>
+                        <a style="color: black" href="./readMyOrderPage?m_idx${sessionData.m_idx }">My Lecture</a>
                     </div>
                     <div id="write-review">
                        <div class="empty-box2"><br></div>

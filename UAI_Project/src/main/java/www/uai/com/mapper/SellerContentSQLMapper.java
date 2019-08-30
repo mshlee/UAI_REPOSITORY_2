@@ -20,11 +20,11 @@ public interface SellerContentSQLMapper {
 	
 
 	//lhe-어드민 계정 관리용
-	@Select("SELECT Admin_seq.NEXTVAL FROM DUAL")
+	@Select("SELECT Admins_Seq.NEXTVAL FROM DUAL")
 	public String newAdIdx();
 	
-	@Insert("INSERT INTO Admins VALUES (#{ad_idx}, #{ad_id}, #{ad_pw}, #{ad_nick}")
-	public void insertAdminData(String ad_idx, String ad_id, String ad_pw, String ad_nick);
+	@Insert("INSERT INTO Admins VALUES (Admins_Seq.NEXTVAL, #{ad_id}, #{ad_pw}, #{ad_nick})")
+	public void insertAdminData(AdminDataVO requestVO);
 	
 	@Select("SELECT * FROM Admins WHERE ad_idx=#{ad_idx}")
 	public AdminDataVO getAdminDataByIdx(String ad_idx);
