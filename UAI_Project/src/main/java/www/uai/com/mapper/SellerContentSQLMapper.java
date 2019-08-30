@@ -109,7 +109,7 @@ public interface SellerContentSQLMapper {
 	public ArrayList<MemberDataVO> getMemberListBySearchWord(String query);
 	
 	//lhe-판매자 리뷰&QnA 관리 상세검색용
-	@Select("SELECT * FROM Board_Content WHERE ${value} ORDER BY B_IDX")
+	@Select("SELECT * FROM Board_Content WHERE ${value} AND B_ISPOST=1 ORDER BY B_IDX")
 	public ArrayList<ContentDataVO> getPostListBySearchWord(String query);
 	
 	//lhe-판매자 지급관리 상세검색용

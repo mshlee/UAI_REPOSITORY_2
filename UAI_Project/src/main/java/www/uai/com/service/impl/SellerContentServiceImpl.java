@@ -93,101 +93,111 @@ public class SellerContentServiceImpl implements SellerContentService {
 	}
 
 	// 판매자 상품 리스트 출력
-	@Override
-	public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO) {
-		// TODO Auto-generated method stub
+		@Override
+		public ArrayList<ProductVO> getAllProductList(AdvancedSearchDataVO searchDataVO) {
+			// TODO Auto-generated method stub
 
-		String p_type = searchDataVO.getP_type();
-		String startDate = searchDataVO.getStartDate();
-		String endDate = searchDataVO.getEndDate();
-		String minPrice = searchDataVO.getMinPrice();
-		String maxPrice = searchDataVO.getMaxPrice();
-		String keyword = searchDataVO.getKeyword();
-		String value = searchDataVO.getValue();
+			String p_type = searchDataVO.getP_type();
+			String startDate = searchDataVO.getStartDate();
+			String endDate = searchDataVO.getEndDate();
+			String minPrice = searchDataVO.getMinPrice();
+			String maxPrice = searchDataVO.getMaxPrice();
+			String keyword = searchDataVO.getKeyword();
+			String value = searchDataVO.getValue();
 
-		// vo 객체 null값 여부 확인
-		boolean isEmpty = false;
+			// vo 객체 null값 여부 확인
+			boolean isEmpty = false;
 
-		if (p_type == null && startDate == null && minPrice == null && keyword == null) {
-			isEmpty = true;
-		}
-
-		// lhe-상세검색기능 추가 (다중 조건 정렬 이용)
-		ArrayList<ProductVO> productDataList = new ArrayList<ProductVO>();
-
-		if (isEmpty == true) {
-
-			productDataList = sellerContentSQLMapper.getAllProductList();
-
-		} else if (isEmpty == false) {
-
-			// empty string 예외처리
-			if (p_type.length() == 0) {
-				p_type = null;
-			}
-			if (startDate.length() == 0) {
-				startDate = null;
-			}
-			if (endDate.length() == 0) {
-				endDate = null;
-			}
-			if (minPrice.length() == 0) {
-				minPrice = null;
-			}
-			if (maxPrice.length() == 0) {
-				maxPrice = null;
-			}
-			if (keyword.length() == 0) {
-				keyword = null;
-			}
-			if (value.length() == 0) {
-				value = null;
+			if (p_type == null && startDate == null && minPrice == null && keyword == null) {
+				isEmpty = true;
 			}
 
-			String query = " AND ";
+			// lhe-상세검색기능 추가 (다중 조건 정렬 이용)
+			ArrayList<ProductVO> productDataList = new ArrayList<ProductVO>();
 
-			String andPhrase = " AND ";
-			if (p_type != null) {
-				query = query.substring(0, query.length() - 5);
-				query += "P_TYPE=" + p_type;
-				query += andPhrase;
-			}
-			if (startDate != null || endDate != null) {
-				if (startDate == null || endDate == null) {
-				} else {
-					query = query.substring(0, query.length() - 5);
-					query += "P_POSTDATE BETWEEN " + "'" + startDate + "'" + " AND " + "'" + endDate + "'";
-					query += andPhrase;
-				}
-			}
-			if (minPrice != null || maxPrice != null) {
-				if (minPrice == null || maxPrice == null) {
+			if (isEmpty == true) {
 
-				} else {
-					query = query.substring(0, query.length() - 5);
-					query += "P_ORIGINALPRICE BETWEEN " + minPrice + " AND " + maxPrice;
-					query += andPhrase;
-				}
-			}
-			if (keyword != null && value != null) {
-				query = query.substring(0, query.length() - 5);
-				query += keyword.toUpperCase() + " LIKE " + "'%" + value + "%'";
-				query += andPhrase;
-			}
-
-			query = query.substring(0, query.length() - 5);
-
-			if (query.length() < 1) {
 				productDataList = sellerContentSQLMapper.getAllProductList();
-			} else {
-				productDataList = sellerContentSQLMapper.getProductListBySearchWord(query);
+
+			} else if (isEmpty == false) {
+
+				// empty string 예외처리
+				if (p_type.length() == 0) {
+					p_type = null;
+				}
+				if (startDate.length() == 0) {
+					startDate = null;
+				}
+				if (endDate.length() == 0) {
+					endDate = null;
+				}
+				if (minPrice.length() == 0) {
+					minPrice = null;
+				}
+				if (maxPrice.length() == 0) {
+					maxPrice = null;
+				}
+				if (keyword.length() == 0) {
+					keyword = null;
+				}
+				if (value.length() == 0) {
+					value = null;
+				}
+
+				String query = " AND ";
+
+				String andPhrase = " AND ";
+				if (p_type != null) {
+					query = query.substring(0, query.length() - 5);
+					query += "P_TYPE=" + p_type;
+					query += andPhrase;
+				}
+				if (startDate != null || endDate != null) {
+					if (startDate == null || endDate == null) {
+					} else {
+						query = query.substring(0, query.length() - 5);
+						query += "P_POSTDATE BETWEEN " + "'" + startDate + "'" + " AND " + "'" + endDate + "'";
+						query += andPhrase;
+					}
+				}
+				if (minPrice != null || maxPrice != null) {
+					if (minPrice == null || maxPrice == null) {
+
+					} else {
+						query = query.substring(0, query.length() - 5);
+						query += "P_ORIGINALPRICE BETWEEN " + minPrice + " AND " + maxPrice;
+						query += andPhrase;
+					}
+				}
+				if (keyword != null && value != null) {
+
+					if (keyword.contentEquals("P_IDX")) {
+						query = query.substring(0, query.length() - 5);
+						query += "P_IDX= " + value;
+						query += andPhrase;
+					} else {
+						query = query.substring(0, query.length() - 5);
+						query += keyword + " LIKE " + "'%" + value + "%'";
+						query += andPhrase;
+					}
+				}
+
+				query = query.substring(0, query.length() - 5);
+
+				if (query.length() < 1) {
+					System.out.println("1번분기"+query);
+					productDataList = sellerContentSQLMapper.getAllProductList();
+				} else {
+					System.out.println("2번분기"+query);
+					productDataList = sellerContentSQLMapper.getProductListBySearchWord(query);
+				}
+
 			}
 
+			return productDataList;
 		}
-
-		return productDataList;
-	}
-
+		
+		
 	// lhe-판매자 상품 관리 목록 단일 항목 삭제
 	@Override
 	public void deleteProductByIdx(String p_idx) {
@@ -274,7 +284,7 @@ public class SellerContentServiceImpl implements SellerContentService {
 			if (keyword != null && value != null) {
 				// query = query.substring(0, query.length() - 5);
 
-				if (keyword == "m_idx") {
+				if (keyword.contentEquals("M_IDX")) {
 					query += "M_IDX= " + value;
 					query += andPhrase;
 				} else {
@@ -335,6 +345,18 @@ public class SellerContentServiceImpl implements SellerContentService {
 		String checkboxValue = searchDataVO.getCheckboxValue();
 		String keyword = searchDataVO.getKeyword();
 		String value = searchDataVO.getValue();
+		
+		/*
+		System.out.println(startDate);
+		System.out.println(endDate);
+		System.out.println(minPrice);
+		System.out.println(maxPrice);
+		System.out.println(radioboxValue);
+		System.out.println(checkboxValue);
+		System.out.println(keyword);
+		System.out.println(value);
+		*/
+		
 
 		// vo 객체 null값 여부 확인
 		boolean isEmpty = false;
@@ -415,19 +437,22 @@ public class SellerContentServiceImpl implements SellerContentService {
 			if (keyword != null && value != null) {
 				// query = query.substring(0, query.length() - 5);
 
-				if (keyword == "M_IDX") {
+				if (keyword.contentEquals("M_IDX")) {
 					query += "M_IDX= " + value;
 					query += andPhrase;
-				} else if (keyword == "P_IDX") {
+				} else if (keyword.contentEquals("P_IDX")) {
 					query += "P_IDX= " + value;
 					query += andPhrase;
-				} else if (keyword == "O_IDX") {
+				} else if (keyword.contentEquals("O_IDX")) {
 					query += "O_IDX=" + value;
+					query += andPhrase;
+				}else {
+					query += keyword + " LIKE " + "'%" + value + "%'";
 					query += andPhrase;
 				}
 			}
 
-			if (query.length() < 1) {
+			if (query.length()==0) {
 				orderDataList = sellerContentSQLMapper.getAllOrderList();
 				System.out.println("1번분기");
 			} else {
@@ -533,17 +558,17 @@ public class SellerContentServiceImpl implements SellerContentService {
 			if (keyword != null && value != null) {
 				// query = query.substring(0, query.length() - 5);
 
-				if (keyword == "M_IDX") {
+				if (keyword.contentEquals("M_IDX")) {
 					query += "M_IDX= " + value;
 					query += andPhrase;
-				}else if (keyword == "P_IDX") {
+				}else if (keyword.contentEquals("P_IDX")) {
 					query += "P_IDX= " + value;
 					query += andPhrase;
-				}else if (keyword == "B_REFERIDX") {
+				}else if (keyword.contentEquals("B_REFERIDX")) {
 					query += "B_REFERIDX=" + value;
 					query += andPhrase;
 				}else {
-					query += keyword.toUpperCase() + " LIKE " + "'%" + value + "%'";
+					query += keyword + " LIKE " + "'%" + value + "%'";
 					query += andPhrase;
 				}
 
@@ -660,17 +685,17 @@ public class SellerContentServiceImpl implements SellerContentService {
 			}
 			if (keyword != null && value != null) {
 				// query = query.substring(0, query.length() - 5);
-				if (keyword == "M_IDX") {
+				if (keyword.contentEquals("M_IDX")) {
 					query += "M_IDX= " + value;
 					query += andPhrase;
-				} else if (keyword == "P_IDX") {
+				} else if (keyword.contentEquals("P_IDX")) {
 					query += "P_IDX= " + value;
 					query += andPhrase;
-				} else if (keyword == "B_REFERIDX") {
+				} else if (keyword.contentEquals("B_REFERIDX")) {
 					query += "B_REFERIDX=" + value;
 					query += andPhrase;
 				} else {
-					query += keyword.toUpperCase() + " LIKE " + "'%" + value + "%'";
+					query += keyword + " LIKE " + "'%" + value + "%'";
 					query += andPhrase;
 				}
 
@@ -780,10 +805,10 @@ public class SellerContentServiceImpl implements SellerContentService {
 			if (keyword != null && value != null) {
 				//query = query.substring(0, query.length() - 5);
 				
-				if(keyword=="O_IDX") {
-					query += "M_IDX= " + value;
+				if(keyword.contentEquals("O_IDX")) {
+					query += "O_IDX= " + value;
 					query += andPhrase;
-				}else if(keyword=="P_IDX") {
+				}else if(keyword.contentEquals("P_IDX")) {
 					query += "P_IDX= " + value;
 					query += andPhrase;
 				}else {

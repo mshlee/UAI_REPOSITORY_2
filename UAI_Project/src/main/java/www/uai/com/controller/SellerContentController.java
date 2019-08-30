@@ -99,12 +99,13 @@ public class SellerContentController {
 	//관리자 메인 페이지
 	@RequestMapping ("/sellerIndex")
 	public String sellerMainPage(Model model, HttpSession session){
-
-		if(session!=null) {
-			return "sellerMainPage";
-		}else {
+		
+		if(session==null){
 			
+			return "loginForm";
 		}
+
+	
 		
 		//메인 리스트 4개 불러오기
 		ArrayList<OrderDataVO> orderListForMain = sellerContentService.getOrderListForMain();
@@ -117,7 +118,7 @@ public class SellerContentController {
 		model.addAttribute("qnaListForMain", qnaListForMain);
 		model.addAttribute("reviewListForMain", reviewListForMain);
 		
-		return "mainPage";
+		return "sellerMainPage";
 		
 	}
 	

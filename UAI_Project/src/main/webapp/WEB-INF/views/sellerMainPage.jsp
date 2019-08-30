@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -26,13 +26,7 @@
         
         <!-- font 설정 -->
         <link rel="stylesheet" href="https://use.typekit.net/kcj1cyn.css">
-        
-        <!--효은언니가 설정해 둔것-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-        
-
+            
 
         <style>
         @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
@@ -206,7 +200,7 @@
                                                                                border-collapse: collapse;
                                                                                font-family: 'Nanum Gothic', sans-serif;
                                                                                margin-left: 12px;
-                                                                               font-size: 12pt;
+                                                                               font-size: 9pt;
                                                                                float:left;
                                                                                margin-left: 50px;
                                                                            }
@@ -230,7 +224,7 @@
                                                                                border-collapse: collapse;
                                                                                font-family: 'Nanum Gothic', sans-serif;
                                                                                margin-left: 12px;
-                                                                               font-size: 12pt;
+                                                                               font-size: 10pt;
                                                                                float:left;
                                                                                margin-left: 50px;
                                                                            }
@@ -298,16 +292,8 @@
                     
 
 
-</head>
-<body>
-    <div id="wrapper">
-        <div id="upper_bar"><a href="">쇼핑몰메인</a><a href="">로그아웃</a></div><br>
-        <img src="" type="button">
-        <div id="header"><a href="./sellerIndex">메인</a> | <a href="./sellerManageProduct">강의 관리</a> | <a href="./sellerManageOrder">주문 관리</a> | <a href="./sellerManageMember">회원관리</a> |  
-            <a href="./sellerManageReview">리뷰 관리</a> | <a href="./sellerManageQnA">QnA 관리</a> | <a href="./sellerManagePaycheck">지급 관리</a>
-        </div>
-        <div id="left_box">
-            <div id="admin_menu">
+
+
 
           #bottom-box{
             width: 1024px;
@@ -401,7 +387,8 @@
                       <li class="nav-item"><a class="nav-link" href="./sellerManageMember">회원 관리</a></li>
                       <li class="nav-item"><a class="nav-link" href="./sellerManageReview">리뷰 관리</a></li>
                       <li class="nav-item"><a class="nav-link" href="./sellerManageQnA">Q & A 관리</a></li>
-                      <li class="nav-item"><a class="nav-link" href="./sellerManagePayceck">지급 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerManagePaycheck">지급 관리</a></li>
+                      <li class="nav-item"><a class="nav-link" href="./sellerDashboard">통계 관리</a></li>
                     </ul>
                 </nav>
               </div>
@@ -501,8 +488,15 @@
                     <c:forEach var="orderListForMain" items="${orderListForMain }" begin="1" end="4" step="1">
                      	<tr>
                          <td>${orderListForMain.o_idx }</td>
-                         <td>${orderListForMain.o_id }</td>
-                         <td>${orderListForMain.o_o_paymentMethod }</td>
+                         <td>${orderListForMain.o_totalPrice }</td>
+                         <c:choose>
+                         <c:when test="${orderListForMain.o_paymentMethod == 0 }">
+                         <td>무통장</td>
+                         </c:when>
+                         <c:when test="${orderListForMain.o_paymentMethod == 1 }">
+                           <td>카드</td>
+                           </c:when>
+                           </c:choose>
                          <td>${orderListForMain.o_date }</td>
                        </tr>
                        </c:forEach>
@@ -523,12 +517,12 @@
                        </tr>
                      </thead>
                      <tbody>
-                    <c:forEach var="productListForMain" items="${productListForMain }" begin="1" end="4" step="1">
+                    <c:forEach var="productListForMain" items="${productListForMain }" >
                      	<tr>
                          <td>${productListForMain.p_idx }</td>
                          <td><a href="./readProductPage?p_idx=${productListForMain.p_idx}">${productListForMain.p_name }</a></td>
                          <td>${productListForMain.p_originalPrice }</td>
-                         <td>${productListForMain.p_postdate }</td>
+                         <td>${productListForMain.p_postDate }</td>
                        </tr>
                        </c:forEach>
                      </tbody>
@@ -548,11 +542,18 @@
                        </tr>
                      </thead>
                      <tbody>
-                    <c:forEach var="qnaListForMain" items="${qnaListForMain }" begin="1" end="4" step="1">
+          			  <c:forEach var="qnaListForMain" items="${qnaListForMain }" begin="1" end="4" step="1">
                      	<tr>
                          <td>${qnaListForMain.b_referIdx }</td>
                          <td><a href="./readQnAPageByAdmin?b_idx=${qnaListForMain.b_idx }">${qnaListForMain.b_title }</a></td>
-                         <td>${qnaListForMain.b_qCategory }</td>
+                         <c:choose>
+                         <c:when test="${qnaListForMain.b_qCategory == 0 }">
+                         <td>상품문의</td>
+                         </c:when>
+                         <c:when test="${qnaListForMain.b_qCategory == 1 }">
+                           <td>결제문의</td>
+                           </c:when>
+                           </c:choose>                  
                          <td>${qnaListForMain.b_postdate }</td>
                        </tr>
                        </c:forEach>
@@ -568,15 +569,15 @@
                        <table>
                      <thead>
                        <tr>
-                         <th>글번호</th><th>제목</th><th>별점</th><th>작성날짜</th>
+                         <th>글번호</th><th>제목</th><th>조회수</th><th>작성날짜</th>
                        </tr>
                      </thead>
                      <tbody>
-                     <c:forEach var="reviewListForMain" items="${reviewListForMain }" begin="1" end="4" step="1">
+   		 			   <c:forEach var="reviewListForMain" items="${reviewListForMain }" begin="1" end="4" step="1">
                      	<tr>
                          <td>${reviewListForMain.b_referIdx }</td>
                          <td><a href="./readReviewPage?b_idx=${reviewListForMain.b_idx }">${reviewListForMain.b_title }</a></td>
-                         <td>${reviewListForMain.b_starrate }</td>
+                         <td>${reviewListForMain.b_count }</td>
                          <td>${reviewListForMain.b_postdate }</td>
                        </tr>
                        </c:forEach>
