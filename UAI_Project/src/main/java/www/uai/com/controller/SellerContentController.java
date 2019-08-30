@@ -442,18 +442,6 @@ public class SellerContentController {
 	public String sellerDashboardPage(Model model) {
 		
 		
-		//통계 데이터 리스트 받아오기
-		ArrayList<DashboardVO> lineChartArray= sellerContentService.getOrderStatList();
-	
-
-	
-		
-		//String stringfied = dashJSON.toString();
-		//System.out.println("toString: "+ stringfied);
-		
-		
-
-		//model.addAttribute("lineChartArray", lineChartArray);
 		
 		return "sellerDashboardPage";
 		

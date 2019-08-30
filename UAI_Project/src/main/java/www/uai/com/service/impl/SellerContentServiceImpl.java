@@ -871,7 +871,7 @@ public class SellerContentServiceImpl implements SellerContentService {
 	public ArrayList<DashboardVO> getOrderStatList() {
 		// TODO Auto-generated method stub
 		
-		ArrayList<DashboardVO> dashVO=sellerContentSQLMapper.getOrderSumStats();
+		//ArrayList<DashboardVO> dashVO=sellerContentSQLMapper.getOrderSumStats();
 		
 		/*
 		[
@@ -882,7 +882,7 @@ public class SellerContentServiceImpl implements SellerContentService {
          ['2018-09-01',  200000]
        ]
        */
-		
+		/*
     		   String lineChartArray=""; //= "['날짜', '총 주문액'],";
 		
 		for(DashboardVO dash : dashVO) {
@@ -920,9 +920,9 @@ public class SellerContentServiceImpl implements SellerContentService {
 		
 		String strJson = statsJSON.toString();
 		
+		*/
 		
-		
-		return dashVO;
+		return null;
 	}
 
 

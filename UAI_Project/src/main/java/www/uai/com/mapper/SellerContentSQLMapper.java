@@ -138,8 +138,8 @@ public interface SellerContentSQLMapper {
 	public void updatePaycheckByIdx(String o_idx);
 
 	//lhe-판매자 대시보드 구성용
-	@Select("SELECT S_DATE, S_DAILYSUM FROM OrderStats ORDER BY S_DATE ASC")
-	public ArrayList<DashboardVO> getOrderSumStats();
+	//@Select("SELECT S_DATE, S_DAILYSUM FROM OrderStats ORDER BY S_DATE ASC")
+	//public ArrayList<DashboardVO> getOrderSumStats();
 	
 
 	
