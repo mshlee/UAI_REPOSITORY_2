@@ -517,7 +517,7 @@
                        </tr>
                      </thead>
                      <tbody>
-                    <c:forEach var="productListForMain" items="${productListForMain }" >
+                    <c:forEach var="productListForMain" items="${productListForMain }" begin="1" end="3" step="1">
                      	<tr>
                          <td>${productListForMain.p_idx }</td>
                          <td><a href="./readProductPage?p_idx=${productListForMain.p_idx}">${productListForMain.p_name }</a></td>

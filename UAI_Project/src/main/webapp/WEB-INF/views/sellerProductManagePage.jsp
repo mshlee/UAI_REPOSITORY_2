@@ -212,9 +212,12 @@
 																				                        	font-weight: 400;
 																				                        }
 																				                        #content_box{
+																				                        	width: 800px;
+																				                        	height: 500px;
 																				                        	float:left;
 																				                        	font-family: 'Jeju Gothic', sans-serif;
-																				                        	font-size: 8pt;
+																				                        	font-size: 10pt;
+																				                        	overflow: auto;
 																				                        
 																				                        }
 																				                  
@@ -304,6 +307,8 @@ function delchk(){
 		                           <a href="./logoutAction"><button class="btn btn-light">Logout</button></a>
 		                           <a href="./sellerIndex.do"><button class="btn btn-info">Settings</button></a>
 		                           <br>
+		                           <div>
+			<a href="./sellerNewProduct">강의 등록</a></div>
 		                           </div>
 
 		                        
@@ -327,7 +332,7 @@ function delchk(){
 		                        <a href="./loginForm">go back to Login Page</a> <br><br> -->
 		                      </c:otherwise>      
                     	</c:choose>
-	<a href="./sellerNewProduct">강의 등록</a>
+                    	
                 </div><!--middle-small-box-1-->
 
       

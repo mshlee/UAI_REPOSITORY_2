@@ -211,10 +211,13 @@
 																				                        	font-family: 'Jeju Gothic', sans-serif;
 																				                        	font-weight: 400;
 																				                        }
-																				                        #content_box{
+																				                     #content_box{
+																				                        	width: 800px;
+																				                        	height: 500px;
 																				                        	float:left;
 																				                        	font-family: 'Jeju Gothic', sans-serif;
-																				                        	font-size: 8pt;
+																				                        	font-size: 10pt;
+																				                        	overflow: auto;
 																				                        
 																				                        }
 																				                  

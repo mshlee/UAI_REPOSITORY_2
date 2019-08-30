@@ -211,10 +211,13 @@
 																				                        	font-family: 'Jeju Gothic', sans-serif;
 																				                        	font-weight: 400;
 																				                        }
-																				                        #content_box{
+																				                      #content_box{
+																				                        	width: 800px;
+																				                        	height: 500px;
 																				                        	float:left;
 																				                        	font-family: 'Jeju Gothic', sans-serif;
-																				                        	font-size: 8pt;
+																				                        	font-size: 10pt;
+																				                        	overflow: auto;
 																				                        
 																				                        }
 																				                  
@@ -420,14 +423,16 @@
 
 		<div id="content_box" style="overflow: auto;">
 					<!--Divs that will hold each control and chart-->
-			
+			<div>
 			<label>1. 주문관련 통계</label><br>
-			<div id="curve_chart1" style="width: 500px; height: 300px; float: left; padding: 10px;"></div>
-			<div id="curve_chart2" style="width: 500px; height: 300px; float: right; padding: 10px;"></div>
-			<br>
-			<label>2. 상품관련 통계</label><br>
-			<div id="pie_chart" style="width: 500px; height: 300px; padding: 10px;" ></div>
+			<div id="curve_chart1" style="width: 380px; height: 300px; float: left; padding: 10px;"></div>
+			<div id="curve_chart2" style="width: 380px; height: 300px; float: right; padding: 10px;"></div>
+			</div><br>
 			
+			<div>
+			<label>2. 상품관련 통계</label><br>
+			<div id="pie_chart" style="width: 500px; height: 300px; float: left; padding: 10px;" ></div>
+			</div>
 			
 		
 			</div> <!-- content_box -->
