@@ -1,7 +1,5 @@
 package www.uai.com.service;
 
-import org.springframework.stereotype.Service;
-
 import www.uai.com.vo.AdminDataVO;
 import www.uai.com.vo.MemberDataVO;
 import www.uai.com.vo.SessionDataVO;
@@ -19,4 +17,6 @@ public interface UserService {
    public boolean isExistADID(AdminDataVO requestParam);
    
    public boolean isExistMNick(MemberDataVO requestParam);
+   
+   public boolean isExistADNick(AdminDataVO requestParam);
 }

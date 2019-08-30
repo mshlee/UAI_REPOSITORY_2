@@ -20,10 +20,11 @@ public interface UserSQLMapper {
    public MemberDataVO selectByMIdx(String idx);
 
    @Select("SELECT * FROM ADMINS WHERE AD_ID = #{ad_id}")
-   public AdminDataVO selectByADId(String id);
+   public AdminDataVO selectByADId(String ad_id);
    
    @Select("SELECT * FROM ADMINS WHERE AD_IDX = #{ad_idx}")
    public AdminDataVO selectByADIdx(String idx);
+   
 
    //회원정보 수정...
    @Update("UPDATE MEMBERS SET m_nick = #{m_nick} WHERE m_idx = #{m_idx}")
@@ -31,6 +32,10 @@ public interface UserSQLMapper {
    
    @Select("SELECT * FROM MEMBERS WHERE M_NICK = #{m_nick}")
    public MemberDataVO selectByMNick(String m_nick);
+   
+   //lhe-관리자 닉네임 중복 체크 확인용
+   @Select("SELECT * FROM ADMINS WHERE AD_NICK = #{ad_nick}")
+   public AdminDataVO selectByANick(String ad_nick);
 
 
 }

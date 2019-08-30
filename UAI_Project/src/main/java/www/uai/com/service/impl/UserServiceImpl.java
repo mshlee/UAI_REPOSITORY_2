@@ -97,4 +97,16 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
+	@Override
+	public boolean isExistADNick(AdminDataVO requestParam) {
+		// TODO Auto-generated method stub
+		AdminDataVO admindata = userSQLMapper.selectByANick(requestParam.getAd_nick());
+		if (admindata != null) {
+
+			return true;
+		}
+		
+		return false;
+	}
+
 }

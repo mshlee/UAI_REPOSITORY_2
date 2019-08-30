@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -364,7 +366,103 @@
             align-items: center;
           }
         </style>
-
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	
+	<script type="text/javascript">
+	function confirmID(){
+		console.log("confirmID 호출 됨.");
+	
+		//양식에 입력된 값 가져오기.
+		var id = document.getElementById("inputID").value;
+		
+		//ajax 호출 및 함수 처리 로직....
+		var xmlhttp = new XMLHttpRequest();
+		
+		//호출할 함수 엮기--->5번의 함수 호출 중 4번째에서 값을 전달받음
+		xmlhttp.onreadystatechange = function(){
+			
+			//4번째 호출 & 호출한 상태의 결과 코드가 200번(성공)일 때
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				//alert(xmlhttp.responseText);
+			
+				//병렬형 데이터 객체를 JSON타입으로 데이터 파싱.
+				var result = JSON.parse(xmlhttp.responseText);
+				
+				//로직 처리 및 동적 UI처리
+				var result_box=document.getElementById("result_box1");
+				
+				
+				if(result.exist == true){
+					//alert("이미 존재하는 아이디 입니다.");
+					result_box.style.color="red";
+					result_box.innerText="이미 존재하는 아이디 입니다.";
+					
+				}else{
+					//alert("사용 가능한 아이디 입니다.");
+					result_box.style.color="cyan";
+					result_box.innerText="사용 가능한 아이디 입니다.";
+				}
+				
+			}
+				
+		};
+		
+		xmlhttp.open("post","./isExistAID",true);
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
+		xmlhttp.send("ad_id="+id);
+		
+		
+	}
+   </script>
+   
+   	<script type="text/javascript">
+	function confirmNick(){
+		console.log("confirmNick 호출 됨.");
+	
+		//양식에 입력된 값 가져오기.
+		var nick = document.getElementById("inputNick").value;
+		
+		//ajax 호출 및 함수 처리 로직....
+		var xmlhttp = new XMLHttpRequest();
+		
+		//호출할 함수 엮기--->5번의 함수 호출 중 4번째에서 값을 전달받음
+		xmlhttp.onreadystatechange = function(){
+			
+			//4번째 호출 & 호출한 상태의 결과 코드가 200번(성공)일 때
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				//alert(xmlhttp.responseText);
+			
+				//병렬형 데이터 객체를 JSON타입으로 데이터 파싱.
+				var result = JSON.parse(xmlhttp.responseText);
+				
+				//로직 처리 및 동적 UI처리
+				var result_box=document.getElementById("result_box2");
+				
+				
+				if(result.exist == true){
+					//alert("이미 존재하는 아이디 입니다.");
+					result_box.style.color="red";
+					result_box.innerText="이미 존재하는 닉네임 입니다.";
+					
+				}else{
+					//alert("사용 가능한 아이디 입니다.");
+					result_box.style.color="cyan";
+					result_box.innerText="사용 가능한 닉네임 입니다.";
+				}
+				
+			}
+				
+		};
+		
+		xmlhttp.open("post","./isExistANick",true);
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
+		xmlhttp.send("ad_nick="+nick);
+		
+		
+	}
+   </script>
     </head>
 
     <body>
@@ -492,11 +590,13 @@
 				<div id="notice-title">
                 		▶새 관리자 계정 생성
                 	</div>
-                <form action="./sellerNewAdminAction" method="post">
+                <form action="./sellerNewAdminAction" method="post" >
                     
-                    <label>ID: </label><input type="text" name="ad_id"><br>
+                    <label>ID: </label><input  id = "inputID" type="text" name="ad_id"><input type="button" value="중복확인" onclick="confirmID()"><br>
+                    <div id = "result_box1"></div>
                     <label>PW: </label><input type="password" name="ad_pw"><br>
-                    <label>NICK: </label><input type="text" name="ad_nick"><br>
+                    <label>NICK: </label><input  id = "inputNick" type="text" name="ad_nick"><input type="button" value="중복확인" onclick="confirmNick()"><br>
+                    <div id = "result_box2"></div>
                     <input type="submit" value="생성"><br>
                 </form>
 
@@ -513,7 +613,7 @@
              <div id="bottom-phrase">Help | Feedback | Privacy | Terms | ⓒUAI Project Company</div>
           </div><!--bottom box div-->
        </div> <!--wrapper div-->
-    
+    </div>
        <!-- Optional JavaScript -->
        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
