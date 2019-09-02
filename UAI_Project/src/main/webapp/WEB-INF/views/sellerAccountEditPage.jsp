@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+    
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <title>UAI-관리자 계정 생성 페이지</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -364,7 +366,55 @@
             align-items: center;
           }
         </style>
+        
 
+   	<script type="text/javascript">
+	function confirmNick(){
+		console.log("confirmNick 호출 됨.");
+	
+		//양식에 입력된 값 가져오기.
+		var nick = document.getElementById("inputNick").value;
+		
+		//ajax 호출 및 함수 처리 로직....
+		var xmlhttp = new XMLHttpRequest();
+		
+		//호출할 함수 엮기--->5번의 함수 호출 중 4번째에서 값을 전달받음
+		xmlhttp.onreadystatechange = function(){
+			
+			//4번째 호출 & 호출한 상태의 결과 코드가 200번(성공)일 때
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				//alert(xmlhttp.responseText);
+			
+				//병렬형 데이터 객체를 JSON타입으로 데이터 파싱.
+				var result = JSON.parse(xmlhttp.responseText);
+				
+				//로직 처리 및 동적 UI처리
+				var result_box=document.getElementById("result_box");
+				
+				
+				if(result.exist == true){
+					//alert("이미 존재하는 아이디 입니다.");
+					result_box.style.color="red";
+					result_box.innerText="이미 존재하는 닉네임 입니다.";
+					
+				}else{
+					//alert("사용 가능한 아이디 입니다.");
+					result_box.style.color="blue";
+					result_box.innerText="사용 가능한 닉네임 입니다.";
+				}
+				
+			}
+				
+		};
+		
+		xmlhttp.open("post","./isExistANick",true);
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
+		xmlhttp.send("ad_nick="+nick);
+		
+		
+	}
+   </script>
     </head>
 
     <body>
@@ -497,9 +547,14 @@
                             <label>ID:</label>
                             <input type="text" name="ad_id" value="${adminData.ad_id}" disabled><br>
                             <label>NICK:</label>
-                            <input type="text" name="ad_nick" value="${adminData.ad_nick }"><input type="checkbox" name="ad_nick" value="${adminData.ad_nick }">수정안함<br>
+                            <input type="text" id="inputNick" name="ad_nick" value="${adminData.ad_nick }"><input type="button" value="중복확인" onclick="confirmNick()"><br>
+                            <div id="result_box"></div>
+                            <!-- 
+                            <input type="checkbox" name="ad_nick" value="${adminData.ad_nick }">수정안함<br>--> 
                            	<label>PW:</label>
-                            <input type="password" name="ad_pw" value="${adminData.ad_pw }"><input type="checkbox" name="ad_nick" value="${adminData.ad_nick }">수정안함<br>
+                            <input type="password" name="ad_pw" value="${adminData.ad_pw }"><br>
+                             <!--
+                            <input type="checkbox" name="ad_nick" value="${adminData.ad_nick }">수정안함<br>-->
                             <input type="submit" value="수정"><br>
                 </form>
 

@@ -56,10 +56,7 @@ public class SellerContentController {
 	@RequestMapping("/sellerAdminEdit")
 	public String sellerAccountEditPage(Model model, String ad_idx) {
 		
-		//String ad_idx = (String) sessionVO.getAttribute("ad_idx");
-		
-		//SessionDataVO sessionData = (SessionDataVO) sessionVO;
-		
+
 		AdminDataVO adminData = sellerContentService.getAdminDataByIdx(ad_idx);
 		
 		System.out.println(adminData.getAd_idx());
@@ -74,8 +71,11 @@ public class SellerContentController {
 	
 	@RequestMapping("/sellerAdminEditAction")
 	public String sellerAccountEditAction(AdminDataVO requestVO) {
+		System.out.println("param_id: "+ requestVO.getAd_id());
+		System.out.println("param_nick: "+requestVO.getAd_nick());
+		System.out.println("param_pw: "+requestVO.getAd_pw());
 		
-		sellerContentService.updateAdminByIdx(requestVO);
+		//sellerContentService.updateAdminByIdx(requestVO);
 		
 		return "redirect:sellerMainPage";
 	}

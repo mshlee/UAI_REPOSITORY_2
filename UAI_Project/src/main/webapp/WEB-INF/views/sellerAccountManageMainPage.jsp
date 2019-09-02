@@ -462,6 +462,7 @@
         <div id="left_box">
             <label><a href="./sellerIndex">판매자 메인</a></label><br>
             <label><a href="./sellerNewAdmin">판매자 계정 생성</a></label><br>
+            <label><a href="./sellerAdminEdit?ad_idx=${sessionData.ad_idx }">판매자 계정 수정</a></label><br>
             <label><a href="./">쇼핑몰 메인</a></label><br>
         </div>
                            </div>

@@ -399,7 +399,7 @@
 					
 				}else{
 					//alert("사용 가능한 아이디 입니다.");
-					result_box.style.color="cyan";
+					result_box.style.color="blue";
 					result_box.innerText="사용 가능한 아이디 입니다.";
 				}
 				
@@ -447,7 +447,7 @@
 					
 				}else{
 					//alert("사용 가능한 아이디 입니다.");
-					result_box.style.color="cyan";
+					result_box.style.color="blue";
 					result_box.innerText="사용 가능한 닉네임 입니다.";
 				}
 				
@@ -559,7 +559,7 @@
 <br>
         <div id="left_box">
             <label><a href="./sellerIndex">판매자 메인</a></label><br>
-            <label><a href="./sellerAdminEdit">판매자 계정 수정</a></label><br>
+            <label><a href="./sellerAdminEdit?ad_idx=${sessionData.ad_idx }">판매자 계정 수정</a></label><br>
             <label><a href="./">쇼핑몰 메인</a></label><br>
         </div>
                            </div>
